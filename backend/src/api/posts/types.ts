@@ -7,15 +7,11 @@ export * from './mutation';
 
 export const Post = objectType({
   name: 'Post',
-  definition (t) {
+  definition(t) {
     t.model.id();
-    t.model.moderationChecked();
     t.model.createdAt();
     t.model.title();
-    t.model.isOffer();
-    t.model.isResource();
     t.model.isNews();
-    t.model.category();
     t.field('poster', {
       type: 'Media',
       resolve: async (parent: any, { }, ctx: Context) => {
@@ -50,18 +46,15 @@ export const Post = objectType({
     t.model.description();
     t.model.articleBody();
     t.model.article();
-    t.model.rejectMessage();
     t.model.platformConfigNewsShowed();
     t.model.platformConfigOffersShowed();
-    t.model.isApproved();
-    t.model.moderate();
     t.model.postMedia();
   },
 });
 
 export const SignUrlPostPoster = objectType({
   name: 'SignUrlPostPoster',
-  definition (t) {
+  definition(t) {
     t.string('signedURL');
     t.string('fileName');
   },

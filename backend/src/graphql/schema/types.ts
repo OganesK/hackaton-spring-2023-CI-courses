@@ -4,7 +4,7 @@ export * from '../../api/media/types';
 export * from '../../api/messages/types';
 export * from '../../api/platform-config/types';
 export * from '../../api/posts/types';
-export * from '../../api/projects/types';
+export * from '../../api/course/types';
 export * from '../../api/stream/types';
 export * from '../../api/typings/types';
 export * from '../../api/users/types';

@@ -53,27 +53,12 @@ export const ClientMutation = extendType({
         });
       },
     });
-    t.field('checkNotification', {
-      type: 'String',
-      args: { data: nonNull(arg({ type: checkNotificationInput })) },
-      resolve: async (_, { data }, ctx: Context) => {
-        await ctx.prisma.notification.update({
-          where: {
-            id: data.notificationId,
-          },
-          data: {
-            checked: true,
-          },
-        });
-        return 'Success';
-      },
-    });
   },
 });
 
 export const SignUpInput = inputObjectType({
   name: 'CreateUserInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('firstname');
     t.nonNull.string('lastname');
     t.nonNull.string('login');
@@ -84,7 +69,7 @@ export const SignUpInput = inputObjectType({
 
 export const SignInInput = inputObjectType({
   name: 'SignInInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('login');
     t.nonNull.string('password');
   },
@@ -92,7 +77,7 @@ export const SignInInput = inputObjectType({
 
 export const updateUserInput = inputObjectType({
   name: 'updateUserInput',
-  definition (t) {
+  definition(t) {
     t.int('userId');
     t.string('email');
     t.string('login');
@@ -106,14 +91,7 @@ export const updateUserInput = inputObjectType({
 
 export const deleteUserInput = inputObjectType({
   name: 'deleteUserInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.int('userId');
-  },
-});
-
-export const checkNotificationInput = inputObjectType({
-  name: 'checkNotificationInput',
-  definition (t) {
-    t.nonNull.int('notificationId');
   },
 });

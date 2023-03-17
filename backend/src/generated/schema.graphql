@@ -3,6 +3,7 @@
 
 
 type Article {
+  course: Course
   createdAt: DateTime!
   id: Int!
   post: Post
@@ -46,6 +47,16 @@ type AuthPayload {
 input BoolFilter {
   equals: Boolean
   not: NestedBoolFilter
+}
+
+type Course {
+  createdAt: DateTime!
+  description: Article
+  id: Int!
+  name: String!
+  poster: Media
+  publishedPosts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByWithRelationInput!]): [Post!]!
+  shortDescription: String!
 }
 
 input CourseListRelationFilter {
@@ -355,6 +366,7 @@ input MediaOrderByWithRelationInput {
   createdAt: SortOrder
   event: EventOrderByRelationAggregateInput
   id: SortOrder
+  isApproved: SortOrder
   messagerGroup: MessagerGroupOrderByRelationAggregateInput
   post: PostOrderByRelationAggregateInput
   postMedia: PostOrderByWithRelationInput
@@ -377,6 +389,7 @@ input MediaWhereInput {
   createdAt: DateTimeNullableFilter
   event: EventListRelationFilter
   id: IntFilter
+  isApproved: BoolFilter
   messagerGroup: MessagerGroupListRelationFilter
   post: PostListRelationFilter
   postMedia: PostWhereInput
@@ -490,11 +503,9 @@ type Mutation {
   articleCreateMutation(data: CreateArticleInput!): String
   articleDeleteMutation(data: DeleteArticleInput!): String
   articleUpdateMutation(data: UpdateArticleInput!): String
-  checkNotification(data: checkNotificationInput!): String
   createGroup(data: createGroupInput!): MessagerGroup
   createMedia(data: createMediaInput!): SignUrlResponse
   createOneEvent(data: EventCreatedInput!): Event
-  createOneProject(data: createProjectInput!): Project
   createStream(data: createStreamArgs!): Stream
   deleteGroup(data: deleteGroupInput!): String
   deleteMediaElement(data: deleteMediaElementInput!): String
@@ -525,7 +536,6 @@ type Mutation {
   switchToMessager(data: switchToMessagerInput!): MessagerGroup
   updateGroup(data: updateGroupInput!): MessagerGroup
   updateOneEvent(data: EventUpdatedInput!): String
-  updateProject(data: updateProjectInput!): String
   updateStream(data: createStreamArgs!): Stream
   updateStreamActivity(data: updateStreamActivityArgs!): Stream
   updateUserData(data: updateUserInput): User
@@ -628,8 +638,6 @@ input NestedStringNullableFilter {
   notIn: [String!]
   startsWith: String
 }
-
-type Notification
 
 type PlatformConfig {
   createdAt: DateTime!
@@ -762,12 +770,6 @@ input PostWhereUniqueInput {
   id: Int
 }
 
-type Project {
-  poster: Media
-}
-
-type ProjectMetrics
-
 type Query {
   event(where: EventWhereUniqueInput!): Event
   events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByWithRelationInput!], where: EventWhereInput): [Event!]!
@@ -779,7 +781,6 @@ type Query {
   getUsersWhichCanAddToGroup(data: getUsersWhichCantAddToGroupInput!): [User]
   me: User
   media(after: MediaWhereUniqueInput, before: MediaWhereUniqueInput, first: Int, last: Int, where: MediaWhereInput): [Media!]!
-  myNotification: [Notification]
   post(where: PostWhereUniqueInput!): Post
   postQuery(data: postQueryInput!): Post
   posts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByWithRelationInput!], where: PostWhereInput): [Post!]!
@@ -1142,10 +1143,6 @@ enum businessModel {
   G2C
 }
 
-input checkNotificationInput {
-  notificationId: Int!
-}
-
 input connectMediaInput {
   entityId: Int!
   entityType: entityTypes!
@@ -1175,22 +1172,6 @@ input createMediaInput {
   entityId: Int
   entityType: entityTypes
   fileType: String!
-}
-
-input createProjectInput {
-  businessModel: businessModel
-  category: filteringCategoies!
-  investmentStage: investmentStage
-  mainGoal: mainGoal
-  name: String!
-  ownerCompany: Int!
-  projectMarket: projectMarket
-  projectSite: String
-  projectStage: projectStage
-  projectType: projectType
-  salesType: salesType
-  shortDescription: String!
-  technologyType: technologyType
 }
 
 input createStreamArgs {
@@ -1453,22 +1434,6 @@ input updatePostInput {
   postId: Int!
   tags: [String]
   title: String
-}
-
-input updateProjectInput {
-  businessModel: businessModel
-  category: filteringCategoies
-  investmentStage: investmentStage
-  mainGoal: mainGoal
-  name: String
-  projectId: Int!
-  projectMarket: projectMarket
-  projectSite: String
-  projectStage: projectStage
-  projectType: projectType
-  salesType: salesType
-  shortDescription: String
-  technologyType: technologyType
 }
 
 input updateStreamActivityArgs {

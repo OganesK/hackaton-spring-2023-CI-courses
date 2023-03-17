@@ -17,15 +17,5 @@ export const UserQuery = extendType({
         return user;
       },
     });
-    t.list.field('myNotification', {
-      type: 'Notification',
-      resolve: async (_, { }, ctx: Context) => {
-        return ctx.prisma.notification.findMany({
-          where: {
-            toWhomId: ctx.user.id,
-          },
-        });
-      },
-    });
   },
 });

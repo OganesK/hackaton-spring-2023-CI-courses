@@ -4,7 +4,7 @@ export * from './mutation';
 
 export const Article = objectType({
   name: 'Article',
-  definition (t) {
+  definition(t) {
     t.model.id();
     t.model.createdAt();
     t.model.post();
@@ -19,7 +19,7 @@ export const Article = objectType({
 
 export const Section = objectType({
   name: 'Section',
-  definition (t) {
+  definition(t) {
     t.model.id();
     t.model.article();
     t.model.number();

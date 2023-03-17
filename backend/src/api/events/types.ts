@@ -7,9 +7,8 @@ export * from './mutation';
 
 export const Event = objectType({
   name: 'Event',
-  definition (t) {
+  definition(t) {
     t.model.id();
-    t.model.moderationChecked();
     t.model.name();
     t.field('poster', {
       type: 'Media',
@@ -41,17 +40,14 @@ export const Event = objectType({
         });
       },
     });
-    t.model.category();
     t.model.description();
     t.model.shortDescription();
-    t.model.isApproved();
     t.model.date();
     t.model.organizer();
     t.model.address();
     t.model.theme();
     t.model.format();
     t.model.platformConfigShowed();
-    t.model.moderate();
     t.model.user();
     t.model.address();
     t.model.stream();
@@ -60,9 +56,8 @@ export const Event = objectType({
 
 export const RegisteredForEvent = objectType({
   name: 'RegisteredForEvent',
-  definition (t) {
+  definition(t) {
     t.model.id();
-    t.model.verdict();
     t.model.name();
     t.model.surname();
     t.model.email();
@@ -72,7 +67,7 @@ export const RegisteredForEvent = objectType({
 
 export const SignUrlEventPoster = objectType({
   name: 'SignUrlEventPoster',
-  definition (t) {
+  definition(t) {
     t.string('signedURL');
     t.string('fileName');
   },

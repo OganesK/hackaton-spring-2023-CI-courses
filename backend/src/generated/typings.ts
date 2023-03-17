@@ -296,6 +296,7 @@ export interface NexusGenInputs {
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     event?: NexusGenInputs['EventOrderByRelationAggregateInput'] | null; // EventOrderByRelationAggregateInput
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
+    isApproved?: NexusGenEnums['SortOrder'] | null; // SortOrder
     messagerGroup?: NexusGenInputs['MessagerGroupOrderByRelationAggregateInput'] | null; // MessagerGroupOrderByRelationAggregateInput
     post?: NexusGenInputs['PostOrderByRelationAggregateInput'] | null; // PostOrderByRelationAggregateInput
     postMedia?: NexusGenInputs['PostOrderByWithRelationInput'] | null; // PostOrderByWithRelationInput
@@ -317,6 +318,7 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeNullableFilter'] | null; // DateTimeNullableFilter
     event?: NexusGenInputs['EventListRelationFilter'] | null; // EventListRelationFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    isApproved?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     messagerGroup?: NexusGenInputs['MessagerGroupListRelationFilter'] | null; // MessagerGroupListRelationFilter
     post?: NexusGenInputs['PostListRelationFilter'] | null; // PostListRelationFilter
     postMedia?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
@@ -789,9 +791,6 @@ export interface NexusGenInputs {
     groupId: number; // Int!
     membersIds?: Array<number | null> | null; // [Int]
   }
-  checkNotificationInput: { // input type
-    notificationId: number; // Int!
-  }
   connectMediaInput: { // input type
     entityId: number; // Int!
     entityType: NexusGenEnums['entityTypes']; // entityTypes!
@@ -808,21 +807,6 @@ export interface NexusGenInputs {
     entityId?: number | null; // Int
     entityType?: NexusGenEnums['entityTypes'] | null; // entityTypes
     fileType: string; // String!
-  }
-  createProjectInput: { // input type
-    businessModel?: NexusGenEnums['businessModel'] | null; // businessModel
-    category: NexusGenEnums['filteringCategoies']; // filteringCategoies!
-    investmentStage?: NexusGenEnums['investmentStage'] | null; // investmentStage
-    mainGoal?: NexusGenEnums['mainGoal'] | null; // mainGoal
-    name: string; // String!
-    ownerCompany: number; // Int!
-    projectMarket?: NexusGenEnums['projectMarket'] | null; // projectMarket
-    projectSite?: string | null; // String
-    projectStage?: NexusGenEnums['projectStage'] | null; // projectStage
-    projectType?: NexusGenEnums['projectType'] | null; // projectType
-    salesType?: NexusGenEnums['salesType'] | null; // salesType
-    shortDescription: string; // String!
-    technologyType?: NexusGenEnums['technologyType'] | null; // technologyType
   }
   createStreamArgs: { // input type
     eventId?: number | null; // Int
@@ -913,21 +897,6 @@ export interface NexusGenInputs {
     tags?: Array<string | null> | null; // [String]
     title?: string | null; // String
   }
-  updateProjectInput: { // input type
-    businessModel?: NexusGenEnums['businessModel'] | null; // businessModel
-    category?: NexusGenEnums['filteringCategoies'] | null; // filteringCategoies
-    investmentStage?: NexusGenEnums['investmentStage'] | null; // investmentStage
-    mainGoal?: NexusGenEnums['mainGoal'] | null; // mainGoal
-    name?: string | null; // String
-    projectId: number; // Int!
-    projectMarket?: NexusGenEnums['projectMarket'] | null; // projectMarket
-    projectSite?: string | null; // String
-    projectStage?: NexusGenEnums['projectStage'] | null; // projectStage
-    projectType?: NexusGenEnums['projectType'] | null; // projectType
-    salesType?: NexusGenEnums['salesType'] | null; // salesType
-    shortDescription?: string | null; // String
-    technologyType?: NexusGenEnums['technologyType'] | null; // technologyType
-  }
   updateStreamActivityArgs: { // input type
     streamId?: number | null; // Int
   }
@@ -982,6 +951,12 @@ export interface NexusGenObjects {
     token?: string | null; // String
     user?: NexusGenRootTypes['User'] | null; // User
   }
+  Course: { // root type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    id: number; // Int!
+    name: string; // String!
+    shortDescription: string; // String!
+  }
   Event: { // root type
     address: string; // String!
     date: NexusGenScalars['DateTime']; // DateTime!
@@ -1032,7 +1007,6 @@ export interface NexusGenObjects {
     tags: string[]; // [String!]!
     title: string; // String!
   }
-  Project: {};
   Query: {};
   RegisteredForEvent: { // root type
     email: string; // String!
@@ -1110,6 +1084,7 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars & NexusGenEnu
 
 export interface NexusGenFieldTypes {
   Article: { // field return type
+    course: NexusGenRootTypes['Course'] | null; // Course
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     post: NexusGenRootTypes['Post'] | null; // Post
@@ -1118,6 +1093,15 @@ export interface NexusGenFieldTypes {
   AuthPayload: { // field return type
     token: string | null; // String
     user: NexusGenRootTypes['User'] | null; // User
+  }
+  Course: { // field return type
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
+    description: NexusGenRootTypes['Article'] | null; // Article
+    id: number; // Int!
+    name: string; // String!
+    poster: NexusGenRootTypes['Media'] | null; // Media
+    publishedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
+    shortDescription: string; // String!
   }
   Event: { // field return type
     address: string; // String!
@@ -1168,11 +1152,9 @@ export interface NexusGenFieldTypes {
     articleCreateMutation: string | null; // String
     articleDeleteMutation: string | null; // String
     articleUpdateMutation: string | null; // String
-    checkNotification: string | null; // String
     createGroup: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
     createMedia: NexusGenRootTypes['SignUrlResponse'] | null; // SignUrlResponse
     createOneEvent: NexusGenRootTypes['Event'] | null; // Event
-    createOneProject: NexusGenRootTypes['Project'] | null; // Project
     createStream: NexusGenRootTypes['Stream'] | null; // Stream
     deleteGroup: string | null; // String
     deleteMediaElement: string | null; // String
@@ -1203,7 +1185,6 @@ export interface NexusGenFieldTypes {
     switchToMessager: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
     updateGroup: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
     updateOneEvent: string | null; // String
-    updateProject: string | null; // String
     updateStream: NexusGenRootTypes['Stream'] | null; // Stream
     updateStreamActivity: NexusGenRootTypes['Stream'] | null; // Stream
     updateUserData: NexusGenRootTypes['User'] | null; // User
@@ -1236,9 +1217,6 @@ export interface NexusGenFieldTypes {
     tags: string[]; // [String!]!
     title: string; // String!
   }
-  Project: { // field return type
-    poster: NexusGenRootTypes['Media'] | null; // Media
-  }
   Query: { // field return type
     event: NexusGenRootTypes['Event'] | null; // Event
     events: NexusGenRootTypes['Event'][]; // [Event!]!
@@ -1250,7 +1228,6 @@ export interface NexusGenFieldTypes {
     getUsersWhichCanAddToGroup: Array<NexusGenRootTypes['User'] | null> | null; // [User]
     me: NexusGenRootTypes['User'] | null; // User
     media: NexusGenRootTypes['Media'][]; // [Media!]!
-    myNotification: Array<NexusGenRootTypes['Notification'] | null> | null; // [Notification]
     post: NexusGenRootTypes['Post'] | null; // Post
     postQuery: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
@@ -1338,6 +1315,7 @@ export interface NexusGenFieldTypes {
 
 export interface NexusGenFieldTypeNames {
   Article: { // field return type name
+    course: 'Course'
     createdAt: 'DateTime'
     id: 'Int'
     post: 'Post'
@@ -1346,6 +1324,15 @@ export interface NexusGenFieldTypeNames {
   AuthPayload: { // field return type name
     token: 'String'
     user: 'User'
+  }
+  Course: { // field return type name
+    createdAt: 'DateTime'
+    description: 'Article'
+    id: 'Int'
+    name: 'String'
+    poster: 'Media'
+    publishedPosts: 'Post'
+    shortDescription: 'String'
   }
   Event: { // field return type name
     address: 'String'
@@ -1396,11 +1383,9 @@ export interface NexusGenFieldTypeNames {
     articleCreateMutation: 'String'
     articleDeleteMutation: 'String'
     articleUpdateMutation: 'String'
-    checkNotification: 'String'
     createGroup: 'MessagerGroup'
     createMedia: 'SignUrlResponse'
     createOneEvent: 'Event'
-    createOneProject: 'Project'
     createStream: 'Stream'
     deleteGroup: 'String'
     deleteMediaElement: 'String'
@@ -1431,7 +1416,6 @@ export interface NexusGenFieldTypeNames {
     switchToMessager: 'MessagerGroup'
     updateGroup: 'MessagerGroup'
     updateOneEvent: 'String'
-    updateProject: 'String'
     updateStream: 'Stream'
     updateStreamActivity: 'Stream'
     updateUserData: 'User'
@@ -1464,9 +1448,6 @@ export interface NexusGenFieldTypeNames {
     tags: 'String'
     title: 'String'
   }
-  Project: { // field return type name
-    poster: 'Media'
-  }
   Query: { // field return type name
     event: 'Event'
     events: 'Event'
@@ -1478,7 +1459,6 @@ export interface NexusGenFieldTypeNames {
     getUsersWhichCanAddToGroup: 'User'
     me: 'User'
     media: 'Media'
-    myNotification: 'Notification'
     post: 'Post'
     postQuery: 'Post'
     posts: 'Post'
@@ -1574,6 +1554,15 @@ export interface NexusGenArgTypes {
       orderBy?: NexusGenInputs['ArticleSectionsOrderByInput'][] | null; // [ArticleSectionsOrderByInput!]
     }
   }
+  Course: {
+    publishedPosts: { // args
+      after?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+      before?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['PostOrderByWithRelationInput'][] | null; // [PostOrderByWithRelationInput!]
+    }
+  }
   Event: {
     platformConfigShowed: { // args
       after?: NexusGenInputs['PlatformConfigWhereUniqueInput'] | null; // PlatformConfigWhereUniqueInput
@@ -1635,9 +1624,6 @@ export interface NexusGenArgTypes {
     articleUpdateMutation: { // args
       data: NexusGenInputs['UpdateArticleInput']; // UpdateArticleInput!
     }
-    checkNotification: { // args
-      data: NexusGenInputs['checkNotificationInput']; // checkNotificationInput!
-    }
     createGroup: { // args
       data: NexusGenInputs['createGroupInput']; // createGroupInput!
     }
@@ -1646,9 +1632,6 @@ export interface NexusGenArgTypes {
     }
     createOneEvent: { // args
       data: NexusGenInputs['EventCreatedInput']; // EventCreatedInput!
-    }
-    createOneProject: { // args
-      data: NexusGenInputs['createProjectInput']; // createProjectInput!
     }
     createStream: { // args
       data: NexusGenInputs['createStreamArgs']; // createStreamArgs!
@@ -1739,9 +1722,6 @@ export interface NexusGenArgTypes {
     }
     updateOneEvent: { // args
       data: NexusGenInputs['EventUpdatedInput']; // EventUpdatedInput!
-    }
-    updateProject: { // args
-      data: NexusGenInputs['updateProjectInput']; // updateProjectInput!
     }
     updateStream: { // args
       data: NexusGenInputs['createStreamArgs']; // createStreamArgs!
