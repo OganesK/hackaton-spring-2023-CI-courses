@@ -7,7 +7,7 @@ export * from './mutation';
 
 export const Media = objectType({
   name: 'Media',
-  definition (t) {
+  definition(t) {
     t.model.id();
     t.model.createdAt();
     t.model.type();
@@ -51,7 +51,7 @@ export const Media = objectType({
 
 export const SignUrlResponse = objectType({
   name: 'SignUrlResponse',
-  definition (t) {
+  definition(t) {
     t.string('signedURL');
     t.string('fileName');
     t.int('mediaId');

@@ -7,12 +7,6 @@ generator client {
   provider = "prisma-client-js"
 }
 
-enum Role {
-  resident
-  moderator
-  administrator
-}
-
 enum mediaType {
   image
   video
@@ -22,17 +16,6 @@ enum sectionTypes {
   text
   image
   video
-}
-
-enum filteringCategories {
-  business
-  development
-  design
-  management
-  analytic
-  education
-  content
-  IT
 }
 
 enum courseTypeEnum {
@@ -55,7 +38,6 @@ model User {
   password         String          @db.VarChar(512)
   firstname        String          @db.VarChar(512)
   lastname         String          @db.VarChar(512)
-  role             Role?           @default(resident)
   bio              String?         @db.Text
   avatar           Media?          @relation(fields: [avatarId], references: [id])
   avatarId         Int?            @default(1)
@@ -69,43 +51,41 @@ model User {
 }
 
 model Course {
-  id                   Int                 @id @default(autoincrement())
-  createdAt            DateTime            @default(now())
-  name                 String              @db.VarChar(512)
-  category             filteringCategories
-  poster               Media?              @relation("Poster", fields: [posterId], references: [id])
+  id                   Int              @id @default(autoincrement())
+  createdAt            DateTime         @default(now())
+  name                 String           @db.VarChar(512)
+  poster               Media?           @relation("Poster", fields: [posterId], references: [id])
   posterId             Int?
-  courseMedia          Media[]             @relation("courseMedia")
-  description          Article?            @relation(name: "courseArticle")
-  shortDescription     String              @db.Text
+  courseMedia          Media[]          @relation("courseMedia")
+  description          Article?         @relation(name: "courseArticle")
+  shortDescription     String           @db.Text
   ownerId              Int
-  owner                User                @relation(fields: [ownerId], references: [id])
+  owner                User             @relation(fields: [ownerId], references: [id])
   publishedPosts       Post[]
   platformConfigShowed PlatformConfig[]
   courseType           courseTypeEnum?
+  Media                Media[]          @relation("Media")
 
   @@map("course")
-  Media Media[] @relation("Media")
 }
 
 model Post {
-  id                         Int                 @id @default(autoincrement())
-  createdAt                  DateTime            @default(now())
-  isNews                     Boolean             @default(false)
-  title                      String              @db.VarChar(512)
-  category                   filteringCategories
-  poster                     Media?              @relation(name: "Post", fields: [posterId], references: [id])
-  posterId                   Int?                @default(1)
-  postMedia                  Media[]             @relation("postMedia")
-  tags                       String[]            @db.VarChar(512)
-  articleBody                String?             @db.Text
-  description                String              @db.Text
-  course                     Course?             @relation(fields: [courseID], references: [id])
+  id                         Int              @id @default(autoincrement())
+  createdAt                  DateTime         @default(now())
+  isNews                     Boolean          @default(false)
+  title                      String           @db.VarChar(512)
+  poster                     Media?           @relation(name: "Post", fields: [posterId], references: [id])
+  posterId                   Int?             @default(1)
+  postMedia                  Media[]          @relation("postMedia")
+  tags                       String[]         @db.VarChar(512)
+  articleBody                String?          @db.Text
+  description                String           @db.Text
+  course                     Course?          @relation(fields: [courseID], references: [id])
   courseID                   Int?
   authorID                   Int?
-  platformConfigNewsShowed   PlatformConfig[]    @relation(name: "newsOnLanding")
-  platformConfigOffersShowed PlatformConfig[]    @relation(name: "offersOnLanding")
-  article                    Article?            @relation("Article")
+  platformConfigNewsShowed   PlatformConfig[] @relation(name: "newsOnLanding")
+  platformConfigOffersShowed PlatformConfig[] @relation(name: "offersOnLanding")
+  article                    Article?         @relation("Article")
 }
 
 model Article {
@@ -135,7 +115,6 @@ model Event {
   name                 String               @db.VarChar(512)
   poster               Media?               @relation(fields: [posterId], references: [id])
   posterId             Int?                 @default(1)
-  category             filteringCategories
   description          String               @db.Text
   shortDescription     String               @db.Text
   date                 DateTime
@@ -202,12 +181,6 @@ model PlatformConfig {
   offersShownOnLanding       Post[]   @relation(name: "offersOnLanding")
   coursesShownOnLanding      Course[]
   eventsShownOnLanding       Event[]
-}
-
-model Email {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  email     String
 }
 
 model Message {

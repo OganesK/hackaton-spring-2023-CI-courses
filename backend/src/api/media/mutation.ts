@@ -150,26 +150,6 @@ export const MediaMutation = extendType({
       },
     });
 
-    t.field('putCompanyAvatar', {
-      type: 'SignUrlResponse',
-      args: { data: nonNull(arg({ type: getMediaDataInput })) },
-      resolve: async (_, { data }, ctx: Context) => {
-        if (await awsS3API.objectType({ type: data.fileType }) === false) {
-          throw new GraphQLError('Not supported mimetype!');
-        }
-
-        const result = await awsS3API.getSignedUrl({ fileName: data.fileName, type: data.fileType });
-
-        await ctx.prisma.media.create({
-          data: {
-            url: result.objectURL,
-            type: 'image',
-          },
-        });
-
-        return result;
-      },
-    });
     t.field('putUserAvatar', {
       type: 'SignUrlResponse',
       args: { data: nonNull(arg({ type: getMediaDataInput })) },
@@ -359,7 +339,7 @@ export const MediaMutation = extendType({
 
 export const getMediaDataInput = inputObjectType({
   name: 'getMediaDataInput',
-  definition (t) {
+  definition(t) {
     t.int('entityId');
     t.string('fileName');
     t.string('fileType');
@@ -368,28 +348,28 @@ export const getMediaDataInput = inputObjectType({
 
 export const deleteProjectPresentationMedia = inputObjectType({
   name: 'deleteProjectPresentationMedia',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('mediaUrl');
   },
 });
 
 export const deleteMediaElementInput = inputObjectType({
   name: 'deleteMediaElementInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('mediaURL');
   },
 });
 
 export const deletePostMedia = inputObjectType({
   name: 'deletePostMedia',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('mediaUrl');
   },
 });
 
 export const createMediaInput = inputObjectType({
   name: 'createMediaInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('fileType');
     t.int('entityId');
     t.field('entityType', {
@@ -400,7 +380,7 @@ export const createMediaInput = inputObjectType({
 
 export const connectMediaInput = inputObjectType({
   name: 'connectMediaInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.int('entityId');
     t.nonNull.string('mediaURL');
     t.nonNull.field('entityType', {
