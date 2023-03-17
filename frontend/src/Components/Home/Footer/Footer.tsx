@@ -59,10 +59,10 @@ const Footer: (props: FooterProps) => JSX.Element = (props: FooterProps) => {
               className={classes.footerContactsContainer}
             >
               <Link className={classes.linkNameFooter} to="/home">
-                NewVision
+                CI Curses
               </Link>
               <Grid className={classes.footerHeaderTextContacts}>
-                ДГТУ, УЛК №7, ауд. 100/101, пр. Михаила Нагибина, 3а, Ростов-на-Дону, 344010
+                Хакатон 2033
               </Grid>
             </Grid>
 
@@ -75,8 +75,8 @@ const Footer: (props: FooterProps) => JSX.Element = (props: FooterProps) => {
             >
               <Grid className={classes.footerHeaderContacts}>Контакты</Grid>
               <Grid container className={classes.footerTitleTextContacts}>
-                <Grid>info@magicamedia.com</Grid>
-                <Grid>+7 918 539 99 10</Grid>
+                <Grid>info@gmail.com</Grid>
+                <Grid>+7 334 555 33 33</Grid>
               </Grid>
             </Grid>
 
@@ -118,7 +118,7 @@ const Footer: (props: FooterProps) => JSX.Element = (props: FooterProps) => {
               className={classes.footerContactsContainer}
             >
               <Grid className={classes.footerHeaderTextContacts}>
-                ДГТУ, УЛК №7, ауд. 100/101, пр. Михаила Нагибина, 3а, Ростов-на-Дону, 344010
+                Хакатон 2033
               </Grid>
               {/* <Grid
                   container
@@ -149,8 +149,8 @@ const Footer: (props: FooterProps) => JSX.Element = (props: FooterProps) => {
             >
               <Grid className={classes.footerHeaderContacts}>Контакты</Grid>
               <Grid container className={classes.footerTitleTextContacts}>
-                <Grid>info@magicamedia.com</Grid>
-                <Grid>+7 918 539 99 10</Grid>
+                <Grid>info@gmail.com</Grid>
+                <Grid>+7 666 666 3333</Grid>
               </Grid>
             </Grid>
 

@@ -59,9 +59,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
     history.push('/messages');
   };
 
-  const handleModerateClick: () => void = () => {
-    history.push('/moderate');
-  };
+
 
   const loginHandler: () => void = () => {
     history.push('/login');
@@ -100,7 +98,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
         {width > 1349 ? (
           <Grid container alignItems="center" justifyContent="space-between" xs={10}>
             <Link className={props.text === 'header' ? classes.linkName : classes.linkNameFooter} to="/home">
-              NewVision
+              CI Curses
             </Link>
 
             <Grid>
@@ -115,7 +113,22 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                   }
                   to="/projects"
                 >
-                  Проекты
+                  Курсы
+                </Link>
+              </Button>
+              
+              <Button>
+                <Link
+                  className={
+                    props.text === 'header'
+                      ? classes.link
+                      : props.text === 'footer'
+                      ? classes.linkFooter
+                      : classes.projectLink
+                  }
+                  to="/news"
+                >
+                  Уроки
                 </Link>
               </Button>
               <Button>
@@ -129,51 +142,10 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                   }
                   to="/events"
                 >
-                  Мероприятия
+                  Трансляции
                 </Link>
               </Button>
-              <Button>
-                <Link
-                  className={
-                    props.text === 'header'
-                      ? classes.link
-                      : props.text === 'footer'
-                      ? classes.linkFooter
-                      : classes.projectLink
-                  }
-                  to="/resources"
-                >
-                  Ресурсы
-                </Link>
-              </Button>
-              <Button>
-                <Link
-                  className={
-                    props.text === 'header'
-                      ? classes.link
-                      : props.text === 'footer'
-                      ? classes.linkFooter
-                      : classes.projectLink
-                  }
-                  to="/ads"
-                >
-                  Объявления
-                </Link>
-              </Button>
-              <Button>
-                <Link
-                  className={
-                    props.text === 'header'
-                      ? classes.link
-                      : props.text === 'footer'
-                      ? classes.linkFooter
-                      : classes.projectLink
-                  }
-                  to="/news"
-                >
-                  Новости
-                </Link>
-              </Button>
+              
               {/* <Button>
                 <Link
                   className={
@@ -260,30 +232,19 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                         className={props.text === 'header' ? classes.linkFooter : classes.projectLink}
                         to="/projects"
                       >
-                        Проекты
+                        Курсы
                       </Link>
                     </MenuItem>
                     <MenuItem>
                       <Link className={props.text === 'header' ? classes.linkFooter : classes.projectLink} to="/events">
-                        Мероприятия
+                        Прямая трансляцию
                       </Link>
                     </MenuItem>
-                    <MenuItem>
-                      <Link
-                        className={props.text === 'header' ? classes.linkFooter : classes.projectLink}
-                        to="/resources"
-                      >
-                        Ресурсы
-                      </Link>
-                    </MenuItem>
-                    <MenuItem>
-                      <Link className={props.text === 'header' ? classes.linkFooter : classes.projectLink} to="/ads">
-                        Объявления
-                      </Link>
-                    </MenuItem>
+                   
+                    
                     <MenuItem>
                       <Link className={props.text === 'header' ? classes.linkFooter : classes.projectLink} to="/news">
-                        Новости
+                        Уроки
                       </Link>
                     </MenuItem>
                     {/* <MenuItem>
@@ -336,27 +297,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                                 <Grid>Сообщения</Grid>
                               </Grid>
                             </MenuItem>
-                            {context.user.role === 'administrator' || context.user.role === 'moderator' ? (
-                              <MenuItem
-                                onClick={handleModerateClick}
-                                style={{
-                                  color: '#252525',
-                                  textDecoration: 'none',
-                                  fontSize: 18,
-                                  lineHeight: '100%',
-                                }}
-                              >
-                                <Grid container direction="row">
-                                  <Grid container xs={3} style={{ border: '0px solid' }}>
-                                    <ListItemIcon>
-                                      <AdminPanelSettingsIcon fontSize="small" />
-                                    </ListItemIcon>
-                                  </Grid>
-                                  <Grid>Модерация</Grid>
-                                </Grid>
-                              </MenuItem>
-                            ) : null}
-
+                            
                             <MenuItem
                               onClick={exitHandler}
                               style={{
@@ -404,7 +345,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
             ) : (
               <Grid container justifyContent="space-between" alignItems="center">
                 <Link className={props.text === 'header' ? classes.linkName : classes.linkNameFooter} to="/home">
-                  NewVision
+                  CI Courses
                 </Link>
 
                 <Grid style={props.text === 'header' ? { color: '#fff' } : { color: '#252525' }}>
@@ -438,7 +379,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                         }
                         to="/projects"
                       >
-                        Проекты
+                        Курсы
                       </Link>
                     </MenuItem>
                     <MenuItem>
@@ -452,23 +393,10 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                         }
                         to="/events"
                       >
-                        Мероприятия
+                        Трансляции
                       </Link>
                     </MenuItem>
-                    <MenuItem>
-                      <Link
-                        className={
-                          props.text === 'header'
-                            ? classes.linkFooter
-                            : props.text === 'footer'
-                            ? classes.linkFooter
-                            : classes.projectLink
-                        }
-                        to="/resources"
-                      >
-                        Ресурсы
-                      </Link>
-                    </MenuItem>
+                    
                     <MenuItem>
                       <Link
                         className={
@@ -480,7 +408,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                         }
                         to="/ads"
                       >
-                        Объявления
+                        Уроки
                       </Link>
                     </MenuItem>
                     {props.text === 'header' || props.text === 'qwe' ? (

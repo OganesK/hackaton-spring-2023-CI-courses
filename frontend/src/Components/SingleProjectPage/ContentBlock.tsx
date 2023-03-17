@@ -5,8 +5,7 @@ import Grid from '@mui/material/Grid';
 import { useWindowSize } from '../../rules/index';
 
 import ProfileNewsBlock from '../../Components/ProfilePage/ProfileNewsBlock/ProfileNewsBlock';
-import ProfileResourceBlock from '../../Components/ProfilePage/ProfileResourceBlock/ProfileResourceBlock';
-import ProfileOfferBlock from '../../Components/ProfilePage/ProfileOfferBlock/ProfileOfferBlock';
+
 
 import { SingleProjectsContentProps } from './typings';
 
@@ -23,7 +22,7 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
 
   return (
     <Grid container>
-      {props.isNoPostAtUser === false ? (
+      {/* {props.isNoPostAtUser === false ? (
         <>
           <Grid container justifyContent="space-between" columnSpacing={6}>
             {props.contentValues.map(contentValues => (
@@ -58,7 +57,7 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
                       shortDescription={contentValues.description}
                       article={contentValues.article}
                       img={contentValues.poster?.link}
-                      isOffer={contentValues.isOffer ? contentValues.isOffer : false}
+                    
                       isResource={contentValues.isResource ? contentValues.isResource : false}
                       isNews={contentValues.isNews ? contentValues.isNews : false}
                       isApproved={contentValues.isApproved}
@@ -135,7 +134,7 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
             ))}
           </Grid>
         </>
-      ) : null}
+      ) : null} */}
     </Grid>
   );
 };

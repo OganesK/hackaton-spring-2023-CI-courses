@@ -16,13 +16,8 @@ const StyledAppBar = styled(AppBar)(() => ({
 }));
 
 export default function FilterLine(props: FilterLineProps): JSX.Element {
-  const filters = props.isCompanyPage
-    ? ['Проекты', 'Контакты']
-    : props.isProfilePage
-    ? ['Компании', 'Проекты', 'Мероприятия', 'Ресурсы', 'Объявления', 'Новости']
-    : props.isModerationPage
-    ? ['Публикации', 'Проекты', 'Краудфандинги', 'Компании', 'Мероприятия', 'Контакты']
-    : categoriesArray;
+  const filters = ['Курсы', 'Уроки', 'Трансляции']
+    
 
   const onClickLeft: () => void = () => {
     document.getElementById('container')!.scrollLeft -= 100;

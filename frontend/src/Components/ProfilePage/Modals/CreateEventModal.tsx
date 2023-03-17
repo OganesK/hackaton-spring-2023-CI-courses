@@ -10,7 +10,7 @@ import 'react-responsive-modal/styles.css';
 
 //@ts-ignore
 import DateTimePicker from 'react-datetime-picker';
-import { CreateEventMutation, GetUrlToUploadEventPoster } from '../../../Pages/Company/graphql/mutation';
+import { CreateEventMutation, GetUrlToUploadEventPoster } from '../graphql/mutations';
 import Button from '../../UI/Buttons/OutlinedButton/Button';
 import NoneClick from '../../UI/NoneClickableField/NoneClick';
 import SnackbarOnChange from '../../UI/Snackbar/Snackbar';

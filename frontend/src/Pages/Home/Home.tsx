@@ -7,13 +7,13 @@ import { useWindowSize } from '../../rules/index';
 import Header from '../../Components/Home/Header/Header';
 import Footer from '../../Components/Home/Footer/Footer';
 import LastNews from '../../Components/Home/LastNews/LastNewsBlock';
-import CrowdsBlock from '../../Components/Home/Crowds/CrowdsBlock';
+
 import AboutUs from '../../Components/Home/AboutUs/AboutUs';
 import OurProjects from '../../Components/Home/OurProjects/OurProjects';
 import Partners from '../../Components/Home/Partners/Partners';
 import BidProject from '../../Components/Home/BidProject/BidProject';
 import EventsBlock from '../../Components/Calendar/EventsBlock';
-import OffersBlock from '../../Components/Home/Offers/OffersBlock';
+
 
 import Loading from '../../Components/UI/Loading/Loading';
 import useStyles from './Styles';
@@ -73,9 +73,7 @@ const Home: () => JSX.Element = () => {
         ) : null} */}
 
         <EventsBlock />
-        {data?.getPlatformConfig?.offersShownOnLanding && data.getPlatformConfig.offersShownOnLanding.length > 0 ? (
-          <OffersBlock offersOnLanding={data?.getPlatformConfig?.offersShownOnLanding} refetch={refetch} />
-        ) : null}
+        
 
         {width < 600 ? null : <BidProject />}
       </Grid>

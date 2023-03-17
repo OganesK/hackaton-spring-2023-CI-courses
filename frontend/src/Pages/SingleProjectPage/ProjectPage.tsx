@@ -24,9 +24,6 @@ import MyButton from '../../Components/UI/Buttons/OutlinedButton/Button';
 
 import Line from '../../Components/UI/Line/Line';
 import ContentBlock from '../../Components/SingleProjectPage/ContentBlock';
-import WorkerCard from '../../Components/SingleProjectPage/WorkerCard';
-import Crowdfunding from '../../Components/SingleProjectPage/Crowdfunding/Crowdfunding';
-import CreateCrowdBlock from '../../Components/SingleProjectPage/Crowdfunding/CreateCrowdBlock/CreateCrowdBlock';
 
 import BidProject from '../../Components/Home/BidProject/BidProjectOnSProjectPage';
 import Footer from '../../Components/Home/Footer/Footer';
@@ -37,7 +34,7 @@ import ImageSlider from '../../Components/SingleProjectPage/ImageSlider';
 
 import CreatePostModal from '../../Components/ProfilePage/Modals/CreatePostModal';
 import ProjectEditModal from '../../Components/SingleProjectPage/Modals/ProjectEditModal';
-import CreateCrowdfundingModal from '../../Components/SingleProjectPage/Modals/CreateCrowdfundingModal';
+
 
 import useStyles from './Style';
 
@@ -318,13 +315,13 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
           {isTabletOrMobile ? null : (
             <StickyBox offsetTop={150} style={{ width: '100%', zIndex: 2 }}>
               <SideBarNavigation
+              
                 isDescription={projectData?.project.description ? true : false}
                 // isWorkers={projectData?.project.workers.length > 0 ? true : false}
                 isCrowd={projectData?.project.crowdFunding.some(el => el.isApproved) ? true : false}
                 isResources={
                   projectData?.project.publishedPosts.some(el => el.isResource && el.isApproved) ? true : false
                 }
-                isOffers={projectData?.project.publishedPosts.some(el => el.isOffer && el.isApproved) ? true : false}
                 isNews={projectData?.project.publishedPosts.some(el => el.isNews && el.isApproved) ? true : false}
                 isOwner={isOwner}
               />
@@ -433,50 +430,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                   />
                 </Grid>
 
-                <Grid
-                  container
-                  direction="column"
-                  id="team"
-                  // style={{
-                  //   display: isOwner || projectData?.project.workers ? '' : 'none',
-                  // }}
-                >
-                  {isTabletOrMobile ? (
-                    <Grid container alignItems="center" className={classes.navigationProjectHeader}>
-                      Команда
-                    </Grid>
-                  ) : null}
-                  {isOwner && projectData?.project.isApproved === true ? (
-                    <AutoCompleteSearchField
-                      projectWorkers={projectData.project.workers}
-                      projectId={Number(projectId)}
-                      refetch={refetch}
-                    />
-                  ) : null}
-                  {projectData && projectData.project.workers ? (
-                    <>
-                      <Line
-                        marginTop={isOwner && projectData?.project.isApproved === true ? undefined : 10}
-                        marginBottom={22}
-                      />
-                      {projectData.project.workers.map((worker: WorkerTypes) => (
-                        <WorkerCard
-                          refetch={refetch}
-                          key={worker.id}
-                          userId={worker.worker.id}
-                          workerId={worker.id}
-                          avatar={worker.worker?.avatar?.link}
-                          position={worker.position}
-                          firstName={worker.worker.firstname}
-                          lastName={worker.worker.lastname}
-                          isOwner={notEditableFields === null || notEditableFields ? false : true}
-                          userInfo={userContextInfo?.user?.id}
-                        />
-                      ))}
-                    </>
-                  ) : null}
-                </Grid>
-
+              
                 {/* <Grid
                   container
                   direction="column"
@@ -684,7 +638,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
 
                 <Grid
                   container
-                  id="offers"
+
                   style={{
                     gap: 30,
                     marginBottom: -40,

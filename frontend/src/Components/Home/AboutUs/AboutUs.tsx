@@ -59,7 +59,7 @@ const AboutUs: (props: AboutUsProps) => JSX.Element = (props: AboutUsProps) => {
           <MyCard
             avatar={Projects}
             header="Стартапы"
-            title1="Проекты"
+            title1="Курсы"
             title2="Компании"
             number1={`${props.totalProjectCount ? props.totalProjectCount.toString() : ' totalProjectCount'}`}
             number2={`${props.totalCompanyCount ? props.totalCompanyCount.toString() : ' totalCompanyCount'}`}

@@ -11,7 +11,6 @@ import 'react-responsive-modal/styles.css';
 //@ts-ignore
 import DateTimePicker from 'react-datetime-picker';
 
-import { GetUrlToUploadEventPoster } from '../../../Pages/Company/graphql/mutation';
 import { EventTypes } from '../../../Pages/ProfilePage/graphql/typings';
 
 import Button from '../../UI/Buttons/OutlinedButton/Button';
@@ -35,7 +34,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
   const [openSnack, setOpenSnack] = useState(false);
 
   const updateEventHandler = UpdateEventMutation();
-  const getUrlToUploadEventPosterHandler = GetUrlToUploadEventPoster();
+ 
   const [nameValue, setNameValue] = useState('');
   const [descriptionValue, setDescriptionValue] = useState('');
   const [posterValue, setPosterValue] = useState<{
@@ -111,16 +110,16 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
           entityId: props.eventId,
           fileType: posterValue.type,
         };
-        const uploadUrl = await getUrlToUploadEventPosterHandler(PosterData);
-        await fetch(uploadUrl.data!.createMedia?.signedURL, {
-          method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-          credentials: 'include', // include, *same-origin, omit
-          headers: {
-            'Content-Type': posterValue.type,
-          },
-          //@ts-ignore
-          body: posterValue, // body data type must match "Content-Type" header
-        });
+        // const uploadUrl = await getUrlToUploadEventPosterHandler(PosterData);
+        // await fetch(uploadUrl.data!.createMedia?.signedURL, {
+        //   method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+        //   credentials: 'include', // include, *same-origin, omit
+        //   headers: {
+        //     'Content-Type': posterValue.type,
+        //   },
+        //   //@ts-ignore
+        //   body: posterValue, // body data type must match "Content-Type" header
+        // });
       }
       props.handleOpenClose();
       await refetch();

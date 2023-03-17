@@ -82,14 +82,7 @@ export default function AccountMenu(props: { logOutHandler: () => void }): JSX.E
           </ListItemIcon>
           Сообщения
         </MenuItem>
-        {user?.role === 'administrator' || user?.role === 'moderator' ? (
-          <MenuItem onClick={(): void => history.push('/moderate')}>
-            <ListItemIcon>
-              <AdminPanelSettingsIcon fontSize="small" />
-            </ListItemIcon>
-            Модерация
-          </MenuItem>
-        ) : null}
+        
         <MenuItem onClick={props.logOutHandler}>
           <ListItemIcon>
             <Logout fontSize="small" />

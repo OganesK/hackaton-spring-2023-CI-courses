@@ -36,7 +36,7 @@ const SideBarNavigation: (props: NavigationProps) => JSX.Element = (props: Navig
                 smooth={true}
                 offset={-150}
               >
-                Данные проекта
+                Данные курса
               </Link>
             </Button>
           </Grid>
@@ -131,24 +131,7 @@ const SideBarNavigation: (props: NavigationProps) => JSX.Element = (props: Navig
               </Button>
             </Grid>
           ) : null}
-          {props.isOffers || props.isOwner ? (
-            <Grid className={classes.GridLink}>
-              <Button>
-                <Link
-                  activeClass={classes.activeLink}
-                  className={classes.link}
-                  style={{ color: props.isOffers ? '' : '#AAADB2' }}
-                  to="offers"
-                  spy={true}
-                  hashSpy={true}
-                  smooth={true}
-                  offset={-150}
-                >
-                  Объявления
-                </Link>
-              </Button>
-            </Grid>
-          ) : null}
+          
           {props.isNews || props.isOwner ? (
             <Grid className={classes.GridLink}>
               <Button>

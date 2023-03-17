@@ -24,7 +24,6 @@ import SnackbarOnChange from '../../UI/Snackbar/Snackbar';
 import { ModalImage, ModalImageContainer } from '../../UI/Styles/TS/Style';
 import useStyles from '../../UI/Styles/TS/Components/createModalStyles/index';
 
-import { OfferTypes } from '../../../Pages/Offers/typings';
 import imgModalDefault from '../../../assets/img/imgModal.svg';
 
 import { GET_POST_QUERY } from './graphql/query';

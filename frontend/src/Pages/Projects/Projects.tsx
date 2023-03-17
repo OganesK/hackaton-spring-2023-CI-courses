@@ -70,7 +70,7 @@ const Projects: () => JSX.Element = () => {
     <Grid container xs={12}>
       <NavBar text="qwe" />
       <Grid container xs={10} style={{ margin: 'auto' }}>
-        <Grid className={classes.sloganText}>Витрина проектов</Grid>
+        <Grid className={classes.sloganText}>Представленные курсы</Grid>
         <FilterLine selectedCategory={filter} setSelectedCategory={setFilter} isProjectsPage />
 
         <Grid container direction="row" justifyContent="flex-start" style={{ marginTop: 40 }}>

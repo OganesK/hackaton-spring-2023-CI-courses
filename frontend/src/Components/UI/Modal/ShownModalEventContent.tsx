@@ -506,7 +506,7 @@ export default function ShownModalEventContent(props: ShownModalEventContentProp
                   </Grid>
                   <Grid container style={{ gap: 20 }}>
                     <Grid container className={classes.modalArticleHeader}>
-                      О мероприятии
+                      О трансляции
                     </Grid>
                     {edit && props.isOwner ? (
                       <OutlinedInput

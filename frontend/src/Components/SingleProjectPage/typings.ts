@@ -137,7 +137,6 @@ export interface NavigationProps {
   // isWorkers: boolean;
   isCrowd: boolean;
   isResources: boolean;
-  isOffers: boolean;
   isNews: boolean;
   isOwner: boolean;
 }

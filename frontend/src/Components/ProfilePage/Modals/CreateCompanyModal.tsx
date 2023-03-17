@@ -135,7 +135,7 @@ const CreateCompanyModal: (props: CompanyCreateModalProps) => JSX.Element = (pro
       <Grid container direction="column" className={styles.modalContainer}>
         {openNoneClick ? <NoneClick /> : null}
         <Grid item className={styles.modalHeader}>
-          Создание компании
+          Создание курса
         </Grid>
 
         <Grid container direction="row" className={styles.inputContainerGap}>
