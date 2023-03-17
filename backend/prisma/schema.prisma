@@ -24,6 +24,8 @@ model User {
   password  String          @db.VarChar(255)
 
   ownedCourses Course[]
+
+  testPasses  TestPass[]
   
   tokenVersion            Int?
 }
@@ -38,6 +40,29 @@ model Course {
 
   tasks CourseTask[]
   materials CourseMaterial[]
+
+  tests Test[]
+}
+
+model Test {
+  id  String  @id @default(uuid())
+
+  name  String
+
+  courseId  String
+  course  Course  @relation(references: [id], fields: [courseId])
+
+  testPasses  TestPass[]
+}
+
+model TestPass {
+  id  String  @id @default(uuid())
+
+  userId  String
+  user    User  @relation(references: [id], fields: [userId])
+
+  testId  String
+  test  Test  @relation(references: [id], fields: [testId])
 }
 
 model CourseMaterial {
