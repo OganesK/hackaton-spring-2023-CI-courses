@@ -1,0 +1,33 @@
+.reactMarkDown {
+  /* border: 2px solid; */
+  line-height: 130%;
+  font-size: clamp(0.75rem, 0.4688rem + 1.25vw, 1.125rem);
+}
+@media (max-width: 960px) {
+  .reactMarkDown {
+    line-height: 140%;
+    font-size: clamp(1rem, 0.7rem + 1.3333vw, 1.5rem);
+  }
+}
+
+.reactMarkDown ul {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  list-style: disc outside none;
+}
+
+.reactMarkDown ul li {
+  margin-left: 2em;
+}
+
+.reactMarkDown ol {
+  margin-left: 2em;
+}
+
+.reactMarkDown p > img {
+  width: 100%;
+  max-width: 600px;
+  display: block;
+  /* margin: 0 auto; */
+  padding: 20px 0 0 0;
+}

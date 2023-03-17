@@ -1,0 +1,33 @@
+.Show {
+  display: block;
+  animation: fadeClose 0.5s ease-in-out;
+  width: 100%;
+}
+.ShowOnHover {
+  display: none;
+  width: 100%;
+}
+.Message:hover .Show {
+  display: none;
+}
+.Message:hover .ShowOnHover {
+  animation: fade 0.5s ease-in-out;
+  display: block;
+}
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeClose {
+  0% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}

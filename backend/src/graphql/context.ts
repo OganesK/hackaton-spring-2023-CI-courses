@@ -1,8 +1,11 @@
 import { DataSourceConfig } from 'apollo-datasource';
 import { PrismaClient, User } from '@prisma/client';
+import { RedisPubSub } from 'graphql-redis-subscriptions';
+import { PubSub } from 'graphql-subscriptions';
 
 import express from 'express';
 import prisma from '../prisma-client';
+import pubsub from '../pubsub';
 import { ApolloDataSources } from '../datasources';
 import { UsersAPI } from '../datasources/users';
 
@@ -10,6 +13,7 @@ export interface InitialContext {
   prisma: PrismaClient;
   user: User | null;
   response: express.Response;
+  pubsub: RedisPubSub | PubSub;
 }
 
 export interface Context extends InitialContext {
@@ -21,6 +25,7 @@ export default async ({ req, connection, res }: { req: express.Request; connecti
     prisma,
     response: res,
     user: null,
+    pubsub,
   };
 
   const usersAPI = new UsersAPI();

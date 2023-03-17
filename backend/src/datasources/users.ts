@@ -2,17 +2,16 @@ import { DataSourceConfig } from 'apollo-datasource';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 import isEmail from 'isemail';
-import _ from 'lodash';
 import { UserInputError, ForbiddenError } from 'apollo-server-express';
 import { PrismaClient, User } from '@prisma/client';
 
-import { HASH_SALT } from '../config';
+import { DEFAULT_IMAGE, JWT_SECRET } from '../config';
 import { Context } from '../graphql/context';
 
 import { createToken } from '../integrations/jwt';
 
 export class UsersAPI {
-  private readonly jwtSecret = process.env.JWT_SECRET || 'secret';
+  private readonly jwtSecret = JWT_SECRET || 'secret';
   private prisma!: PrismaClient;
   private context!: Context;
 
@@ -26,7 +25,7 @@ export class UsersAPI {
       email: user.email,
       sub: user.id,
     }, this.jwtSecret, {
-      expiresIn: '24h',
+      expiresIn: '200h',
       algorithm: 'HS256',
     });
   }
@@ -47,6 +46,7 @@ export class UsersAPI {
 
   public async createUser ({ login, email, firstname, lastname, password }: CreateUserArgs): Promise<CreateUser> {
     const existingUser = await this.prisma.user.findFirst({ where: { OR: [{ email }, { login }] } });
+    const bcryptHashNumber = 7;
 
     if (existingUser) {
       throw new UserInputError('This email is already exist');
@@ -56,7 +56,7 @@ export class UsersAPI {
       throw new UserInputError('Invalid email');
     }
 
-    const hashedPassword = await bcrypt.hash(password, HASH_SALT);
+    const hashedPassword = await bcrypt.hash(password, bcryptHashNumber);
     const user = await this.prisma.user.create({
       data: {
         login,
@@ -64,6 +64,18 @@ export class UsersAPI {
         firstname,
         lastname,
         password: hashedPassword,
+        avatar: {
+          connectOrCreate: {
+            create: {
+              url: DEFAULT_IMAGE,
+              type: 'image',
+              isApproved: true,
+            },
+            where: {
+              url: DEFAULT_IMAGE,
+            },
+          },
+        },
       },
     });
 

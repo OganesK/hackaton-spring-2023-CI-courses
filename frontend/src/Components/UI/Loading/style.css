@@ -1,0 +1,36 @@
+.loading {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 3px solid hsla(11, 100%, 60%, 0.2);
+  border-top-color: #ff5631;
+  border-radius: 50%;
+  width: 75px;
+  height: 75px;
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+}
+
+.local_loading {
+  width: 75px;
+  height: 75px;
+  position: relative;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+  border: 3px solid hsla(11, 100%, 60%, 0.2);
+  border-top-color: #ff5631;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  transform-origin: center;
+}
+
+@keyframes spin {
+  from {
+    transform: translate(-50%, -50%) rotate(0);
+  }
+
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

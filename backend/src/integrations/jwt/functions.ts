@@ -1,19 +1,20 @@
 import jwt from 'jsonwebtoken';
-import { User } from '@prisma/client'; // TODO: Add reference to your user model in Prisma
+import { User } from '@prisma/client';
+import { JWT_REFRESH_SECRET, JWT_SECRET } from '../../config';
 
 export const createToken = (user: User): string => {
   return jwt.sign({
     userId: user.id,
-    iss: 'Issuer', // TODO: Add issuer
-  }, process.env.JWT_SECRET!, {
+    iss: '',
+  }, JWT_SECRET!, {
     algorithm: 'HS256',
-    expiresIn: process.env.ENV_NAME === 'dev' ? '24h' : '15m',
+    expiresIn: process.env.ENV_NAME === 'dev' ? '100h' : '200h',
   });
 };
 
 export const createRefreshToken = (user: User) => {
   return jwt.sign(
     { userId: user.id, tokenVersion: user.tokenVersion },
-    process.env.JWT_REFRESH_SECRET!,
+    JWT_REFRESH_SECRET!,
   );
 };

@@ -11,10 +11,12 @@ const config = {
   context,
   dataSources,
   tracing: true,
+  csrfPrevention: true,
   introspection: process.env.ENV_NAME !== 'production',
-  plugins: process.env.ENV_NAME !== 'production' ? [ApolloServerPluginLandingPageGraphQLPlayground()] : [],
+  // playground: process.env.ENV_NAME !== 'production',
+  plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
 };
 
-const server = new ApolloServer(config);
+const apolloServer = new ApolloServer(config);
 
-export default server;
+export default apolloServer;

@@ -1,0 +1,11 @@
+.projectHeader {
+  color: #252525;
+  font-size: clamp(1.125rem, -1.4063rem + 11.25vw, 4.5rem);
+  line-height: 86px;
+  margin: auto;
+  word-break: break-word;
+}
+
+ol {
+  margin-left: 1.1em;
+}
