@@ -8,8 +8,7 @@ export const Article = objectType({
     t.model.id();
     t.model.createdAt();
     t.model.post();
-    t.model.crowdfunding();
-    t.model.project();
+    t.model.course();
     t.model.sections({
       ordering: {
         number: true,

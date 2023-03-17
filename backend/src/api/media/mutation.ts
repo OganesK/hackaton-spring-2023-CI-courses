@@ -42,66 +42,6 @@ export const MediaMutation = extendType({
               });
               break;
             }
-            case 'crowdFundingPoster': {
-              await ctx.prisma.crowdFunding.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  poster: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'companyAvatar': {
-              await ctx.prisma.company.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  avatar: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'projectPoster': {
-              await ctx.prisma.project.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  poster: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'projectMedia': {
-              await ctx.prisma.project.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  presentationMedia: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
             case 'eventPoster': {
               await ctx.prisma.event.update({
                 where: {
@@ -163,27 +103,12 @@ export const MediaMutation = extendType({
               break;
             }
             case 'projectDescription': {
-              await ctx.prisma.project.update({
+              await ctx.prisma.course.update({
                 where: {
                   id: data.entityId,
                 },
                 data: {
-                  projectMedia: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'crowdfundingStory': {
-              await ctx.prisma.crowdFunding.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  crowdFundingMedia: {
+                  courseMedia: {
                     connect: {
                       url: media.url,
                     },
@@ -237,11 +162,6 @@ export const MediaMutation = extendType({
 
         await ctx.prisma.media.create({
           data: {
-            company: {
-              connect: {
-                id: data.entityId,
-              },
-            },
             url: result.objectURL,
             type: 'image',
           },
@@ -379,7 +299,7 @@ export const MediaMutation = extendType({
 
         await ctx.prisma.media.create({
           data: {
-            projectPoster: {
+            courseMedia: {
               connect: {
                 id: data.entityId,
               },
@@ -404,7 +324,7 @@ export const MediaMutation = extendType({
 
         await ctx.prisma.media.create({
           data: {
-            projectMedia: {
+            courseMedia: {
               connect: {
                 id: data.entityId,
               },

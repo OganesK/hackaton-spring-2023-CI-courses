@@ -12,14 +12,9 @@ export const Media = objectType({
     t.model.createdAt();
     t.model.type();
     t.model.user();
-    t.model.company();
-    t.model.projectPoster();
-    t.model.projectMedia();
     t.model.event();
     t.model.post();
     t.model.postMedia();
-    t.model.projectDescripiton();
-    t.model.crowdfundingStory();
     t.field('link', {
       type: 'String',
       resolve: async (parent: any, { }, ctx: Context) => {

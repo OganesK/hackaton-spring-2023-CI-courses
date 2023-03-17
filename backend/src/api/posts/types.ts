@@ -11,7 +11,6 @@ export const Post = objectType({
     t.model.id();
     t.model.moderationChecked();
     t.model.createdAt();
-    t.model.author();
     t.model.title();
     t.model.isOffer();
     t.model.isResource();
@@ -52,7 +51,6 @@ export const Post = objectType({
     t.model.articleBody();
     t.model.article();
     t.model.rejectMessage();
-    t.model.project();
     t.model.platformConfigNewsShowed();
     t.model.platformConfigOffersShowed();
     t.model.isApproved();

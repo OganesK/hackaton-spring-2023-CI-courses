@@ -3,7 +3,7 @@ CREATE TYPE "Role" AS ENUM ('resident', 'moderator', 'administrator');
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "role" "Role",
     "firstname" VARCHAR(64) NOT NULL,

@@ -1,537 +1,245 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 enum Role {
-    resident
-    moderator
-    administrator
+  resident
+  moderator
+  administrator
 }
 
 enum mediaType {
-    image
-    video
-}
-
-enum eventRegisteredVerdict {
-    yes
-    maybe
+  image
+  video
 }
 
 enum sectionTypes {
-    text
-    image
-    video
+  text
+  image
+  video
 }
 
 enum filteringCategories {
-    business
-    development
-    design
-    management
-    analytic
-    education
-    content
-    IT
-    securityAndDefenseIndustry
-    geologyGeodesyAndMeteorology
-    stateAdministration
-    other
-    healthcareMedicinePharmaceuticals
-    healthyLifestyleAndSports
-    publicUtilities
-    creativeTechnologiesAndTheEntertainmentIndustry
-    cultureAndArt
-    forestry
-    mediaAndSocialNetworks
-    metallurgyAndMiningIndustry
-    theScience
-    realty
-    oilAndGasIndustry
-    catering
-    productionOfProducts
-    connection
-    agriculturalIndustry
-    constructionAndInfrastructure
-    tradeAndRetail
-    transport
-    tourismAndHotelBusiness
-    finance
-    chemicalIndustry
-    energy
+  business
+  development
+  design
+  management
+  analytic
+  education
+  content
+  IT
 }
 
-enum projectTypeEnum {
-    softwareSolution
-    hardwareAndSoftwareComplex
-    initiativeOfTheRegion
-    technology
-    service
-    notDefined
-    hardwareSolution
-}
-
-enum projectStageEnum {
-    ideaOrConcept
-    prototypeOrMVP
-    workingProduct
-    scaling
-}
-
-enum projectMarketEnum {
-    AeroNet
-    AeroNext
-    AutoNet
-    EcoNet
-    EduNet
-    EnergyNet
-    FoodNet
-    GameNet
-    HealthNet
-    HomeNet
-    Marinet
-    NeuroNet
-    SafeNet
-    SpaceNet
-    SportNet
-    TechNet
-    WearNet
-}
-
-enum technologyTypeEnum {
-    Prototyping3D
-    additiveTechnologies
-    bionics
-    hydrogenTechnologies
-    renewableMaterialsAndWasteRecycling
-    genobionics
-    geoinformationSystems
-    greenEnergy
-    artificialIntelligence
-    quantumTechnologies
-    collaborativeTechnologies
-    molecularEngineering
-    neurotechnologiesVirtualTechnologies
-    newProductionTechnologies
-    personalizedMedicine
-    powerPlants
-    syntheticBiology
-    wirelessCommunicationTechnologies
-    informationSecurityTechnologies
-    quantumCommunicationTechnologies
-    technologiesOfRoboticsAndMechatronics
-    machineLearningAndCognitiveTechnologies
-    technologiesOfModeling
-    distributedRegistryTechnologies
-    sensorTechnology
-    technologiesForCreatingNewAndPortableEnergySources
-    technologiesOfElectricPowerTransportation
-    technologiesForControllingBiologicalObjects
-    bigDataStorageAndAnalysisTechnologies
-    carbonFootprintManagement
-    photonics
-}
-
-enum investmentStageEnum {
-    ownInvestments
-    angels
-    preSeed
-    seed
-    stageA
-    stageB
-    stageC
-}
-
-enum salesTypeEnum {
-    noSales
-    firstSales
-    systemSales
-}
-
-enum businessModelEnum {
-    B2B
-    B2B2C
-    B2C
-    B2G
-    C2C
-    G2B
-    G2C
-}
-
-enum mainGoalEnum {
-    biometricsTasks
-    dataMiningTasks
-    computerVisionTasks
-    naturalLanguageProcessingTasks
-    humanSpeechProcessingTasks
-    tasksOfRecommendationSystems
+enum courseTypeEnum {
+  softwareSolution
+  hardwareAndSoftwareComplex
+  initiativeOfTheRegion
+  technology
+  service
+  notDefined
+  hardwareSolution
 }
 
 model User {
-    id               Int             @id @default(autoincrement())
-    createdAt        DateTime        @default(now())
-    city             String?         @db.VarChar(512)
-    shortDescription String?         @db.VarChar(512)
-    email            String          @unique @db.VarChar(512)
-    login            String          @unique @db.VarChar(512)
-    password         String          @db.VarChar(512)
-    firstname        String          @db.VarChar(512)
-    lastname         String          @db.VarChar(512)
-    role             Role?           @default(resident)
-    bio              String?         @db.Text
-    avatar           Media?          @relation(fields: [avatarId], references: [id])
-    avatarId         Int?            @default(1)
-    tokenVersion     Int?
-    groupAdmins      MessagerGroup[] @relation(name: "admin")
-    publishedEvent   Event[]
-    ownerCompanies   Company[]
-    inWorks          Worker[]
-    groups           MessagerGroup[]
-    messages         Message[]
-    notifications    Notification[]
-    moderatedEntity  Moderation[]
-    StreamMessage    StreamMessage[]
+  id               Int             @id @default(autoincrement())
+  createdAt        DateTime        @default(now())
+  city             String?         @db.VarChar(512)
+  shortDescription String?         @db.VarChar(512)
+  email            String          @unique @db.VarChar(512)
+  login            String          @unique @db.VarChar(512)
+  password         String          @db.VarChar(512)
+  firstname        String          @db.VarChar(512)
+  lastname         String          @db.VarChar(512)
+  role             Role?           @default(resident)
+  bio              String?         @db.Text
+  avatar           Media?          @relation(fields: [avatarId], references: [id])
+  avatarId         Int?            @default(1)
+  tokenVersion     Int?
+  groupAdmins      MessagerGroup[] @relation(name: "admin")
+  publishedEvent   Event[]
+  groups           MessagerGroup[]
+  messages         Message[]
+  StreamMessage    StreamMessage[]
+  courses          Course[]
 }
 
-model Company {
-    id                Int                 @id @default(autoincrement())
-    moderationChecked Boolean?            @default(false)
-    createdAt         DateTime            @default(now())
-    name              String              @db.VarChar(512)
-    avatar            Media?              @relation(fields: [avatarId], references: [id])
-    avatarId          Int?                @default(1)
-    description       String?             @db.Text
-    shortDescription  String?             @db.Text
-    activityKind      filteringCategories
-    owner             User                @relation(fields: [ownerID], references: [id])
-    ownerID           Int
-    contact           Contact?
-    projects          Project[]
-    isApproved        Boolean?            @default(false)
-    moderate          Moderation?         @relation(fields: [moderateId], references: [id])
-    moderateId        Int?                @unique
-    inn               String?
-    mainRegion        String?
-    mainContact       String?
-}
+model Course {
+  id                   Int                 @id @default(autoincrement())
+  createdAt            DateTime            @default(now())
+  name                 String              @db.VarChar(512)
+  category             filteringCategories
+  poster               Media?              @relation("Poster", fields: [posterId], references: [id])
+  posterId             Int?
+  courseMedia          Media[]             @relation("courseMedia")
+  description          Article?            @relation(name: "courseArticle")
+  shortDescription     String              @db.Text
+  ownerId              Int
+  owner                User                @relation(fields: [ownerId], references: [id])
+  publishedPosts       Post[]
+  platformConfigShowed PlatformConfig[]
+  courseType           courseTypeEnum?
 
-model Contact {
-    id                Int         @id @default(autoincrement())
-    moderationChecked Boolean?    @default(false)
-    emails            String[]    @db.VarChar(512)
-    adresses          String[]    @db.VarChar(512)
-    phones            String[]    @db.VarChar(512)
-    ownerCompany      Company     @relation(fields: [ownerCompanyID], references: [id])
-    ownerCompanyID    Int         @unique
-    isApproved        Boolean?    @default(false)
-    moderate          Moderation? @relation(fields: [moderateId], references: [id])
-    moderateId        Int?        @unique
-}
-
-model Project {
-    id                   Int                  @id @default(autoincrement())
-    moderationChecked    Boolean?             @default(false)
-    createdAt            DateTime             @default(now())
-    name                 String               @db.VarChar(512)
-    category             filteringCategories
-    poster               Media?               @relation("Poster", fields: [posterId], references: [id])
-    posterId             Int?
-    presentationMedia    Media[]              @relation("Media")
-    projectMedia         Media[]              @relation("projectMedia")
-    description          Article?             @relation(name: "ProjectArticle")
-    shortDescription     String               @db.Text
-    metrics              ProjectMetrics?
-    ownerCompany         Company              @relation(fields: [ownerCompanyID], references: [id])
-    ownerCompanyID       Int
-    workers              Worker[]
-    publishedPosts       Post[]
-    platformConfigShowed PlatformConfig[]
-    isApproved           Boolean?             @default(false)
-    moderate             Moderation?          @relation(fields: [moderateId], references: [id])
-    moderateId           Int?                 @unique
-    crowdFunding         CrowdFunding[]
-    projectType          projectTypeEnum?
-    projectStage         projectStageEnum?
-    projectSite          String?
-    projectMarket        projectMarketEnum?
-    technologyType       technologyTypeEnum?
-    investmentStage      investmentStageEnum?
-    salesType            salesTypeEnum?
-    businessModel        businessModelEnum?
-    mainGoal             mainGoalEnum?
-}
-
-model ProjectMetrics {
-    id             Int     @id @default(autoincrement())
-    workersCount   Int
-    earned         Float
-    investmentsGot Float
-    project        Project @relation(fields: [projectID], references: [id])
-    projectID      Int     @unique
-}
-
-model Worker {
-    id             Int      @id @default(autoincrement())
-    createdAt      DateTime @default(now())
-    position       String   @db.VarChar(512)
-    worker         User     @relation(fields: [workerID], references: [id])
-    workerID       Int
-    project        Project  @relation(fields: [projectID], references: [id])
-    projectID      Int
-    publishedPosts Post[]
+  @@map("course")
+  Media Media[] @relation("Media")
 }
 
 model Post {
-    id                         Int                 @id @default(autoincrement())
-    moderationChecked          Boolean?            @default(false)
-    createdAt                  DateTime            @default(now())
-    isOffer                    Boolean             @default(false)
-    isResource                 Boolean             @default(false)
-    isNews                     Boolean             @default(false)
-    title                      String              @db.VarChar(512)
-    category                   filteringCategories
-    poster                     Media?              @relation(name: "Post", fields: [posterId], references: [id])
-    posterId                   Int?                @default(1)
-    postMedia                  Media[]             @relation("postMedia")
-    tags                       String[]            @db.VarChar(512)
-    articleBody                String?             @db.Text
-    description                String              @db.Text
-    auditedAt                  DateTime?
-    rejectMessage              String?             @db.Text
-    project                    Project?            @relation(fields: [projectID], references: [id])
-    projectID                  Int?
-    author                     Worker?             @relation(fields: [authorID], references: [id])
-    authorID                   Int?
-    platformConfigNewsShowed   PlatformConfig[]    @relation(name: "newsOnLanding")
-    platformConfigOffersShowed PlatformConfig[]    @relation(name: "offersOnLanding")
-    isApproved                 Boolean?            @default(false)
-    moderate                   Moderation?         @relation(fields: [moderateId], references: [id])
-    moderateId                 Int?                @unique
-    article                    Article?            @relation("Article")
+  id                         Int                 @id @default(autoincrement())
+  createdAt                  DateTime            @default(now())
+  isNews                     Boolean             @default(false)
+  title                      String              @db.VarChar(512)
+  category                   filteringCategories
+  poster                     Media?              @relation(name: "Post", fields: [posterId], references: [id])
+  posterId                   Int?                @default(1)
+  postMedia                  Media[]             @relation("postMedia")
+  tags                       String[]            @db.VarChar(512)
+  articleBody                String?             @db.Text
+  description                String              @db.Text
+  course                     Course?             @relation(fields: [courseID], references: [id])
+  courseID                   Int?
+  authorID                   Int?
+  platformConfigNewsShowed   PlatformConfig[]    @relation(name: "newsOnLanding")
+  platformConfigOffersShowed PlatformConfig[]    @relation(name: "offersOnLanding")
+  article                    Article?            @relation("Article")
 }
 
 model Article {
-    id           Int           @id @default(autoincrement())
-    createdAt    DateTime      @default(now())
-    post         Post?         @relation(name: "Article", fields: [postID], references: [id], onDelete: Cascade)
-    postID       Int?          @unique
-    sections     Section[]
-    crowdfunding CrowdFunding? @relation(name: "CFArticle", fields: [cfId], references: [id], onDelete: Cascade)
-    cfId         Int?          @unique
-    project      Project?      @relation(name: "ProjectArticle", fields: [projectId], references: [id], onDelete: Cascade)
-    projectId    Int?          @unique
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  post      Post?     @relation(name: "Article", fields: [postID], references: [id], onDelete: Cascade)
+  postID    Int?      @unique
+  sections  Section[]
+  cfId      Int?      @unique
+  course    Course?   @relation(name: "courseArticle", fields: [courseId], references: [id], onDelete: Cascade)
+  courseId  Int?      @unique
 }
 
 model Section {
-    id        Int          @id @default(autoincrement())
-    article   Article      @relation(fields: [articleID], references: [id], onDelete: Cascade)
-    articleID Int
-    number    Int
-    type      sectionTypes
-    text      String?      @db.Text
-    media     Media?       @relation(fields: [mediaID], references: [id])
-    mediaID   Int?
+  id        Int          @id @default(autoincrement())
+  article   Article      @relation(fields: [articleID], references: [id], onDelete: Cascade)
+  articleID Int
+  number    Int
+  type      sectionTypes
+  text      String?      @db.Text
+  media     Media?       @relation(fields: [mediaID], references: [id])
+  mediaID   Int?
 }
 
 model Event {
-    id                   Int                  @id @default(autoincrement())
-    moderationChecked    Boolean?             @default(false)
-    isApproved           Boolean              @default(false)
-    name                 String               @db.VarChar(512)
-    poster               Media?               @relation(fields: [posterId], references: [id])
-    posterId             Int?                 @default(1)
-    category             filteringCategories
-    description          String               @db.Text
-    shortDescription     String               @db.Text
-    date                 DateTime
-    organizer            String               @db.VarChar(512)
-    theme                String               @db.VarChar(512)
-    address              String               @db.VarChar(512)
-    format               String?              @db.VarChar(512)
-    moderate             Moderation?          @relation(fields: [moderateId], references: [id])
-    moderateId           Int?                 @unique
-    platformConfigShowed PlatformConfig[]
-    user                 User?                @relation(fields: [userId], references: [id])
-    userId               Int?
-    stream               Stream?
-    registeredForEvent   RegisteredForEvent[]
+  id                   Int                  @id @default(autoincrement())
+  name                 String               @db.VarChar(512)
+  poster               Media?               @relation(fields: [posterId], references: [id])
+  posterId             Int?                 @default(1)
+  category             filteringCategories
+  description          String               @db.Text
+  shortDescription     String               @db.Text
+  date                 DateTime
+  organizer            String               @db.VarChar(512)
+  theme                String               @db.VarChar(512)
+  address              String               @db.VarChar(512)
+  format               String?              @db.VarChar(512)
+  platformConfigShowed PlatformConfig[]
+  user                 User?                @relation(fields: [userId], references: [id])
+  userId               Int?
+  stream               Stream?
+  registeredForEvent   RegisteredForEvent[]
 }
 
 model RegisteredForEvent {
-    id      Int                    @id @default(autoincrement())
-    verdict eventRegisteredVerdict
-    name    String                 @db.VarChar(512)
-    surname String                 @db.VarChar(512)
-    email   String                 @db.VarChar(512)
-    event   Event                  @relation(fields: [eventId], references: [id], onDelete: Cascade)
-    eventId Int
-}
-
-model Moderation {
-    id           Int           @id @default(autoincrement())
-    moderatedAt  DateTime      @default(now())
-    auditor      User?         @relation(fields: [auditorId], references: [id])
-    auditorId    Int?
-    company      Company?
-    project      Project?
-    contact      Contact?
-    post         Post?
-    event        Event?
-    crowdFunding CrowdFunding?
+  id      Int    @id @default(autoincrement())
+  name    String @db.VarChar(512)
+  surname String @db.VarChar(512)
+  email   String @db.VarChar(512)
+  event   Event  @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  eventId Int
 }
 
 model Stream {
-    id            Int             @id @default(autoincrement())
-    eventId       Int?            @unique
-    event         Event?          @relation(fields: [eventId], references: [id], onDelete: Cascade)
-    streamKey     String          @unique @default(uuid())
-    active        Boolean         @default(false)
-    streamMessage StreamMessage[]
+  id            Int             @id @default(autoincrement())
+  eventId       Int?            @unique
+  event         Event?          @relation(fields: [eventId], references: [id], onDelete: Cascade)
+  streamKey     String          @unique @default(uuid())
+  active        Boolean         @default(false)
+  streamMessage StreamMessage[]
 }
 
 model Media {
-    id                   Int             @id @default(autoincrement())
-    createdAt            DateTime?       @default(now())
-    url                  String          @unique @db.VarChar(512)
-    type                 mediaType
-    isApproved           Boolean         @default(false)
-    event                Event[]
-    post                 Post[]          @relation(name: "Post")
-    projectPoster        Project[]       @relation(name: "Poster")
-    projectMedia         Project?        @relation(name: "Media", fields: [projectMediaId], references: [id])
-    projectMediaId       Int?
-    company              Company[]
-    user                 User[]
-    postMedia            Post?           @relation("postMedia", fields: [postMediaId], references: [id])
-    postMediaId          Int?
-    section              Section[]
-    messagerGroup        MessagerGroup[]
-    crowdFunding         CrowdFunding[]
-    projectDescripiton   Project?        @relation(name: "projectMedia", fields: [projectDescriptionId], references: [id])
-    projectDescriptionId Int?
-    crowdfundingStory    CrowdFunding?   @relation(name: "crowdFundingMedia", fields: [crowdfundingStoryId], references: [id])
-    crowdfundingStoryId  Int?
-}
-
-model Notification {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    theme     String   @db.VarChar(512)
-    body      String   @db.Text
-    toWhom    User     @relation(fields: [toWhomId], references: [id])
-    toWhomId  Int
-    checked   Boolean  @default(false)
+  id                  Int             @id @default(autoincrement())
+  createdAt           DateTime?       @default(now())
+  url                 String          @unique @db.VarChar(512)
+  type                mediaType
+  event               Event[]
+  post                Post[]          @relation(name: "Post")
+  coursePoster        Course[]        @relation(name: "Poster")
+  courseMedia         Course?         @relation(name: "Media", fields: [courseMediaId], references: [id])
+  courseMediaId       Int?
+  user                User[]
+  postMedia           Post?           @relation("postMedia", fields: [postMediaId], references: [id])
+  postMediaId         Int?
+  section             Section[]
+  messagerGroup       MessagerGroup[]
+  courseDescripiton   Course?         @relation(name: "courseMedia", fields: [courseDescriptionId], references: [id])
+  courseDescriptionId Int?
 }
 
 model PlatformConfig {
-    id                          Int            @id @default(autoincrement())
-    createdAt                   DateTime       @default(now())
-    totalProjectCount           Int
-    totalCompanyCount           Int
-    totalBudgetInvestment       Int
-    totalExtraBudgetInvestment  Int
-    platformTagline             String         @db.Text
-    platformTitle               String         @db.Text
-    platformDescription         String         @db.Text
-    platformShortDescription    String         @db.Text
-    newsShownOnLanding          Post[]         @relation(name: "newsOnLanding")
-    offersShownOnLanding        Post[]         @relation(name: "offersOnLanding")
-    crowdFundingsShownOnLanding CrowdFunding[]
-    projectsShownOnLanding      Project[]
-    eventsShownOnLanding        Event[]
+  id                         Int      @id @default(autoincrement())
+  createdAt                  DateTime @default(now())
+  totalcourseCount           Int
+  totalCompanyCount          Int
+  totalBudgetInvestment      Int
+  totalExtraBudgetInvestment Int
+  platformTagline            String   @db.Text
+  platformTitle              String   @db.Text
+  platformDescription        String   @db.Text
+  platformShortDescription   String   @db.Text
+  newsShownOnLanding         Post[]   @relation(name: "newsOnLanding")
+  offersShownOnLanding       Post[]   @relation(name: "offersOnLanding")
+  coursesShownOnLanding      Course[]
+  eventsShownOnLanding       Event[]
 }
 
 model Email {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    email     String
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  email     String
 }
 
 model Message {
-    id        Int           @id @default(autoincrement())
-    createdAt DateTime      @default(now())
-    updatedAt DateTime      @updatedAt
-    text      String        @db.Text
-    sender    User          @relation(fields: [senderId], references: [id])
-    senderId  Int
-    group     MessagerGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
-    groupId   Int
+  id        Int           @id @default(autoincrement())
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+  text      String        @db.Text
+  sender    User          @relation(fields: [senderId], references: [id])
+  senderId  Int
+  group     MessagerGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  groupId   Int
 }
 
 model MessagerGroup {
-    id        Int       @id @default(autoincrement())
-    createdAt DateTime  @default(now())
-    title     String    @db.VarChar(512)
-    type      String
-    avatar    Media?    @relation(fields: [avatarId], references: [id])
-    avatarId  Int?
-    inviteURL String?   @unique @db.VarChar(512)
-    members   User[]
-    messages  Message[]
-    admins    User[]    @relation("admin")
+  id        Int       @id @default(autoincrement())
+  createdAt DateTime  @default(now())
+  title     String    @db.VarChar(512)
+  type      String
+  avatar    Media?    @relation(fields: [avatarId], references: [id])
+  avatarId  Int?
+  inviteURL String?   @unique @db.VarChar(512)
+  members   User[]
+  messages  Message[]
+  admins    User[]    @relation("admin")
 }
 
 model StreamMessage {
-    id        Int      @id @default(autoincrement())
-    createdAt DateTime @default(now())
-    text      String   @db.Text
-    sender    User     @relation(fields: [senderId], references: [id])
-    senderId  Int
-    stream    Stream   @relation(fields: [streamId], references: [id])
-    streamId  Int
-}
-
-model CrowdFunding {
-    id                   Int                  @id @default(autoincrement())
-    createdAt            DateTime             @default(now())
-    title                String               @db.VarChar(512)
-    shortDescription     String               @db.VarChar(512)
-    story                Article?             @relation("CFArticle")
-    poster               Media?               @relation(fields: [posterId], references: [id])
-    posterId             Int?                 @default(1)
-    crowdFundingMedia    Media[]              @relation("crowdFundingMedia")
-    project              Project              @relation(fields: [projectId], references: [id])
-    projectId            Int
-    start                DateTime
-    end                  DateTime
-    goalSum              Float
-    nowSum               Float                @default(0)
-    moderate             Moderation?          @relation(fields: [moderateId], references: [id])
-    moderateId           Int?                 @unique
-    moderationChecked    Boolean?             @default(false)
-    isApproved           Boolean              @default(false)
-    tariffs              CrowdFundingTariff[]
-    payedTariffs         payedTariffs[]
-    platformConfigShowed PlatformConfig[]
-}
-
-model CrowdFundingTariff {
-    id             Int          @id @default(autoincrement())
-    createdAt      DateTime     @default(now())
-    title          String       @db.VarChar(512)
-    price          Float
-    description    String       @db.VarChar(512)
-    buyerCount     Int          @default(0)
-    crowdFunding   CrowdFunding @relation(fields: [crowdFundingId], references: [id], onDelete: Cascade)
-    crowdFundingId Int
-}
-
-model payedTariffs {
-    id           Int          @id @default(autoincrement())
-    createdAt    DateTime     @default(now())
-    crowdfunding CrowdFunding @relation(fields: [cfId], references: [id])
-    cfId         Int
-    summ         Float
-    email        String       @db.VarChar(512)
-    address      String       @db.Text
-    firstName    String
-    lastName     String
-    fatherName   String
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  text      String   @db.Text
+  sender    User     @relation(fields: [senderId], references: [id])
+  senderId  Int
+  stream    Stream   @relation(fields: [streamId], references: [id])
+  streamId  Int
 }

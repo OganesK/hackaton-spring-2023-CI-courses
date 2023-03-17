@@ -9,31 +9,12 @@ export const ProjectMutation = extendType({
       type: 'Project',
       args: { data: nonNull(arg({ type: createProjectInput })) },
       resolve: async (_, { data }, ctx: Context) => {
-        return ctx.prisma.project.create({
+        return ctx.prisma.course.create({
           data: {
             name: data.name,
             category: data.category,
-            projectSite: data.projectSite || null,
-            projectType: data.projectType || null,
-            projectStage: data.projectStage || null,
-            projectMarket: data.projectMarket || null,
-            technologyType: data.technologyType || null,
-            investmentStage: data.investmentStage || null,
-            salesType: data.salesType || null,
-            businessModel: data.businessModel || null,
-            mainGoal: data.mainGoal || null,
             shortDescription: data.shortDescription,
-            workers: {
-              create: {
-                position: 'Руководитель',
-                worker: {
-                  connect: {
-                    id: ctx.user.id,
-                  },
-                },
-              },
-            },
-            ownerCompany: {
+            owner: {
               connect: {
                 id: data.ownerCompany,
               },
