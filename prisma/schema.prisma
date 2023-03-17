@@ -1,0 +1,60 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  resident
+  moderator
+  administrator
+}
+
+model User {
+  id        String             @id @default(uuid())
+  createdAt DateTime        @default(now())
+  role      Role?
+  firstname String          @db.VarChar(64)
+  lastname  String          @db.VarChar(64)
+  email     String          @db.VarChar(64)   @unique
+  login     String          @db.VarChar(64)   @unique
+  password  String          @db.VarChar(255)
+
+  ownedCourses Course[]
+  
+  tokenVersion            Int?
+}
+
+model Course {
+  id String @id @default(uuid())
+  name String
+
+
+  ownerId String
+  owner User @relation(references: [id], fields: [ownerId])
+
+  tasks CourseTask[]
+  materials CourseMaterial[]
+}
+
+model CourseMaterial {
+  id  String  @id @default(uuid())
+  dataUrl String
+
+  courses Course[]
+}
+
+model CourseTask {
+  id  String  @id @default(uuid())
+
+  name  String
+  description String
+  cost  Float
+
+  answer String?
+
+  courses Course[]
+}
