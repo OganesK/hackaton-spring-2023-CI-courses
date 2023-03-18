@@ -150,16 +150,8 @@ export const PostCreateInput = inputObjectType({
   name: 'PostCreateInput',
   definition (t) {
     t.nonNull.string('title');
-    t.nonNull.list.string('tags');
     t.nonNull.string('articleBody');
     t.nonNull.string('description');
-    t.nonNull.boolean('isOffer');
-    t.nonNull.boolean('isResource');
-    t.nonNull.boolean('isNews');
-    t.nonNull.field('category', {
-      type: 'filteringCategoies',
-    });
-    t.nonNull.int('projectId');
   },
 });
 
@@ -169,27 +161,16 @@ export const CreatePostInput = inputObjectType({
   name: 'CreatePostInput',
   definition (t) {
     t.nonNull.string('title');
-    t.nonNull.list.string('tags');
+    t.nonNull.string('articleBody');
     t.nonNull.string('description');
-    t.nonNull.boolean('isOffer');
-    t.nonNull.boolean('isResource');
-    t.nonNull.boolean('isNews');
-    t.nonNull.field('category', {
-      type: 'filteringCategoies',
-    });
-    t.nonNull.int('projectId');
   },
 });
 
 export const UpdatePostInput = inputObjectType({
   name: 'UpdatePostInput',
   definition (t) {
-    t.nonNull.int('postId');
-    t.string('title');
-    t.list.string('tags');
-    t.string('description');
-    t.field('category', {
-      type: 'filteringCategoies',
-    });
+    t.nonNull.string('title');
+    t.nonNull.string('articleBody');
+    t.nonNull.string('description');
   },
 });
