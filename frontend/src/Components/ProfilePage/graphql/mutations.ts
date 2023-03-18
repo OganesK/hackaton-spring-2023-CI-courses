@@ -28,11 +28,11 @@ export const UpdateEventMutation = (): ((
 
 export const CreateOfferMutation = () => {
   const [offerId] = useMutation<{ postCreateMutation: { id: number } }>(gql`
-    mutation ($data: CreatePostInput!) {
-      postCreateMutation(data: $data) {
-        id
-      }
+  mutation($data: PostCreateInput!){
+    createOnePost(data: $data) {
+      id
     }
+  }
   `);
   return (data: any) => offerId({ variables: { data } });
 };
