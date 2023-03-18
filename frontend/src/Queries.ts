@@ -349,28 +349,12 @@ export const GET_USER_QUERY = gql`
 `;
 
 export const GET_EVENTS_QUERY = gql`
-  query {
-    events(where: { }, orderBy: { date: desc }) {
-      id
-      name
-      poster {
-        link
-      }
-      category
-      description
-      shortDescription
-      date
-      organizer
-      format
-      theme
-      address
-      user {
-        publishedEvent {
-          id
-        }
-      }
-    }
+query{
+  streams{
+    name
+    streamKey
   }
+}
 `;
 
 export const GET_STREAMS_QUERY = gql`

@@ -5,4 +5,4 @@
 export const API_URL = process.env.API_URL || 'https://nikko-develop.space/course-main-back';
 export const WS_URL = process.env.WS_URL || 'wss://nikko-develop.space/course-main-back';
 export const VCS_URL = process.env.VCS_URL || 'https://nikko-develop.space/course-main-back';
-export const STREAM_URL = process.env.STREAM_URL || 'https://nikko-develop.space/course-main-back/live/';
+export const STREAM_URL = process.env.STREAM_URL || 'http://localhost:8000/streaming/';
