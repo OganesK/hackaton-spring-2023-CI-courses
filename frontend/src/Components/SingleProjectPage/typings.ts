@@ -114,7 +114,7 @@ interface ContentBlockProps {
       };
     }[];
   };
-  isApproved: boolean;
+  : boolean;
 }
 
 export interface SingleProjectsContentProps {

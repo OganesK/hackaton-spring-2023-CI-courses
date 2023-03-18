@@ -10,7 +10,7 @@ export interface ProfileProjectProps {
     name: string;
     shortDescription: string;
     presentationMedia: string[];
-    isApproved: boolean;
+    : boolean;
     category: string;
     updatedVariable?: {
       name: string;
@@ -34,7 +34,7 @@ export interface ProjectPosterProps {
   header: string;
   img?: string;
   shortDescription: string;
-  isApproved: boolean;
+  : boolean;
   isOwner: boolean;
   category: string;
   updatedVariable?: {

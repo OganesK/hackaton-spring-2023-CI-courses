@@ -14,11 +14,6 @@ export interface ProjectsTypes {
   poster: {
     link: string;
   };
-  ownerCompany: {
-    owner: {
-      id: number;
-    };
-  };
 }
 
 interface Section {

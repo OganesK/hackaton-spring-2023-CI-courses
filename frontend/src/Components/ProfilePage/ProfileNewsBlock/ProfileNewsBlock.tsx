@@ -76,7 +76,7 @@ const ProfileNewsBlock: (props: ProfileNewsProps) => JSX.Element = (props: Profi
     <>
       <Tooltip
         title={
-          props.isApproved === false && openFullscreenModal === false
+          props. === false && openFullscreenModal === false
             ? 'Новость проходит модерацию, только вы видите её.'
             : ''
         }
@@ -85,7 +85,7 @@ const ProfileNewsBlock: (props: ProfileNewsProps) => JSX.Element = (props: Profi
           item
           container
           style={{
-            filter: props.isApproved ? 'none' : 'brightness(0.6) opacity(0.8)',
+            filter: props. ? 'none' : 'brightness(0.6) opacity(0.8)',
             wordBreak: 'break-word',
             gap: 20,
             marginBottom: 10,

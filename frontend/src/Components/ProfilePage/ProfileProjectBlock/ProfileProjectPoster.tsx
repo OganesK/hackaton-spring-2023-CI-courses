@@ -44,7 +44,7 @@ const ProfileProjectPoster: (props: ProjectPosterProps) => JSX.Element = (props:
   return (
     <Tooltip
       title={
-        props.isOwner && props.isApproved === false
+        props.isOwner && props. === false
           ? 'курс находится на стадии модерации, только вы видите его. Доступно редактирование.'
           : ''
       }
@@ -53,12 +53,12 @@ const ProfileProjectPoster: (props: ProjectPosterProps) => JSX.Element = (props:
         <Tooltip placement="top" title={props.isOwner ? getStringWhatUpdated() : ''}>
           <div
             onClick={() => {
-              if (props.isApproved || props.isOwner) {
+              if (props. || props.isOwner) {
                 history.push(`/projects/project/${props.projectId}`);
               }
             }}
             style={{
-              filter: props.isApproved ? 'none' : 'brightness(0.6) opacity(0.8)',
+              filter: props. ? 'none' : 'brightness(0.6) opacity(0.8)',
               wordBreak: 'break-word',
               cursor: 'pointer',
             }}

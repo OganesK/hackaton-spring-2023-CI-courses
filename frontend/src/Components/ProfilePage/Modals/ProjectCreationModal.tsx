@@ -140,10 +140,6 @@ const ProjectCreationModal: (props: ProjectCreateModalProps) => JSX.Element = (p
         name: nameValue,
         shortDescription: shortDescriptionValue,
         category: activityTypeValue,
-        ownerCompany:
-          props.ownerId === 0
-            ? Number(companyData?.companies.filter(company => company.name === companyIdValue)[0].id)
-            : props.ownerId,
         industrialDirections: projectIndustrialDirectionsValue,
         projectType: projectTypesValue,
         projectStage: projectStagesValue,

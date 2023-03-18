@@ -77,7 +77,7 @@ interface CrowdsOnLanding {
     };
   };
   createdAt: Date;
-  isApproved: boolean;
+  : boolean;
   activeCheck: boolean;
 }
 

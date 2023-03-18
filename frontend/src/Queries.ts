@@ -75,7 +75,6 @@ export const GET_CONFIG_QUERY = gql`
             link
           }
         }
-        isApproved
         activeCheck
       }
       offersShownOnLanding {
@@ -115,7 +114,7 @@ export const GET_CONFIG_QUERY = gql`
 
 export const GET_PROJECTS_QUERY = gql`
   query {
-    projects(where: { isApproved: { equals: true } }, orderBy: { createdAt: desc }) {
+    projects(where:  orderBy: { createdAt: desc }) {
       id
       category
       name
@@ -132,7 +131,6 @@ export const GET_PROJECTS_QUERY = gql`
         }
       }
       shortDescription
-      isApproved
       presentationMedia {
         link
         type
@@ -140,18 +138,13 @@ export const GET_PROJECTS_QUERY = gql`
       poster {
         link
       }
-      ownerCompany {
-        owner {
-          id
-        }
-      }
     }
   }
 `;
 
 export const GET_CROWDFUNDS_QUERY = gql`
   query {
-    crowdFundings(where: { isApproved: { equals: true } }, orderBy: { createdAt: desc }) {
+    crowdFundings(where:  orderBy: { createdAt: desc }) {
       id
       title
       story {
@@ -177,7 +170,6 @@ export const GET_CROWDFUNDS_QUERY = gql`
           link
         }
       }
-      isApproved
       activeCheck
     }
   }
@@ -185,7 +177,7 @@ export const GET_CROWDFUNDS_QUERY = gql`
 
 export const GET_RESOURCES_QUERY = gql`
   query {
-    posts(where: { isApproved: { equals: true }, isResource: { equals: true } }, orderBy: { createdAt: desc }) {
+    posts(where: { isResource: { equals: true } }, orderBy: { createdAt: desc }) {
       id
       createdAt
       isResource
@@ -227,7 +219,7 @@ export const GET_RESOURCES_QUERY = gql`
 
 export const GET_NEWS_QUERY = gql`
   query {
-    posts(where: { isApproved: { equals: true }, isNews: { equals: true } }, orderBy: { createdAt: desc }) {
+    posts(where: {  isNews: { equals: true } }, orderBy: { createdAt: desc }) {
       category
       id
       createdAt
@@ -268,7 +260,7 @@ export const GET_NEWS_QUERY = gql`
 
 export const GET_OFFERS_QUERY = gql`
   query {
-    posts(where: { isApproved: { equals: true }, isOffer: { equals: true } }, orderBy: { createdAt: desc }) {
+    posts(where: {  isOffer: { equals: true } }, orderBy: { createdAt: desc }) {
       id
       category
       createdAt
@@ -335,7 +327,6 @@ export const GET_PROJECT_QUERY = gql`
       businessModel
       salesType
       mainGoal
-      isApproved
       presentationMedia {
         link
         type
@@ -373,11 +364,6 @@ export const GET_PROJECT_QUERY = gql`
             }
           }
         }
-        isApproved
-      }
-      ownerCompany {
-        id
-        name
       }
       crowdFunding {
         id
@@ -391,7 +377,6 @@ export const GET_PROJECT_QUERY = gql`
         end
         goalSum
         nowSum
-        isApproved
         activeCheck
         story {
           id
@@ -432,7 +417,6 @@ export const GET_PROJECT_QUERY = gql`
 export const ME_QUERY = gql`
   query {
     me {
-      role
       avatar {
         link
       }
@@ -452,7 +436,6 @@ export const ME_QUERY = gql`
         organizer
         address
         theme
-        isApproved
         stream {
           id
           streamKey
@@ -474,7 +457,6 @@ export const ME_QUERY = gql`
           id
           name
         }
-        isApproved
       }
       inWorks {
         id
@@ -531,7 +513,6 @@ export const GET_USER_QUERY = gql`
         address
         theme
         format
-        isApproved
         stream {
           id
           streamKey
@@ -559,7 +540,6 @@ export const GET_USER_QUERY = gql`
             }
           }
           shortDescription
-          isApproved
           poster {
             link
           }
@@ -598,7 +578,6 @@ export const GET_USER_QUERY = gql`
                 }
               }
             }
-            isApproved
           }
           presentationMedia {
             link
@@ -612,7 +591,6 @@ export const GET_USER_QUERY = gql`
           link
         }
         shortDescription
-        isApproved
         createdAt
         activityKind
         projects {
@@ -631,7 +609,6 @@ export const GET_USER_QUERY = gql`
             }
           }
           shortDescription
-          isApproved
           category
           poster {
             link
@@ -670,7 +647,6 @@ export const GET_USER_QUERY = gql`
                 }
               }
             }
-            isApproved
           }
           presentationMedia {
             link
@@ -683,7 +659,7 @@ export const GET_USER_QUERY = gql`
 
 export const GET_EVENTS_QUERY = gql`
   query {
-    events(where: { isApproved: { equals: true } }, orderBy: { date: desc }) {
+    events(where: {  }, orderBy: { date: desc }) {
       id
       name
       poster {

@@ -417,7 +417,7 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                       postToShow.map(post => (
                         <>
                           {(contextUserData.user && Number(userId) === contextUserData.user.id && post.isNews) ||
-                          (post.isApproved && post.isNews) ? (
+                          (
                             <Grid
                               item
                               xl={4}
@@ -453,7 +453,7 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                                 refetch={refetch}
                               />
                             </Grid>
-                          ) : null}
+                          )}
                         </>
                       ))}
                   </>

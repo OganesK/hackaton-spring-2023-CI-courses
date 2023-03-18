@@ -66,7 +66,7 @@ const ProfileProjectsBlock: (props: ProfileProjectProps) => JSX.Element = (props
                 <>
                   {props.isOwner ||
                   (contextUserData.user && contextUserData.user.id === props.userid) ||
-                  work.isApproved ? (
+                  work. ? (
                     <Grid
                       key={work.id}
                       item
@@ -110,7 +110,7 @@ const ProfileProjectsBlock: (props: ProfileProjectProps) => JSX.Element = (props
                               : work.poster?.link
                             : work.poster?.link
                         }
-                        isApproved={work.isApproved}
+                        ={work.}
                         updatedVariable={work.updatedVariable}
                         category={work.category}
                       />

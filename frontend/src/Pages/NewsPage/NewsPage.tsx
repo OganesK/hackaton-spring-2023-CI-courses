@@ -86,7 +86,7 @@ const NewsPage: () => JSX.Element = () => {
                     isResource={news.isResource ? news.isResource : false}
                     isNews={news.isNews}
                     isOwner={false}
-                    isApproved={true}
+                    ={true}
                     refetch={refetch}
                   />
                 </Grid>
