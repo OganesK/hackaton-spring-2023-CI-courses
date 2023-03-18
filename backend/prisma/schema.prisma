@@ -66,7 +66,6 @@ model Course {
   shortDescription     String           @db.Text
   ownerId              Int
   owner                User             @relation(fields: [ownerId], references: [id])
-  publishedPosts       Post[]
   platformConfigShowed PlatformConfig[]
   courseType           courseTypeEnum?
   Media                Media[]          @relation("Media")
@@ -112,19 +111,12 @@ model Task {
 model Post {
   id                         Int              @id @default(autoincrement())
   createdAt                  DateTime         @default(now())
-  isNews                     Boolean          @default(false)
   title                      String           @db.VarChar(512)
   poster                     Media?           @relation(name: "Post", fields: [posterId], references: [id])
   posterId                   Int?             @default(1)
   postMedia                  Media[]          @relation("postMedia")
-  tags                       String[]         @db.VarChar(512)
   articleBody                String?          @db.Text
   description                String           @db.Text
-  course                     Course?          @relation(fields: [courseID], references: [id])
-  courseID                   Int?
-  authorID                   Int?
-  platformConfigNewsShowed   PlatformConfig[] @relation(name: "newsOnLanding")
-  platformConfigOffersShowed PlatformConfig[] @relation(name: "offersOnLanding")
   article                    Article?         @relation("Article")
 }
 
@@ -215,8 +207,6 @@ model PlatformConfig {
   platformTitle              String   @db.Text
   platformDescription        String   @db.Text
   platformShortDescription   String   @db.Text
-  newsShownOnLanding         Post[]   @relation(name: "newsOnLanding")
-  offersShownOnLanding       Post[]   @relation(name: "offersOnLanding")
   coursesShownOnLanding      Course[]
   eventsShownOnLanding       Event[]
 }

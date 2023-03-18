@@ -43,9 +43,6 @@ export const Course = objectType({
     });
     t.model.description();
     t.model.shortDescription();
-    t.model.publishedPosts({
-      ordering: true,
-    });
   },
 });
 export const SignUrlProjectPresentationMedia = objectType({

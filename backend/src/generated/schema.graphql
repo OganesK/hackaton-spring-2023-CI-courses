@@ -184,7 +184,6 @@ type Course {
   id: Int!
   name: String!
   poster: Media
-  publishedPosts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByWithRelationInput!]): [Post!]!
   shortDescription: String!
 }
 
@@ -254,12 +253,6 @@ input CourseCreateNestedOneWithoutMediaInput {
   create: CourseCreateWithoutMediaInput
 }
 
-input CourseCreateNestedOneWithoutPublishedPostsInput {
-  connect: CourseWhereUniqueInput
-  connectOrCreate: CourseCreateOrConnectWithoutPublishedPostsInput
-  create: CourseCreateWithoutPublishedPostsInput
-}
-
 input CourseCreateOrConnectWithoutCourseMediaInput {
   create: CourseCreateWithoutCourseMediaInput!
   where: CourseWhereUniqueInput!
@@ -290,11 +283,6 @@ input CourseCreateOrConnectWithoutPosterInput {
   where: CourseWhereUniqueInput!
 }
 
-input CourseCreateOrConnectWithoutPublishedPostsInput {
-  create: CourseCreateWithoutPublishedPostsInput!
-  where: CourseWhereUniqueInput!
-}
-
 input CourseCreateWithoutCourseMediaInput {
   Media: MediaCreateNestedManyWithoutCourseMediaInput
   courseType: courseTypeEnum
@@ -304,7 +292,6 @@ input CourseCreateWithoutCourseMediaInput {
   owner: UserCreateNestedOneWithoutCoursesInput!
   platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
   poster: MediaCreateNestedOneWithoutCoursePosterInput
-  publishedPosts: PostCreateNestedManyWithoutCourseInput
   shortDescription: String!
 }
 
@@ -317,7 +304,6 @@ input CourseCreateWithoutDescriptionInput {
   owner: UserCreateNestedOneWithoutCoursesInput!
   platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
   poster: MediaCreateNestedOneWithoutCoursePosterInput
-  publishedPosts: PostCreateNestedManyWithoutCourseInput
   shortDescription: String!
 }
 
@@ -330,7 +316,6 @@ input CourseCreateWithoutMediaInput {
   owner: UserCreateNestedOneWithoutCoursesInput!
   platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
   poster: MediaCreateNestedOneWithoutCoursePosterInput
-  publishedPosts: PostCreateNestedManyWithoutCourseInput
   shortDescription: String!
 }
 
@@ -343,7 +328,6 @@ input CourseCreateWithoutOwnerInput {
   name: String!
   platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
   poster: MediaCreateNestedOneWithoutCoursePosterInput
-  publishedPosts: PostCreateNestedManyWithoutCourseInput
   shortDescription: String!
 }
 
@@ -356,7 +340,6 @@ input CourseCreateWithoutPlatformConfigShowedInput {
   name: String!
   owner: UserCreateNestedOneWithoutCoursesInput!
   poster: MediaCreateNestedOneWithoutCoursePosterInput
-  publishedPosts: PostCreateNestedManyWithoutCourseInput
   shortDescription: String!
 }
 
@@ -369,20 +352,6 @@ input CourseCreateWithoutPosterInput {
   name: String!
   owner: UserCreateNestedOneWithoutCoursesInput!
   platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
-  publishedPosts: PostCreateNestedManyWithoutCourseInput
-  shortDescription: String!
-}
-
-input CourseCreateWithoutPublishedPostsInput {
-  Media: MediaCreateNestedManyWithoutCourseMediaInput
-  courseMedia: MediaCreateNestedManyWithoutCourseDescripitonInput
-  courseType: courseTypeEnum
-  createdAt: DateTime
-  description: ArticleCreateNestedOneWithoutCourseInput
-  name: String!
-  owner: UserCreateNestedOneWithoutCoursesInput!
-  platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
-  poster: MediaCreateNestedOneWithoutCoursePosterInput
   shortDescription: String!
 }
 
@@ -409,7 +378,6 @@ input CourseOrderByWithRelationInput {
   platformConfigShowed: PlatformConfigOrderByRelationAggregateInput
   poster: MediaOrderByWithRelationInput
   posterId: SortOrder
-  publishedPosts: PostOrderByRelationAggregateInput
   shortDescription: SortOrder
 }
 
@@ -519,16 +487,6 @@ input CourseUpdateOneWithoutMediaInput {
   upsert: CourseUpsertWithoutMediaInput
 }
 
-input CourseUpdateOneWithoutPublishedPostsInput {
-  connect: CourseWhereUniqueInput
-  connectOrCreate: CourseCreateOrConnectWithoutPublishedPostsInput
-  create: CourseCreateWithoutPublishedPostsInput
-  delete: Boolean
-  disconnect: Boolean
-  update: CourseUpdateWithoutPublishedPostsInput
-  upsert: CourseUpsertWithoutPublishedPostsInput
-}
-
 input CourseUpdateWithWhereUniqueWithoutOwnerInput {
   data: CourseUpdateWithoutOwnerInput!
   where: CourseWhereUniqueInput!
@@ -553,7 +511,6 @@ input CourseUpdateWithoutCourseMediaInput {
   owner: UserUpdateOneRequiredWithoutCoursesInput
   platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
   poster: MediaUpdateOneWithoutCoursePosterInput
-  publishedPosts: PostUpdateManyWithoutCourseInput
   shortDescription: StringFieldUpdateOperationsInput
 }
 
@@ -566,7 +523,6 @@ input CourseUpdateWithoutDescriptionInput {
   owner: UserUpdateOneRequiredWithoutCoursesInput
   platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
   poster: MediaUpdateOneWithoutCoursePosterInput
-  publishedPosts: PostUpdateManyWithoutCourseInput
   shortDescription: StringFieldUpdateOperationsInput
 }
 
@@ -579,7 +535,6 @@ input CourseUpdateWithoutMediaInput {
   owner: UserUpdateOneRequiredWithoutCoursesInput
   platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
   poster: MediaUpdateOneWithoutCoursePosterInput
-  publishedPosts: PostUpdateManyWithoutCourseInput
   shortDescription: StringFieldUpdateOperationsInput
 }
 
@@ -592,7 +547,6 @@ input CourseUpdateWithoutOwnerInput {
   name: StringFieldUpdateOperationsInput
   platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
   poster: MediaUpdateOneWithoutCoursePosterInput
-  publishedPosts: PostUpdateManyWithoutCourseInput
   shortDescription: StringFieldUpdateOperationsInput
 }
 
@@ -605,7 +559,6 @@ input CourseUpdateWithoutPlatformConfigShowedInput {
   name: StringFieldUpdateOperationsInput
   owner: UserUpdateOneRequiredWithoutCoursesInput
   poster: MediaUpdateOneWithoutCoursePosterInput
-  publishedPosts: PostUpdateManyWithoutCourseInput
   shortDescription: StringFieldUpdateOperationsInput
 }
 
@@ -618,20 +571,6 @@ input CourseUpdateWithoutPosterInput {
   name: StringFieldUpdateOperationsInput
   owner: UserUpdateOneRequiredWithoutCoursesInput
   platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
-  publishedPosts: PostUpdateManyWithoutCourseInput
-  shortDescription: StringFieldUpdateOperationsInput
-}
-
-input CourseUpdateWithoutPublishedPostsInput {
-  Media: MediaUpdateManyWithoutCourseMediaInput
-  courseMedia: MediaUpdateManyWithoutCourseDescripitonInput
-  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: ArticleUpdateOneWithoutCourseInput
-  name: StringFieldUpdateOperationsInput
-  owner: UserUpdateOneRequiredWithoutCoursesInput
-  platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
-  poster: MediaUpdateOneWithoutCoursePosterInput
   shortDescription: StringFieldUpdateOperationsInput
 }
 
@@ -668,11 +607,6 @@ input CourseUpsertWithoutMediaInput {
   update: CourseUpdateWithoutMediaInput!
 }
 
-input CourseUpsertWithoutPublishedPostsInput {
-  create: CourseCreateWithoutPublishedPostsInput!
-  update: CourseUpdateWithoutPublishedPostsInput!
-}
-
 input CourseWhereInput {
   AND: [CourseWhereInput!]
   Media: MediaListRelationFilter
@@ -689,7 +623,6 @@ input CourseWhereInput {
   platformConfigShowed: PlatformConfigListRelationFilter
   poster: MediaWhereInput
   posterId: IntNullableFilter
-  publishedPosts: PostListRelationFilter
   shortDescription: StringFilter
 }
 
@@ -2438,6 +2371,7 @@ type Mutation {
   createMedia(data: createMediaInput!): SignUrlResponse
   createOneCourse(data: createCourseInput!): Course
   createOneEvent(data: EventCreatedInput!): Event
+  createOnePost(data: PostCreateInput!): Post
   createOneStream(data: StreamCreateInput!): Stream!
   createOneTest(data: TestCreateInput!): Test!
   deleteGroup(data: deleteGroupInput!): String
@@ -2609,8 +2543,6 @@ type PlatformConfig {
   createdAt: DateTime!
   eventsShownOnLanding(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int): [Event!]!
   id: Int!
-  newsShownOnLanding(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int): [Post!]!
-  offersShownOnLanding(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int): [Post!]!
   platformDescription: String!
   platformShortDescription: String!
   platformTagline: String!
@@ -2632,18 +2564,6 @@ input PlatformConfigCreateNestedManyWithoutEventsShownOnLandingInput {
   create: [PlatformConfigCreateWithoutEventsShownOnLandingInput!]
 }
 
-input PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput {
-  connect: [PlatformConfigWhereUniqueInput!]
-  connectOrCreate: [PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput!]
-  create: [PlatformConfigCreateWithoutNewsShownOnLandingInput!]
-}
-
-input PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput {
-  connect: [PlatformConfigWhereUniqueInput!]
-  connectOrCreate: [PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput!]
-  create: [PlatformConfigCreateWithoutOffersShownOnLandingInput!]
-}
-
 input PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput {
   create: PlatformConfigCreateWithoutCoursesShownOnLandingInput!
   where: PlatformConfigWhereUniqueInput!
@@ -2654,21 +2574,9 @@ input PlatformConfigCreateOrConnectWithoutEventsShownOnLandingInput {
   where: PlatformConfigWhereUniqueInput!
 }
 
-input PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput {
-  create: PlatformConfigCreateWithoutNewsShownOnLandingInput!
-  where: PlatformConfigWhereUniqueInput!
-}
-
-input PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput {
-  create: PlatformConfigCreateWithoutOffersShownOnLandingInput!
-  where: PlatformConfigWhereUniqueInput!
-}
-
 input PlatformConfigCreateWithoutCoursesShownOnLandingInput {
   createdAt: DateTime
   eventsShownOnLanding: EventCreateNestedManyWithoutPlatformConfigShowedInput
-  newsShownOnLanding: PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
-  offersShownOnLanding: PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
   platformDescription: String!
   platformShortDescription: String!
   platformTagline: String!
@@ -2682,38 +2590,6 @@ input PlatformConfigCreateWithoutCoursesShownOnLandingInput {
 input PlatformConfigCreateWithoutEventsShownOnLandingInput {
   coursesShownOnLanding: CourseCreateNestedManyWithoutPlatformConfigShowedInput
   createdAt: DateTime
-  newsShownOnLanding: PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
-  offersShownOnLanding: PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
-  platformDescription: String!
-  platformShortDescription: String!
-  platformTagline: String!
-  platformTitle: String!
-  totalBudgetInvestment: Int!
-  totalCompanyCount: Int!
-  totalExtraBudgetInvestment: Int!
-  totalcourseCount: Int!
-}
-
-input PlatformConfigCreateWithoutNewsShownOnLandingInput {
-  coursesShownOnLanding: CourseCreateNestedManyWithoutPlatformConfigShowedInput
-  createdAt: DateTime
-  eventsShownOnLanding: EventCreateNestedManyWithoutPlatformConfigShowedInput
-  offersShownOnLanding: PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
-  platformDescription: String!
-  platformShortDescription: String!
-  platformTagline: String!
-  platformTitle: String!
-  totalBudgetInvestment: Int!
-  totalCompanyCount: Int!
-  totalExtraBudgetInvestment: Int!
-  totalcourseCount: Int!
-}
-
-input PlatformConfigCreateWithoutOffersShownOnLandingInput {
-  coursesShownOnLanding: CourseCreateNestedManyWithoutPlatformConfigShowedInput
-  createdAt: DateTime
-  eventsShownOnLanding: EventCreateNestedManyWithoutPlatformConfigShowedInput
-  newsShownOnLanding: PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
   platformDescription: String!
   platformShortDescription: String!
   platformTagline: String!
@@ -2772,16 +2648,6 @@ input PlatformConfigUpdateManyWithWhereWithoutEventsShownOnLandingInput {
   where: PlatformConfigScalarWhereInput!
 }
 
-input PlatformConfigUpdateManyWithWhereWithoutNewsShownOnLandingInput {
-  data: PlatformConfigUpdateManyMutationInput!
-  where: PlatformConfigScalarWhereInput!
-}
-
-input PlatformConfigUpdateManyWithWhereWithoutOffersShownOnLandingInput {
-  data: PlatformConfigUpdateManyMutationInput!
-  where: PlatformConfigScalarWhereInput!
-}
-
 input PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput {
   connect: [PlatformConfigWhereUniqueInput!]
   connectOrCreate: [PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput!]
@@ -2808,32 +2674,6 @@ input PlatformConfigUpdateManyWithoutEventsShownOnLandingInput {
   upsert: [PlatformConfigUpsertWithWhereUniqueWithoutEventsShownOnLandingInput!]
 }
 
-input PlatformConfigUpdateManyWithoutNewsShownOnLandingInput {
-  connect: [PlatformConfigWhereUniqueInput!]
-  connectOrCreate: [PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput!]
-  create: [PlatformConfigCreateWithoutNewsShownOnLandingInput!]
-  delete: [PlatformConfigWhereUniqueInput!]
-  deleteMany: [PlatformConfigScalarWhereInput!]
-  disconnect: [PlatformConfigWhereUniqueInput!]
-  set: [PlatformConfigWhereUniqueInput!]
-  update: [PlatformConfigUpdateWithWhereUniqueWithoutNewsShownOnLandingInput!]
-  updateMany: [PlatformConfigUpdateManyWithWhereWithoutNewsShownOnLandingInput!]
-  upsert: [PlatformConfigUpsertWithWhereUniqueWithoutNewsShownOnLandingInput!]
-}
-
-input PlatformConfigUpdateManyWithoutOffersShownOnLandingInput {
-  connect: [PlatformConfigWhereUniqueInput!]
-  connectOrCreate: [PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput!]
-  create: [PlatformConfigCreateWithoutOffersShownOnLandingInput!]
-  delete: [PlatformConfigWhereUniqueInput!]
-  deleteMany: [PlatformConfigScalarWhereInput!]
-  disconnect: [PlatformConfigWhereUniqueInput!]
-  set: [PlatformConfigWhereUniqueInput!]
-  update: [PlatformConfigUpdateWithWhereUniqueWithoutOffersShownOnLandingInput!]
-  updateMany: [PlatformConfigUpdateManyWithWhereWithoutOffersShownOnLandingInput!]
-  upsert: [PlatformConfigUpsertWithWhereUniqueWithoutOffersShownOnLandingInput!]
-}
-
 input PlatformConfigUpdateWithWhereUniqueWithoutCoursesShownOnLandingInput {
   data: PlatformConfigUpdateWithoutCoursesShownOnLandingInput!
   where: PlatformConfigWhereUniqueInput!
@@ -2844,21 +2684,9 @@ input PlatformConfigUpdateWithWhereUniqueWithoutEventsShownOnLandingInput {
   where: PlatformConfigWhereUniqueInput!
 }
 
-input PlatformConfigUpdateWithWhereUniqueWithoutNewsShownOnLandingInput {
-  data: PlatformConfigUpdateWithoutNewsShownOnLandingInput!
-  where: PlatformConfigWhereUniqueInput!
-}
-
-input PlatformConfigUpdateWithWhereUniqueWithoutOffersShownOnLandingInput {
-  data: PlatformConfigUpdateWithoutOffersShownOnLandingInput!
-  where: PlatformConfigWhereUniqueInput!
-}
-
 input PlatformConfigUpdateWithoutCoursesShownOnLandingInput {
   createdAt: DateTimeFieldUpdateOperationsInput
   eventsShownOnLanding: EventUpdateManyWithoutPlatformConfigShowedInput
-  newsShownOnLanding: PostUpdateManyWithoutPlatformConfigNewsShowedInput
-  offersShownOnLanding: PostUpdateManyWithoutPlatformConfigOffersShowedInput
   platformDescription: StringFieldUpdateOperationsInput
   platformShortDescription: StringFieldUpdateOperationsInput
   platformTagline: StringFieldUpdateOperationsInput
@@ -2872,38 +2700,6 @@ input PlatformConfigUpdateWithoutCoursesShownOnLandingInput {
 input PlatformConfigUpdateWithoutEventsShownOnLandingInput {
   coursesShownOnLanding: CourseUpdateManyWithoutPlatformConfigShowedInput
   createdAt: DateTimeFieldUpdateOperationsInput
-  newsShownOnLanding: PostUpdateManyWithoutPlatformConfigNewsShowedInput
-  offersShownOnLanding: PostUpdateManyWithoutPlatformConfigOffersShowedInput
-  platformDescription: StringFieldUpdateOperationsInput
-  platformShortDescription: StringFieldUpdateOperationsInput
-  platformTagline: StringFieldUpdateOperationsInput
-  platformTitle: StringFieldUpdateOperationsInput
-  totalBudgetInvestment: IntFieldUpdateOperationsInput
-  totalCompanyCount: IntFieldUpdateOperationsInput
-  totalExtraBudgetInvestment: IntFieldUpdateOperationsInput
-  totalcourseCount: IntFieldUpdateOperationsInput
-}
-
-input PlatformConfigUpdateWithoutNewsShownOnLandingInput {
-  coursesShownOnLanding: CourseUpdateManyWithoutPlatformConfigShowedInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  eventsShownOnLanding: EventUpdateManyWithoutPlatformConfigShowedInput
-  offersShownOnLanding: PostUpdateManyWithoutPlatformConfigOffersShowedInput
-  platformDescription: StringFieldUpdateOperationsInput
-  platformShortDescription: StringFieldUpdateOperationsInput
-  platformTagline: StringFieldUpdateOperationsInput
-  platformTitle: StringFieldUpdateOperationsInput
-  totalBudgetInvestment: IntFieldUpdateOperationsInput
-  totalCompanyCount: IntFieldUpdateOperationsInput
-  totalExtraBudgetInvestment: IntFieldUpdateOperationsInput
-  totalcourseCount: IntFieldUpdateOperationsInput
-}
-
-input PlatformConfigUpdateWithoutOffersShownOnLandingInput {
-  coursesShownOnLanding: CourseUpdateManyWithoutPlatformConfigShowedInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  eventsShownOnLanding: EventUpdateManyWithoutPlatformConfigShowedInput
-  newsShownOnLanding: PostUpdateManyWithoutPlatformConfigNewsShowedInput
   platformDescription: StringFieldUpdateOperationsInput
   platformShortDescription: StringFieldUpdateOperationsInput
   platformTagline: StringFieldUpdateOperationsInput
@@ -2926,18 +2722,6 @@ input PlatformConfigUpsertWithWhereUniqueWithoutEventsShownOnLandingInput {
   where: PlatformConfigWhereUniqueInput!
 }
 
-input PlatformConfigUpsertWithWhereUniqueWithoutNewsShownOnLandingInput {
-  create: PlatformConfigCreateWithoutNewsShownOnLandingInput!
-  update: PlatformConfigUpdateWithoutNewsShownOnLandingInput!
-  where: PlatformConfigWhereUniqueInput!
-}
-
-input PlatformConfigUpsertWithWhereUniqueWithoutOffersShownOnLandingInput {
-  create: PlatformConfigCreateWithoutOffersShownOnLandingInput!
-  update: PlatformConfigUpdateWithoutOffersShownOnLandingInput!
-  where: PlatformConfigWhereUniqueInput!
-}
-
 input PlatformConfigWhereInput {
   AND: [PlatformConfigWhereInput!]
   NOT: [PlatformConfigWhereInput!]
@@ -2946,8 +2730,6 @@ input PlatformConfigWhereInput {
   createdAt: DateTimeFilter
   eventsShownOnLanding: EventListRelationFilter
   id: IntFilter
-  newsShownOnLanding: PostListRelationFilter
-  offersShownOnLanding: PostListRelationFilter
   platformDescription: StringFilter
   platformShortDescription: StringFilter
   platformTagline: StringFilter
@@ -2968,12 +2750,8 @@ type Post {
   createdAt: DateTime!
   description: String!
   id: Int!
-  isNews: Boolean!
-  platformConfigNewsShowed(after: PlatformConfigWhereUniqueInput, before: PlatformConfigWhereUniqueInput, first: Int, last: Int): [PlatformConfig!]!
-  platformConfigOffersShowed(after: PlatformConfigWhereUniqueInput, before: PlatformConfigWhereUniqueInput, first: Int, last: Int): [PlatformConfig!]!
   postMedia(after: MediaWhereUniqueInput, before: MediaWhereUniqueInput, first: Int, last: Int): [Media!]!
   poster: Media
-  tags: [String!]!
   title: String!
 }
 
@@ -2989,61 +2767,17 @@ input PostCreateInput {
   title: String!
 }
 
-input PostCreateManyCourseInput {
-  articleBody: String
-  authorID: Int
-  createdAt: DateTime
-  description: String!
-  id: Int
-  isNews: Boolean
-  posterId: Int
-  tags: PostCreateManytagsInput
-  title: String!
-}
-
-input PostCreateManyCourseInputEnvelope {
-  data: [PostCreateManyCourseInput!]
-  skipDuplicates: Boolean
-}
-
 input PostCreateManyPosterInput {
   articleBody: String
-  authorID: Int
-  courseID: Int
   createdAt: DateTime
   description: String!
   id: Int
-  isNews: Boolean
-  tags: PostCreateManytagsInput
   title: String!
 }
 
 input PostCreateManyPosterInputEnvelope {
   data: [PostCreateManyPosterInput!]
   skipDuplicates: Boolean
-}
-
-input PostCreateManytagsInput {
-  set: [String!]
-}
-
-input PostCreateNestedManyWithoutCourseInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutCourseInput!]
-  create: [PostCreateWithoutCourseInput!]
-  createMany: PostCreateManyCourseInputEnvelope
-}
-
-input PostCreateNestedManyWithoutPlatformConfigNewsShowedInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigNewsShowedInput!]
-  create: [PostCreateWithoutPlatformConfigNewsShowedInput!]
-}
-
-input PostCreateNestedManyWithoutPlatformConfigOffersShowedInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigOffersShowedInput!]
-  create: [PostCreateWithoutPlatformConfigOffersShowedInput!]
 }
 
 input PostCreateNestedManyWithoutPosterInput {
@@ -3070,21 +2804,6 @@ input PostCreateOrConnectWithoutArticleInput {
   where: PostWhereUniqueInput!
 }
 
-input PostCreateOrConnectWithoutCourseInput {
-  create: PostCreateWithoutCourseInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostCreateOrConnectWithoutPlatformConfigNewsShowedInput {
-  create: PostCreateWithoutPlatformConfigNewsShowedInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostCreateOrConnectWithoutPlatformConfigOffersShowedInput {
-  create: PostCreateWithoutPlatformConfigOffersShowedInput!
-  where: PostWhereUniqueInput!
-}
-
 input PostCreateOrConnectWithoutPostMediaInput {
   create: PostCreateWithoutPostMediaInput!
   where: PostWhereUniqueInput!
@@ -3097,96 +2816,29 @@ input PostCreateOrConnectWithoutPosterInput {
 
 input PostCreateWithoutArticleInput {
   articleBody: String
-  authorID: Int
-  course: CourseCreateNestedOneWithoutPublishedPostsInput
   createdAt: DateTime
   description: String!
-  isNews: Boolean
-  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
   postMedia: MediaCreateNestedManyWithoutPostMediaInput
   poster: MediaCreateNestedOneWithoutPostInput
-  tags: PostCreatetagsInput
-  title: String!
-}
-
-input PostCreateWithoutCourseInput {
-  article: ArticleCreateNestedOneWithoutPostInput
-  articleBody: String
-  authorID: Int
-  createdAt: DateTime
-  description: String!
-  isNews: Boolean
-  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
-  postMedia: MediaCreateNestedManyWithoutPostMediaInput
-  poster: MediaCreateNestedOneWithoutPostInput
-  tags: PostCreatetagsInput
-  title: String!
-}
-
-input PostCreateWithoutPlatformConfigNewsShowedInput {
-  article: ArticleCreateNestedOneWithoutPostInput
-  articleBody: String
-  authorID: Int
-  course: CourseCreateNestedOneWithoutPublishedPostsInput
-  createdAt: DateTime
-  description: String!
-  isNews: Boolean
-  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
-  postMedia: MediaCreateNestedManyWithoutPostMediaInput
-  poster: MediaCreateNestedOneWithoutPostInput
-  tags: PostCreatetagsInput
-  title: String!
-}
-
-input PostCreateWithoutPlatformConfigOffersShowedInput {
-  article: ArticleCreateNestedOneWithoutPostInput
-  articleBody: String
-  authorID: Int
-  course: CourseCreateNestedOneWithoutPublishedPostsInput
-  createdAt: DateTime
-  description: String!
-  isNews: Boolean
-  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-  postMedia: MediaCreateNestedManyWithoutPostMediaInput
-  poster: MediaCreateNestedOneWithoutPostInput
-  tags: PostCreatetagsInput
   title: String!
 }
 
 input PostCreateWithoutPostMediaInput {
   article: ArticleCreateNestedOneWithoutPostInput
   articleBody: String
-  authorID: Int
-  course: CourseCreateNestedOneWithoutPublishedPostsInput
   createdAt: DateTime
   description: String!
-  isNews: Boolean
-  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
   poster: MediaCreateNestedOneWithoutPostInput
-  tags: PostCreatetagsInput
   title: String!
 }
 
 input PostCreateWithoutPosterInput {
   article: ArticleCreateNestedOneWithoutPostInput
   articleBody: String
-  authorID: Int
-  course: CourseCreateNestedOneWithoutPublishedPostsInput
   createdAt: DateTime
   description: String!
-  isNews: Boolean
-  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
   postMedia: MediaCreateNestedManyWithoutPostMediaInput
-  tags: PostCreatetagsInput
   title: String!
-}
-
-input PostCreatetagsInput {
-  set: [String!]
 }
 
 input PostListRelationFilter {
@@ -3202,19 +2854,12 @@ input PostOrderByRelationAggregateInput {
 input PostOrderByWithRelationInput {
   article: ArticleOrderByWithRelationInput
   articleBody: SortOrder
-  authorID: SortOrder
-  course: CourseOrderByWithRelationInput
-  courseID: SortOrder
   createdAt: SortOrder
   description: SortOrder
   id: SortOrder
-  isNews: SortOrder
-  platformConfigNewsShowed: PlatformConfigOrderByRelationAggregateInput
-  platformConfigOffersShowed: PlatformConfigOrderByRelationAggregateInput
   postMedia: MediaOrderByRelationAggregateInput
   poster: MediaOrderByWithRelationInput
   posterId: SortOrder
-  tags: SortOrder
   title: SortOrder
 }
 
@@ -3223,85 +2868,23 @@ input PostScalarWhereInput {
   NOT: [PostScalarWhereInput!]
   OR: [PostScalarWhereInput!]
   articleBody: StringNullableFilter
-  authorID: IntNullableFilter
-  courseID: IntNullableFilter
   createdAt: DateTimeFilter
   description: StringFilter
   id: IntFilter
-  isNews: BoolFilter
   posterId: IntNullableFilter
-  tags: StringNullableListFilter
   title: StringFilter
 }
 
 input PostUpdateManyMutationInput {
   articleBody: NullableStringFieldUpdateOperationsInput
-  authorID: NullableIntFieldUpdateOperationsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  isNews: BoolFieldUpdateOperationsInput
-  tags: PostUpdatetagsInput
   title: StringFieldUpdateOperationsInput
-}
-
-input PostUpdateManyWithWhereWithoutCourseInput {
-  data: PostUpdateManyMutationInput!
-  where: PostScalarWhereInput!
-}
-
-input PostUpdateManyWithWhereWithoutPlatformConfigNewsShowedInput {
-  data: PostUpdateManyMutationInput!
-  where: PostScalarWhereInput!
-}
-
-input PostUpdateManyWithWhereWithoutPlatformConfigOffersShowedInput {
-  data: PostUpdateManyMutationInput!
-  where: PostScalarWhereInput!
 }
 
 input PostUpdateManyWithWhereWithoutPosterInput {
   data: PostUpdateManyMutationInput!
   where: PostScalarWhereInput!
-}
-
-input PostUpdateManyWithoutCourseInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutCourseInput!]
-  create: [PostCreateWithoutCourseInput!]
-  createMany: PostCreateManyCourseInputEnvelope
-  delete: [PostWhereUniqueInput!]
-  deleteMany: [PostScalarWhereInput!]
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutCourseInput!]
-  updateMany: [PostUpdateManyWithWhereWithoutCourseInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutCourseInput!]
-}
-
-input PostUpdateManyWithoutPlatformConfigNewsShowedInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigNewsShowedInput!]
-  create: [PostCreateWithoutPlatformConfigNewsShowedInput!]
-  delete: [PostWhereUniqueInput!]
-  deleteMany: [PostScalarWhereInput!]
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutPlatformConfigNewsShowedInput!]
-  updateMany: [PostUpdateManyWithWhereWithoutPlatformConfigNewsShowedInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutPlatformConfigNewsShowedInput!]
-}
-
-input PostUpdateManyWithoutPlatformConfigOffersShowedInput {
-  connect: [PostWhereUniqueInput!]
-  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigOffersShowedInput!]
-  create: [PostCreateWithoutPlatformConfigOffersShowedInput!]
-  delete: [PostWhereUniqueInput!]
-  deleteMany: [PostScalarWhereInput!]
-  disconnect: [PostWhereUniqueInput!]
-  set: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutPlatformConfigOffersShowedInput!]
-  updateMany: [PostUpdateManyWithWhereWithoutPlatformConfigOffersShowedInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutPlatformConfigOffersShowedInput!]
 }
 
 input PostUpdateManyWithoutPosterInput {
@@ -3338,21 +2921,6 @@ input PostUpdateOneWithoutPostMediaInput {
   upsert: PostUpsertWithoutPostMediaInput
 }
 
-input PostUpdateWithWhereUniqueWithoutCourseInput {
-  data: PostUpdateWithoutCourseInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostUpdateWithWhereUniqueWithoutPlatformConfigNewsShowedInput {
-  data: PostUpdateWithoutPlatformConfigNewsShowedInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostUpdateWithWhereUniqueWithoutPlatformConfigOffersShowedInput {
-  data: PostUpdateWithoutPlatformConfigOffersShowedInput!
-  where: PostWhereUniqueInput!
-}
-
 input PostUpdateWithWhereUniqueWithoutPosterInput {
   data: PostUpdateWithoutPosterInput!
   where: PostWhereUniqueInput!
@@ -3360,115 +2928,29 @@ input PostUpdateWithWhereUniqueWithoutPosterInput {
 
 input PostUpdateWithoutArticleInput {
   articleBody: NullableStringFieldUpdateOperationsInput
-  authorID: NullableIntFieldUpdateOperationsInput
-  course: CourseUpdateOneWithoutPublishedPostsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  isNews: BoolFieldUpdateOperationsInput
-  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
   postMedia: MediaUpdateManyWithoutPostMediaInput
   poster: MediaUpdateOneWithoutPostInput
-  tags: PostUpdatetagsInput
-  title: StringFieldUpdateOperationsInput
-}
-
-input PostUpdateWithoutCourseInput {
-  article: ArticleUpdateOneWithoutPostInput
-  articleBody: NullableStringFieldUpdateOperationsInput
-  authorID: NullableIntFieldUpdateOperationsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
-  isNews: BoolFieldUpdateOperationsInput
-  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
-  postMedia: MediaUpdateManyWithoutPostMediaInput
-  poster: MediaUpdateOneWithoutPostInput
-  tags: PostUpdatetagsInput
-  title: StringFieldUpdateOperationsInput
-}
-
-input PostUpdateWithoutPlatformConfigNewsShowedInput {
-  article: ArticleUpdateOneWithoutPostInput
-  articleBody: NullableStringFieldUpdateOperationsInput
-  authorID: NullableIntFieldUpdateOperationsInput
-  course: CourseUpdateOneWithoutPublishedPostsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
-  isNews: BoolFieldUpdateOperationsInput
-  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
-  postMedia: MediaUpdateManyWithoutPostMediaInput
-  poster: MediaUpdateOneWithoutPostInput
-  tags: PostUpdatetagsInput
-  title: StringFieldUpdateOperationsInput
-}
-
-input PostUpdateWithoutPlatformConfigOffersShowedInput {
-  article: ArticleUpdateOneWithoutPostInput
-  articleBody: NullableStringFieldUpdateOperationsInput
-  authorID: NullableIntFieldUpdateOperationsInput
-  course: CourseUpdateOneWithoutPublishedPostsInput
-  createdAt: DateTimeFieldUpdateOperationsInput
-  description: StringFieldUpdateOperationsInput
-  isNews: BoolFieldUpdateOperationsInput
-  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-  postMedia: MediaUpdateManyWithoutPostMediaInput
-  poster: MediaUpdateOneWithoutPostInput
-  tags: PostUpdatetagsInput
   title: StringFieldUpdateOperationsInput
 }
 
 input PostUpdateWithoutPostMediaInput {
   article: ArticleUpdateOneWithoutPostInput
   articleBody: NullableStringFieldUpdateOperationsInput
-  authorID: NullableIntFieldUpdateOperationsInput
-  course: CourseUpdateOneWithoutPublishedPostsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  isNews: BoolFieldUpdateOperationsInput
-  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
   poster: MediaUpdateOneWithoutPostInput
-  tags: PostUpdatetagsInput
   title: StringFieldUpdateOperationsInput
 }
 
 input PostUpdateWithoutPosterInput {
   article: ArticleUpdateOneWithoutPostInput
   articleBody: NullableStringFieldUpdateOperationsInput
-  authorID: NullableIntFieldUpdateOperationsInput
-  course: CourseUpdateOneWithoutPublishedPostsInput
   createdAt: DateTimeFieldUpdateOperationsInput
   description: StringFieldUpdateOperationsInput
-  isNews: BoolFieldUpdateOperationsInput
-  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
   postMedia: MediaUpdateManyWithoutPostMediaInput
-  tags: PostUpdatetagsInput
   title: StringFieldUpdateOperationsInput
-}
-
-input PostUpdatetagsInput {
-  push: String
-  set: [String!]
-}
-
-input PostUpsertWithWhereUniqueWithoutCourseInput {
-  create: PostCreateWithoutCourseInput!
-  update: PostUpdateWithoutCourseInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostUpsertWithWhereUniqueWithoutPlatformConfigNewsShowedInput {
-  create: PostCreateWithoutPlatformConfigNewsShowedInput!
-  update: PostUpdateWithoutPlatformConfigNewsShowedInput!
-  where: PostWhereUniqueInput!
-}
-
-input PostUpsertWithWhereUniqueWithoutPlatformConfigOffersShowedInput {
-  create: PostCreateWithoutPlatformConfigOffersShowedInput!
-  update: PostUpdateWithoutPlatformConfigOffersShowedInput!
-  where: PostWhereUniqueInput!
 }
 
 input PostUpsertWithWhereUniqueWithoutPosterInput {
@@ -3493,19 +2975,12 @@ input PostWhereInput {
   OR: [PostWhereInput!]
   article: ArticleWhereInput
   articleBody: StringNullableFilter
-  authorID: IntNullableFilter
-  course: CourseWhereInput
-  courseID: IntNullableFilter
   createdAt: DateTimeFilter
   description: StringFilter
   id: IntFilter
-  isNews: BoolFilter
-  platformConfigNewsShowed: PlatformConfigListRelationFilter
-  platformConfigOffersShowed: PlatformConfigListRelationFilter
   postMedia: MediaListRelationFilter
   poster: MediaWhereInput
   posterId: IntNullableFilter
-  tags: StringNullableListFilter
   title: StringFilter
 }
 
@@ -3906,6 +3381,7 @@ enum SortOrder {
 type Stream {
   active: Boolean!
   id: Int!
+  name: String!
   streamKey: String!
 }
 

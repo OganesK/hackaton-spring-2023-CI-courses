@@ -14,8 +14,6 @@ export const PlatformConfig = objectType({
     t.model.platformTitle();
     t.model.platformDescription();
     t.model.platformShortDescription();
-    t.model.newsShownOnLanding();
-    t.model.offersShownOnLanding();
     t.model.eventsShownOnLanding();
   },
 });

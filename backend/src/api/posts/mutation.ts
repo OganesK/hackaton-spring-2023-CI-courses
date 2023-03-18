@@ -14,11 +14,7 @@ export const NewsMutation = extendType({
           data: {
             title: data.title,
             description: data.description,
-            tags: {
-              set: data.tags,
-            },
             articleBody: data.articleBody,
-            isNews: data.isNews,
             poster: {
               connect: {
                 url: DEFAULT_IMAGE,

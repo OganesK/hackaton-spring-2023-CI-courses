@@ -50,7 +50,6 @@ export const Event = objectType({
     t.model.platformConfigShowed();
     t.model.user();
     t.model.address();
-    t.model.stream();
   },
 });
 

@@ -214,11 +214,6 @@ export interface NexusGenInputs {
     connectOrCreate?: NexusGenInputs['CourseCreateOrConnectWithoutMediaInput'] | null; // CourseCreateOrConnectWithoutMediaInput
     create?: NexusGenInputs['CourseCreateWithoutMediaInput'] | null; // CourseCreateWithoutMediaInput
   }
-  CourseCreateNestedOneWithoutPublishedPostsInput: { // input type
-    connect?: NexusGenInputs['CourseWhereUniqueInput'] | null; // CourseWhereUniqueInput
-    connectOrCreate?: NexusGenInputs['CourseCreateOrConnectWithoutPublishedPostsInput'] | null; // CourseCreateOrConnectWithoutPublishedPostsInput
-    create?: NexusGenInputs['CourseCreateWithoutPublishedPostsInput'] | null; // CourseCreateWithoutPublishedPostsInput
-  }
   CourseCreateOrConnectWithoutCourseMediaInput: { // input type
     create: NexusGenInputs['CourseCreateWithoutCourseMediaInput']; // CourseCreateWithoutCourseMediaInput!
     where: NexusGenInputs['CourseWhereUniqueInput']; // CourseWhereUniqueInput!
@@ -243,10 +238,6 @@ export interface NexusGenInputs {
     create: NexusGenInputs['CourseCreateWithoutPosterInput']; // CourseCreateWithoutPosterInput!
     where: NexusGenInputs['CourseWhereUniqueInput']; // CourseWhereUniqueInput!
   }
-  CourseCreateOrConnectWithoutPublishedPostsInput: { // input type
-    create: NexusGenInputs['CourseCreateWithoutPublishedPostsInput']; // CourseCreateWithoutPublishedPostsInput!
-    where: NexusGenInputs['CourseWhereUniqueInput']; // CourseWhereUniqueInput!
-  }
   CourseCreateWithoutCourseMediaInput: { // input type
     Media?: NexusGenInputs['MediaCreateNestedManyWithoutCourseMediaInput'] | null; // MediaCreateNestedManyWithoutCourseMediaInput
     courseType?: NexusGenEnums['courseTypeEnum'] | null; // courseTypeEnum
@@ -256,7 +247,6 @@ export interface NexusGenInputs {
     owner: NexusGenInputs['UserCreateNestedOneWithoutCoursesInput']; // UserCreateNestedOneWithoutCoursesInput!
     platformConfigShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaCreateNestedOneWithoutCoursePosterInput'] | null; // MediaCreateNestedOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostCreateNestedManyWithoutCourseInput'] | null; // PostCreateNestedManyWithoutCourseInput
     shortDescription: string; // String!
   }
   CourseCreateWithoutDescriptionInput: { // input type
@@ -268,7 +258,6 @@ export interface NexusGenInputs {
     owner: NexusGenInputs['UserCreateNestedOneWithoutCoursesInput']; // UserCreateNestedOneWithoutCoursesInput!
     platformConfigShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaCreateNestedOneWithoutCoursePosterInput'] | null; // MediaCreateNestedOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostCreateNestedManyWithoutCourseInput'] | null; // PostCreateNestedManyWithoutCourseInput
     shortDescription: string; // String!
   }
   CourseCreateWithoutMediaInput: { // input type
@@ -280,7 +269,6 @@ export interface NexusGenInputs {
     owner: NexusGenInputs['UserCreateNestedOneWithoutCoursesInput']; // UserCreateNestedOneWithoutCoursesInput!
     platformConfigShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaCreateNestedOneWithoutCoursePosterInput'] | null; // MediaCreateNestedOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostCreateNestedManyWithoutCourseInput'] | null; // PostCreateNestedManyWithoutCourseInput
     shortDescription: string; // String!
   }
   CourseCreateWithoutOwnerInput: { // input type
@@ -292,7 +280,6 @@ export interface NexusGenInputs {
     name: string; // String!
     platformConfigShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaCreateNestedOneWithoutCoursePosterInput'] | null; // MediaCreateNestedOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostCreateNestedManyWithoutCourseInput'] | null; // PostCreateNestedManyWithoutCourseInput
     shortDescription: string; // String!
   }
   CourseCreateWithoutPlatformConfigShowedInput: { // input type
@@ -304,7 +291,6 @@ export interface NexusGenInputs {
     name: string; // String!
     owner: NexusGenInputs['UserCreateNestedOneWithoutCoursesInput']; // UserCreateNestedOneWithoutCoursesInput!
     poster?: NexusGenInputs['MediaCreateNestedOneWithoutCoursePosterInput'] | null; // MediaCreateNestedOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostCreateNestedManyWithoutCourseInput'] | null; // PostCreateNestedManyWithoutCourseInput
     shortDescription: string; // String!
   }
   CourseCreateWithoutPosterInput: { // input type
@@ -316,19 +302,6 @@ export interface NexusGenInputs {
     name: string; // String!
     owner: NexusGenInputs['UserCreateNestedOneWithoutCoursesInput']; // UserCreateNestedOneWithoutCoursesInput!
     platformConfigShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
-    publishedPosts?: NexusGenInputs['PostCreateNestedManyWithoutCourseInput'] | null; // PostCreateNestedManyWithoutCourseInput
-    shortDescription: string; // String!
-  }
-  CourseCreateWithoutPublishedPostsInput: { // input type
-    Media?: NexusGenInputs['MediaCreateNestedManyWithoutCourseMediaInput'] | null; // MediaCreateNestedManyWithoutCourseMediaInput
-    courseMedia?: NexusGenInputs['MediaCreateNestedManyWithoutCourseDescripitonInput'] | null; // MediaCreateNestedManyWithoutCourseDescripitonInput
-    courseType?: NexusGenEnums['courseTypeEnum'] | null; // courseTypeEnum
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description?: NexusGenInputs['ArticleCreateNestedOneWithoutCourseInput'] | null; // ArticleCreateNestedOneWithoutCourseInput
-    name: string; // String!
-    owner: NexusGenInputs['UserCreateNestedOneWithoutCoursesInput']; // UserCreateNestedOneWithoutCoursesInput!
-    platformConfigShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
-    poster?: NexusGenInputs['MediaCreateNestedOneWithoutCoursePosterInput'] | null; // MediaCreateNestedOneWithoutCoursePosterInput
     shortDescription: string; // String!
   }
   CourseListRelationFilter: { // input type
@@ -352,7 +325,6 @@ export interface NexusGenInputs {
     platformConfigShowed?: NexusGenInputs['PlatformConfigOrderByRelationAggregateInput'] | null; // PlatformConfigOrderByRelationAggregateInput
     poster?: NexusGenInputs['MediaOrderByWithRelationInput'] | null; // MediaOrderByWithRelationInput
     posterId?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    publishedPosts?: NexusGenInputs['PostOrderByRelationAggregateInput'] | null; // PostOrderByRelationAggregateInput
     shortDescription?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   CourseScalarWhereInput: { // input type
@@ -450,15 +422,6 @@ export interface NexusGenInputs {
     update?: NexusGenInputs['CourseUpdateWithoutMediaInput'] | null; // CourseUpdateWithoutMediaInput
     upsert?: NexusGenInputs['CourseUpsertWithoutMediaInput'] | null; // CourseUpsertWithoutMediaInput
   }
-  CourseUpdateOneWithoutPublishedPostsInput: { // input type
-    connect?: NexusGenInputs['CourseWhereUniqueInput'] | null; // CourseWhereUniqueInput
-    connectOrCreate?: NexusGenInputs['CourseCreateOrConnectWithoutPublishedPostsInput'] | null; // CourseCreateOrConnectWithoutPublishedPostsInput
-    create?: NexusGenInputs['CourseCreateWithoutPublishedPostsInput'] | null; // CourseCreateWithoutPublishedPostsInput
-    delete?: boolean | null; // Boolean
-    disconnect?: boolean | null; // Boolean
-    update?: NexusGenInputs['CourseUpdateWithoutPublishedPostsInput'] | null; // CourseUpdateWithoutPublishedPostsInput
-    upsert?: NexusGenInputs['CourseUpsertWithoutPublishedPostsInput'] | null; // CourseUpsertWithoutPublishedPostsInput
-  }
   CourseUpdateWithWhereUniqueWithoutOwnerInput: { // input type
     data: NexusGenInputs['CourseUpdateWithoutOwnerInput']; // CourseUpdateWithoutOwnerInput!
     where: NexusGenInputs['CourseWhereUniqueInput']; // CourseWhereUniqueInput!
@@ -480,7 +443,6 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserUpdateOneRequiredWithoutCoursesInput'] | null; // UserUpdateOneRequiredWithoutCoursesInput
     platformConfigShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaUpdateOneWithoutCoursePosterInput'] | null; // MediaUpdateOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostUpdateManyWithoutCourseInput'] | null; // PostUpdateManyWithoutCourseInput
     shortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   CourseUpdateWithoutDescriptionInput: { // input type
@@ -492,7 +454,6 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserUpdateOneRequiredWithoutCoursesInput'] | null; // UserUpdateOneRequiredWithoutCoursesInput
     platformConfigShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaUpdateOneWithoutCoursePosterInput'] | null; // MediaUpdateOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostUpdateManyWithoutCourseInput'] | null; // PostUpdateManyWithoutCourseInput
     shortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   CourseUpdateWithoutMediaInput: { // input type
@@ -504,7 +465,6 @@ export interface NexusGenInputs {
     owner?: NexusGenInputs['UserUpdateOneRequiredWithoutCoursesInput'] | null; // UserUpdateOneRequiredWithoutCoursesInput
     platformConfigShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaUpdateOneWithoutCoursePosterInput'] | null; // MediaUpdateOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostUpdateManyWithoutCourseInput'] | null; // PostUpdateManyWithoutCourseInput
     shortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   CourseUpdateWithoutOwnerInput: { // input type
@@ -516,7 +476,6 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     platformConfigShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
     poster?: NexusGenInputs['MediaUpdateOneWithoutCoursePosterInput'] | null; // MediaUpdateOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostUpdateManyWithoutCourseInput'] | null; // PostUpdateManyWithoutCourseInput
     shortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   CourseUpdateWithoutPlatformConfigShowedInput: { // input type
@@ -528,7 +487,6 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     owner?: NexusGenInputs['UserUpdateOneRequiredWithoutCoursesInput'] | null; // UserUpdateOneRequiredWithoutCoursesInput
     poster?: NexusGenInputs['MediaUpdateOneWithoutCoursePosterInput'] | null; // MediaUpdateOneWithoutCoursePosterInput
-    publishedPosts?: NexusGenInputs['PostUpdateManyWithoutCourseInput'] | null; // PostUpdateManyWithoutCourseInput
     shortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   CourseUpdateWithoutPosterInput: { // input type
@@ -540,19 +498,6 @@ export interface NexusGenInputs {
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     owner?: NexusGenInputs['UserUpdateOneRequiredWithoutCoursesInput'] | null; // UserUpdateOneRequiredWithoutCoursesInput
     platformConfigShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
-    publishedPosts?: NexusGenInputs['PostUpdateManyWithoutCourseInput'] | null; // PostUpdateManyWithoutCourseInput
-    shortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-  }
-  CourseUpdateWithoutPublishedPostsInput: { // input type
-    Media?: NexusGenInputs['MediaUpdateManyWithoutCourseMediaInput'] | null; // MediaUpdateManyWithoutCourseMediaInput
-    courseMedia?: NexusGenInputs['MediaUpdateManyWithoutCourseDescripitonInput'] | null; // MediaUpdateManyWithoutCourseDescripitonInput
-    courseType?: NexusGenInputs['NullableEnumcourseTypeEnumFieldUpdateOperationsInput'] | null; // NullableEnumcourseTypeEnumFieldUpdateOperationsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['ArticleUpdateOneWithoutCourseInput'] | null; // ArticleUpdateOneWithoutCourseInput
-    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    owner?: NexusGenInputs['UserUpdateOneRequiredWithoutCoursesInput'] | null; // UserUpdateOneRequiredWithoutCoursesInput
-    platformConfigShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
-    poster?: NexusGenInputs['MediaUpdateOneWithoutCoursePosterInput'] | null; // MediaUpdateOneWithoutCoursePosterInput
     shortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   CourseUpsertWithWhereUniqueWithoutOwnerInput: { // input type
@@ -582,10 +527,6 @@ export interface NexusGenInputs {
     create: NexusGenInputs['CourseCreateWithoutMediaInput']; // CourseCreateWithoutMediaInput!
     update: NexusGenInputs['CourseUpdateWithoutMediaInput']; // CourseUpdateWithoutMediaInput!
   }
-  CourseUpsertWithoutPublishedPostsInput: { // input type
-    create: NexusGenInputs['CourseCreateWithoutPublishedPostsInput']; // CourseCreateWithoutPublishedPostsInput!
-    update: NexusGenInputs['CourseUpdateWithoutPublishedPostsInput']; // CourseUpdateWithoutPublishedPostsInput!
-  }
   CourseWhereInput: { // input type
     AND?: NexusGenInputs['CourseWhereInput'][] | null; // [CourseWhereInput!]
     Media?: NexusGenInputs['MediaListRelationFilter'] | null; // MediaListRelationFilter
@@ -602,7 +543,6 @@ export interface NexusGenInputs {
     platformConfigShowed?: NexusGenInputs['PlatformConfigListRelationFilter'] | null; // PlatformConfigListRelationFilter
     poster?: NexusGenInputs['MediaWhereInput'] | null; // MediaWhereInput
     posterId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
-    publishedPosts?: NexusGenInputs['PostListRelationFilter'] | null; // PostListRelationFilter
     shortDescription?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   CourseWhereUniqueInput: { // input type
@@ -2216,16 +2156,6 @@ export interface NexusGenInputs {
     connectOrCreate?: NexusGenInputs['PlatformConfigCreateOrConnectWithoutEventsShownOnLandingInput'][] | null; // [PlatformConfigCreateOrConnectWithoutEventsShownOnLandingInput!]
     create?: NexusGenInputs['PlatformConfigCreateWithoutEventsShownOnLandingInput'][] | null; // [PlatformConfigCreateWithoutEventsShownOnLandingInput!]
   }
-  PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput: { // input type
-    connect?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput'][] | null; // [PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput!]
-    create?: NexusGenInputs['PlatformConfigCreateWithoutNewsShownOnLandingInput'][] | null; // [PlatformConfigCreateWithoutNewsShownOnLandingInput!]
-  }
-  PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput: { // input type
-    connect?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput'][] | null; // [PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput!]
-    create?: NexusGenInputs['PlatformConfigCreateWithoutOffersShownOnLandingInput'][] | null; // [PlatformConfigCreateWithoutOffersShownOnLandingInput!]
-  }
   PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput: { // input type
     create: NexusGenInputs['PlatformConfigCreateWithoutCoursesShownOnLandingInput']; // PlatformConfigCreateWithoutCoursesShownOnLandingInput!
     where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
@@ -2234,19 +2164,9 @@ export interface NexusGenInputs {
     create: NexusGenInputs['PlatformConfigCreateWithoutEventsShownOnLandingInput']; // PlatformConfigCreateWithoutEventsShownOnLandingInput!
     where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
   }
-  PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput: { // input type
-    create: NexusGenInputs['PlatformConfigCreateWithoutNewsShownOnLandingInput']; // PlatformConfigCreateWithoutNewsShownOnLandingInput!
-    where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
-  }
-  PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput: { // input type
-    create: NexusGenInputs['PlatformConfigCreateWithoutOffersShownOnLandingInput']; // PlatformConfigCreateWithoutOffersShownOnLandingInput!
-    where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
-  }
   PlatformConfigCreateWithoutCoursesShownOnLandingInput: { // input type
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     eventsShownOnLanding?: NexusGenInputs['EventCreateNestedManyWithoutPlatformConfigShowedInput'] | null; // EventCreateNestedManyWithoutPlatformConfigShowedInput
-    newsShownOnLanding?: NexusGenInputs['PostCreateNestedManyWithoutPlatformConfigNewsShowedInput'] | null; // PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
-    offersShownOnLanding?: NexusGenInputs['PostCreateNestedManyWithoutPlatformConfigOffersShowedInput'] | null; // PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
     platformDescription: string; // String!
     platformShortDescription: string; // String!
     platformTagline: string; // String!
@@ -2259,36 +2179,6 @@ export interface NexusGenInputs {
   PlatformConfigCreateWithoutEventsShownOnLandingInput: { // input type
     coursesShownOnLanding?: NexusGenInputs['CourseCreateNestedManyWithoutPlatformConfigShowedInput'] | null; // CourseCreateNestedManyWithoutPlatformConfigShowedInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    newsShownOnLanding?: NexusGenInputs['PostCreateNestedManyWithoutPlatformConfigNewsShowedInput'] | null; // PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
-    offersShownOnLanding?: NexusGenInputs['PostCreateNestedManyWithoutPlatformConfigOffersShowedInput'] | null; // PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
-    platformDescription: string; // String!
-    platformShortDescription: string; // String!
-    platformTagline: string; // String!
-    platformTitle: string; // String!
-    totalBudgetInvestment: number; // Int!
-    totalCompanyCount: number; // Int!
-    totalExtraBudgetInvestment: number; // Int!
-    totalcourseCount: number; // Int!
-  }
-  PlatformConfigCreateWithoutNewsShownOnLandingInput: { // input type
-    coursesShownOnLanding?: NexusGenInputs['CourseCreateNestedManyWithoutPlatformConfigShowedInput'] | null; // CourseCreateNestedManyWithoutPlatformConfigShowedInput
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    eventsShownOnLanding?: NexusGenInputs['EventCreateNestedManyWithoutPlatformConfigShowedInput'] | null; // EventCreateNestedManyWithoutPlatformConfigShowedInput
-    offersShownOnLanding?: NexusGenInputs['PostCreateNestedManyWithoutPlatformConfigOffersShowedInput'] | null; // PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
-    platformDescription: string; // String!
-    platformShortDescription: string; // String!
-    platformTagline: string; // String!
-    platformTitle: string; // String!
-    totalBudgetInvestment: number; // Int!
-    totalCompanyCount: number; // Int!
-    totalExtraBudgetInvestment: number; // Int!
-    totalcourseCount: number; // Int!
-  }
-  PlatformConfigCreateWithoutOffersShownOnLandingInput: { // input type
-    coursesShownOnLanding?: NexusGenInputs['CourseCreateNestedManyWithoutPlatformConfigShowedInput'] | null; // CourseCreateNestedManyWithoutPlatformConfigShowedInput
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    eventsShownOnLanding?: NexusGenInputs['EventCreateNestedManyWithoutPlatformConfigShowedInput'] | null; // EventCreateNestedManyWithoutPlatformConfigShowedInput
-    newsShownOnLanding?: NexusGenInputs['PostCreateNestedManyWithoutPlatformConfigNewsShowedInput'] | null; // PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
     platformDescription: string; // String!
     platformShortDescription: string; // String!
     platformTagline: string; // String!
@@ -2340,14 +2230,6 @@ export interface NexusGenInputs {
     data: NexusGenInputs['PlatformConfigUpdateManyMutationInput']; // PlatformConfigUpdateManyMutationInput!
     where: NexusGenInputs['PlatformConfigScalarWhereInput']; // PlatformConfigScalarWhereInput!
   }
-  PlatformConfigUpdateManyWithWhereWithoutNewsShownOnLandingInput: { // input type
-    data: NexusGenInputs['PlatformConfigUpdateManyMutationInput']; // PlatformConfigUpdateManyMutationInput!
-    where: NexusGenInputs['PlatformConfigScalarWhereInput']; // PlatformConfigScalarWhereInput!
-  }
-  PlatformConfigUpdateManyWithWhereWithoutOffersShownOnLandingInput: { // input type
-    data: NexusGenInputs['PlatformConfigUpdateManyMutationInput']; // PlatformConfigUpdateManyMutationInput!
-    where: NexusGenInputs['PlatformConfigScalarWhereInput']; // PlatformConfigScalarWhereInput!
-  }
   PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput: { // input type
     connect?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
     connectOrCreate?: NexusGenInputs['PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput'][] | null; // [PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput!]
@@ -2372,30 +2254,6 @@ export interface NexusGenInputs {
     updateMany?: NexusGenInputs['PlatformConfigUpdateManyWithWhereWithoutEventsShownOnLandingInput'][] | null; // [PlatformConfigUpdateManyWithWhereWithoutEventsShownOnLandingInput!]
     upsert?: NexusGenInputs['PlatformConfigUpsertWithWhereUniqueWithoutEventsShownOnLandingInput'][] | null; // [PlatformConfigUpsertWithWhereUniqueWithoutEventsShownOnLandingInput!]
   }
-  PlatformConfigUpdateManyWithoutNewsShownOnLandingInput: { // input type
-    connect?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput'][] | null; // [PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput!]
-    create?: NexusGenInputs['PlatformConfigCreateWithoutNewsShownOnLandingInput'][] | null; // [PlatformConfigCreateWithoutNewsShownOnLandingInput!]
-    delete?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['PlatformConfigScalarWhereInput'][] | null; // [PlatformConfigScalarWhereInput!]
-    disconnect?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    set?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    update?: NexusGenInputs['PlatformConfigUpdateWithWhereUniqueWithoutNewsShownOnLandingInput'][] | null; // [PlatformConfigUpdateWithWhereUniqueWithoutNewsShownOnLandingInput!]
-    updateMany?: NexusGenInputs['PlatformConfigUpdateManyWithWhereWithoutNewsShownOnLandingInput'][] | null; // [PlatformConfigUpdateManyWithWhereWithoutNewsShownOnLandingInput!]
-    upsert?: NexusGenInputs['PlatformConfigUpsertWithWhereUniqueWithoutNewsShownOnLandingInput'][] | null; // [PlatformConfigUpsertWithWhereUniqueWithoutNewsShownOnLandingInput!]
-  }
-  PlatformConfigUpdateManyWithoutOffersShownOnLandingInput: { // input type
-    connect?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput'][] | null; // [PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput!]
-    create?: NexusGenInputs['PlatformConfigCreateWithoutOffersShownOnLandingInput'][] | null; // [PlatformConfigCreateWithoutOffersShownOnLandingInput!]
-    delete?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['PlatformConfigScalarWhereInput'][] | null; // [PlatformConfigScalarWhereInput!]
-    disconnect?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    set?: NexusGenInputs['PlatformConfigWhereUniqueInput'][] | null; // [PlatformConfigWhereUniqueInput!]
-    update?: NexusGenInputs['PlatformConfigUpdateWithWhereUniqueWithoutOffersShownOnLandingInput'][] | null; // [PlatformConfigUpdateWithWhereUniqueWithoutOffersShownOnLandingInput!]
-    updateMany?: NexusGenInputs['PlatformConfigUpdateManyWithWhereWithoutOffersShownOnLandingInput'][] | null; // [PlatformConfigUpdateManyWithWhereWithoutOffersShownOnLandingInput!]
-    upsert?: NexusGenInputs['PlatformConfigUpsertWithWhereUniqueWithoutOffersShownOnLandingInput'][] | null; // [PlatformConfigUpsertWithWhereUniqueWithoutOffersShownOnLandingInput!]
-  }
   PlatformConfigUpdateWithWhereUniqueWithoutCoursesShownOnLandingInput: { // input type
     data: NexusGenInputs['PlatformConfigUpdateWithoutCoursesShownOnLandingInput']; // PlatformConfigUpdateWithoutCoursesShownOnLandingInput!
     where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
@@ -2404,19 +2262,9 @@ export interface NexusGenInputs {
     data: NexusGenInputs['PlatformConfigUpdateWithoutEventsShownOnLandingInput']; // PlatformConfigUpdateWithoutEventsShownOnLandingInput!
     where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
   }
-  PlatformConfigUpdateWithWhereUniqueWithoutNewsShownOnLandingInput: { // input type
-    data: NexusGenInputs['PlatformConfigUpdateWithoutNewsShownOnLandingInput']; // PlatformConfigUpdateWithoutNewsShownOnLandingInput!
-    where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
-  }
-  PlatformConfigUpdateWithWhereUniqueWithoutOffersShownOnLandingInput: { // input type
-    data: NexusGenInputs['PlatformConfigUpdateWithoutOffersShownOnLandingInput']; // PlatformConfigUpdateWithoutOffersShownOnLandingInput!
-    where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
-  }
   PlatformConfigUpdateWithoutCoursesShownOnLandingInput: { // input type
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     eventsShownOnLanding?: NexusGenInputs['EventUpdateManyWithoutPlatformConfigShowedInput'] | null; // EventUpdateManyWithoutPlatformConfigShowedInput
-    newsShownOnLanding?: NexusGenInputs['PostUpdateManyWithoutPlatformConfigNewsShowedInput'] | null; // PostUpdateManyWithoutPlatformConfigNewsShowedInput
-    offersShownOnLanding?: NexusGenInputs['PostUpdateManyWithoutPlatformConfigOffersShowedInput'] | null; // PostUpdateManyWithoutPlatformConfigOffersShowedInput
     platformDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     platformShortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     platformTagline?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -2429,36 +2277,6 @@ export interface NexusGenInputs {
   PlatformConfigUpdateWithoutEventsShownOnLandingInput: { // input type
     coursesShownOnLanding?: NexusGenInputs['CourseUpdateManyWithoutPlatformConfigShowedInput'] | null; // CourseUpdateManyWithoutPlatformConfigShowedInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    newsShownOnLanding?: NexusGenInputs['PostUpdateManyWithoutPlatformConfigNewsShowedInput'] | null; // PostUpdateManyWithoutPlatformConfigNewsShowedInput
-    offersShownOnLanding?: NexusGenInputs['PostUpdateManyWithoutPlatformConfigOffersShowedInput'] | null; // PostUpdateManyWithoutPlatformConfigOffersShowedInput
-    platformDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    platformShortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    platformTagline?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    platformTitle?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    totalBudgetInvestment?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    totalCompanyCount?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    totalExtraBudgetInvestment?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    totalcourseCount?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-  }
-  PlatformConfigUpdateWithoutNewsShownOnLandingInput: { // input type
-    coursesShownOnLanding?: NexusGenInputs['CourseUpdateManyWithoutPlatformConfigShowedInput'] | null; // CourseUpdateManyWithoutPlatformConfigShowedInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    eventsShownOnLanding?: NexusGenInputs['EventUpdateManyWithoutPlatformConfigShowedInput'] | null; // EventUpdateManyWithoutPlatformConfigShowedInput
-    offersShownOnLanding?: NexusGenInputs['PostUpdateManyWithoutPlatformConfigOffersShowedInput'] | null; // PostUpdateManyWithoutPlatformConfigOffersShowedInput
-    platformDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    platformShortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    platformTagline?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    platformTitle?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    totalBudgetInvestment?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    totalCompanyCount?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    totalExtraBudgetInvestment?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-    totalcourseCount?: NexusGenInputs['IntFieldUpdateOperationsInput'] | null; // IntFieldUpdateOperationsInput
-  }
-  PlatformConfigUpdateWithoutOffersShownOnLandingInput: { // input type
-    coursesShownOnLanding?: NexusGenInputs['CourseUpdateManyWithoutPlatformConfigShowedInput'] | null; // CourseUpdateManyWithoutPlatformConfigShowedInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    eventsShownOnLanding?: NexusGenInputs['EventUpdateManyWithoutPlatformConfigShowedInput'] | null; // EventUpdateManyWithoutPlatformConfigShowedInput
-    newsShownOnLanding?: NexusGenInputs['PostUpdateManyWithoutPlatformConfigNewsShowedInput'] | null; // PostUpdateManyWithoutPlatformConfigNewsShowedInput
     platformDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     platformShortDescription?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     platformTagline?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
@@ -2478,16 +2296,6 @@ export interface NexusGenInputs {
     update: NexusGenInputs['PlatformConfigUpdateWithoutEventsShownOnLandingInput']; // PlatformConfigUpdateWithoutEventsShownOnLandingInput!
     where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
   }
-  PlatformConfigUpsertWithWhereUniqueWithoutNewsShownOnLandingInput: { // input type
-    create: NexusGenInputs['PlatformConfigCreateWithoutNewsShownOnLandingInput']; // PlatformConfigCreateWithoutNewsShownOnLandingInput!
-    update: NexusGenInputs['PlatformConfigUpdateWithoutNewsShownOnLandingInput']; // PlatformConfigUpdateWithoutNewsShownOnLandingInput!
-    where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
-  }
-  PlatformConfigUpsertWithWhereUniqueWithoutOffersShownOnLandingInput: { // input type
-    create: NexusGenInputs['PlatformConfigCreateWithoutOffersShownOnLandingInput']; // PlatformConfigCreateWithoutOffersShownOnLandingInput!
-    update: NexusGenInputs['PlatformConfigUpdateWithoutOffersShownOnLandingInput']; // PlatformConfigUpdateWithoutOffersShownOnLandingInput!
-    where: NexusGenInputs['PlatformConfigWhereUniqueInput']; // PlatformConfigWhereUniqueInput!
-  }
   PlatformConfigWhereInput: { // input type
     AND?: NexusGenInputs['PlatformConfigWhereInput'][] | null; // [PlatformConfigWhereInput!]
     NOT?: NexusGenInputs['PlatformConfigWhereInput'][] | null; // [PlatformConfigWhereInput!]
@@ -2496,8 +2304,6 @@ export interface NexusGenInputs {
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     eventsShownOnLanding?: NexusGenInputs['EventListRelationFilter'] | null; // EventListRelationFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    newsShownOnLanding?: NexusGenInputs['PostListRelationFilter'] | null; // PostListRelationFilter
-    offersShownOnLanding?: NexusGenInputs['PostListRelationFilter'] | null; // PostListRelationFilter
     platformDescription?: NexusGenInputs['StringFilter'] | null; // StringFilter
     platformShortDescription?: NexusGenInputs['StringFilter'] | null; // StringFilter
     platformTagline?: NexusGenInputs['StringFilter'] | null; // StringFilter
@@ -2521,54 +2327,16 @@ export interface NexusGenInputs {
     tags: Array<string | null>; // [String]!
     title: string; // String!
   }
-  PostCreateManyCourseInput: { // input type
-    articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description: string; // String!
-    id?: number | null; // Int
-    isNews?: boolean | null; // Boolean
-    posterId?: number | null; // Int
-    tags?: NexusGenInputs['PostCreateManytagsInput'] | null; // PostCreateManytagsInput
-    title: string; // String!
-  }
-  PostCreateManyCourseInputEnvelope: { // input type
-    data?: NexusGenInputs['PostCreateManyCourseInput'][] | null; // [PostCreateManyCourseInput!]
-    skipDuplicates?: boolean | null; // Boolean
-  }
   PostCreateManyPosterInput: { // input type
     articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    courseID?: number | null; // Int
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
     id?: number | null; // Int
-    isNews?: boolean | null; // Boolean
-    tags?: NexusGenInputs['PostCreateManytagsInput'] | null; // PostCreateManytagsInput
     title: string; // String!
   }
   PostCreateManyPosterInputEnvelope: { // input type
     data?: NexusGenInputs['PostCreateManyPosterInput'][] | null; // [PostCreateManyPosterInput!]
     skipDuplicates?: boolean | null; // Boolean
-  }
-  PostCreateManytagsInput: { // input type
-    set?: string[] | null; // [String!]
-  }
-  PostCreateNestedManyWithoutCourseInput: { // input type
-    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutCourseInput'][] | null; // [PostCreateOrConnectWithoutCourseInput!]
-    create?: NexusGenInputs['PostCreateWithoutCourseInput'][] | null; // [PostCreateWithoutCourseInput!]
-    createMany?: NexusGenInputs['PostCreateManyCourseInputEnvelope'] | null; // PostCreateManyCourseInputEnvelope
-  }
-  PostCreateNestedManyWithoutPlatformConfigNewsShowedInput: { // input type
-    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutPlatformConfigNewsShowedInput'][] | null; // [PostCreateOrConnectWithoutPlatformConfigNewsShowedInput!]
-    create?: NexusGenInputs['PostCreateWithoutPlatformConfigNewsShowedInput'][] | null; // [PostCreateWithoutPlatformConfigNewsShowedInput!]
-  }
-  PostCreateNestedManyWithoutPlatformConfigOffersShowedInput: { // input type
-    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutPlatformConfigOffersShowedInput'][] | null; // [PostCreateOrConnectWithoutPlatformConfigOffersShowedInput!]
-    create?: NexusGenInputs['PostCreateWithoutPlatformConfigOffersShowedInput'][] | null; // [PostCreateWithoutPlatformConfigOffersShowedInput!]
   }
   PostCreateNestedManyWithoutPosterInput: { // input type
     connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
@@ -2590,18 +2358,6 @@ export interface NexusGenInputs {
     create: NexusGenInputs['PostCreateWithoutArticleInput']; // PostCreateWithoutArticleInput!
     where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
   }
-  PostCreateOrConnectWithoutCourseInput: { // input type
-    create: NexusGenInputs['PostCreateWithoutCourseInput']; // PostCreateWithoutCourseInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
-  PostCreateOrConnectWithoutPlatformConfigNewsShowedInput: { // input type
-    create: NexusGenInputs['PostCreateWithoutPlatformConfigNewsShowedInput']; // PostCreateWithoutPlatformConfigNewsShowedInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
-  PostCreateOrConnectWithoutPlatformConfigOffersShowedInput: { // input type
-    create: NexusGenInputs['PostCreateWithoutPlatformConfigOffersShowedInput']; // PostCreateWithoutPlatformConfigOffersShowedInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
   PostCreateOrConnectWithoutPostMediaInput: { // input type
     create: NexusGenInputs['PostCreateWithoutPostMediaInput']; // PostCreateWithoutPostMediaInput!
     where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
@@ -2612,90 +2368,27 @@ export interface NexusGenInputs {
   }
   PostCreateWithoutArticleInput: { // input type
     articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    course?: NexusGenInputs['CourseCreateNestedOneWithoutPublishedPostsInput'] | null; // CourseCreateNestedOneWithoutPublishedPostsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    isNews?: boolean | null; // Boolean
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
     postMedia?: NexusGenInputs['MediaCreateNestedManyWithoutPostMediaInput'] | null; // MediaCreateNestedManyWithoutPostMediaInput
     poster?: NexusGenInputs['MediaCreateNestedOneWithoutPostInput'] | null; // MediaCreateNestedOneWithoutPostInput
-    tags?: NexusGenInputs['PostCreatetagsInput'] | null; // PostCreatetagsInput
-    title: string; // String!
-  }
-  PostCreateWithoutCourseInput: { // input type
-    article?: NexusGenInputs['ArticleCreateNestedOneWithoutPostInput'] | null; // ArticleCreateNestedOneWithoutPostInput
-    articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description: string; // String!
-    isNews?: boolean | null; // Boolean
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
-    postMedia?: NexusGenInputs['MediaCreateNestedManyWithoutPostMediaInput'] | null; // MediaCreateNestedManyWithoutPostMediaInput
-    poster?: NexusGenInputs['MediaCreateNestedOneWithoutPostInput'] | null; // MediaCreateNestedOneWithoutPostInput
-    tags?: NexusGenInputs['PostCreatetagsInput'] | null; // PostCreatetagsInput
-    title: string; // String!
-  }
-  PostCreateWithoutPlatformConfigNewsShowedInput: { // input type
-    article?: NexusGenInputs['ArticleCreateNestedOneWithoutPostInput'] | null; // ArticleCreateNestedOneWithoutPostInput
-    articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    course?: NexusGenInputs['CourseCreateNestedOneWithoutPublishedPostsInput'] | null; // CourseCreateNestedOneWithoutPublishedPostsInput
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description: string; // String!
-    isNews?: boolean | null; // Boolean
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
-    postMedia?: NexusGenInputs['MediaCreateNestedManyWithoutPostMediaInput'] | null; // MediaCreateNestedManyWithoutPostMediaInput
-    poster?: NexusGenInputs['MediaCreateNestedOneWithoutPostInput'] | null; // MediaCreateNestedOneWithoutPostInput
-    tags?: NexusGenInputs['PostCreatetagsInput'] | null; // PostCreatetagsInput
-    title: string; // String!
-  }
-  PostCreateWithoutPlatformConfigOffersShowedInput: { // input type
-    article?: NexusGenInputs['ArticleCreateNestedOneWithoutPostInput'] | null; // ArticleCreateNestedOneWithoutPostInput
-    articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    course?: NexusGenInputs['CourseCreateNestedOneWithoutPublishedPostsInput'] | null; // CourseCreateNestedOneWithoutPublishedPostsInput
-    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
-    description: string; // String!
-    isNews?: boolean | null; // Boolean
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-    postMedia?: NexusGenInputs['MediaCreateNestedManyWithoutPostMediaInput'] | null; // MediaCreateNestedManyWithoutPostMediaInput
-    poster?: NexusGenInputs['MediaCreateNestedOneWithoutPostInput'] | null; // MediaCreateNestedOneWithoutPostInput
-    tags?: NexusGenInputs['PostCreatetagsInput'] | null; // PostCreatetagsInput
     title: string; // String!
   }
   PostCreateWithoutPostMediaInput: { // input type
     article?: NexusGenInputs['ArticleCreateNestedOneWithoutPostInput'] | null; // ArticleCreateNestedOneWithoutPostInput
     articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    course?: NexusGenInputs['CourseCreateNestedOneWithoutPublishedPostsInput'] | null; // CourseCreateNestedOneWithoutPublishedPostsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    isNews?: boolean | null; // Boolean
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
     poster?: NexusGenInputs['MediaCreateNestedOneWithoutPostInput'] | null; // MediaCreateNestedOneWithoutPostInput
-    tags?: NexusGenInputs['PostCreatetagsInput'] | null; // PostCreatetagsInput
     title: string; // String!
   }
   PostCreateWithoutPosterInput: { // input type
     article?: NexusGenInputs['ArticleCreateNestedOneWithoutPostInput'] | null; // ArticleCreateNestedOneWithoutPostInput
     articleBody?: string | null; // String
-    authorID?: number | null; // Int
-    course?: NexusGenInputs['CourseCreateNestedOneWithoutPublishedPostsInput'] | null; // CourseCreateNestedOneWithoutPublishedPostsInput
     createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
     description: string; // String!
-    isNews?: boolean | null; // Boolean
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
     postMedia?: NexusGenInputs['MediaCreateNestedManyWithoutPostMediaInput'] | null; // MediaCreateNestedManyWithoutPostMediaInput
-    tags?: NexusGenInputs['PostCreatetagsInput'] | null; // PostCreatetagsInput
     title: string; // String!
-  }
-  PostCreatetagsInput: { // input type
-    set?: string[] | null; // [String!]
   }
   PostListRelationFilter: { // input type
     every?: NexusGenInputs['PostWhereInput'] | null; // PostWhereInput
@@ -2708,19 +2401,12 @@ export interface NexusGenInputs {
   PostOrderByWithRelationInput: { // input type
     article?: NexusGenInputs['ArticleOrderByWithRelationInput'] | null; // ArticleOrderByWithRelationInput
     articleBody?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    authorID?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    course?: NexusGenInputs['CourseOrderByWithRelationInput'] | null; // CourseOrderByWithRelationInput
-    courseID?: NexusGenEnums['SortOrder'] | null; // SortOrder
     createdAt?: NexusGenEnums['SortOrder'] | null; // SortOrder
     description?: NexusGenEnums['SortOrder'] | null; // SortOrder
     id?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    isNews?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigOrderByRelationAggregateInput'] | null; // PlatformConfigOrderByRelationAggregateInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigOrderByRelationAggregateInput'] | null; // PlatformConfigOrderByRelationAggregateInput
     postMedia?: NexusGenInputs['MediaOrderByRelationAggregateInput'] | null; // MediaOrderByRelationAggregateInput
     poster?: NexusGenInputs['MediaOrderByWithRelationInput'] | null; // MediaOrderByWithRelationInput
     posterId?: NexusGenEnums['SortOrder'] | null; // SortOrder
-    tags?: NexusGenEnums['SortOrder'] | null; // SortOrder
     title?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
   PostScalarWhereInput: { // input type
@@ -2728,77 +2414,21 @@ export interface NexusGenInputs {
     NOT?: NexusGenInputs['PostScalarWhereInput'][] | null; // [PostScalarWhereInput!]
     OR?: NexusGenInputs['PostScalarWhereInput'][] | null; // [PostScalarWhereInput!]
     articleBody?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
-    authorID?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
-    courseID?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    isNews?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
     posterId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
-    tags?: NexusGenInputs['StringNullableListFilter'] | null; // StringNullableListFilter
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   PostUpdateManyMutationInput: { // input type
     articleBody?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-    authorID?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isNews?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
-    tags?: NexusGenInputs['PostUpdatetagsInput'] | null; // PostUpdatetagsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-  }
-  PostUpdateManyWithWhereWithoutCourseInput: { // input type
-    data: NexusGenInputs['PostUpdateManyMutationInput']; // PostUpdateManyMutationInput!
-    where: NexusGenInputs['PostScalarWhereInput']; // PostScalarWhereInput!
-  }
-  PostUpdateManyWithWhereWithoutPlatformConfigNewsShowedInput: { // input type
-    data: NexusGenInputs['PostUpdateManyMutationInput']; // PostUpdateManyMutationInput!
-    where: NexusGenInputs['PostScalarWhereInput']; // PostScalarWhereInput!
-  }
-  PostUpdateManyWithWhereWithoutPlatformConfigOffersShowedInput: { // input type
-    data: NexusGenInputs['PostUpdateManyMutationInput']; // PostUpdateManyMutationInput!
-    where: NexusGenInputs['PostScalarWhereInput']; // PostScalarWhereInput!
   }
   PostUpdateManyWithWhereWithoutPosterInput: { // input type
     data: NexusGenInputs['PostUpdateManyMutationInput']; // PostUpdateManyMutationInput!
     where: NexusGenInputs['PostScalarWhereInput']; // PostScalarWhereInput!
-  }
-  PostUpdateManyWithoutCourseInput: { // input type
-    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutCourseInput'][] | null; // [PostCreateOrConnectWithoutCourseInput!]
-    create?: NexusGenInputs['PostCreateWithoutCourseInput'][] | null; // [PostCreateWithoutCourseInput!]
-    createMany?: NexusGenInputs['PostCreateManyCourseInputEnvelope'] | null; // PostCreateManyCourseInputEnvelope
-    delete?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['PostScalarWhereInput'][] | null; // [PostScalarWhereInput!]
-    disconnect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    set?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    update?: NexusGenInputs['PostUpdateWithWhereUniqueWithoutCourseInput'][] | null; // [PostUpdateWithWhereUniqueWithoutCourseInput!]
-    updateMany?: NexusGenInputs['PostUpdateManyWithWhereWithoutCourseInput'][] | null; // [PostUpdateManyWithWhereWithoutCourseInput!]
-    upsert?: NexusGenInputs['PostUpsertWithWhereUniqueWithoutCourseInput'][] | null; // [PostUpsertWithWhereUniqueWithoutCourseInput!]
-  }
-  PostUpdateManyWithoutPlatformConfigNewsShowedInput: { // input type
-    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutPlatformConfigNewsShowedInput'][] | null; // [PostCreateOrConnectWithoutPlatformConfigNewsShowedInput!]
-    create?: NexusGenInputs['PostCreateWithoutPlatformConfigNewsShowedInput'][] | null; // [PostCreateWithoutPlatformConfigNewsShowedInput!]
-    delete?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['PostScalarWhereInput'][] | null; // [PostScalarWhereInput!]
-    disconnect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    set?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    update?: NexusGenInputs['PostUpdateWithWhereUniqueWithoutPlatformConfigNewsShowedInput'][] | null; // [PostUpdateWithWhereUniqueWithoutPlatformConfigNewsShowedInput!]
-    updateMany?: NexusGenInputs['PostUpdateManyWithWhereWithoutPlatformConfigNewsShowedInput'][] | null; // [PostUpdateManyWithWhereWithoutPlatformConfigNewsShowedInput!]
-    upsert?: NexusGenInputs['PostUpsertWithWhereUniqueWithoutPlatformConfigNewsShowedInput'][] | null; // [PostUpsertWithWhereUniqueWithoutPlatformConfigNewsShowedInput!]
-  }
-  PostUpdateManyWithoutPlatformConfigOffersShowedInput: { // input type
-    connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    connectOrCreate?: NexusGenInputs['PostCreateOrConnectWithoutPlatformConfigOffersShowedInput'][] | null; // [PostCreateOrConnectWithoutPlatformConfigOffersShowedInput!]
-    create?: NexusGenInputs['PostCreateWithoutPlatformConfigOffersShowedInput'][] | null; // [PostCreateWithoutPlatformConfigOffersShowedInput!]
-    delete?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    deleteMany?: NexusGenInputs['PostScalarWhereInput'][] | null; // [PostScalarWhereInput!]
-    disconnect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    set?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
-    update?: NexusGenInputs['PostUpdateWithWhereUniqueWithoutPlatformConfigOffersShowedInput'][] | null; // [PostUpdateWithWhereUniqueWithoutPlatformConfigOffersShowedInput!]
-    updateMany?: NexusGenInputs['PostUpdateManyWithWhereWithoutPlatformConfigOffersShowedInput'][] | null; // [PostUpdateManyWithWhereWithoutPlatformConfigOffersShowedInput!]
-    upsert?: NexusGenInputs['PostUpsertWithWhereUniqueWithoutPlatformConfigOffersShowedInput'][] | null; // [PostUpsertWithWhereUniqueWithoutPlatformConfigOffersShowedInput!]
   }
   PostUpdateManyWithoutPosterInput: { // input type
     connect?: NexusGenInputs['PostWhereUniqueInput'][] | null; // [PostWhereUniqueInput!]
@@ -2831,124 +2461,33 @@ export interface NexusGenInputs {
     update?: NexusGenInputs['PostUpdateWithoutPostMediaInput'] | null; // PostUpdateWithoutPostMediaInput
     upsert?: NexusGenInputs['PostUpsertWithoutPostMediaInput'] | null; // PostUpsertWithoutPostMediaInput
   }
-  PostUpdateWithWhereUniqueWithoutCourseInput: { // input type
-    data: NexusGenInputs['PostUpdateWithoutCourseInput']; // PostUpdateWithoutCourseInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
-  PostUpdateWithWhereUniqueWithoutPlatformConfigNewsShowedInput: { // input type
-    data: NexusGenInputs['PostUpdateWithoutPlatformConfigNewsShowedInput']; // PostUpdateWithoutPlatformConfigNewsShowedInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
-  PostUpdateWithWhereUniqueWithoutPlatformConfigOffersShowedInput: { // input type
-    data: NexusGenInputs['PostUpdateWithoutPlatformConfigOffersShowedInput']; // PostUpdateWithoutPlatformConfigOffersShowedInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
   PostUpdateWithWhereUniqueWithoutPosterInput: { // input type
     data: NexusGenInputs['PostUpdateWithoutPosterInput']; // PostUpdateWithoutPosterInput!
     where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
   }
   PostUpdateWithoutArticleInput: { // input type
     articleBody?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-    authorID?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
-    course?: NexusGenInputs['CourseUpdateOneWithoutPublishedPostsInput'] | null; // CourseUpdateOneWithoutPublishedPostsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isNews?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
     postMedia?: NexusGenInputs['MediaUpdateManyWithoutPostMediaInput'] | null; // MediaUpdateManyWithoutPostMediaInput
     poster?: NexusGenInputs['MediaUpdateOneWithoutPostInput'] | null; // MediaUpdateOneWithoutPostInput
-    tags?: NexusGenInputs['PostUpdatetagsInput'] | null; // PostUpdatetagsInput
-    title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-  }
-  PostUpdateWithoutCourseInput: { // input type
-    article?: NexusGenInputs['ArticleUpdateOneWithoutPostInput'] | null; // ArticleUpdateOneWithoutPostInput
-    articleBody?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-    authorID?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isNews?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
-    postMedia?: NexusGenInputs['MediaUpdateManyWithoutPostMediaInput'] | null; // MediaUpdateManyWithoutPostMediaInput
-    poster?: NexusGenInputs['MediaUpdateOneWithoutPostInput'] | null; // MediaUpdateOneWithoutPostInput
-    tags?: NexusGenInputs['PostUpdatetagsInput'] | null; // PostUpdatetagsInput
-    title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-  }
-  PostUpdateWithoutPlatformConfigNewsShowedInput: { // input type
-    article?: NexusGenInputs['ArticleUpdateOneWithoutPostInput'] | null; // ArticleUpdateOneWithoutPostInput
-    articleBody?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-    authorID?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
-    course?: NexusGenInputs['CourseUpdateOneWithoutPublishedPostsInput'] | null; // CourseUpdateOneWithoutPublishedPostsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isNews?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
-    postMedia?: NexusGenInputs['MediaUpdateManyWithoutPostMediaInput'] | null; // MediaUpdateManyWithoutPostMediaInput
-    poster?: NexusGenInputs['MediaUpdateOneWithoutPostInput'] | null; // MediaUpdateOneWithoutPostInput
-    tags?: NexusGenInputs['PostUpdatetagsInput'] | null; // PostUpdatetagsInput
-    title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-  }
-  PostUpdateWithoutPlatformConfigOffersShowedInput: { // input type
-    article?: NexusGenInputs['ArticleUpdateOneWithoutPostInput'] | null; // ArticleUpdateOneWithoutPostInput
-    articleBody?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-    authorID?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
-    course?: NexusGenInputs['CourseUpdateOneWithoutPublishedPostsInput'] | null; // CourseUpdateOneWithoutPublishedPostsInput
-    createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
-    description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isNews?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-    postMedia?: NexusGenInputs['MediaUpdateManyWithoutPostMediaInput'] | null; // MediaUpdateManyWithoutPostMediaInput
-    poster?: NexusGenInputs['MediaUpdateOneWithoutPostInput'] | null; // MediaUpdateOneWithoutPostInput
-    tags?: NexusGenInputs['PostUpdatetagsInput'] | null; // PostUpdatetagsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   PostUpdateWithoutPostMediaInput: { // input type
     article?: NexusGenInputs['ArticleUpdateOneWithoutPostInput'] | null; // ArticleUpdateOneWithoutPostInput
     articleBody?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-    authorID?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
-    course?: NexusGenInputs['CourseUpdateOneWithoutPublishedPostsInput'] | null; // CourseUpdateOneWithoutPublishedPostsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isNews?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
     poster?: NexusGenInputs['MediaUpdateOneWithoutPostInput'] | null; // MediaUpdateOneWithoutPostInput
-    tags?: NexusGenInputs['PostUpdatetagsInput'] | null; // PostUpdatetagsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
   }
   PostUpdateWithoutPosterInput: { // input type
     article?: NexusGenInputs['ArticleUpdateOneWithoutPostInput'] | null; // ArticleUpdateOneWithoutPostInput
     articleBody?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
-    authorID?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
-    course?: NexusGenInputs['CourseUpdateOneWithoutPublishedPostsInput'] | null; // CourseUpdateOneWithoutPublishedPostsInput
     createdAt?: NexusGenInputs['DateTimeFieldUpdateOperationsInput'] | null; // DateTimeFieldUpdateOperationsInput
     description?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    isNews?: NexusGenInputs['BoolFieldUpdateOperationsInput'] | null; // BoolFieldUpdateOperationsInput
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutNewsShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigUpdateManyWithoutOffersShownOnLandingInput'] | null; // PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
     postMedia?: NexusGenInputs['MediaUpdateManyWithoutPostMediaInput'] | null; // MediaUpdateManyWithoutPostMediaInput
-    tags?: NexusGenInputs['PostUpdatetagsInput'] | null; // PostUpdatetagsInput
     title?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-  }
-  PostUpdatetagsInput: { // input type
-    push?: string | null; // String
-    set?: string[] | null; // [String!]
-  }
-  PostUpsertWithWhereUniqueWithoutCourseInput: { // input type
-    create: NexusGenInputs['PostCreateWithoutCourseInput']; // PostCreateWithoutCourseInput!
-    update: NexusGenInputs['PostUpdateWithoutCourseInput']; // PostUpdateWithoutCourseInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
-  PostUpsertWithWhereUniqueWithoutPlatformConfigNewsShowedInput: { // input type
-    create: NexusGenInputs['PostCreateWithoutPlatformConfigNewsShowedInput']; // PostCreateWithoutPlatformConfigNewsShowedInput!
-    update: NexusGenInputs['PostUpdateWithoutPlatformConfigNewsShowedInput']; // PostUpdateWithoutPlatformConfigNewsShowedInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
-  }
-  PostUpsertWithWhereUniqueWithoutPlatformConfigOffersShowedInput: { // input type
-    create: NexusGenInputs['PostCreateWithoutPlatformConfigOffersShowedInput']; // PostCreateWithoutPlatformConfigOffersShowedInput!
-    update: NexusGenInputs['PostUpdateWithoutPlatformConfigOffersShowedInput']; // PostUpdateWithoutPlatformConfigOffersShowedInput!
-    where: NexusGenInputs['PostWhereUniqueInput']; // PostWhereUniqueInput!
   }
   PostUpsertWithWhereUniqueWithoutPosterInput: { // input type
     create: NexusGenInputs['PostCreateWithoutPosterInput']; // PostCreateWithoutPosterInput!
@@ -2969,19 +2508,12 @@ export interface NexusGenInputs {
     OR?: NexusGenInputs['PostWhereInput'][] | null; // [PostWhereInput!]
     article?: NexusGenInputs['ArticleWhereInput'] | null; // ArticleWhereInput
     articleBody?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
-    authorID?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
-    course?: NexusGenInputs['CourseWhereInput'] | null; // CourseWhereInput
-    courseID?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
     createdAt?: NexusGenInputs['DateTimeFilter'] | null; // DateTimeFilter
     description?: NexusGenInputs['StringFilter'] | null; // StringFilter
     id?: NexusGenInputs['IntFilter'] | null; // IntFilter
-    isNews?: NexusGenInputs['BoolFilter'] | null; // BoolFilter
-    platformConfigNewsShowed?: NexusGenInputs['PlatformConfigListRelationFilter'] | null; // PlatformConfigListRelationFilter
-    platformConfigOffersShowed?: NexusGenInputs['PlatformConfigListRelationFilter'] | null; // PlatformConfigListRelationFilter
     postMedia?: NexusGenInputs['MediaListRelationFilter'] | null; // MediaListRelationFilter
     poster?: NexusGenInputs['MediaWhereInput'] | null; // MediaWhereInput
     posterId?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
-    tags?: NexusGenInputs['StringNullableListFilter'] | null; // StringNullableListFilter
     title?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
   PostWhereUniqueInput: { // input type
@@ -4516,8 +4048,6 @@ export interface NexusGenObjects {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     id: number; // Int!
-    isNews: boolean; // Boolean!
-    tags: string[]; // [String!]!
     title: string; // String!
   }
   Query: {};
@@ -4562,6 +4092,7 @@ export interface NexusGenObjects {
   Stream: { // root type
     active: boolean; // Boolean!
     id: number; // Int!
+    name: string; // String!
     streamKey: string; // String!
   }
   StreamMessage: { // root type
@@ -4618,7 +4149,6 @@ export interface NexusGenFieldTypes {
     id: number; // Int!
     name: string; // String!
     poster: NexusGenRootTypes['Media'] | null; // Media
-    publishedPosts: NexusGenRootTypes['Post'][]; // [Post!]!
     shortDescription: string; // String!
   }
   Event: { // field return type
@@ -4673,6 +4203,7 @@ export interface NexusGenFieldTypes {
     createMedia: NexusGenRootTypes['SignUrlResponse'] | null; // SignUrlResponse
     createOneCourse: NexusGenRootTypes['Course'] | null; // Course
     createOneEvent: NexusGenRootTypes['Event'] | null; // Event
+    createOnePost: NexusGenRootTypes['Post'] | null; // Post
     createOneStream: NexusGenRootTypes['Stream']; // Stream!
     createOneTest: NexusGenRootTypes['Test']; // Test!
     deleteGroup: string | null; // String
@@ -4714,8 +4245,6 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     eventsShownOnLanding: NexusGenRootTypes['Event'][]; // [Event!]!
     id: number; // Int!
-    newsShownOnLanding: NexusGenRootTypes['Post'][]; // [Post!]!
-    offersShownOnLanding: NexusGenRootTypes['Post'][]; // [Post!]!
     platformDescription: string; // String!
     platformShortDescription: string; // String!
     platformTagline: string; // String!
@@ -4730,12 +4259,8 @@ export interface NexusGenFieldTypes {
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     id: number; // Int!
-    isNews: boolean; // Boolean!
-    platformConfigNewsShowed: NexusGenRootTypes['PlatformConfig'][]; // [PlatformConfig!]!
-    platformConfigOffersShowed: NexusGenRootTypes['PlatformConfig'][]; // [PlatformConfig!]!
     postMedia: NexusGenRootTypes['Media'][]; // [Media!]!
     poster: NexusGenRootTypes['Media'] | null; // Media
-    tags: string[]; // [String!]!
     title: string; // String!
   }
   Query: { // field return type
@@ -4806,6 +4331,7 @@ export interface NexusGenFieldTypes {
   Stream: { // field return type
     active: boolean; // Boolean!
     id: number; // Int!
+    name: string; // String!
     streamKey: string; // String!
   }
   StreamMessage: { // field return type
@@ -4860,7 +4386,6 @@ export interface NexusGenFieldTypeNames {
     id: 'Int'
     name: 'String'
     poster: 'Media'
-    publishedPosts: 'Post'
     shortDescription: 'String'
   }
   Event: { // field return type name
@@ -4915,6 +4440,7 @@ export interface NexusGenFieldTypeNames {
     createMedia: 'SignUrlResponse'
     createOneCourse: 'Course'
     createOneEvent: 'Event'
+    createOnePost: 'Post'
     createOneStream: 'Stream'
     createOneTest: 'Test'
     deleteGroup: 'String'
@@ -4956,8 +4482,6 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     eventsShownOnLanding: 'Event'
     id: 'Int'
-    newsShownOnLanding: 'Post'
-    offersShownOnLanding: 'Post'
     platformDescription: 'String'
     platformShortDescription: 'String'
     platformTagline: 'String'
@@ -4972,12 +4496,8 @@ export interface NexusGenFieldTypeNames {
     createdAt: 'DateTime'
     description: 'String'
     id: 'Int'
-    isNews: 'Boolean'
-    platformConfigNewsShowed: 'PlatformConfig'
-    platformConfigOffersShowed: 'PlatformConfig'
     postMedia: 'Media'
     poster: 'Media'
-    tags: 'String'
     title: 'String'
   }
   Query: { // field return type name
@@ -5048,6 +4568,7 @@ export interface NexusGenFieldTypeNames {
   Stream: { // field return type name
     active: 'Boolean'
     id: 'Int'
+    name: 'String'
     streamKey: 'String'
   }
   StreamMessage: { // field return type name
@@ -5092,15 +4613,6 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
       orderBy?: NexusGenInputs['ArticleSectionsOrderByInput'][] | null; // [ArticleSectionsOrderByInput!]
-    }
-  }
-  Course: {
-    publishedPosts: { // args
-      after?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      before?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-      orderBy?: NexusGenInputs['PostOrderByWithRelationInput'][] | null; // [PostOrderByWithRelationInput!]
     }
   }
   Event: {
@@ -5175,6 +4687,9 @@ export interface NexusGenArgTypes {
     }
     createOneEvent: { // args
       data: NexusGenInputs['EventCreatedInput']; // EventCreatedInput!
+    }
+    createOnePost: { // args
+      data: NexusGenInputs['PostCreateInput']; // PostCreateInput!
     }
     createOneStream: { // args
       data: NexusGenInputs['StreamCreateInput']; // StreamCreateInput!
@@ -5294,32 +4809,8 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
     }
-    newsShownOnLanding: { // args
-      after?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      before?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    }
-    offersShownOnLanding: { // args
-      after?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      before?: NexusGenInputs['PostWhereUniqueInput'] | null; // PostWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    }
   }
   Post: {
-    platformConfigNewsShowed: { // args
-      after?: NexusGenInputs['PlatformConfigWhereUniqueInput'] | null; // PlatformConfigWhereUniqueInput
-      before?: NexusGenInputs['PlatformConfigWhereUniqueInput'] | null; // PlatformConfigWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    }
-    platformConfigOffersShowed: { // args
-      after?: NexusGenInputs['PlatformConfigWhereUniqueInput'] | null; // PlatformConfigWhereUniqueInput
-      before?: NexusGenInputs['PlatformConfigWhereUniqueInput'] | null; // PlatformConfigWhereUniqueInput
-      first?: number | null; // Int
-      last?: number | null; // Int
-    }
     postMedia: { // args
       after?: NexusGenInputs['MediaWhereUniqueInput'] | null; // MediaWhereUniqueInput
       before?: NexusGenInputs['MediaWhereUniqueInput'] | null; // MediaWhereUniqueInput

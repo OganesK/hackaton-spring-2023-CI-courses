@@ -14,10 +14,6 @@ export const PlatformConfigQuery = extendType({
           },
           take: 1,
           include: {
-            projectsShownOnLanding: true,
-            newsShownOnLanding: true,
-            offersShownOnLanding: true,
-            crowdFundingsShownOnLanding: true,
           },
         });
 

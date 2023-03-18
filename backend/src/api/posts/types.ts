@@ -11,7 +11,6 @@ export const Post = objectType({
     t.model.id();
     t.model.createdAt();
     t.model.title();
-    t.model.isNews();
     t.field('poster', {
       type: 'Media',
       resolve: async (parent: any, { }, ctx: Context) => {
@@ -42,12 +41,9 @@ export const Post = objectType({
         });
       },
     });
-    t.model.tags();
     t.model.description();
     t.model.articleBody();
     t.model.article();
-    t.model.platformConfigNewsShowed();
-    t.model.platformConfigOffersShowed();
     t.model.postMedia();
   },
 });
