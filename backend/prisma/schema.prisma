@@ -21,6 +21,12 @@ enum sectionTypes {
   pdf
 }
 
+enum UserRole {
+  administrator
+  user
+  creator
+}
+
 enum courseTypeEnum {
   softwareSolution
   hardwareAndSoftwareComplex
@@ -37,7 +43,7 @@ model User {
   city             String?         @db.VarChar(512)
   shortDescription String?         @db.VarChar(512)
   email            String          @unique @db.VarChar(512)
-  role             String          @default("administrator")
+  role             UserRole        @default(administrator)
   login            String          @unique @db.VarChar(512)
   password         String          @db.VarChar(512)
   firstname        String          @db.VarChar(512)
