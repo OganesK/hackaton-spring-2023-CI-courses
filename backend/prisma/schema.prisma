@@ -16,6 +16,9 @@ enum sectionTypes {
   text
   image
   video
+  audio
+  doc
+  pdf
 }
 
 enum courseTypeEnum {

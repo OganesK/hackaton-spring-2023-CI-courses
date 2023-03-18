@@ -6,6 +6,7 @@ import url from 'url-parse';
 import cuid from 'cuid';
 import * as awsS3API from '../../integrations/aws/s3';
 import { Context } from '../../graphql/context';
+import { mediaType } from '@prisma/client';
 
 export const MediaMutation = extendType({
   type: 'Mutation',
@@ -21,7 +22,7 @@ export const MediaMutation = extendType({
         const media = await ctx.prisma.media.create({
           data: {
             url: result.objectURL,
-            type: data.fileType === 'video/mp4' ? 'video' : 'image',
+            type: data.fileType as mediaType,
           },
         });
 
