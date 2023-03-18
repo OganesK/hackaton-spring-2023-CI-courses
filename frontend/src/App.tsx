@@ -122,7 +122,6 @@ function App(): JSX.Element {
               bio: 'string',
               ownerCompanies: [],
               publishedEvent: [],
-              inWorks: [],
               role: 'string',
               avatar: {
                 link: '',

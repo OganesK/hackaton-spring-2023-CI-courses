@@ -53,7 +53,7 @@ export default function AutoCompleteSearchField(props: AutoCompleteTypes): JSX.E
       const filtered =
         data &&
         data.users.reduce((acc: string[], user: UserTypes) => {
-          if (user.inWorks.filter(work => work.project.id === props.projectId).length === 0)
+          if (true)
             acc.push(user.id.toString() + '.' + user.firstname + ' ' + user.lastname);
           return acc;
         }, []);

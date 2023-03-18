@@ -22,7 +22,7 @@ const MyCard: (props: CardProps) => JSX.Element = (props: CardProps) => {
           <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
             <Grid>{props.title1}</Grid>
             <Grid className={classes.num}>
-              <div className={props.link === 'Для инвесторов' ? 'unicode' : '1'}>{props.number1}</div>
+              <div className={ '1'}>{props.number1}</div>
             </Grid>
           </Grid>
         </Typography>
@@ -30,14 +30,13 @@ const MyCard: (props: CardProps) => JSX.Element = (props: CardProps) => {
           <Grid container direction="row" justifyContent="space-between" alignItems="flex-start">
             <Grid>{props.title2}</Grid>
             <Grid className={classes.num}>
-              <div className={props.link === 'Для инвесторов' ? 'unicode' : '1'}>{props.number2}</div>
+              <div className={ '1'}>{props.number2}</div>
             </Grid>
           </Grid>
         </Typography>
       </CardContent>
       <CardActions>
         <Grid>
-          <ArrowButton onClick={props.goTo} text={props.link} className={classes.colorLink} />
         </Grid>
       </CardActions>
     </Card>

@@ -46,7 +46,6 @@ const AboutUs: (props: AboutUsProps) => JSX.Element = (props: AboutUsProps) => {
           <ComponentTextHeader text={props.platformTagline} />
         </Grid>
         <Grid container xs={width < 961 ? 12 : 6} className={classes.taglineTitle}>
-          {props.platformShortDescription}
         </Grid>
       </Grid>
       <Grid
@@ -58,44 +57,25 @@ const AboutUs: (props: AboutUsProps) => JSX.Element = (props: AboutUsProps) => {
         <Grid item xl lg md={5} sm={7} xs={12}>
           <MyCard
             avatar={Projects}
-            header="Стартапы"
+            header="Ученики"
             title1="Курсы"
-            title2="Компании"
-            number1={`${props.totalProjectCount ? props.totalProjectCount.toString() : ' totalProjectCount'}`}
-            number2={`${props.totalCompanyCount ? props.totalCompanyCount.toString() : ' totalCompanyCount'}`}
-            link="Стать резидентом"
-            goTo={onClickHandlerResidents}
+            title2="Сертификаты"
+            number1={`${props.totalProjectCount ? props.totalProjectCount.toString() : 1000}`}
+            number2={`${props.totalCompanyCount ? props.totalCompanyCount.toString() : 5}`}
           />
         </Grid>
 
         <Grid item xl lg md={5} sm={7} xs={12}>
-          <MyCard
-            avatar={Invests}
-            header="Инвестиции"
-            title1="Бюдж."
-            title2="Внебюдж."
-            number1={`${
-              props.totalBudgetInvestment ? props.totalBudgetInvestment.toString() : 'totalBudgetInvestment'
-            } млн `}
-            number2={`${
-              props.totalExtraBudgetInvestment
-                ? props.totalExtraBudgetInvestment.toString()
-                : 'totalExtraBudgetInvestment'
-            } млн `}
-            link="Инвесторам"
-            goTo={onClickHandlerInvestors}
-          />
+          
         </Grid>
         <Grid item xl lg md={5} sm={7} xs={12}>
           <MyCard
             avatar={Partners}
             header="Партнеры"
-            title1="Хотите вырастить свой стартап? Добро пожаловать!"
-            link="Стать партнером"
+            title1="Хотите развиваться вместе с нами? Добро пожаловать!"
             title2=""
             number1=""
             number2=""
-            goTo={onClickHandlerPartners}
           />
         </Grid>
       </Grid>

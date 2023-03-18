@@ -71,11 +71,7 @@ const Projects: () => JSX.Element = () => {
       <NavBar text="qwe" />
       <Grid container xs={10} style={{ margin: 'auto' }}>
         <Grid className={classes.sloganText}>Представленные курсы</Grid>
-        <FilterLine selectedCategory={filter} setSelectedCategory={setFilter} isProjectsPage />
 
-        <Grid container direction="row" justifyContent="flex-start" style={{ marginTop: 40 }}>
-          <FormRow data={filter === 'Все' ? data && data.projects : filteredData && filteredData} loading={loading} />
-        </Grid>
       </Grid>
       <Footer footerMobileTopIdent={100} footerTopIdent={200} />
     </Grid>

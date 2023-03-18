@@ -134,12 +134,6 @@ export interface ProjectType {
   workers: WorkerTypes[];
 }
 
-interface InWorks {
-  id: number;
-  position: string;
-  project: ProjectType;
-}
-
 export interface ContextUserTypes {
   user: {
     id: number;
@@ -149,7 +143,6 @@ export interface ContextUserTypes {
     email: string;
     ownerCompanies: CompaniesTypes[];
     publishedEvent: PublishedEventsType[];
-    inWorks: InWorks[];
     avatar: {
       link: string;
     };

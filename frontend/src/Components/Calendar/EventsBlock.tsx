@@ -106,11 +106,6 @@ export default function EventsBlock(): JSX.Element {
       {width > 1200 ? (
         <Grid container direction="row" justifyContent="space-between" className={classes.eventsContainer}>
           <Grid container xs={7} direction="column" justifyContent="flex-start" style={{ gap: 30 }}>
-            <FilterLine
-              selectedCategory={selectedCategory}
-              setSelectedCategory={setSelectedCategory}
-              isCalendar={true}
-            />
             <Grid container xs direction="column">
               {filteredData.length !== 0 ? (
                 filteredData.map(event => {
@@ -168,9 +163,6 @@ export default function EventsBlock(): JSX.Element {
             className={classes.calendarContainer}
             style={{ gap: 40 }}
           >
-            <Grid style={{ width: firstDefaultBlockWidth }}>
-              <FilterLine selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} />
-            </Grid>
             <Grid container justifyContent="center">
               <Grid item md={6} sm={8} xs={12}>
                 <Calendar

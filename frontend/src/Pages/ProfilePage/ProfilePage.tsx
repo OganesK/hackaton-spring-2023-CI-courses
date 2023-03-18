@@ -88,25 +88,10 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
     setOpenModalEvent(!openModalEvent);
   };
 
-  const postToShow = data?.user.ownerCompanies.reduce((acc: PostTypes[], company) => {
-    company.projects.map(project => {
-      project.publishedPosts.map(post => acc.push(post));
-    });
-    return acc;
-  }, []);
+  const postToShow = []
 
-  const projects =
-    userData &&
-    userData.ownerCompanies.reduce<Array<ProjectTypes>>((acc, company) => {
-      company.projects.map(project => {
-        acc.push(project);
-      });
-      return acc;
-    }, []);
+  const projects = [];
 
-  userData?.inWorks.map(work => {
-    projects?.push(work.project);
-  });
   const filteredArr = projects?.reduce((acc: ProjectTypes[], current) => {
     const x = acc.find(item => item.id === current.id);
     if (!x) {

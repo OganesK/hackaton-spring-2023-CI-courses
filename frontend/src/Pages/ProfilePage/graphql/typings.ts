@@ -102,9 +102,6 @@ export interface UserDataTypes {
       active: boolean;
     };
   }[];
-  inWorks: {
-    project: ProjectTypes;
-  }[];
   ownerCompanies: {
     id: number;
     name: string;

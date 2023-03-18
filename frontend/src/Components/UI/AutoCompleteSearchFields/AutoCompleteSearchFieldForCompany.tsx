@@ -11,13 +11,13 @@ export default function AutoCompleteSearchField(props: AutoCompleteSearchFieldPr
 
   const contextUserData = useContext(userContext);
   useEffect(() => {
-    const ownerCompanies =
-      contextUserData &&
-      contextUserData.user.ownerCompanies.map(company => {
-        return company.id.toString() + '|' + company.name;
-      });
+    // const ownerCompanies =
+    //   contextUserData &&
+    //   contextUserData.user.ownerCompanies.map(company => {
+    //     return company.id.toString() + '|' + company.name;
+    //   });
 
-    setFilteredData(ownerCompanies);
+    // setFilteredData(ownerCompanies);
   }, []);
 
   return (

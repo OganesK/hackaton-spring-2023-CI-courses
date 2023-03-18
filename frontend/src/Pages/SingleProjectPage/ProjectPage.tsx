@@ -109,14 +109,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 960px)' });
   const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
 
-  const projects =
-    userContextInfo.user &&
-    userContextInfo.user.ownerCompanies.reduce((acc: ProjectTypes[], company) => {
-      company.projects.map(project => {
-        acc.push(project);
-      });
-      return acc;
-    }, []);
+  const projects = []
   const notEditableFields =
     projects && projects.filter(project => project.id === Number(props.match.params.projectId)).length === 0;
 

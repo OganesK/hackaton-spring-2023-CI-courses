@@ -67,11 +67,6 @@ export interface UserDataQueryTypes {
     firstname: string;
     lastname: string;
     avatar: string;
-    inWorks: {
-      project: {
-        id: number;
-      };
-    }[];
   }[];
 }
 

@@ -10,18 +10,6 @@ export default function AutoCompleteSearchField(props: AutoCompleteSearchFieldPr
 
   const contextUserData = useContext(userContext);
   useEffect(() => {
-    const ownerProjects =
-      contextUserData &&
-      contextUserData.user.ownerCompanies.reduce((acc: string[], company) => {
-        if (company) {
-          company.projects.map(project => {
-            acc.push(project.id.toString() + '.' + project.name);
-          });
-        }
-        return acc;
-      }, []);
-
-    setFilteredData(ownerProjects);
   }, []);
 
   return (

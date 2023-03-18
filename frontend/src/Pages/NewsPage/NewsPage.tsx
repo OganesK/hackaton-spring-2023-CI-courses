@@ -27,18 +27,10 @@ const NewsPage: () => JSX.Element = () => {
   const { data, loading, refetch } = useQuery<{ posts: NewsTypes[] }>(GET_NEWS_QUERY);
 
   useEffect(() => {
-    if (!loading) {
-      setFilteredData(data!.posts.filter((post: NewsTypes) => post.isNews));
-    }
   }, [loading]);
 
   useEffect(() => {
-    if (filter !== 'Все' && data) {
-      const filtered = data.posts.filter(post => post.category === filter && post.isNews);
-      setFilteredData(filtered);
-    } else if (data && filter === 'Все') {
-      setFilteredData(data.posts.filter((post: NewsTypes) => post.isNews));
-    }
+    
   }, [filter]);
 
   return (
@@ -46,7 +38,6 @@ const NewsPage: () => JSX.Element = () => {
       <NavBar text="qwe" />
       <Grid container xs={10} style={{ margin: 'auto', gap: 0 }} spacing={0}>
         <Grid className={styles.sloganText}>уроки</Grid>
-        <FilterLine selectedCategory={filter} setSelectedCategory={setFilter} isNewsPage />
         <Line marginTop={10} marginBottom={70} />
 
         {loading ? (

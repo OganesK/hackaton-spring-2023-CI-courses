@@ -126,76 +126,7 @@ const ProjectCreationModal: (props: ProjectCreateModalProps) => JSX.Element = (p
   };
 
   const onClickHandler: () => Promise<void> = async () => {
-    if (
-      nameValue &&
-      shortDescriptionValue &&
-      activityTypeValue &&
-      (props.ownerId === 0 ? companyIdValue : props.ownerId) &&
-      projectIndustrialDirectionsValue &&
-      projectTypesValue &&
-      projectStagesValue
-    ) {
-      setOpenNoneClick(true);
-      const newProjectData = {
-        name: nameValue,
-        shortDescription: shortDescriptionValue,
-        category: activityTypeValue,
-        ownerCompany:
-          props.ownerId === 0
-            ? Number(companyData?.companies.filter(company => company.name === companyIdValue)[0].id)
-            : props.ownerId,
-        industrialDirections: projectIndustrialDirectionsValue,
-        projectType: projectTypesValue,
-        projectStage: projectStagesValue,
-        ...(projectSiteValue && { projectSite: projectSiteValue }),
-        ...(projectMarketsValue && { projectMarket: projectMarketsValue }),
-        ...(projectTechTypesValue && { technologyType: projectTechTypesValue }),
-        ...(projectInvestmentsStagesValue && { investmentStage: projectInvestmentsStagesValue }),
-        ...(projectSalesTypesValue && { salesType: projectSalesTypesValue }),
-        ...(projectBusinessModelsValue && { businessModel: projectBusinessModelsValue }),
-        ...(projectMainGoalsValue && { mainGoal: projectMainGoalsValue }),
-      };
-      const projectId = await createProjectHandler(newProjectData);
-      if (posterValue.size !== 0) {
-        const PosterData = {
-          entityType: 'projectPoster',
-          entityId: projectId?.data?.createOneProject?.id,
-          fileType: posterValue.type,
-        };
-        const uploadUrl = (await GetUrlToUploadProjectPoster(PosterData)).data;
-        await fetch(uploadUrl!.createMedia?.signedURL, {
-          method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-          credentials: 'include', // include, *same-origin, omit
-          headers: {
-            'Content-Type': posterValue.type,
-          },
-          //@ts-ignore
-          body: posterValue, // body data type must match "Content-Type" header
-        });
-      }
-      props.handleOpenClose();
-
-      if (props.isProfilePage) {
-        await props.refetchOnProfilePage!();
-      } else {
-        await props.refetchOnCompanyPage!();
-      }
-
-      setNameValue('');
-      setShortDescriptionValue('');
-      setPosterValue({
-        name: '',
-        type: '',
-        size: 0,
-      });
-      setImgModal(imgModalDefault);
-      setActivityTypeValue('business');
-
-      setOpenNoneClick(false);
-    } else {
-      setOpenSnack(true);
-      setTimeout(() => setOpenSnack(false), 4000);
-    }
+    
   };
 
   const hiddenFileInput = React.useRef<HTMLInputElement>(null);
@@ -227,20 +158,6 @@ const ProjectCreationModal: (props: ProjectCreateModalProps) => JSX.Element = (p
           <Grid item className={styles.modalHeader}>
             Создание курса
           </Grid>
-          {props.ownerId === 0 ? (
-            <Grid container direction="row" className={styles.inputContainerGap}>
-              <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-                Прикрепите компанию
-              </Grid>
-              <Grid container xs>
-                <AutoCompleteSearchFieldForCompany
-                  projectId="100500"
-                  value={companyIdValue}
-                  setValue={setCompanyIdValue}
-                />
-              </Grid>
-            </Grid>
-          ) : null}
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
               Название курса
@@ -301,25 +218,7 @@ const ProjectCreationModal: (props: ProjectCreateModalProps) => JSX.Element = (p
             </Grid>
           </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Индустриальное направление курса*
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select
-                value={projectIndustrialDirectionsValue}
-                onChange={handleChangeProjectIndustry}
-                fullWidth
-                size="small"
-              >
-                {projectIndustrialDirections.map(industry => (
-                  <MenuItem key={industry} value={industry}>
-                    {useTranslateIndustrialDirections(industry)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
+          
 
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
@@ -336,152 +235,15 @@ const ProjectCreationModal: (props: ProjectCreateModalProps) => JSX.Element = (p
             </Grid>
           </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Стадия курса*
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={projectStagesValue} onChange={handleChangeProjectStage} fullWidth size="small">
-                {projectStages.map(stage => (
-                  <MenuItem key={stage} value={stage}>
-                    {useTranslateStages(stage)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Рынки курса
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={projectMarketsValue} onChange={handleChangeProjectMarket} fullWidth size="small">
-                <MenuItem value="" style={{ fontWeight: 'bold', fontStyle: 'italic' }}>
-                  Отменить выбор
-                </MenuItem>
-                {projectMarkets.map(market => (
-                  <MenuItem key={market} value={market}>
-                    {market}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Сквозные технологии
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={projectTechTypesValue} onChange={handleChangeProjectTechType} fullWidth size="small">
-                <MenuItem value="" style={{ fontWeight: 'bold', fontStyle: 'italic' }}>
-                  Отменить выбор
-                </MenuItem>
-                {projectTechTypes.map(tech => (
-                  <MenuItem key={tech} value={tech}>
-                    {useTranslateTechTypes(tech)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Стадия инвестирования
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select
-                value={projectInvestmentsStagesValue}
-                onChange={handleChangeProjectInvestments}
-                fullWidth
-                size="small"
-              >
-                <MenuItem value="" style={{ fontWeight: 'bold', fontStyle: 'italic' }}>
-                  Отменить выбор
-                </MenuItem>
-                {projectInvestmentsStages.map(investments => (
-                  <MenuItem key={investments} value={investments}>
-                    {useTranslateInvestmentsStages(investments)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Уровень продаж
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={projectSalesTypesValue} onChange={handleChangeProjectSalesType} fullWidth size="small">
-                <MenuItem value="" style={{ fontWeight: 'bold', fontStyle: 'italic' }}>
-                  Отменить выбор
-                </MenuItem>
-                {projectSalesTypes.map(sales => (
-                  <MenuItem key={sales} value={sales}>
-                    {useTranslateSalesTypes(sales)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Бизнес-модель
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={projectBusinessModelsValue} onChange={handleChangeProjectBM} fullWidth size="small">
-                <MenuItem value="" style={{ fontWeight: 'bold', fontStyle: 'italic' }}>
-                  Отменить выбор
-                </MenuItem>
-                {projectBusinessModels.map(business => (
-                  <MenuItem key={business} value={business}>
-                    {business}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Задачи курса
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={projectMainGoalsValue} onChange={handleChangeProjectMainGoal} fullWidth size="small">
-                <MenuItem value="" style={{ fontWeight: 'bold', fontStyle: 'italic' }}>
-                  Отменить выбор
-                </MenuItem>
-                {projectMainGoals.map(goal => (
-                  <MenuItem key={goal} value={goal}>
-                    {useTranslateMainGoals(goal)}
-                  </MenuItem>
-                ))}
-              </Select>
-            </Grid>
-          </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Ссылка на сайт
-            </Grid>
-            <Grid container xs>
-              <OutlinedInput
-                fullWidth={true}
-                defaultValue={projectSiteValue}
-                value={projectSiteValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setProjectSiteValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '' : 'Ссылка на сайт курса (если есть)'}
-                inputProps={{
-                  maxLength: 512,
-                }}
-                size="small"
-              />
-            </Grid>
-          </Grid>
+
+ 
 
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} className={styles.modalHeaderText}>

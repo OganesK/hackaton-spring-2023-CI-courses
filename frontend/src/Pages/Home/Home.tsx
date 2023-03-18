@@ -46,15 +46,9 @@ const Home: () => JSX.Element = () => {
         platformDescription={data?.getPlatformConfig?.platformDescription}
       />
       <Grid container xs={10} className={classes.articleBox}>
-        {data?.getPlatformConfig?.newsShownOnLanding && data.getPlatformConfig.newsShownOnLanding.length > 0 ? (
-          <LastNews newsShownOnLanding={data?.getPlatformConfig?.newsShownOnLanding} />
-        ) : null}
 
         <AboutUs
-          platformTagline={data ? data?.getPlatformConfig?.platformTagline : 'platformTagline'}
-          platformShortDescription={
-            data ? data?.getPlatformConfig?.platformShortDescription : 'platformShortDescription'
-          }
+          platformTagline={data ? data?.getPlatformConfig?.platformTagline : 'CL Courses'}
           totalBudgetInvestment={data && data.getPlatformConfig ? data.getPlatformConfig.totalBudgetInvestment : 0}
           totalProjectCount={data && data.getPlatformConfig ? data.getPlatformConfig.totalProjectCount : 0}
           totalCompanyCount={data && data.getPlatformConfig ? data.getPlatformConfig.totalCompanyCount : 0}
@@ -66,20 +60,16 @@ const Home: () => JSX.Element = () => {
         {data?.getPlatformConfig?.projectsShownOnLanding && data.getPlatformConfig.projectsShownOnLanding.length > 0 ? (
           <OurProjects projectsShownOnLanding={data?.getPlatformConfig?.projectsShownOnLanding} />
         ) : null}
-        <Partners />
         {/* {data?.getPlatformConfig?.crowdFundingsShownOnLanding &&
         data.getPlatformConfig.crowdFundingsShownOnLanding.length > 0 ? (
           <CrowdsBlock crowdsOnLanding={data?.getPlatformConfig?.crowdFundingsShownOnLanding} />
         ) : null} */}
 
-        <EventsBlock />
         
 
-        {width < 600 ? null : <BidProject />}
       </Grid>
       {width < 600 ? (
         <Grid container style={{ marginTop: 100 }}>
-          <BidProject />
         </Grid>
       ) : null}
       <Footer footerMobileTopIdent={40} footerTopIdent={140} />

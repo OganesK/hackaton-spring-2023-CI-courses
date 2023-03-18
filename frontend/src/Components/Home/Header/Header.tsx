@@ -37,10 +37,10 @@ const Header: (props: HeaderProps) => JSX.Element = (props: HeaderProps) => {
       <NavBar text="header" />
       <Grid xs={10} container direction="column" justifyContent="space-evenly" className={classes.sloganTextContainer}>
         <Grid xs={12} container className={classes.sloganText}>
-          {props.platformTitle ? props.platformTitle : 'platformTitle'}
+          {props.platformTitle ? props.platformTitle : 'Watch, learn, improve'}
         </Grid>
         <Grid xs={5} container className={classes.sloganTextDesc}>
-          {props.platformDescription ? props.platformDescription : 'platformDescription'}
+          {props.platformDescription ? props.platformDescription : 'Гибкая платформа онлайн-образования'}
         </Grid>
         <Grid style={{ marginTop: 30 }}>
           <ArrowButton onClick={onClickHandler} text="Смотреть курсы" className={classes.colorLink} />

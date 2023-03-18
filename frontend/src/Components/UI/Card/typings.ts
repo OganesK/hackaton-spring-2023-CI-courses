@@ -4,7 +4,5 @@ export interface CardProps {
   number1: string;
   title2: string;
   number2: string;
-  link: string;
   avatar: string;
-  goTo: () => void;
 }

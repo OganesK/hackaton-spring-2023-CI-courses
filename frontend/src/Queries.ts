@@ -501,69 +501,7 @@ export const GET_USER_QUERY = gql`
           active
         }
       }
-      inWorks {
-        project {
-          id
-          name
-          description {
-            id
-            sections(orderBy: { number: asc }) {
-              id
-              number
-              type
-              text
-              media {
-                link
-              }
-            }
-          }
-          shortDescription
-          
-          poster {
-            link
-          }
-          category
-          publishedPosts(orderBy: { createdAt: desc }) {
-            id
-            createdAt
-            title
-            isOffer
-            isResource
-            isNews
-            poster {
-              link
-            }
-            category
-            author {
-              worker {
-                id
-                avatar {
-                  link
-                }
-                firstname
-                lastname
-              }
-            }
-            description
-            article {
-              id
-              sections(orderBy: { number: asc }) {
-                id
-                number
-                type
-                text
-                media {
-                  link
-                }
-              }
-            }
-            
-          }
-          presentationMedia {
-            link
-          }
-        }
-      }
+      
       
     }
   }
