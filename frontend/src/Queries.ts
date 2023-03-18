@@ -11,39 +11,33 @@ export const GET_CONFIG_QUERY = gql`
   }
 `;
 
-export const GET_PROJECTS_QUERY = gql`
-  query {
-    projects(where: {  }, orderBy: { createdAt: desc }) {
-      id
-      category
-      name
-      description {
-        id
-        sections(orderBy: { number: asc }) {
-          id
-          number
-          type
-          text
-          media {
-            link
-          }
-        }
-      }
-      shortDescription
-      presentationMedia {
-        link
-        type
-      }
-      poster {
-        link
-      }
-      ownerCompany {
-        owner {
-          id
-        }
-      }
+export const GET_COURSES_QUERY = gql`
+query{
+  courses{
+    id
+    name
+    description
+    poster{
+      link
     }
+
+    
   }
+}
+`;
+export const GET_PROJECTS_QUERY = gql`
+query{
+  courses{
+    id
+    name
+    description
+    poster{
+      link
+    }
+
+    
+  }
+}
 `;
 
 export const GET_CROWDFUNDS_QUERY = gql`

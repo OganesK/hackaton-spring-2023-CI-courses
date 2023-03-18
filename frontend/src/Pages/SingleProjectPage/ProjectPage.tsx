@@ -109,9 +109,9 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 960px)' });
   const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
 
-  const projects = []
+  const [courses, setCourses] = useState([]) 
   const notEditableFields =
-    projects && projects.filter(project => project.id === Number(props.match.params.projectId)).length === 0;
+  courses && courses.filter(course => course.id === Number(props.match.params.projectId)).length === 0;
 
   const isOwner = !(notEditableFields || notEditableFields === null);
 
@@ -153,7 +153,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
       setFilteredShownPosts(projectData!.project.publishedPosts);
     }
     switch (selectedPostCategory) {
-      case 'уроки': {
+      case 'Уроки': {
         const filteredByCategoryPosts = shownPosts.filter((post: PostTypes) => post.isNews === true);
         setFilteredShownPosts(filteredByCategoryPosts);
         break;

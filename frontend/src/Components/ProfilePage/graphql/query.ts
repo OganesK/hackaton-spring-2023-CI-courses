@@ -15,19 +15,17 @@ export const GET_USERS_QUERY = gql`
 `;
 
 export const GET_COMPANIES_QUERY = gql`
-  query {
-    companies {
-      name
-      id
+query{
+  courses{
+    id
+    name
+    description
+    poster{
+      link
     }
+
+    
   }
+}
 `;
 
-export const GET_PROJECTS_QUERY = gql`
-  query {
-    projects {
-      name
-      id
-    }
-  }
-`;

@@ -45,7 +45,7 @@ import useStyles from './Style';
 const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 960px)' });
   const [isExpanded, setIsExpanded] = useState(false);
-
+ 
   const history = useHistory();
   const userId = props.match.params.profileId;
   const { data, loading, refetch } = useQuery<{ user: UserDataTypes }>(GET_USER_QUERY, {
@@ -88,11 +88,11 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
     setOpenModalEvent(!openModalEvent);
   };
 
-  const postToShow = []
+  const [postToShow, setPostToShow] = useState([])
 
-  const projects = [];
+  const [courses, setCourses] = useState([]);
 
-  const filteredArr = projects?.reduce((acc: ProjectTypes[], current) => {
+  const filteredArr = courses?.reduce((acc: ProjectTypes[], current) => {
     const x = acc.find(item => item.id === current.id);
     if (!x) {
       return acc.concat([current]);
