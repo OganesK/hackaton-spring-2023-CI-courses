@@ -175,7 +175,7 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
         <Grid container direction="column" className={styles.modalContainer}>
           {openNoneClick ? <NoneClick /> : null}
           <Grid item className={styles.modalHeader}>
-            Создание {props.isNewsFilter ? 'уроки' : props.isResourceFilter ? 'ресурса' : 'объявления'}
+            Создание {props.isNewsFilter ? 'урока' : props.isResourceFilter ? 'ресурса' : 'объявления'}
           </Grid>
 
           <Grid container direction="row" className={styles.inputContainerGap}>
