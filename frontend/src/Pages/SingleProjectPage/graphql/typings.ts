@@ -93,41 +93,6 @@ export interface ProjectTypes {
     id: number;
     sections: Section[];
   };
-  category: string;
-  industrialDirections: string;
-  projectSite: string;
-  projectType: string;
-  projectStage: string;
-  projectMarket: string;
-  technologyType: string;
-  investmentStage: string;
-  salesType: string;
-  businessModel: string;
-  mainGoal: string;
-  isApproved: boolean;
-  publishedPosts: PostTypes[];
-  presentationMedia: {
-    link: string;
-    type: string;
-  }[];
-  ownerCompany: {
-    id: number;
-    name: string;
-  };
-  workers: WorkerTypes[];
-  crowdFunding: CrowdfundingTypes[];
-  updatedVariable?: {
-    name: string;
-    description?: {
-      id: number;
-      sections: Section[];
-    };
-    shortDescription: string;
-    presentationMedia: {
-      link: string;
-      type: string;
-    }[];
-  };
 }
 
 export interface WorkerTypes {

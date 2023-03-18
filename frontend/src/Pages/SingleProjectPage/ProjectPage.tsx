@@ -61,7 +61,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
     loading,
     data: projectData,
     refetch,
-  } = useQuery<{ project: ProjectTypes }>(GET_PROJECT_QUERY, {
+  } = useQuery<{ course: ProjectTypes }>(GET_PROJECT_QUERY, {
     variables: {
       id: Number(projectId),
     },
@@ -104,54 +104,18 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
   const [openSnack, setOpenSnack] = useState(false);
   const [openNoneClick, setOpenNoneClick] = useState(false);
 
-  const crowdsActiveCheck = projectData?.project.crowdFunding.every(crowdFunding => crowdFunding.activeCheck === false);
 
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 960px)' });
   const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
 
   const [courses, setCourses] = useState([]) 
-  const notEditableFields =
-  courses && courses.filter(course => course.id === Number(props.match.params.projectId)).length === 0;
 
-  const isOwner = !(notEditableFields || notEditableFields === null);
 
   const classes = useStyles();
 
-  useEffect(() => {
-    if (notEditableFields !== null && notEditableFields && !loading && projectData) {
-      const filteredPosts = projectData.project.publishedPosts.reduce((acc: PostTypes[], post: PostTypes) => {
-        if (post.isApproved) {
-          acc.push(post);
-        }
-        return acc;
-      }, []);
-      setShownPosts(filteredPosts);
-    }
-    if (notEditableFields !== null && !notEditableFields && !loading && projectData) {
-      setShownPosts(projectData && projectData.project.publishedPosts);
-    }
-  }, [projectData]);
+
 
   useEffect(() => {
-    if (projectData && !loading) {
-      setProjectIndustrialDirectionsValue(projectData.project.industrialDirections);
-      setProjectCatValue(projectData.project.category);
-      setProjectTypesValue(projectData.project.projectType);
-      setProjectStagesValue(projectData.project.projectStage);
-      setProjectSiteValue(projectData.project.projectSite);
-      setProjectMarketsValue(projectData.project.projectMarket);
-      setProjectTechTypesValue(projectData.project.technologyType);
-      setProjectInvestmentsStagesValue(projectData.project.investmentStage);
-      setProjectSalesTypesValue(projectData.project.salesType);
-      setProjectBusinessModelsValue(projectData.project.businessModel);
-      setProjectMainGoalsValue(projectData.project.mainGoal);
-    }
-  }, [loading]);
-
-  useEffect(() => {
-    if (!loading) {
-      setFilteredShownPosts(projectData!.project.publishedPosts);
-    }
     switch (selectedPostCategory) {
       case 'Уроки': {
         const filteredByCategoryPosts = shownPosts.filter((post: PostTypes) => post.isNews === true);
@@ -188,7 +152,6 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
   };
 
   const handleOnCompanyClick: () => void = () => {
-    history.push(`/company/${projectData!.project.ownerCompany.id}`);
   };
 
   const handleProjectSiteClick: () => void = () => {
@@ -214,7 +177,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
             <Grid container xs={10} direction="column" className={classes.projectHeader}>
               {isTabletOrMobile ? null : (
                 <Grid container justifyContent="flex-end">
-                  {isOwner ? (
+                  {true ? (
                     <>
                       <ProjectEditModal
                         projectId={Number(projectId)}
@@ -244,14 +207,14 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                   xs
                   className={classes.textHeader}
                   style={{
-                    color: projectData?.project.updatedVariable?.name && isOwner ? '#24B95C' : 'inherit',
+                    color: '#24B95C',
                   }}
                 >
-                  {projectData?.project.name}
+                  {projectData?.course.name}
                 </Grid>
                 {isTabletOrMobile ? (
                   <>
-                    {isOwner ? (
+                    {true ? (
                       <Grid item style={{ color: '#AAADB2', gap: 20 }}>
                         <ProjectEditModal
                           projectId={Number(projectId)}
@@ -277,7 +240,6 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
               style={{ margin: '30px auto 40px auto' }}
             >
               <Grid item alignItems="center" className={classes.textNameCompany} onClick={handleOnCompanyClick}>
-                {projectData && projectData.project.ownerCompany.name}
                 <img src={diagonalLink} style={{ marginLeft: 6 }} />
               </Grid>
             </Grid>
@@ -286,18 +248,9 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
           <Grid container>
             <ImageSlider
               projectId={Number(projectId)}
-              images={
-                projectData!.project.updatedVariable?.presentationMedia
-                  ? isOwner
-                    ? projectData!.project.updatedVariable?.presentationMedia.concat(
-                        projectData!.project.presentationMedia,
-                      )
-                    : projectData!.project.presentationMedia
-                  : projectData!.project.presentationMedia
-              }
-              editableFields={notEditableFields}
-              notApprovedImage={projectData!.project.updatedVariable?.presentationMedia ? true : false}
-              refetch={refetch}
+              images={[]}
+              editableFields={false}
+              notApprovedImage={false}
             />
           </Grid>
           {/* ) : null} */}
@@ -309,14 +262,12 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
             <StickyBox offsetTop={150} style={{ width: '100%', zIndex: 2 }}>
               <SideBarNavigation
               
-                isDescription={projectData?.project.description ? true : false}
+                isDescription={false}
                 // isWorkers={projectData?.project.workers.length > 0 ? true : false}
-                isCrowd={projectData?.project.crowdFunding.some(el => el.isApproved) ? true : false}
-                isResources={
-                  projectData?.project.publishedPosts.some(el => el.isResource && el.isApproved) ? true : false
-                }
-                isNews={projectData?.project.publishedPosts.some(el => el.isNews && el.isApproved) ? true : false}
-                isOwner={isOwner}
+                isCrowd={false}
+                isResources={true}
+                isNews={false}
+                isOwner={true}
               />
             </StickyBox>
           )}
@@ -407,7 +358,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                   id="howItWorks"
                   justifyContent="flex-end"
                   style={{
-                    display: isOwner || projectData?.project.description ? '' : 'none',
+                    display:'',
                   }}
                 >
                   {isTabletOrMobile ? (
@@ -416,9 +367,9 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                     </Grid>
                   ) : null}
                   <PostArticleComponent
-                    article={projectData!.project.description}
-                    postId={projectData!.project.id}
-                    isOwner={isOwner}
+                    article={projectData!.course.description}
+                    postId={projectData!.course.id}
+                    isOwner={true}
                     isProject={true}
                   />
                 </Grid>
@@ -508,7 +459,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                   )}
                 </Grid> */}
 
-                {isOwner ? null : (
+                {true ? null : (
                   <Grid container id="forInvestors" style={{ gap: 30 }}>
                     {isTabletOrMobile ? (
                       <Grid container alignItems="center" className={classes.navigationProjectHeader}>
@@ -524,60 +475,12 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                   style={{
                     gap: 30,
                     marginBottom: -60,
-                    display:
-                      isOwner || projectData?.project.publishedPosts.some(el => el.isResource && el.isApproved)
-                        ? ''
-                        : 'none',
+                    display: ''
                   }}
                 >
-                  {projectData?.project.publishedPosts.some(el => el.isResource) ? (
-                    <Grid
-                      container
-                      justifyContent="space-between"
-                      alignItems="center"
-                      className={classes.navigationProjectHeader}
-                    >
-                      <Grid item>{isTabletOrMobile ? 'Ресурсы' : null}</Grid>
-                      <Grid item>
-                        {isOwner ? (
-                          <Grid
-                            container
-                            justifyContent="space-between"
-                            alignItems="center"
-                            className={classes.projectHeaders}
-                          >
-                            <CreatePostModal
-                              projectId={Number(projectId)}
-                              open={openModalResource}
-                              handleOpenClose={handleResourceOpenClose}
-                              isOfferFilter={false}
-                              isResourceFilter={true}
-                              isNewsFilter={false}
-                              isProjectPage
-                              refetchOnProjectPage={refetch}
-                            />
-                            <Tooltip title="Новый ресурс" placement="left">
-                              <Button
-                                onClick={handleResourceOpenClose}
-                                variant="text"
-                                startIcon={<AddIcon />}
-                                sx={{
-                                  color: isTabletOrMobile ? '#252525' : '#AAADB2',
-                                  fontWeight: 500,
-                                  fontSize: isTabletOrMobile ? 'clamp(0.813rem, 0.6258rem + 0.8320vw, 1.125rem)' : 18,
-                                  lineHeight: '100%',
-                                }}
-                              >
-                                Добавить
-                              </Button>
-                            </Tooltip>
-                          </Grid>
-                        ) : null}
-                      </Grid>
-                    </Grid>
-                  ) : (
+                  
                     <>
-                      {isOwner ? (
+                      {true ? (
                         <Grid
                           container
                           direction="column"
@@ -602,7 +505,6 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                               isResourceFilter={true}
                               isNewsFilter={false}
                               isProjectPage
-                              refetchOnProjectPage={refetch}
                             />
                             <MyButton
                               value="Submit"
@@ -615,15 +517,13 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                         </Grid>
                       ) : null}
                     </>
-                  )}
 
                   <ContentBlock
-                    refetch={refetch}
                     selectedPostCategory={selectedPostCategory}
                     setSelectedPostCategory={setSelectedPostCategory}
-                    isOwner={notEditableFields === null || notEditableFields ? false : true}
+                    isOwner={true}
                     contentValues={filteredShownPosts}
-                    isNoPostAtUser={projectData?.project.publishedPosts.length === 0}
+                    isNoPostAtUser={true}
                     value={'Ресурсы'}
                     ownerId={userContextInfo?.user?.id !== undefined ? userContextInfo.user.id : 0}
                   />
@@ -635,60 +535,12 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                   style={{
                     gap: 30,
                     marginBottom: -40,
-                    display:
-                      isOwner || projectData?.project.publishedPosts.some(el => el.isOffer && el.isApproved)
-                        ? ''
-                        : 'none',
+                    display:''
                   }}
                 >
-                  {projectData?.project.publishedPosts.some(el => el.isOffer) ? (
-                    <Grid
-                      container
-                      justifyContent="space-between"
-                      alignItems="center"
-                      className={classes.navigationProjectHeader}
-                    >
-                      <Grid item>{isTabletOrMobile ? 'Объявления' : null}</Grid>
-                      <Grid item>
-                        {isOwner ? (
-                          <Grid
-                            container
-                            justifyContent="space-between"
-                            alignItems="center"
-                            className={classes.projectHeaders}
-                          >
-                            <CreatePostModal
-                              projectId={Number(projectId)}
-                              open={openModalOffer}
-                              handleOpenClose={handleOfferOpenClose}
-                              isOfferFilter={true}
-                              isResourceFilter={false}
-                              isNewsFilter={false}
-                              isProjectPage
-                              refetchOnProjectPage={refetch}
-                            />
-                            <Tooltip title="Новое объявление" placement="left">
-                              <Button
-                                onClick={handleOfferOpenClose}
-                                variant="text"
-                                startIcon={<AddIcon />}
-                                sx={{
-                                  color: isTabletOrMobile ? '#252525' : '#AAADB2',
-                                  fontWeight: 500,
-                                  fontSize: isTabletOrMobile ? 'clamp(0.813rem, 0.6258rem + 0.8320vw, 1.125rem)' : 18,
-                                  lineHeight: '100%',
-                                }}
-                              >
-                                Добавить
-                              </Button>
-                            </Tooltip>
-                          </Grid>
-                        ) : null}
-                      </Grid>
-                    </Grid>
-                  ) : (
+                  
                     <>
-                      {isOwner ? (
+                      {true ? (
                         <Grid
                           container
                           direction="column"
@@ -713,7 +565,6 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                               isResourceFilter={false}
                               isNewsFilter={false}
                               isProjectPage
-                              refetchOnProjectPage={refetch}
                             />
                             <MyButton
                               value="Submit"
@@ -726,15 +577,13 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                         </Grid>
                       ) : null}
                     </>
-                  )}
 
                   <ContentBlock
-                    refetch={refetch}
                     selectedPostCategory={selectedPostCategory}
                     setSelectedPostCategory={setSelectedPostCategory}
-                    isOwner={notEditableFields === null || notEditableFields ? false : true}
+                    isOwner={true}
                     contentValues={filteredShownPosts}
-                    isNoPostAtUser={projectData?.project.publishedPosts.length === 0}
+                    isNoPostAtUser={true}
                     value={'Объявления'}
                     ownerId={userContextInfo?.user?.id !== undefined ? userContextInfo.user.id : 0}
                   />
@@ -746,61 +595,12 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                   style={{
                     gap: 30,
                     marginBottom: -60,
-                    display:
-                      isOwner || projectData?.project.publishedPosts.some(el => el.isNews && el.isApproved)
-                        ? ''
-                        : 'none',
+                    display:''
                   }}
                 >
-                  {projectData?.project.publishedPosts.some(el => el.isNews) ? (
-                    <Grid
-                      container
-                      justifyContent="space-between"
-                      alignItems="center"
-                      className={classes.navigationProjectHeader}
-                    >
-                      <Grid item>{isTabletOrMobile ? 'уроки' : null}</Grid>
-
-                      <Grid item>
-                        {isOwner ? (
-                          <Grid
-                            container
-                            justifyContent="space-between"
-                            alignItems="center"
-                            className={classes.projectHeaders}
-                          >
-                            <CreatePostModal
-                              projectId={Number(projectId)}
-                              open={openModalNews}
-                              handleOpenClose={handleNewsOpenClose}
-                              isOfferFilter={false}
-                              isResourceFilter={false}
-                              isNewsFilter={true}
-                              isProjectPage
-                              refetchOnProjectPage={refetch}
-                            />
-                            <Tooltip title="Новость" placement="left">
-                              <Button
-                                onClick={handleNewsOpenClose}
-                                variant="text"
-                                startIcon={<AddIcon />}
-                                sx={{
-                                  color: isTabletOrMobile ? '#252525' : '#AAADB2',
-                                  fontWeight: 500,
-                                  fontSize: isTabletOrMobile ? 'clamp(0.813rem, 0.6258rem + 0.8320vw, 1.125rem)' : 18,
-                                  lineHeight: '100%',
-                                }}
-                              >
-                                Добавить
-                              </Button>
-                            </Tooltip>
-                          </Grid>
-                        ) : null}
-                      </Grid>
-                    </Grid>
-                  ) : (
+                  
                     <>
-                      {isOwner ? (
+                      {true ? (
                         <Grid
                           container
                           direction="column"
@@ -825,7 +625,6 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                               isResourceFilter={false}
                               isNewsFilter={true}
                               isProjectPage
-                              refetchOnProjectPage={refetch}
                             />
                             <MyButton
                               value="Submit"
@@ -838,15 +637,13 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                         </Grid>
                       ) : null}
                     </>
-                  )}
 
                   <ContentBlock
-                    refetch={refetch}
                     selectedPostCategory={selectedPostCategory}
                     setSelectedPostCategory={setSelectedPostCategory}
-                    isOwner={notEditableFields === null || notEditableFields ? false : true}
+                    isOwner={true}
                     contentValues={filteredShownPosts}
-                    isNoPostAtUser={projectData?.project.publishedPosts.length === 0}
+                    isNoPostAtUser={true}
                     value={'уроки'}
                     ownerId={userContextInfo?.user?.id !== undefined ? userContextInfo.user.id : 0}
                   />

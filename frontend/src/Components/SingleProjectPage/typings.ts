@@ -3,7 +3,6 @@ import { ApolloQueryResult, OperationVariables } from '@apollo/client';
 import { ProjectTypes } from '../../Pages/SingleProjectPage/graphql/typings';
 
 export interface ImageSliderProps {
-  refetch: () => Promise<ApolloQueryResult<{ project: ProjectTypes }>>;
   images: { link: string; type: string }[];
   projectId: number;
   notApprovedImage?: boolean;
@@ -116,11 +115,6 @@ export interface SingleProjectsContentProps {
   value: string;
   ownerId: number;
   setSelectedPostCategory: React.Dispatch<React.SetStateAction<string>>;
-  refetch: (variables?: Partial<OperationVariables> | undefined) => Promise<
-    ApolloQueryResult<{
-      project: ProjectTypes;
-    }>
-  >;
 }
 
 export interface NavigationProps {

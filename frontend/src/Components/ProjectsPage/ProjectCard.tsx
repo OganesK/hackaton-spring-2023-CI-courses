@@ -22,7 +22,7 @@ export default function ProjectCard(props: ProjectCardProps): JSX.Element {
   const classes = useStyles();
   return (
     <div
-      // onClick={(): void => history.push(`/projects/project/${props.projectId}`)}
+      onClick={(): void => history.push(`/projects/project/${props.courseId}`)}
       style={{
         cursor: 'pointer',
       }}

@@ -46,6 +46,7 @@ function FormRow(props: { data: ProjectsTypes[] | undefined; loading: boolean })
               img={project.poster?.link}
               title={project.name}
               shortContent={'Description'}
+              courseId={project.id}
             />
           </Grid>
         ))}

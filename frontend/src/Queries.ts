@@ -166,117 +166,23 @@ export const GET_OFFERS_QUERY = gql`
 `;
 
 export const GET_PROJECT_QUERY = gql`
-  query ($id: Int!) {
-    project(where: { id: $id }) {
-      id
-      name
-      shortDescription
-      description {
-        id
-        sections(orderBy: { number: asc }) {
-          id
-          number
-          type
-          text
-          media {
-            link
-          }
-        }
-      }
-      
-      industrialDirections
-      projectType
-      projectStage
-      projectSite
-      projectMarket
-      technologyType
-      investmentStage
-      businessModel
-      salesType
-      mainGoal
-      
-      presentationMedia {
-        link
-        type
-      }
-      publishedPosts(orderBy: { createdAt: desc }) {
-        id
-        createdAt
-        title
-        isOffer
-        isResource
-        isNews
-        poster {
-          link
-        }
-        description
-        
-        article {
-          id
-          sections(orderBy: { number: asc }) {
-            id
-            number
-            type
-            text
-            media {
-              link
-            }
-          }
-        }
-        
-      }
-      ownerCompany {
-        id
-        name
-      }
-      crowdFunding {
-        id
-        createdAt
-        title
-        shortDescription
-        poster {
-          link
-        }
-        start
-        end
-        goalSum
-        nowSum
-        
-        activeCheck
-        story {
-          id
-          sections(orderBy: { number: asc }) {
-            id
-            number
-            type
-            text
-            media {
-              link
-            }
-          }
-        }
-        tariffs {
-          id
-          title
-          price
-          buyerCount
-          description
-        }
-      }
-      workers {
-        id
-        position
-        worker {
-          id
-          firstname
-          lastname
-          avatar {
-            link
-          }
-        }
+query{
+  course(where: {
+    id: 1
+  }) {
+    id
+    name
+    poster{
+      link
+    }
+    description{
+      sections{
+        text
       }
     }
+    shortDescription
   }
+}
 `;
 
 export const ME_QUERY = gql`
