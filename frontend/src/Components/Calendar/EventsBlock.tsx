@@ -123,7 +123,6 @@ export default function EventsBlock(): JSX.Element {
                         format={event.format}
                         theme={event.theme}
                         organizer={event.organizer}
-                        stream={event.stream}
                         user={context.user}
                         refetch={refetch}
                       />
@@ -195,7 +194,6 @@ export default function EventsBlock(): JSX.Element {
                         format={event.format}
                         theme={event.theme}
                         organizer={event.organizer}
-                        stream={event.stream}
                         user={context.user}
                         refetch={refetch}
                       />

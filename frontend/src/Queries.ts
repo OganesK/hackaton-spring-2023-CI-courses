@@ -309,16 +309,6 @@ export const ME_QUERY = gql`
         organizer
         address
         theme
-        
-        stream {
-          id
-          streamKey
-          event {
-            id
-            date
-          }
-          active
-        }
       }
      
       
@@ -350,16 +340,7 @@ export const GET_USER_QUERY = gql`
         address
         theme
         format
-        
-        stream {
-          id
-          streamKey
-          event {
-            id
-            date
-          }
-          active
-        }
+      
       }
       
       
@@ -383,15 +364,6 @@ export const GET_EVENTS_QUERY = gql`
       format
       theme
       address
-      stream {
-        id
-        streamKey
-        event {
-          id
-          date
-        }
-        active
-      }
       user {
         publishedEvent {
           id
@@ -406,10 +378,7 @@ export const GET_STREAMS_QUERY = gql`
     stream(where: { id: $id }) {
       id
       streamKey
-      event {
-        id
-        date
-      }
+
     }
   }
 `;
