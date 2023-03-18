@@ -1,5 +1,5 @@
 /* eslint-disable no-magic-numbers */
-export const PORT = process.env.PORT || 4000;
+export const PORT = process.env.PORT || 5040;
 export const JWT_SECRET = process.env.JWT_SECRET || 'LOLIDK';
 export const JWT_REFRESH_SECRET = process.env.JWT_REFRESH_SECRET || 'LOLIDK2';
 export const AWS_REGION = process.env.AWS_REGION || 'eu-west-2';
