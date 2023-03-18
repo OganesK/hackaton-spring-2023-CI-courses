@@ -8,6 +8,7 @@ import MyCard from '../../UI/Card/Card';
 
 import Invests from '../../../assets/img/Invests.svg';
 import Partners from '../../../assets/img/Partners.svg';
+import Students from '../../../assets/icons/student.svg'
 import Projects from '../../../assets/img/Projects.svg';
 
 import { useWindowSize } from '../../../rules/index';
@@ -56,7 +57,7 @@ const AboutUs: (props: AboutUsProps) => JSX.Element = (props: AboutUsProps) => {
       >
         <Grid item xl lg md={5} sm={7} xs={12}>
           <MyCard
-            avatar={Projects}
+            avatar={Students}
             header="Ученики"
             title1="Курсы"
             title2="Сертификаты"
@@ -70,7 +71,7 @@ const AboutUs: (props: AboutUsProps) => JSX.Element = (props: AboutUsProps) => {
         </Grid>
         <Grid item xl lg md={5} sm={7} xs={12}>
           <MyCard
-            avatar={Partners}
+            avatar={Students}
             header="Партнеры"
             title1="Хотите развиваться вместе с нами? Добро пожаловать!"
             title2=""

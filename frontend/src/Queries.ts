@@ -62,7 +62,7 @@ export const GET_CROWDFUNDS_QUERY = gql`
       project {
         id
         name
-        category
+        
         poster {
           link
         }
@@ -78,7 +78,7 @@ export const GET_RESOURCES_QUERY = gql`
       id
       createdAt
       isResource
-      category
+      
       title
       description
       article {
@@ -96,7 +96,7 @@ export const GET_RESOURCES_QUERY = gql`
       poster {
         link
       }
-      category
+      
       isOffer
       isResource
       isNews
@@ -107,7 +107,7 @@ export const GET_RESOURCES_QUERY = gql`
 export const GET_NEWS_QUERY = gql`
   query {
     posts(where: { isNews: { equals: true } }, orderBy: { createdAt: desc }) {
-      category
+      
       id
       createdAt
       isResource
@@ -139,7 +139,7 @@ export const GET_OFFERS_QUERY = gql`
   query {
     posts(where: {  isOffer: { equals: true } }, orderBy: { createdAt: desc }) {
       id
-      category
+      
       createdAt
       title
       description
@@ -183,7 +183,7 @@ export const GET_PROJECT_QUERY = gql`
           }
         }
       }
-      category
+      
       industrialDirections
       projectType
       projectStage
@@ -210,7 +210,7 @@ export const GET_PROJECT_QUERY = gql`
           link
         }
         description
-        category
+        
         article {
           id
           sections(orderBy: { number: asc }) {
@@ -349,7 +349,7 @@ export const GET_EVENTS_QUERY = gql`
       poster {
         link
       }
-      category
+      
       description
       shortDescription
       date

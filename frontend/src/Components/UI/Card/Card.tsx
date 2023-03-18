@@ -15,7 +15,6 @@ const MyCard: (props: CardProps) => JSX.Element = (props: CardProps) => {
     <Card className={classes.rootCard}>
       <CardContent>
         <Typography className={classes.title} color="textSecondary" gutterBottom>
-          <img src={props.avatar} alt="avatar" />
         </Typography>
         <Typography className={classes.cardHeader}>{props.header}</Typography>
         <Typography className={classes.pos} color="textSecondary">
