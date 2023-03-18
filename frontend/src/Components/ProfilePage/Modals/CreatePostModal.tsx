@@ -34,6 +34,7 @@ import imgModalDefault from '../../../assets/img/imgModal.svg';
 
 import { categoriesArray } from '../../../helpers/constants/categories';
 import { useTranslate } from '../../../helpers/hooks/useTranslateCategories';
+import { GET_PROJECTS_QUERY } from '../../../Queries';
 
 const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: PostCreateModalProps) => {
   const styles = useStyles();
