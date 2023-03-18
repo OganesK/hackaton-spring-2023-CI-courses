@@ -18,7 +18,7 @@ import 'react-responsive-modal/styles.css';
 import { useQuery } from '@apollo/client';
 
 import { CreateOfferMutation, GetUrlToUploadPostPoster } from '../graphql/mutations';
-import { GET_PROJECTS_QUERY } from '../graphql/query';
+// import { GET_PROJECTS_QUERY } from '../graphql/query';
 import { ProjectsDataQueryTypes } from '../graphql/typing';
 import { PostCreateModalProps } from './typings';
 
