@@ -16,14 +16,13 @@ export default function ProjectCard(props: ProjectCardProps): JSX.Element {
   const secondDefaultBlockHeight = width / 4;
   const thirdDefaultBlockHeight = width / 2;
 
-  const translateCategory = useTranslate(props.category);
 
   const history = useHistory();
 
   const classes = useStyles();
   return (
     <div
-      onClick={(): void => history.push(`/projects/project/${props.projectId}`)}
+      // onClick={(): void => history.push(`/projects/project/${props.projectId}`)}
       style={{
         cursor: 'pointer',
       }}
@@ -57,7 +56,6 @@ export default function ProjectCard(props: ProjectCardProps): JSX.Element {
         >
           <img style={{ height: 'auto', width: '100%', objectFit: 'cover' }} src={props.img} alt="" />
           <figcaption>
-            <h3 className={classes.dateText}>{translateCategory}</h3>
             <p className={classes.titleText}>{props.title}</p>
             <DescriptionText>
               <div

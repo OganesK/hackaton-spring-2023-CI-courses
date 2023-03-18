@@ -30,7 +30,6 @@ query{
   courses{
     id
     name
-    description
     poster{
       link
     }

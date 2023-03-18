@@ -43,11 +43,9 @@ function FormRow(props: { data: ProjectsTypes[] | undefined; loading: boolean })
             }}
           >
             <ProjectCard
-              category={project.category}
               img={project.poster?.link}
               title={project.name}
-              shortContent={project.shortDescription}
-              projectId={project.id}
+              shortContent={'Description'}
             />
           </Grid>
         ))}
@@ -59,19 +57,21 @@ const Projects: () => JSX.Element = () => {
   const classes = useStyles();
   const [filter, setFilter] = useState('Все');
   const [filteredData, setFilteredData] = useState<ProjectsTypes[]>();
-  const { data, loading } = useQuery<{ projects: ProjectsTypes[] }>(GET_PROJECTS_QUERY);
+  const { data, loading } = useQuery<{ courses: ProjectsTypes[] }>(GET_PROJECTS_QUERY);
 
   useEffect(() => {
-    const newFilter = data && data.projects.filter((project: ProjectsTypes) => project.category === filter);
-    setFilteredData(newFilter);
-  }, [filter, data]);
+    if (data && !loading) {
+      setFilteredData(data.courses)
+      console.log(filteredData)
+    }
+  }, [loading, data]);
 
   return (
     <Grid container xs={12}>
       <NavBar text="qwe" />
       <Grid container xs={10} style={{ margin: 'auto' }}>
-        <Grid className={classes.sloganText}>Представленные курсы</Grid>
-
+      <Grid className={classes.sloganText}>Представленные курсы</Grid>
+              <FormRow  data={filteredData} loading={loading}/>
       </Grid>
       <Footer footerMobileTopIdent={100} footerTopIdent={200} />
     </Grid>

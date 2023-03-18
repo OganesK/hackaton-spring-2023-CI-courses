@@ -1,24 +1,10 @@
 export interface ProjectsTypes {
   id: number;
-  category: string;
   name: string;
-  description?: {
-    id: number;
-    sections: Section[];
-  };
-  shortDescription: string;
-  presentationMedia: {
-    type: string;
-    link: string;
-  }[];
+  description: string;
   poster: {
-    link: string;
-  };
-  ownerCompany: {
-    owner: {
-      id: number;
-    };
-  };
+    link: string
+  }
 }
 
 interface Section {
