@@ -4,6 +4,9 @@ import { useQuery } from '@apollo/client';
 import { useMediaQuery } from 'react-responsive';
 import { userContext } from '../../Context/context';
 import { TabletOrMobile } from '../../helpers/constants/constants';
+import { ReactFlvPlayer } from 'react-flv-player';
+import { STREAM_URL } from '../../config';
+
 
 import NavBar from '../../Components/UI/NavBar/NavBar';
 import SkeletonEvents from '../../Components/UI/SkeletonBlocks/SkeletonEvents/SkeletonEvents';
@@ -18,7 +21,7 @@ import { GET_EVENTS_QUERY } from '../../Queries';
 import { EventTypes } from './typings';
 
 const Events: () => JSX.Element = () => {
-  const { loading, data: eventData, error, refetch } = useQuery<{ events: EventTypes[] }>(GET_EVENTS_QUERY);
+  const { loading, data: eventData, error, refetch } = useQuery<{ streams: EventTypes[] }>(GET_EVENTS_QUERY);
   const context = useContext(userContext);
   const [filter, setFilter] = useState<string>('Все');
   const [filteredData, setFilteredData] = useState<EventTypes[]>([]);
@@ -27,19 +30,12 @@ const Events: () => JSX.Element = () => {
   if (error) {
     console.error(error);
   }
-  useEffect(() => {
-    if (filter !== 'Все' && eventData) {
-      const filtered = eventData.events.filter(event => event.category === filter);
-      setFilteredData(filtered);
-    } else if (eventData && filter === 'Все') {
-      setFilteredData(eventData.events);
-    }
-  }, [filter]);
 
   useEffect(() => {
     if (!loading && eventData) {
-      setFilteredData(eventData.events);
+      setFilteredData(eventData.streams);
     }
+    console.log(eventData)
   }, [loading]);
 
   return (
@@ -53,22 +49,18 @@ const Events: () => JSX.Element = () => {
         ) : (
           <>
             {filteredData?.map((event: EventTypes) => (
-              <EventPoster
-                id={event.id}
-                key={event.id}
-                name={event.name}
-                poster={event.poster}
-                description={event.description}
-                shortDescription={event.shortDescription}
-                date={event.date}
-                organizer={event.organizer}
-                theme={event.theme}
-                format={event.format}
-                address={event.address}
-                stream={event.stream}
-                user={context.user}
-                refetch={refetch}
-              />
+              <Grid item xs={12}>
+                <Grid className={styles.sloganText}>{event.name}</Grid>
+                <ReactFlvPlayer
+                  url={`${STREAM_URL}${event.streamKey}.flv`}
+                  width="100%"
+                  height="100%"
+                  isMuted={true}
+                  style={{
+                    border: '2px solid',
+                  }}
+                />
+              </Grid>
             ))}
           </>
         )}
