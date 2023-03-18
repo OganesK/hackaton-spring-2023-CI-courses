@@ -16,6 +16,7 @@ export const User = objectType({
     t.model.firstname();
     t.model.lastname();
     t.model.bio();
+    t.model.role();
     t.model.avatar();
     t.model.tokenVersion();
     t.model.groups({

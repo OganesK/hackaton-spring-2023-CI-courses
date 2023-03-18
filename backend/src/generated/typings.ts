@@ -851,6 +851,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageOrderByRelationAggregateInput'] | null; // MessageOrderByRelationAggregateInput
     password?: NexusGenEnums['SortOrder'] | null; // SortOrder
     publishedEvent?: NexusGenInputs['EventOrderByRelationAggregateInput'] | null; // EventOrderByRelationAggregateInput
+    role?: NexusGenEnums['SortOrder'] | null; // SortOrder
     shortDescription?: NexusGenEnums['SortOrder'] | null; // SortOrder
     tokenVersion?: NexusGenEnums['SortOrder'] | null; // SortOrder
   }
@@ -875,6 +876,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageListRelationFilter'] | null; // MessageListRelationFilter
     password?: NexusGenInputs['StringFilter'] | null; // StringFilter
     publishedEvent?: NexusGenInputs['EventListRelationFilter'] | null; // EventListRelationFilter
+    role?: NexusGenInputs['StringFilter'] | null; // StringFilter
     shortDescription?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     tokenVersion?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
   }
@@ -1181,6 +1183,7 @@ export interface NexusGenObjects {
     lastname: string; // String!
     login: string; // String!
     password: string; // String!
+    role: string; // String!
     shortDescription?: string | null; // String
     tokenVersion?: number | null; // Int
   }
@@ -1435,6 +1438,7 @@ export interface NexusGenFieldTypes {
     messages: NexusGenRootTypes['Message'][]; // [Message!]!
     password: string; // String!
     publishedEvent: NexusGenRootTypes['Event'][]; // [Event!]!
+    role: string; // String!
     shortDescription: string | null; // String
     tokenVersion: number | null; // Int
   }
@@ -1679,6 +1683,7 @@ export interface NexusGenFieldTypeNames {
     messages: 'Message'
     password: 'String'
     publishedEvent: 'Event'
+    role: 'String'
     shortDescription: 'String'
     tokenVersion: 'Int'
   }

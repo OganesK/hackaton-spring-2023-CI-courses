@@ -1192,6 +1192,7 @@ type User {
   messages(after: MessageWhereUniqueInput, before: MessageWhereUniqueInput, first: Int, last: Int): [Message!]!
   password: String!
   publishedEvent(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByWithRelationInput!]): [Event!]!
+  role: String!
   shortDescription: String
   tokenVersion: Int
 }
@@ -1224,6 +1225,7 @@ input UserOrderByWithRelationInput {
   messages: MessageOrderByRelationAggregateInput
   password: SortOrder
   publishedEvent: EventOrderByRelationAggregateInput
+  role: SortOrder
   shortDescription: SortOrder
   tokenVersion: SortOrder
 }
@@ -1249,6 +1251,7 @@ input UserWhereInput {
   messages: MessageListRelationFilter
   password: StringFilter
   publishedEvent: EventListRelationFilter
+  role: StringFilter
   shortDescription: StringNullableFilter
   tokenVersion: IntNullableFilter
 }
