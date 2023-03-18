@@ -109,11 +109,11 @@ export const GetUrlToUploadMedia = () => {
 
 export const CreateProjectMutation = () => {
   const [projectId] = useMutation<{ createOneProject: { id: number } }>(gql`
-    mutation ($data: createProjectInput!) {
-      createOneProject(data: $data) {
-        id
-      }
+  mutation($data: createCourseInput!) {
+    createOneCourse(data: $data) {
+      id
     }
+  }
   `);
   return (data: any) => projectId({ variables: { data } });
 };

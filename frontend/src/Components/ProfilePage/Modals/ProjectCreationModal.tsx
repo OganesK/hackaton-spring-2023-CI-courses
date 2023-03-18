@@ -62,18 +62,8 @@ const ProjectCreationModal: (props: ProjectCreateModalProps) => JSX.Element = (p
   const [shortDescriptionValue, setShortDescriptionValue] = useState('');
 
   const [activityTypeValue, setActivityTypeValue] = useState('business');
-  const [projectIndustrialDirectionsValue, setProjectIndustrialDirectionsValue] = useState('');
   const [projectTypesValue, setProjectTypesValue] = useState('notDefined');
-  const [projectStagesValue, setProjectStagesValue] = useState('');
-  const [projectSiteValue, setProjectSiteValue] = useState('');
-  const [projectMarketsValue, setProjectMarketsValue] = useState('');
-  const [projectTechTypesValue, setProjectTechTypesValue] = useState('');
-  const [projectInvestmentsStagesValue, setProjectInvestmentsStagesValue] = useState('');
-  const [projectSalesTypesValue, setProjectSalesTypesValue] = useState('');
-  const [projectBusinessModelsValue, setProjectBusinessModelsValue] = useState('');
-  const [projectMainGoalsValue, setProjectMainGoalsValue] = useState('');
 
-  const [companyIdValue, setCompanyIdValue] = useState<string | null>('');
 
   const [imgModal, setImgModal] = useState(imgModalDefault);
 
@@ -89,44 +79,22 @@ const ProjectCreationModal: (props: ProjectCreateModalProps) => JSX.Element = (p
     setActivityTypeValue(event.target.value);
   };
 
-  const handleChangeProjectIndustry = (event: SelectChangeEvent) => {
-    setProjectIndustrialDirectionsValue(event.target.value);
-  };
-
   const handleChangeProjectType = (event: SelectChangeEvent) => {
     setProjectTypesValue(event.target.value);
   };
 
-  const handleChangeProjectStage = (event: SelectChangeEvent) => {
-    setProjectStagesValue(event.target.value);
-  };
-
-  const handleChangeProjectMarket = (event: SelectChangeEvent) => {
-    setProjectMarketsValue(event.target.value);
-  };
-
-  const handleChangeProjectTechType = (event: SelectChangeEvent) => {
-    setProjectTechTypesValue(event.target.value);
-  };
-
-  const handleChangeProjectInvestments = (event: SelectChangeEvent) => {
-    setProjectInvestmentsStagesValue(event.target.value);
-  };
-
-  const handleChangeProjectSalesType = (event: SelectChangeEvent) => {
-    setProjectSalesTypesValue(event.target.value);
-  };
-
-  const handleChangeProjectBM = (event: SelectChangeEvent) => {
-    setProjectBusinessModelsValue(event.target.value);
-  };
-
-  const handleChangeProjectMainGoal = (event: SelectChangeEvent) => {
-    setProjectMainGoalsValue(event.target.value);
-  };
 
   const onClickHandler: () => Promise<void> = async () => {
-    
+    const data = {
+      name: nameValue,
+      shortDescription: shortDescriptionValue,
+      category: activityTypeValue,
+      courseType: projectTypesValue,
+      ownerID: 1
+    }
+
+    await createProjectHandler(data)
+    props.handleOpenClose()
   };
 
   const hiddenFileInput = React.useRef<HTMLInputElement>(null);
