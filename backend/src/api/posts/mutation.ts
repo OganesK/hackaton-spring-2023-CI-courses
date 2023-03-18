@@ -5,31 +5,29 @@ import { Context } from '../../graphql/context';
 export const NewsMutation = extendType({
   type: 'Mutation',
   definition: (t) => {
-  //   t.field('createOnePost', {
-  //     type: 'Post',
-  //     args: { data: nonNull(arg({ type: PostCreateInput })) },
-  //     resolve: async (_, { data }, ctx: Context) => {
+    t.field('createOnePost', {
+      type: 'Post',
+      args: { data: nonNull(arg({ type: PostCreateInput })) },
+      resolve: async (_, { data }, ctx: Context) => {
 
-  //       return ctx.prisma.post.create({
-  //         data: {
-  //           title: data.title,
-  //           description: data.description,
-  //           tags: {
-  //             set: data.tags,
-  //           },
-  //           articleBody: data.articleBody,
-  //           isOffer: data.isOffer,
-  //           isResource: data.isResource,
-  //           isNews: data.isNews,
-  //           poster: {
-  //             connect: {
-  //               url: DEFAULT_IMAGE,
-  //             },
-  //           },
-  //         },
-  //       });
-  //     },
-  //   });
+        return ctx.prisma.post.create({
+          data: {
+            title: data.title,
+            description: data.description,
+            tags: {
+              set: data.tags,
+            },
+            articleBody: data.articleBody,
+            isNews: data.isNews,
+            poster: {
+              connect: {
+                url: DEFAULT_IMAGE,
+              },
+            },
+          },
+        });
+      },
+    });
 
   //   t.field('updatePost', {
   //     type: 'String',
