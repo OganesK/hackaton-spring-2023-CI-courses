@@ -1,5 +1,5 @@
 export interface AutoCompleteSearchFieldPropsType {
-  projectId: string;
-  value: string | null;
-  setValue: React.Dispatch<React.SetStateAction<string | null>>;
+  projectId: number;
+  value: number | null;
+  setValue: React.Dispatch<React.SetStateAction<number | null>>;
 }

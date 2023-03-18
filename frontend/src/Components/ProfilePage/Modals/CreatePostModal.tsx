@@ -56,7 +56,7 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
   });
   const [imgModal, setImgModal] = useState(imgModalDefault);
   const [catValue, setCatValue] = useState('business');
-  const [projectIdValue, setProjectIdValue] = useState<string | null>('');
+  const [projectIdValue, setProjectIdValue] = useState<number | null>(1);
 
   const [openNoneClick, setOpenNoneClick] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
@@ -77,7 +77,7 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
 
   useEffect(() => {
     if (props.isProjectPage) {
-      setProjectIdValue(props.projectId.toLocaleString());
+      setProjectIdValue(props.projectId);
     }
   }, []);
 
@@ -159,6 +159,10 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
     setImgModal(URL.createObjectURL(fileUploaded));
     setPosterValue(fileUploaded);
   };
+
+  console.log('projectIdValue');
+  console.log(projectIdValue);
+  
 
   return (
     <div>
@@ -326,7 +330,7 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
             <Grid container xs>
               <Grid container md={7} xs={12}>
                 <AutoCompleteSearchFieldForProject
-                  projectId="100500"
+                  projectId={1}
                   value={projectIdValue}
                   setValue={setProjectIdValue}
                 />

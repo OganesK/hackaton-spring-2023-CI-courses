@@ -368,7 +368,7 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                 {contextUserData.user && contextUserData.user.id === Number(userId) ? (
                   <>
                     <CreatePostModal
-                      projectId={0}
+                      projectId={1}
                       open={openModalOffer}
                       handleOpenClose={handleOpenClosePostModal}
                       isOfferFilter={false}
