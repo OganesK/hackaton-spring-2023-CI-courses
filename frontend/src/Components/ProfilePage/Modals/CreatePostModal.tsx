@@ -82,69 +82,14 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
   }, []);
 
   const onClickHandler: () => Promise<void> = async () => {
-    if (props.isOfferFilter) {
-      // content = getInnerHtml(id);
-      // content = createMarkup(convertedContent).__html;
-      content = stateToHTML(editorState.getCurrentContent());
-      // content = getHtml(editorState);
-    } else {
-      content = '';
+    const postData = {
+      title: nameValue,
+      description: descriptionValue,
+      articleBody: String(editorState)
     }
-    if (nameValue && (descriptionValue || content) && catValue && projectIdValue) {
-      setOpenNoneClick(true);
-      console.log(descriptionValue, content);
-      const newPostData = {
-        isOffer: props.isOfferFilter,
-        isResource: props.isResourceFilter,
-        isNews: props.isNewsFilter,
-        title: nameValue,
-        description: props.isOfferFilter ? content : descriptionValue,
-        category: catValue,
-        tags: ['123'],
-        projectId: props.isProjectPage
-          ? props.projectId
-          : Number(projectData?.projects.filter(project => project.name === projectIdValue)[0].id),
-      };
-      const postId = await PostCreationHandler(newPostData);
-      if (posterValue.size !== 0) {
-        const PosterData = {
-          entityType: 'postPoster',
-          entityId: postId?.data?.postCreateMutation?.id,
-          fileType: posterValue.type,
-        };
-        const uploadUrl = await UrlToUploadPosterHandler(PosterData);
-        await fetch(uploadUrl.data!.createMedia?.signedURL, {
-          method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-          credentials: 'include', // include, *same-origin, omit
-          headers: {
-            'Content-Type': posterValue.type,
-          },
-          //@ts-ignore
-          body: posterValue, // body data type must match "Content-Type" header
-        });
-      }
-      props.handleOpenClose();
-      if (props.isProjectPage) {
-        await props.refetchOnProjectPage!();
-      } else {
-        await props.refetchOnProfilePage!();
-      }
 
-      setNameValue('');
-      setDescriptionValue('');
-      setPosterValue({
-        name: '',
-        type: '',
-        size: 0,
-      });
-      setImgModal(imgModalDefault);
-      setCatValue('business');
-
-      setOpenNoneClick(false);
-    } else {
-      setOpenSnack(true);
-      setTimeout(() => setOpenSnack(false), 4000);
-    }
+    await PostCreationHandler(postData);
+    props.handleOpenClose();
   };
 
   const hiddenFileInput = React.useRef<HTMLInputElement>(null);
@@ -197,7 +142,22 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
             </Grid>
           </Grid>
 
+          <Grid item xs>
+                <OutlinedInput
+                  fullWidth
+                  defaultValue={descriptionValue}
+                  value={descriptionValue}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setDescriptionValue(e.target.value)}
+                  placeholder={isTabletOrMobile ? '*' : 'Краткое описание урока *'}
+                  inputProps={{
+                    maxLength: props.isOfferFilter ? 1600 : 128,
+                  }}
+                  size="small"
+                  multiline
+                />
+              </Grid>
           <Grid container direction="row" className={styles.inputContainerGap}>
+            
             <Grid
               container
               md={3}
@@ -205,9 +165,9 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
               style={{ paddingTop: isTabletOrMobile ? 0 : 10 }}
               className={styles.modalHeaderText}
             >
-              {props.isOfferFilter ? 'Описание статьи' : 'Краткое описание'}
+              {'Содержание урока'}
             </Grid>
-            {props.isOfferFilter ? (
+            {true ? (
               <Grid item xs>
                 <Editor
                   editorState={editorState}
@@ -269,74 +229,11 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
             )}
           </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Категория публикации*
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={catValue} onChange={handleChangeCategory} fullWidth size="small">
-                {categoriesArray
-                  .filter(cat => {
-                    if (cat.split(',').pop() === 'Все') {
-                      return false;
-                    }
-                    return true;
-                  })
-                  .map(cat => (
-                    <MenuItem key={cat} value={cat}>
-                      {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
-                      {useTranslate(cat)}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </Grid>
-          </Grid>
+          
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} className={styles.modalHeaderText}>
-              Обложка
-            </Grid>
-            <Grid container xs direction="column" style={{ gap: 15 }}>
-              {isTabletOrMobile ? null : <Grid>Выберете изображение для обложки публикации</Grid>}
-              <Grid container direction="row" style={{ gap: 20 }}>
-                <input type="file" ref={hiddenFileInput} onChange={handleChange} style={{ display: 'none' }} />
-                <ModalImageContainer
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  onClick={handleClick}
-                  md={5}
-                  xs={5}
-                  isDefault={imgModal === imgModalDefault}
-                >
-                  <ModalImage src={imgModal} isDefault={imgModal === imgModalDefault} />
-                </ModalImageContainer>
-                <Grid container xs alignItems="center" className={styles.imgConditionText}>
-                  JPEG или PNG
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
+          
 
-          <Grid
-            container
-            direction="row"
-            className={styles.inputContainerGap}
-            style={{ display: props.isProjectPage ? 'none' : '' }}
-          >
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Прикрепите курс (обязательно)
-            </Grid>
-            <Grid container xs>
-              <Grid container md={7} xs={12}>
-                <AutoCompleteSearchFieldForProject
-                  projectId={1}
-                  value={projectIdValue}
-                  setValue={setProjectIdValue}
-                />
-              </Grid>
-            </Grid>
-          </Grid>
+          
 
           {props.isOfferFilter ? null : (
             <Grid container direction="row" className={styles.inputContainerGap} style={{ marginTop: 30 }}>
