@@ -3,10 +3,111 @@ import { gql } from '@apollo/client';
 export const GET_CONFIG_QUERY = gql`
   query {
     getPlatformConfig {
+      totalProjectCount
+      totalCompanyCount
+      totalBudgetInvestment
+      totalExtraBudgetInvestment
       platformTagline
       platformTitle
       platformDescription
       platformShortDescription
+      projectsShownOnLanding {
+        id
+        name
+        shortDescription
+        category
+        presentationMedia {
+          type
+          link
+        }
+        poster {
+          link
+        }
+        workers {
+          worker {
+            id
+            firstname
+            lastname
+          }
+        }
+      }
+      newsShownOnLanding {
+        title
+        description
+        author {
+          worker {
+            id
+            firstname
+            lastname
+            avatar {
+              link
+            }
+          }
+        }
+        article {
+          id
+          sections(orderBy: { number: asc }) {
+            id
+            number
+            type
+            text
+            media {
+              link
+            }
+          }
+        }
+        createdAt
+        poster {
+          link
+        }
+      }
+      crowdFundingsShownOnLanding {
+        id
+        title
+        shortDescription
+        goalSum
+        nowSum
+        project {
+          id
+          name
+          category
+          poster {
+            link
+          }
+        }
+        activeCheck
+      }
+      offersShownOnLanding {
+        id
+        title
+        description
+        article {
+          id
+          sections(orderBy: { number: asc }) {
+            id
+            number
+            type
+            text
+            media {
+              link
+            }
+          }
+        }
+        createdAt
+        poster {
+          link
+        }
+        author {
+          worker {
+            id
+            avatar {
+              link
+            }
+            firstname
+            lastname
+          }
+        }
+      }
     }
   }
 `;
@@ -98,6 +199,16 @@ export const GET_RESOURCES_QUERY = gql`
         link
       }
       category
+      author {
+        worker {
+          id
+          avatar {
+            link
+          }
+          firstname
+          lastname
+        }
+      }
       isOffer
       isResource
       isNews
@@ -114,6 +225,16 @@ export const GET_NEWS_QUERY = gql`
       isResource
       title
       description
+      author {
+        worker {
+          id
+          avatar {
+            link
+          }
+          firstname
+          lastname
+        }
+      }
       article {
         id
         sections(orderBy: { number: asc }) {
@@ -158,6 +279,16 @@ export const GET_OFFERS_QUERY = gql`
       }
       poster {
         link
+      }
+      author {
+        worker {
+          id
+          avatar {
+            link
+          }
+          firstname
+          lastname
+        }
       }
       isOffer
       isResource
@@ -212,6 +343,15 @@ export const GET_PROJECT_QUERY = gql`
         }
         description
         category
+        author {
+          worker {
+            avatar {
+              link
+            }
+            firstname
+            lastname
+          }
+        }
         article {
           id
           sections(orderBy: { number: asc }) {

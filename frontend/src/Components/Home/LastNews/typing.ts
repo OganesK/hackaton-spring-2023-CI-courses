@@ -2,6 +2,16 @@ export interface NewsTypes {
   createdAt: Date;
   title: string;
   description: string;
+  author: {
+    worker: {
+      id: number;
+      firstname: string;
+      lastname: string;
+      avatar: {
+        link: string;
+      };
+    };
+  };
   article?: {
     id: number;
     sections: {
