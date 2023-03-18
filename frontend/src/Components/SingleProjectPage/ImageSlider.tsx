@@ -335,7 +335,7 @@ const ImageSlider = (props: ImageSliderProps): JSX.Element => {
           </Grid>
         )}
       </Grid>
-      <SnackbarOnChange openSnack={openSnack} setOpenSnack={setOpenSnack} textInSnack="Обложка проекта обновлена" />
+      <SnackbarOnChange openSnack={openSnack} setOpenSnack={setOpenSnack} textInSnack="Обложка курса обновлена" />
     </Grid>
   );
 };

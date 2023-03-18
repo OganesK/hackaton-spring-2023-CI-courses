@@ -159,7 +159,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
           {openNoneClick ? <NoneClick /> : null}
 
           <Grid item className={styles.modalHeader}>
-            Редактирование Мероприятия
+            Редактирование Трансляции
           </Grid>
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
@@ -170,7 +170,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
                 fullWidth={true}
                 defaultValue={nameValue}
                 value={nameValue}
-                placeholder={isTabletOrMobile ? '*' : 'Заголовок мероприятия *'}
+                placeholder={isTabletOrMobile ? '*' : 'Заголовок Трансляции *'}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setNameValue(e.target.value)}
                 inputProps={{
                   maxLength: 96,
@@ -190,7 +190,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
                 defaultValue={descriptionValue}
                 value={descriptionValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setDescriptionValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Краткое описание мероприятия *'}
+                placeholder={isTabletOrMobile ? '*' : 'Краткое описание Трансляции *'}
                 inputProps={{
                   maxLength: 128,
                 }}
@@ -210,7 +210,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
 
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Изменить категорию мероприятия
+              Изменить категорию Трансляции
             </Grid>
             <Grid container md={5} xs={12}>
               <Select value={catValue} onChange={handleChangeCategory} fullWidth size="small">
@@ -239,7 +239,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
               Обложка
             </Grid>
             <Grid container xs direction="column" style={{ gap: 15 }}>
-              {isTabletOrMobile ? null : <Grid>Выберете изображение для обложки мероприятия</Grid>}
+              {isTabletOrMobile ? null : <Grid>Выберете изображение для обложки Трансляции</Grid>}
               <Grid container direction="row" style={{ gap: 20 }}>
                 <input type="file" ref={hiddenFileInput} onChange={handleChange} style={{ display: 'none' }} />
                 <ModalImageContainer
@@ -278,7 +278,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
                 defaultValue={bodyValue}
                 value={bodyValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setBodyValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Описание мероприятия *'}
+                placeholder={isTabletOrMobile ? '*' : 'Описание Трансляции *'}
                 maxRows={7}
                 multiline
                 color="primary"
@@ -300,7 +300,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
                 defaultValue={organizerValue}
                 value={organizerValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setOrganizerValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Организатор мероприятия *'}
+                placeholder={isTabletOrMobile ? '*' : 'Организатор Трансляции *'}
                 inputProps={{
                   maxLength: 56,
                 }}
@@ -319,7 +319,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
                 defaultValue={themeValue}
                 value={themeValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setThemeValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Тематика мероприятия *'}
+                placeholder={isTabletOrMobile ? '*' : 'Тематика Трансляции *'}
                 inputProps={{
                   maxLength: 62,
                 }}
@@ -329,7 +329,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
           </Grid>
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Адрес мероприятия
+              Адрес Трансляции
             </Grid>
             <Grid container xs>
               <OutlinedInput
@@ -337,7 +337,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
                 defaultValue={addressValue}
                 value={addressValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setAddressValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Адрес мероприятия *'}
+                placeholder={isTabletOrMobile ? '*' : 'Адрес Трансляции *'}
                 inputProps={{
                   maxLength: 96,
                 }}
@@ -356,7 +356,7 @@ const EditEventModal: (props: EventEditModalProps) => JSX.Element = (props: Even
                 defaultValue={eventFormatValue}
                 value={eventFormatValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setEventFormatValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '' : 'Формат мероприятия'}
+                placeholder={isTabletOrMobile ? '' : 'Формат Трансляции'}
                 inputProps={{
                   maxLength: 36,
                 }}

@@ -65,7 +65,7 @@ const ProgressComponent: (props: ProgressComponentTypes) => JSX.Element = (props
     <Grid container direction="column" style={{ gap: 12 }}>
       <Grid item className={styles.stageHeader}>
         {props.projectStagesValue
-          ? 'Стадия проекта'
+          ? 'Стадия курса'
           : props.projectInvestmentsStagesValue
           ? 'Стадия инвестирования'
           : props.projectSalesTypesValue

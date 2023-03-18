@@ -145,7 +145,7 @@ const SideBarNavigation: (props: NavigationProps) => JSX.Element = (props: Navig
                   smooth={true}
                   offset={-150}
                 >
-                  Новости
+                  уроки
                 </Link>
               </Button>
             </Grid>

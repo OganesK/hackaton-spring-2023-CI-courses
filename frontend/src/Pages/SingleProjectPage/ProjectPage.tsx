@@ -160,7 +160,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
       setFilteredShownPosts(projectData!.project.publishedPosts);
     }
     switch (selectedPostCategory) {
-      case 'Новости': {
+      case 'уроки': {
         const filteredByCategoryPosts = shownPosts.filter((post: PostTypes) => post.isNews === true);
         setFilteredShownPosts(filteredByCategoryPosts);
         break;
@@ -239,7 +239,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                           lineHeight: '100%',
                         }}
                       >
-                        Редактировать данные проекта
+                        Редактировать данные курса
                       </Button>
                     </>
                   ) : null}
@@ -338,7 +338,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                 <Grid container justifyContent="space-between" id="projectData" style={{ gap: 20 }}>
                   {isTabletOrMobile ? (
                     <Grid container alignItems="center" className={classes.navigationProjectHeader}>
-                      Данные проекта
+                      Данные курса
                     </Grid>
                   ) : null}
                   <Grid container style={{ gap: 40, marginBottom: 60 }}>
@@ -351,7 +351,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                           style={{ fontStyle: 'italic' }}
                           onClick={handleProjectSiteClick}
                         >
-                          Сайт проекта
+                          Сайт курса
                           <img src={diagonalLink} style={{ marginLeft: 6 }} />
                         </Grid>
                       </Grid>
@@ -766,7 +766,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                       alignItems="center"
                       className={classes.navigationProjectHeader}
                     >
-                      <Grid item>{isTabletOrMobile ? 'Новости' : null}</Grid>
+                      <Grid item>{isTabletOrMobile ? 'уроки' : null}</Grid>
 
                       <Grid item>
                         {isOwner ? (
@@ -816,7 +816,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                           className={classes.postNoPostsBox}
                         >
                           <Grid className={classes.textEmptyBlock}>
-                            Сейчас у вас нет публикаций <br /> в разделе &quot;Новости&quot;
+                            Сейчас у вас нет публикаций <br /> в разделе &quot;уроки&quot;
                           </Grid>
                           <Grid
                             container
@@ -854,7 +854,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                     isOwner={notEditableFields === null || notEditableFields ? false : true}
                     contentValues={filteredShownPosts}
                     isNoPostAtUser={projectData?.project.publishedPosts.length === 0}
-                    value={'Новости'}
+                    value={'уроки'}
                     ownerId={userContextInfo?.user?.id !== undefined ? userContextInfo.user.id : 0}
                   />
                 </Grid>

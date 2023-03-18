@@ -170,7 +170,7 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
         <Grid container direction="column" className={styles.modalContainer}>
           {openNoneClick ? <NoneClick /> : null}
           <Grid item className={styles.modalHeader}>
-            Создание {props.isNewsFilter ? 'новости' : props.isResourceFilter ? 'ресурса' : 'объявления'}
+            Создание {props.isNewsFilter ? 'уроки' : props.isResourceFilter ? 'ресурса' : 'объявления'}
           </Grid>
 
           <Grid container direction="row" className={styles.inputContainerGap}>
@@ -320,7 +320,7 @@ const CreatePostModal: (props: PostCreateModalProps) => JSX.Element = (props: Po
             style={{ display: props.isProjectPage ? 'none' : '' }}
           >
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Прикрепите проект (обязательно)
+              Прикрепите курс (обязательно)
             </Grid>
             <Grid container xs>
               <Grid container md={7} xs={12}>

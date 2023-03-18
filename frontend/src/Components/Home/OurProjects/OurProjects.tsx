@@ -73,7 +73,7 @@ const OurProjects: (props: OurProjectsProps) => JSX.Element = (props: OurProject
         </>
       )}
       <Grid container xs justifyContent="center">
-        <ArrowButton onClick={onClickHandler} text="Смотреть Другие проекты" className={classes.colorLink} />
+        <ArrowButton onClick={onClickHandler} text="Смотреть Другие курсы" className={classes.colorLink} />
       </Grid>
     </Grid>
   );

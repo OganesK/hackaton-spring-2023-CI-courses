@@ -33,7 +33,7 @@ const ProfileProjectPoster: (props: ProjectPosterProps) => JSX.Element = (props:
   const getStringWhatUpdated = (): string => {
     if (!props.updatedVariable) return '';
 
-    let tooltipTitle = 'В проекте произошли изменения:';
+    let tooltipTitle = 'В курсе произошли изменения:';
     if (props.updatedVariable.name) tooltipTitle += ' название,';
     if (props.updatedVariable.poster?.link) tooltipTitle += ' постер, ';
     if (props.updatedVariable.presentationMedia) tooltipTitle += ' медиа элементы,';
@@ -45,7 +45,7 @@ const ProfileProjectPoster: (props: ProjectPosterProps) => JSX.Element = (props:
     <Tooltip
       title={
         props.isOwner && props.isApproved === false
-          ? 'Проект находится на стадии модерации, только вы видите его. Доступно редактирование.'
+          ? 'курс находится на стадии модерации, только вы видите его. Доступно редактирование.'
           : ''
       }
     >

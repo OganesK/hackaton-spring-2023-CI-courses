@@ -100,7 +100,7 @@ export default function EventsBlock(): JSX.Element {
   return (
     <Grid container className={classes.eventsBox} xs={12}>
       <Grid item>
-        <ComponentTextHeader text="Ожидаемые мероприятия" />
+        <ComponentTextHeader text="Ожидаемые Трансляции" />
       </Grid>
 
       {width > 1200 ? (

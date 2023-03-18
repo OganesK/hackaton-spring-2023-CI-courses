@@ -25,7 +25,7 @@ interface FetchType {
 }
 
 function App(): JSX.Element {
-  const httpLink = new HttpLink({ uri: `${API_URL}/graphql`, credentials: 'include' });
+  const httpLink = new HttpLink({ uri: `${API_URL}`, credentials: 'include' });
 
   const refreshToken: () => void = async () => {
     const res: FetchType = (await (

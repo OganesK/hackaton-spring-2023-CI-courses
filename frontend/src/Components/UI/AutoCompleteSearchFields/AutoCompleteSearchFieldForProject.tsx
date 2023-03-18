@@ -29,7 +29,7 @@ export default function AutoCompleteSearchField(props: AutoCompleteSearchFieldPr
       <Grid container xs={12}>
         <Autocomplete
           disablePortal
-          noOptionsText="Нет проектов"
+          noOptionsText="Нет курсов"
           value={props.value?.split('.')[1]}
           onChange={(event, newValue: string | null): void => {
             props.setValue(filteredData.filter(data => data.split('.')[1] === newValue)[0].split('.')[1]);
@@ -37,7 +37,7 @@ export default function AutoCompleteSearchField(props: AutoCompleteSearchFieldPr
           id="controllable-states-demo"
           options={filteredData && filteredData.map(data => data.split('.')[1])}
           sx={{ width: '100%' }}
-          renderInput={(params): JSX.Element => <TextField {...params} label="Ваши проекты" />}
+          renderInput={(params): JSX.Element => <TextField {...params} label="Ваши курсы" />}
           size="small"
         />
       </Grid>

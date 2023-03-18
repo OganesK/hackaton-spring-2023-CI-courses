@@ -31,7 +31,7 @@ import ProfileEvent from '../../Components/ProfilePage/ProfileEvent/ProfileEvent
 
 import CreatePostModal from '../../Components/ProfilePage/Modals/CreatePostModal';
 import CreateEventModal from '../../Components/ProfilePage/Modals/CreateEventModal';
-import CreateCompanyModal from '../../Components/ProfilePage/Modals/CreateCompanyModal';
+
 import ProfileEditModal from '../../Components/ProfilePage/EntityEditModals/ProfileEditModal';
 
 import { useHistory } from 'react-router-dom';
@@ -126,7 +126,7 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
 
   useEffect(() => {
     // if (data && !loading) {
-    setSelectedSection(data?.user.ownerCompanies.length === 0 ? 'Компании' : 'Проекты');
+    setSelectedSection(data?.user.ownerCompanies.length === 0 ? 'Компании' : 'курсы');
     // }
   }, []);
 
@@ -360,8 +360,11 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
             <FilterLine isProfilePage selectedCategory={selectedSection} setSelectedCategory={setSelectedSection} />
             <Line marginTop={10} display={isTabletOrMobile ? 'none' : 'block'} />
           </Grid>
-          {selectedSection === 'Проекты' ? (
-            <Grid container id="Проекты">
+          {
+            console.log(selectedSection)
+          }
+          {selectedSection === 'Курсы' ? (
+            <Grid container id="Курсы">
               <ProfileProjectsBlock
                 userid={Number(userId)}
                 workActivity={filteredArr ? filteredArr : []}
@@ -369,8 +372,8 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                 refetch={refetch}
               />
             </Grid>
-          ) : selectedSection === 'Новости' ? (
-            <Grid container id="Новости" style={{ gap: 30 }}>
+          ) : selectedSection === 'Уроки' ? (
+            <Grid container id="Уроки" style={{ gap: 30 }}>
               <Grid
                 container
                 direction="row"
@@ -458,7 +461,7 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
               </Grid>
             </Grid>
           ) : (
-            <Grid container id="Мероприятия" style={{ gap: 30 }}>
+            <Grid container id="Трансляции" style={{ gap: 30 }}>
               <Grid
                 container
                 direction="row"

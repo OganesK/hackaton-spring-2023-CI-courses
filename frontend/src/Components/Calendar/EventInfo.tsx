@@ -34,7 +34,7 @@ const EventInfo: () => JSX.Element = () => {
         Будьте в курсе всех событий
       </Grid>
       <Grid container className={classes.eventInfoTitle}>
-        Оформите бесплатную подписку и узнавайте о предстоящих мероприятиях платформы
+        Оформите бесплатную подписку и узнавайте о предстоящих Трансляциих платформы
       </Grid>
       <Grid container direction="row" justifyContent="space-between" className={classes.eventInfoMailBox}>
         <Grid item xs={9}>

@@ -25,16 +25,16 @@ const BidProject: () => JSX.Element = () => {
       style={{ gap: isTabletOrMobile ? 20 : 35 }}
     >
       <Grid item className={classes.header}>
-        Понравился проект? Поддержите!
+        Понравился курс? Поддержите!
       </Grid>
       <Grid container className={classes.article}>
-        Заполните анкету и назначьте время для онлайн-встречи с представителем проекта.
+        Заполните анкету и назначьте время для онлайн-встречи с представителем курса.
       </Grid>
       {isTabletOrMobile ? (
         <Grid container style={{ marginTop: 30 }}>
           <Button
             onClick={onClickHandler}
-            text={isMobile ? 'Инвестировать' : 'Инвестировать в проект'}
+            text={isMobile ? 'Инвестировать' : 'Инвестировать в курс'}
             isOrange={true}
             className={classes.bidButtonOnProject}
           />
@@ -43,7 +43,7 @@ const BidProject: () => JSX.Element = () => {
         <Grid item>
           <Button
             onClick={onClickHandler}
-            text={'Инвестировать в проект'}
+            text={'Инвестировать в курс'}
             isWhite={true}
             className={classes.bidButtonOnProject}
           />

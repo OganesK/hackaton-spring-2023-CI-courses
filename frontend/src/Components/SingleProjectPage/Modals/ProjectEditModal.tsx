@@ -223,7 +223,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
         {openNoneClick ? <NoneClick /> : null}
 
         <Grid item className={styles.modalHeader}>
-          Редактирование проекта
+          Редактирование курса
         </Grid>
         <Grid container direction="row" className={styles.inputContainerGap}>
           <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
@@ -234,7 +234,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
               fullWidth={true}
               defaultValue={nameValue}
               value={nameValue}
-              placeholder={isTabletOrMobile ? '*' : 'Название проекта *'}
+              placeholder={isTabletOrMobile ? '*' : 'Название курса *'}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setNameValue(e.target.value)}
               inputProps={{
                 maxLength: 128,
@@ -254,7 +254,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
               defaultValue={shortDescriptionValue}
               value={shortDescriptionValue}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setShortDescriptionValue(e.target.value)}
-              placeholder={isTabletOrMobile ? '*' : 'Краткое описание проекта *'}
+              placeholder={isTabletOrMobile ? '*' : 'Краткое описание курса *'}
               inputProps={{
                 maxLength: 128,
               }}
@@ -265,7 +265,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
 
         <Grid container direction="row" className={styles.inputContainerGap}>
           <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-            Редактировать категорию проекта
+            Редактировать категорию курса
           </Grid>
           <Grid container md={5} xs={12}>
             <Select value={activityTypeValue} onChange={handleChangeCategory} fullWidth size="small">
@@ -307,7 +307,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
 
         <Grid container direction="row" className={styles.inputContainerGap}>
           <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-            Редактировать тип проекта
+            Редактировать тип курса
           </Grid>
           <Grid container md={5} xs={12}>
             <Select value={projectTypesValue} onChange={handleChangeProjectType} fullWidth size="small">
@@ -325,7 +325,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
 
         <Grid container direction="row" className={styles.inputContainerGap}>
           <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-            Редактировать стадию проекта
+            Редактировать стадию курса
           </Grid>
           <Grid container md={5} xs={12}>
             <Select value={projectStagesValue} onChange={handleChangeProjectStage} fullWidth size="small">
@@ -343,7 +343,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
 
         <Grid container direction="row" className={styles.inputContainerGap}>
           <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-            Редактировать рынки проекта
+            Редактировать рынки курса
           </Grid>
           <Grid container md={5} xs={12}>
             <Select value={projectMarketsValue} onChange={handleChangeProjectMarket} fullWidth size="small">
@@ -438,7 +438,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
 
         <Grid container direction="row" className={styles.inputContainerGap}>
           <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-            Редактировать задачи проекта
+            Редактировать задачи курса
           </Grid>
           <Grid container md={5} xs={12}>
             <Select value={projectMainGoalsValue} onChange={handleChangeProjectMainGoal} fullWidth size="small">
@@ -464,7 +464,7 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
               defaultValue={projectSiteValue}
               value={projectSiteValue}
               onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setProjectSiteValue(e.target.value)}
-              placeholder={isTabletOrMobile ? '' : 'Ссылка на сайт проекта (если есть)'}
+              placeholder={isTabletOrMobile ? '' : 'Ссылка на сайт курса (если есть)'}
               inputProps={{
                 maxLength: 512,
               }}
@@ -475,10 +475,10 @@ const ProjectEditModal: (props: ProjectEditModalProps) => JSX.Element = (props: 
 
         <Grid container direction="row" className={styles.inputContainerGap}>
           <Grid container md={3} xs={12} className={styles.modalHeaderText}>
-            Редактировать обложку проекта
+            Редактировать обложку курса
           </Grid>
           <Grid container xs direction="column" style={{ gap: 15 }}>
-            {isTabletOrMobile ? null : <Grid>Выберете изображение для постера вашего проекта</Grid>}
+            {isTabletOrMobile ? null : <Grid>Выберете изображение для постера вашего курса</Grid>}
             <Grid container direction="row" style={{ gap: 20 }}>
               <input type="file" ref={hiddenFileInput} onChange={handleChange} style={{ display: 'none' }} />
               <ModalImageContainer

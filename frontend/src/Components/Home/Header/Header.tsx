@@ -43,7 +43,7 @@ const Header: (props: HeaderProps) => JSX.Element = (props: HeaderProps) => {
           {props.platformDescription ? props.platformDescription : 'platformDescription'}
         </Grid>
         <Grid style={{ marginTop: 30 }}>
-          <ArrowButton onClick={onClickHandler} text="Смотреть проекты" className={classes.colorLink} />
+          <ArrowButton onClick={onClickHandler} text="Смотреть курсы" className={classes.colorLink} />
         </Grid>
       </Grid>
     </Grid>

@@ -46,7 +46,7 @@ const Events: () => JSX.Element = () => {
     <Grid container xs={12} spacing={0}>
       <NavBar text="qwe" />
       <Grid container xs={10} style={{ margin: 'auto', gap: 0 }} spacing={0}>
-        <Grid className={styles.sloganText}>Мероприятия</Grid>
+        <Grid className={styles.sloganText}>Трансляции</Grid>
         <FilterLine selectedCategory={filter} setSelectedCategory={setFilter} isEventsPage />
         <Line marginTop={10} marginBottom={70} />
         {loading ? (

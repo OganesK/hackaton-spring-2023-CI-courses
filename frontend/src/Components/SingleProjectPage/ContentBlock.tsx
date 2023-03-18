@@ -90,7 +90,7 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
                       refetch={props.refetch}
                     />
                   </Grid>
-                ) : props.value === 'Новости' && contentValues.isNews && (props.isOwner || contentValues.isApproved) ? (
+                ) : props.value === 'уроки' && contentValues.isNews && (props.isOwner || contentValues.isApproved) ? (
                   <Grid
                     key={contentValues.id}
                     item

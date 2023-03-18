@@ -91,7 +91,7 @@ export default function AutoCompleteSearchField(props: AutoCompleteTypes): JSX.E
               value={role}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => setRole(e.target.value)}
               id="outlined-basic"
-              label="Роль в проекте"
+              label="Роль в курсе"
               variant="outlined"
               size="small"
               inputProps={{

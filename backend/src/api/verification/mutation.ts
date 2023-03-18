@@ -136,7 +136,7 @@ export const VerificationMutation = extendType({
 
               await ctx.prisma.notification.create({
                 data: {
-                  theme: 'Результат модерации Вашего проекта',
+                  theme: 'Результат модерации Вашего курса',
                   body: data.rejectMessage,
                   toWhom: {
                     connect: {
@@ -175,7 +175,7 @@ export const VerificationMutation = extendType({
 
             await ctx.prisma.notification.create({
               data: {
-                theme: 'Результат модерации Вашего проекта',
+                theme: 'Результат модерации Вашего курса',
                 body: data.rejectMessage,
                 toWhom: {
                   connect: {
@@ -313,7 +313,7 @@ export const VerificationMutation = extendType({
 
               await ctx.prisma.notification.create({
                 data: {
-                  theme: 'Результат модерации Вашего мероприятия',
+                  theme: 'Результат модерации Вашего Трансляции',
                   body: data.rejectMessage,
                   toWhom: {
                     connect: {
@@ -352,7 +352,7 @@ export const VerificationMutation = extendType({
 
             await ctx.prisma.notification.create({
               data: {
-                theme: 'Результат модерации Вашего мероприятия',
+                theme: 'Результат модерации Вашего Трансляции',
                 body: data.rejectMessage,
                 toWhom: {
                   connect: {
