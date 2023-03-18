@@ -49,6 +49,7 @@ model User {
   messages         Message[]
   StreamMessage    StreamMessage[]
   courses          Course[]
+  testPasses  TestPass[]
 }
 
 model Course {
@@ -76,13 +77,30 @@ model Test {
   name  String
 
   tasks Task[]
+
+  testPasses  TestPass[]
+}
+
+model TestPass  {
+  id  Int  @id  @default(autoincrement())
+
+  userId  Int
+  user  User  @relation(references: [id], fields: [userId])
+
+  testId  Int
+  test  Test @relation(references: [id], fields: [testId])
+
+  score Float
 }
 
 model Task {
   id  Int @id @default(autoincrement())
 
   question  String
+  rightAnswer String
   answers String[]
+
+  cost  Float @default(1.0)
   
   testId  Int
   test  Test @relation(fields: [testId], references: [id])
