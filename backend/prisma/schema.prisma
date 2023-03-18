@@ -179,6 +179,7 @@ model RegisteredForEvent {
 
 model Stream {
   id            Int             @id @default(autoincrement())
+  name  String
   streamKey     String          @unique @default(uuid())
   active        Boolean         @default(true)
 }
