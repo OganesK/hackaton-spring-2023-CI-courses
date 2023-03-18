@@ -44,7 +44,7 @@ export interface PostTypes {
       };
     };
   };
-  : boolean;
+  isApproved: boolean;
 }
 
 export interface Section {
@@ -76,7 +76,7 @@ export interface CrowdfundingTypes {
   end: Date;
   goalSum: number;
   nowSum: number;
-  : boolean;
+  isApproved: boolean;
   activeCheck: boolean;
   story: {
     id: number;
@@ -104,11 +104,16 @@ export interface ProjectTypes {
   salesType: string;
   businessModel: string;
   mainGoal: string;
+  isApproved: boolean;
   publishedPosts: PostTypes[];
   presentationMedia: {
     link: string;
     type: string;
   }[];
+  ownerCompany: {
+    id: number;
+    name: string;
+  };
   workers: WorkerTypes[];
   crowdFunding: CrowdfundingTypes[];
   updatedVariable?: {
@@ -147,7 +152,7 @@ export interface WorkerTypes {
 //   shortDescription: string;
 //   name: string;
 //   organizer: string;
-//   : boolean;
+//   isApproved: boolean;
 // }
 
 export interface CompanyTypes {

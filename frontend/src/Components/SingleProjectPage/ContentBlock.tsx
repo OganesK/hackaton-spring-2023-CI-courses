@@ -29,7 +29,7 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
               <>
                 {props.value === 'Ресурсы' &&
                 contentValues.isResource &&
-                (props.isOwner || contentValues.) ? (
+                (props.isOwner || contentValues.isApproved) ? (
                   <Grid
                     key={contentValues.id}
                     item
@@ -60,14 +60,14 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
                     
                       isResource={contentValues.isResource ? contentValues.isResource : false}
                       isNews={contentValues.isNews ? contentValues.isNews : false}
-                      ={contentValues.}
+                      isApproved={contentValues.isApproved}
                       refetch={props.refetch}
                       customFirstDefaultHeight={isTabletOrMobile ? width / 2 : (width - width / 4.5) / 3.2}
                     />
                   </Grid>
                 ) : props.value === 'Объявления' &&
                   contentValues.isOffer &&
-                  (props.isOwner || contentValues.) ? (
+                  (props.isOwner || contentValues.isApproved) ? (
                   <Grid key={contentValues.id} item xs={12} xl={8}>
                     <ProfileOfferBlock
                       key={contentValues.id}
@@ -86,11 +86,11 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
                       isOffer={contentValues.isOffer ? contentValues.isOffer : false}
                       isResource={contentValues.isResource ? contentValues.isResource : false}
                       isNews={contentValues.isNews ? contentValues.isNews : false}
-                      ={contentValues.}
+                      isApproved={contentValues.isApproved}
                       refetch={props.refetch}
                     />
                   </Grid>
-                ) : props.value === 'уроки' && contentValues.isNews && (props.isOwner || contentValues.) ? (
+                ) : props.value === 'уроки' && contentValues.isNews && (props.isOwner || contentValues.isApproved) ? (
                   <Grid
                     key={contentValues.id}
                     item
@@ -118,7 +118,7 @@ const ContentBlock: (props: SingleProjectsContentProps) => JSX.Element = (props:
                       isOffer={contentValues.isOffer ? contentValues.isOffer : false}
                       isResource={contentValues.isResource ? contentValues.isResource : false}
                       isNews={contentValues.isNews ? contentValues.isNews : false}
-                      ={contentValues.}
+                      isApproved={contentValues.isApproved}
                       heightTwoElementInGrid={
                         width < 601
                           ? thirdDefaultBlockHeight

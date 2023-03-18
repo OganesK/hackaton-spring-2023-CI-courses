@@ -30,7 +30,7 @@ export interface ProjectTypes {
   };
   shortDescription: string;
   presentationMedia: string[];
-  : boolean;
+  isApproved: boolean;
   category: string;
   publishedPosts: {
     id: number;
@@ -56,7 +56,7 @@ export interface ProjectTypes {
         };
       }[];
     };
-    : boolean;
+    isApproved: boolean;
   }[];
   updatedVariable?: {
     name: string;
@@ -95,7 +95,7 @@ export interface UserDataTypes {
     address: string;
     organizer: string;
     theme: string;
-    : boolean;
+    isApproved: boolean;
     stream?: {
       id: number;
       streamKey: string;
@@ -112,7 +112,7 @@ export interface UserDataTypes {
       link: string;
     };
     shortDescription: string;
-    : boolean;
+    isApproved: boolean;
     createdAt: Date;
     activityKind: string;
     projects: {
@@ -128,7 +128,7 @@ export interface UserDataTypes {
       shortDescription: string;
       presentationMedia: string[];
       category: string;
-      : boolean;
+      isApproved: boolean;
       publishedPosts: {
         id: number;
         createdAt: Date;
@@ -163,7 +163,7 @@ export interface UserDataTypes {
             };
           }[];
         };
-        : boolean;
+        isApproved: boolean;
       }[];
       updatedVariable?: {
         name: string;
@@ -215,7 +215,7 @@ export interface UserDataTypes {
         };
       }[];
     };
-    : boolean;
+    isApproved: boolean;
   }[];
 }
 
@@ -253,7 +253,7 @@ export interface PostTypes {
       };
     }[];
   };
-  : boolean;
+  isApproved: boolean;
 }
 
 export interface EventTypes {
@@ -269,7 +269,7 @@ export interface EventTypes {
   theme: string;
   organizer: string;
   format?: string;
-  : boolean;
+  isApproved: boolean;
   category?: string;
   stream?: {
     id: number;

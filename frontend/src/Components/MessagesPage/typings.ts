@@ -30,6 +30,7 @@ export interface IGroupMember {
   avatar?: {
     link: string;
   };
+  role: string;
 }
 
 export interface IMessage {

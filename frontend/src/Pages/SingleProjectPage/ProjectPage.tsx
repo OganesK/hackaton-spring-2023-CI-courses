@@ -194,6 +194,10 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
     setOpenModalResource(!openModalResource);
   };
 
+  const handleOnCompanyClick: () => void = () => {
+    history.push(`/company/${projectData!.project.ownerCompany.id}`);
+  };
+
   const handleProjectSiteClick: () => void = () => {
     window.open(`${projectSiteValue}`);
   };
@@ -279,10 +283,10 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
               justifyContent="space-between"
               style={{ margin: '30px auto 40px auto' }}
             >
-              {/* <Grid item alignItems="center" className={classes.textNameCompany} onClick={handleOnCompanyClick}>
+              <Grid item alignItems="center" className={classes.textNameCompany} onClick={handleOnCompanyClick}>
                 {projectData && projectData.project.ownerCompany.name}
                 <img src={diagonalLink} style={{ marginLeft: 6 }} />
-              </Grid> */}
+              </Grid>
             </Grid>
           </Grid>
           {/* {isOwner ? ( */}

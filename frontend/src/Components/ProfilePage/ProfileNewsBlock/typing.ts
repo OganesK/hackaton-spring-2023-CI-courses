@@ -21,7 +21,7 @@ export interface ProfileNewsProps {
   isOffer?: boolean;
   isResource?: boolean;
   isNews?: boolean;
-  : boolean;
+  isApproved: boolean;
   isOwner: boolean;
   ownerId: number;
   workerId: number;

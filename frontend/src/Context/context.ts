@@ -79,6 +79,7 @@ export interface CrowdfundingTypes {
   end: Date;
   goalSum: number;
   nowSum: number;
+  isApproved: boolean;
   activeCheck: boolean;
   story: {
     id: number;
@@ -125,6 +126,10 @@ export interface ProjectType {
     link: string;
     type: string;
   }[];
+  ownerCompany: {
+    id: number;
+    name: string;
+  };
   crowdFunding: CrowdfundingTypes[];
   workers: WorkerTypes[];
 }
@@ -148,6 +153,7 @@ export interface ContextUserTypes {
     avatar: {
       link: string;
     };
+    role: string;
   };
 }
 
@@ -164,5 +170,6 @@ export const userContext = createContext<ContextUserTypes>({
     avatar: {
       link: '',
     },
+    role: 'string',
   },
 });

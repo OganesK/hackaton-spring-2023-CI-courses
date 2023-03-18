@@ -127,6 +127,7 @@ function App(): JSX.Element {
                 link: '',
               },
               email: 'string',
+              role: 'string',
             },
           }}
         >

@@ -16,7 +16,7 @@ export const GET_EVENT_DATA = gql`
       format
       theme
       organizer
-      
+      isApproved
     }
   }
 `;
@@ -35,7 +35,7 @@ export const GET_POST_QUERY = gql`
         link
       }
       description
-      
+      isApproved
     }
   }
 `;
