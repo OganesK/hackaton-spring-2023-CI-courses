@@ -1136,7 +1136,10 @@ input TaskWhereUniqueInput {
   id: Int
 }
 
-type Test
+type Test {
+  id: Int!
+  name: String!
+}
 
 input TestCreateInput {
   name: String!

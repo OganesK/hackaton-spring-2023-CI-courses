@@ -9,8 +9,8 @@
 
 declare global {
   interface NexusGenCustomOutputProperties<TypeName extends string> {
-    crud: NexusPrisma<TypeName, 'crud'>
     model: NexusPrisma<TypeName, 'model'>
+    crud: NexusPrisma<TypeName, 'crud'>
   }
 }
 
@@ -1167,6 +1167,10 @@ export interface NexusGenObjects {
     text: string; // String!
   }
   Subscription: {};
+  Test: { // root type
+    id: number; // Int!
+    name: string; // String!
+  }
   User: { // root type
     bio?: string | null; // String
     city?: string | null; // String
@@ -1413,6 +1417,10 @@ export interface NexusGenFieldTypes {
     newMessage: NexusGenRootTypes['Message'] | null; // Message
     streamChat: NexusGenRootTypes['StreamMessage'] | null; // StreamMessage
   }
+  Test: { // field return type
+    id: number; // Int!
+    name: string; // String!
+  }
   User: { // field return type
     avatar: NexusGenRootTypes['Media'] | null; // Media
     bio: string | null; // String
@@ -1652,6 +1660,10 @@ export interface NexusGenFieldTypeNames {
   Subscription: { // field return type name
     newMessage: 'Message'
     streamChat: 'StreamMessage'
+  }
+  Test: { // field return type name
+    id: 'Int'
+    name: 'String'
   }
   User: { // field return type name
     avatar: 'Media'
