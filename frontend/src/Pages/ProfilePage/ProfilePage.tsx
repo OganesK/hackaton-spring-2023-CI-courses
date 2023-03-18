@@ -514,7 +514,6 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                               organizer={event.organizer}
                               theme={event.theme}
                               format={event.format}
-                              isApproved={event.isApproved}
                               isOwner={contextUserData.user && contextUserData.user.id === Number(userId)}
                               stream={event.stream}
                               refetch={refetch}

@@ -75,7 +75,6 @@ export const GET_CONFIG_QUERY = gql`
             link
           }
         }
-        isApproved
         activeCheck
       }
       offersShownOnLanding {
@@ -115,7 +114,7 @@ export const GET_CONFIG_QUERY = gql`
 
 export const GET_PROJECTS_QUERY = gql`
   query {
-    projects(where: { isApproved: { equals: true } }, orderBy: { createdAt: desc }) {
+    projects(where: {  }, orderBy: { createdAt: desc }) {
       id
       category
       name
@@ -132,7 +131,6 @@ export const GET_PROJECTS_QUERY = gql`
         }
       }
       shortDescription
-      isApproved
       presentationMedia {
         link
         type
@@ -151,7 +149,7 @@ export const GET_PROJECTS_QUERY = gql`
 
 export const GET_CROWDFUNDS_QUERY = gql`
   query {
-    crowdFundings(where: { isApproved: { equals: true } }, orderBy: { createdAt: desc }) {
+    crowdFundings(where: { }, orderBy: { createdAt: desc }) {
       id
       title
       story {
@@ -177,7 +175,6 @@ export const GET_CROWDFUNDS_QUERY = gql`
           link
         }
       }
-      isApproved
       activeCheck
     }
   }
@@ -185,7 +182,7 @@ export const GET_CROWDFUNDS_QUERY = gql`
 
 export const GET_RESOURCES_QUERY = gql`
   query {
-    posts(where: { isApproved: { equals: true }, isResource: { equals: true } }, orderBy: { createdAt: desc }) {
+    posts(where: {  isResource: { equals: true } }, orderBy: { createdAt: desc }) {
       id
       createdAt
       isResource
@@ -227,7 +224,7 @@ export const GET_RESOURCES_QUERY = gql`
 
 export const GET_NEWS_QUERY = gql`
   query {
-    posts(where: { isApproved: { equals: true }, isNews: { equals: true } }, orderBy: { createdAt: desc }) {
+    posts(where: { isNews: { equals: true } }, orderBy: { createdAt: desc }) {
       category
       id
       createdAt
@@ -268,7 +265,7 @@ export const GET_NEWS_QUERY = gql`
 
 export const GET_OFFERS_QUERY = gql`
   query {
-    posts(where: { isApproved: { equals: true }, isOffer: { equals: true } }, orderBy: { createdAt: desc }) {
+    posts(where: {  isOffer: { equals: true } }, orderBy: { createdAt: desc }) {
       id
       category
       createdAt
@@ -335,7 +332,7 @@ export const GET_PROJECT_QUERY = gql`
       businessModel
       salesType
       mainGoal
-      isApproved
+      
       presentationMedia {
         link
         type
@@ -373,7 +370,7 @@ export const GET_PROJECT_QUERY = gql`
             }
           }
         }
-        isApproved
+        
       }
       ownerCompany {
         id
@@ -391,7 +388,7 @@ export const GET_PROJECT_QUERY = gql`
         end
         goalSum
         nowSum
-        isApproved
+        
         activeCheck
         story {
           id
@@ -452,7 +449,7 @@ export const ME_QUERY = gql`
         organizer
         address
         theme
-        isApproved
+        
         stream {
           id
           streamKey
@@ -463,46 +460,8 @@ export const ME_QUERY = gql`
           active
         }
       }
-      ownerCompanies {
-        id
-        name
-        avatar {
-          link
-        }
-        description
-        projects {
-          id
-          name
-        }
-        isApproved
-      }
-      inWorks {
-        id
-        position
-        project {
-          id
-          name
-        }
-        publishedPosts(orderBy: { createdAt: desc }) {
-          poster {
-            link
-          }
-          description
-          title
-          article {
-            id
-            sections(orderBy: { number: asc }) {
-              id
-              number
-              type
-              text
-              media {
-                link
-              }
-            }
-          }
-        }
-      }
+     
+      
     }
   }
 `;
@@ -531,7 +490,7 @@ export const GET_USER_QUERY = gql`
         address
         theme
         format
-        isApproved
+        
         stream {
           id
           streamKey
@@ -559,7 +518,7 @@ export const GET_USER_QUERY = gql`
             }
           }
           shortDescription
-          isApproved
+          
           poster {
             link
           }
@@ -598,92 +557,21 @@ export const GET_USER_QUERY = gql`
                 }
               }
             }
-            isApproved
+            
           }
           presentationMedia {
             link
           }
         }
       }
-      ownerCompanies {
-        id
-        name
-        avatar {
-          link
-        }
-        shortDescription
-        isApproved
-        createdAt
-        activityKind
-        projects {
-          id
-          name
-          description {
-            id
-            sections(orderBy: { number: asc }) {
-              id
-              number
-              type
-              text
-              media {
-                link
-              }
-            }
-          }
-          shortDescription
-          isApproved
-          category
-          poster {
-            link
-          }
-          publishedPosts(orderBy: { createdAt: desc }) {
-            id
-            createdAt
-            title
-            isOffer
-            isResource
-            isNews
-            category
-            poster {
-              link
-            }
-            description
-            author {
-              worker {
-                id
-                avatar {
-                  link
-                }
-                firstname
-                lastname
-              }
-            }
-            article {
-              id
-              sections(orderBy: { number: asc }) {
-                id
-                number
-                type
-                text
-                media {
-                  link
-                }
-              }
-            }
-            isApproved
-          }
-          presentationMedia {
-            link
-          }
-        }
-      }
+      
     }
   }
 `;
 
 export const GET_EVENTS_QUERY = gql`
   query {
-    events(where: { isApproved: { equals: true } }, orderBy: { date: desc }) {
+    events(where: { }, orderBy: { date: desc }) {
       id
       name
       poster {

@@ -26,7 +26,7 @@ export interface ProfileEventProps {
     address: string;
     theme: string;
   };
-  isApproved: boolean;
+
   isOwner: boolean;
   refetch: () => Promise<ApolloQueryResult<{ user: UserDataTypes }>>;
 }

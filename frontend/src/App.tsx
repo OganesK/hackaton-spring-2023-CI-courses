@@ -123,11 +123,11 @@ function App(): JSX.Element {
               ownerCompanies: [],
               publishedEvent: [],
               inWorks: [],
+              role: 'string',
               avatar: {
                 link: '',
               },
               email: 'string',
-              role: 'string',
             },
           }}
         >

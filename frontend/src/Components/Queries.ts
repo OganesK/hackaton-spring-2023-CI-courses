@@ -9,29 +9,7 @@ export const ME_QUERY = gql`
       firstname
       lastname
       id
-      ownerCompanies {
-        name
-        avatar {
-          link
-        }
-        description
-        projects {
-          id
-        }
-      }
-      inWorks {
-        position
-        project {
-          name
-        }
-        publishedPosts {
-          poster {
-            link
-          }
-          description
-          title
-        }
-      }
+     
     }
   }
 `;

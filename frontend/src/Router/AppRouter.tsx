@@ -44,17 +44,7 @@ const AppRouter: () => JSX.Element = () => {
           ))}
           <Redirect to="/home" />
         </Switch>
-      ) : data.me.role === 'administrator' || 'moderator' ? (
-        <Switch>
-          {privateRoutes.map(route => (
-            <Route component={route.component} path={route.path} exact={route.exact} key={route.path} />
-          ))}
-          {publicRoutes.map(route => (
-            <Route component={route.component} path={route.path} exact={route.exact} key={route.path} />
-          ))}
-          <Redirect to="/home" />
-        </Switch>
-      ) : (
+      )  : (
         <Switch>
           {publicRoutes.map(route => (
             <Route component={route.component} path={route.path} exact={route.exact} key={route.path} />

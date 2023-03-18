@@ -61,9 +61,7 @@ const ProfileEvent: (props: ProfileEventProps) => JSX.Element = (props: ProfileE
     <>
       <Tooltip
         title={
-          props.isApproved === false && openFullscreenEventModal === false && open === false
-            ? 'Мероприятие находится на стадии модерации, только вы видите его. Доступно редактирование.'
-            : ''
+         ''
         }
       >
         <Grid
@@ -72,7 +70,7 @@ const ProfileEvent: (props: ProfileEventProps) => JSX.Element = (props: ProfileE
           justifyContent="space-between"
           className={classes.event}
           style={{
-            filter: props.isApproved ? 'none' : 'brightness(0.6) opacity(0.8)',
+            filter:true ? 'none' : 'brightness(0.6) opacity(0.8)',
           }}
         >
           <Grid container direction="row" justifyContent="flex-end" xs={12} style={{ gap: 20 }}>
