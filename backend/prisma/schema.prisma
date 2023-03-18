@@ -180,11 +180,8 @@ model RegisteredForEvent {
 
 model Stream {
   id            Int             @id @default(autoincrement())
-  eventId       Int?            @unique
-  event         Event?          @relation(fields: [eventId], references: [id], onDelete: Cascade)
   streamKey     String          @unique @default(uuid())
-  active        Boolean         @default(false)
-  streamMessage StreamMessage[]
+  active        Boolean         @default(true)
 }
 
 model Media {
