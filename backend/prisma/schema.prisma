@@ -165,7 +165,6 @@ model Event {
   platformConfigShowed PlatformConfig[]
   user                 User?                @relation(fields: [userId], references: [id])
   userId               Int?
-  stream               Stream?
   registeredForEvent   RegisteredForEvent[]
 }
 
@@ -251,6 +250,5 @@ model StreamMessage {
   text      String   @db.Text
   sender    User     @relation(fields: [senderId], references: [id])
   senderId  Int
-  stream    Stream   @relation(fields: [streamId], references: [id])
   streamId  Int
 }
