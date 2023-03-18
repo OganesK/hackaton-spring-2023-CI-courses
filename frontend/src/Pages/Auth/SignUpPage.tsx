@@ -32,7 +32,7 @@ function Copyright(): JSX.Element {
     <Typography variant="body2" color="textSecondary" align="center">
       {'Права защищены © '}
       <Link color="inherit" href="#">
-        NewVision
+      CIB Courses
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

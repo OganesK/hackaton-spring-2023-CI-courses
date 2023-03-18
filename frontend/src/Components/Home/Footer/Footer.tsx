@@ -59,7 +59,7 @@ const Footer: (props: FooterProps) => JSX.Element = (props: FooterProps) => {
               className={classes.footerContactsContainer}
             >
               <Link className={classes.linkNameFooter} to="/home">
-                CI Curses
+                CIB Courses
               </Link>
               <Grid className={classes.footerHeaderTextContacts}>
                 Хакатон 2033

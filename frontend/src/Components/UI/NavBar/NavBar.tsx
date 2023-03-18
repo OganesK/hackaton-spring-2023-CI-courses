@@ -97,7 +97,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
         {width > 1349 ? (
           <Grid container alignItems="center" justifyContent="space-between" xs={10}>
             <Link className={props.text === 'header' ? classes.linkName : classes.linkNameFooter} to="/home">
-              CI Curses
+            CIB Courses
             </Link>
 
             <Grid>
@@ -203,7 +203,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                 }}
               >
                 <Link className={props.text === 'header' ? classes.linkName : classes.linkNameFooter} to="/home">
-                  NewVision
+                CIB Courses
                 </Link>
 
                 <Grid style={props.text === 'header' ? { color: '#fff' } : { color: '#252525' }}>

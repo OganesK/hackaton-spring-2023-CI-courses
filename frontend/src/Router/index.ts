@@ -22,10 +22,11 @@ export const publicRoutes = [
   { path: '/projects/project/:projectId', component: ProjectPage, exact: true },
   { path: '/signup', component: SignUpPage, exact: true },
   { path: '/profile/:profileId', component: ProfilePage, exact: true },
-
+  { path: '/messages', component: MessagesPage, exact: true },
+  { path: '/messages/:groupId', component: MessagesPage, exact: true },
 ];
 
 export const privateRoutes = [
-  { path: '/messages', component: MessagesPage, exact: true },
-  { path: '/messages/:groupId', component: MessagesPage, exact: true },
+  // { path: '/messages', component: MessagesPage, exact: true },
+  // { path: '/messages/:groupId', component: MessagesPage, exact: true },
 ];
