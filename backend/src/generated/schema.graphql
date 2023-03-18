@@ -10,6 +10,60 @@ type Article {
   sections(after: SectionWhereUniqueInput, before: SectionWhereUniqueInput, first: Int, last: Int, orderBy: [ArticleSectionsOrderByInput!]): [Section!]!
 }
 
+input ArticleCreateNestedOneWithoutCourseInput {
+  connect: ArticleWhereUniqueInput
+  connectOrCreate: ArticleCreateOrConnectWithoutCourseInput
+  create: ArticleCreateWithoutCourseInput
+}
+
+input ArticleCreateNestedOneWithoutPostInput {
+  connect: ArticleWhereUniqueInput
+  connectOrCreate: ArticleCreateOrConnectWithoutPostInput
+  create: ArticleCreateWithoutPostInput
+}
+
+input ArticleCreateNestedOneWithoutSectionsInput {
+  connect: ArticleWhereUniqueInput
+  connectOrCreate: ArticleCreateOrConnectWithoutSectionsInput
+  create: ArticleCreateWithoutSectionsInput
+}
+
+input ArticleCreateOrConnectWithoutCourseInput {
+  create: ArticleCreateWithoutCourseInput!
+  where: ArticleWhereUniqueInput!
+}
+
+input ArticleCreateOrConnectWithoutPostInput {
+  create: ArticleCreateWithoutPostInput!
+  where: ArticleWhereUniqueInput!
+}
+
+input ArticleCreateOrConnectWithoutSectionsInput {
+  create: ArticleCreateWithoutSectionsInput!
+  where: ArticleWhereUniqueInput!
+}
+
+input ArticleCreateWithoutCourseInput {
+  cfId: Int
+  createdAt: DateTime
+  post: PostCreateNestedOneWithoutArticleInput
+  sections: SectionCreateNestedManyWithoutArticleInput
+}
+
+input ArticleCreateWithoutPostInput {
+  cfId: Int
+  course: CourseCreateNestedOneWithoutDescriptionInput
+  createdAt: DateTime
+  sections: SectionCreateNestedManyWithoutArticleInput
+}
+
+input ArticleCreateWithoutSectionsInput {
+  cfId: Int
+  course: CourseCreateNestedOneWithoutDescriptionInput
+  createdAt: DateTime
+  post: PostCreateNestedOneWithoutArticleInput
+}
+
 input ArticleOrderByWithRelationInput {
   cfId: SortOrder
   course: CourseOrderByWithRelationInput
@@ -23,6 +77,70 @@ input ArticleOrderByWithRelationInput {
 
 input ArticleSectionsOrderByInput {
   number: SortOrder
+}
+
+input ArticleUpdateOneRequiredWithoutSectionsInput {
+  connect: ArticleWhereUniqueInput
+  connectOrCreate: ArticleCreateOrConnectWithoutSectionsInput
+  create: ArticleCreateWithoutSectionsInput
+  update: ArticleUpdateWithoutSectionsInput
+  upsert: ArticleUpsertWithoutSectionsInput
+}
+
+input ArticleUpdateOneWithoutCourseInput {
+  connect: ArticleWhereUniqueInput
+  connectOrCreate: ArticleCreateOrConnectWithoutCourseInput
+  create: ArticleCreateWithoutCourseInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ArticleUpdateWithoutCourseInput
+  upsert: ArticleUpsertWithoutCourseInput
+}
+
+input ArticleUpdateOneWithoutPostInput {
+  connect: ArticleWhereUniqueInput
+  connectOrCreate: ArticleCreateOrConnectWithoutPostInput
+  create: ArticleCreateWithoutPostInput
+  delete: Boolean
+  disconnect: Boolean
+  update: ArticleUpdateWithoutPostInput
+  upsert: ArticleUpsertWithoutPostInput
+}
+
+input ArticleUpdateWithoutCourseInput {
+  cfId: NullableIntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  post: PostUpdateOneWithoutArticleInput
+  sections: SectionUpdateManyWithoutArticleInput
+}
+
+input ArticleUpdateWithoutPostInput {
+  cfId: NullableIntFieldUpdateOperationsInput
+  course: CourseUpdateOneWithoutDescriptionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  sections: SectionUpdateManyWithoutArticleInput
+}
+
+input ArticleUpdateWithoutSectionsInput {
+  cfId: NullableIntFieldUpdateOperationsInput
+  course: CourseUpdateOneWithoutDescriptionInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  post: PostUpdateOneWithoutArticleInput
+}
+
+input ArticleUpsertWithoutCourseInput {
+  create: ArticleCreateWithoutCourseInput!
+  update: ArticleUpdateWithoutCourseInput!
+}
+
+input ArticleUpsertWithoutPostInput {
+  create: ArticleCreateWithoutPostInput!
+  update: ArticleUpdateWithoutPostInput!
+}
+
+input ArticleUpsertWithoutSectionsInput {
+  create: ArticleCreateWithoutSectionsInput!
+  update: ArticleUpdateWithoutSectionsInput!
 }
 
 input ArticleWhereInput {
@@ -39,9 +157,20 @@ input ArticleWhereInput {
   sections: SectionListRelationFilter
 }
 
+input ArticleWhereUniqueInput {
+  cfId: Int
+  courseId: Int
+  id: Int
+  postID: Int
+}
+
 type AuthPayload {
   token: String
   user: User
+}
+
+input BoolFieldUpdateOperationsInput {
+  set: Boolean
 }
 
 input BoolFilter {
@@ -56,6 +185,204 @@ type Course {
   name: String!
   poster: Media
   publishedPosts(after: PostWhereUniqueInput, before: PostWhereUniqueInput, first: Int, last: Int, orderBy: [PostOrderByWithRelationInput!]): [Post!]!
+  shortDescription: String!
+}
+
+input CourseCreateManyOwnerInput {
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  id: Int
+  name: String!
+  posterId: Int
+  shortDescription: String!
+}
+
+input CourseCreateManyOwnerInputEnvelope {
+  data: [CourseCreateManyOwnerInput!]
+  skipDuplicates: Boolean
+}
+
+input CourseCreateManyPosterInput {
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  id: Int
+  name: String!
+  ownerId: Int!
+  shortDescription: String!
+}
+
+input CourseCreateManyPosterInputEnvelope {
+  data: [CourseCreateManyPosterInput!]
+  skipDuplicates: Boolean
+}
+
+input CourseCreateNestedManyWithoutOwnerInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutOwnerInput!]
+  create: [CourseCreateWithoutOwnerInput!]
+  createMany: CourseCreateManyOwnerInputEnvelope
+}
+
+input CourseCreateNestedManyWithoutPlatformConfigShowedInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutPlatformConfigShowedInput!]
+  create: [CourseCreateWithoutPlatformConfigShowedInput!]
+}
+
+input CourseCreateNestedManyWithoutPosterInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutPosterInput!]
+  create: [CourseCreateWithoutPosterInput!]
+  createMany: CourseCreateManyPosterInputEnvelope
+}
+
+input CourseCreateNestedOneWithoutCourseMediaInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutCourseMediaInput
+  create: CourseCreateWithoutCourseMediaInput
+}
+
+input CourseCreateNestedOneWithoutDescriptionInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutDescriptionInput
+  create: CourseCreateWithoutDescriptionInput
+}
+
+input CourseCreateNestedOneWithoutMediaInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutMediaInput
+  create: CourseCreateWithoutMediaInput
+}
+
+input CourseCreateNestedOneWithoutPublishedPostsInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutPublishedPostsInput
+  create: CourseCreateWithoutPublishedPostsInput
+}
+
+input CourseCreateOrConnectWithoutCourseMediaInput {
+  create: CourseCreateWithoutCourseMediaInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutDescriptionInput {
+  create: CourseCreateWithoutDescriptionInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutMediaInput {
+  create: CourseCreateWithoutMediaInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutOwnerInput {
+  create: CourseCreateWithoutOwnerInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutPlatformConfigShowedInput {
+  create: CourseCreateWithoutPlatformConfigShowedInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutPosterInput {
+  create: CourseCreateWithoutPosterInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateOrConnectWithoutPublishedPostsInput {
+  create: CourseCreateWithoutPublishedPostsInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseCreateWithoutCourseMediaInput {
+  Media: MediaCreateNestedManyWithoutCourseMediaInput
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  description: ArticleCreateNestedOneWithoutCourseInput
+  name: String!
+  owner: UserCreateNestedOneWithoutCoursesInput!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
+  poster: MediaCreateNestedOneWithoutCoursePosterInput
+  publishedPosts: PostCreateNestedManyWithoutCourseInput
+  shortDescription: String!
+}
+
+input CourseCreateWithoutDescriptionInput {
+  Media: MediaCreateNestedManyWithoutCourseMediaInput
+  courseMedia: MediaCreateNestedManyWithoutCourseDescripitonInput
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  name: String!
+  owner: UserCreateNestedOneWithoutCoursesInput!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
+  poster: MediaCreateNestedOneWithoutCoursePosterInput
+  publishedPosts: PostCreateNestedManyWithoutCourseInput
+  shortDescription: String!
+}
+
+input CourseCreateWithoutMediaInput {
+  courseMedia: MediaCreateNestedManyWithoutCourseDescripitonInput
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  description: ArticleCreateNestedOneWithoutCourseInput
+  name: String!
+  owner: UserCreateNestedOneWithoutCoursesInput!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
+  poster: MediaCreateNestedOneWithoutCoursePosterInput
+  publishedPosts: PostCreateNestedManyWithoutCourseInput
+  shortDescription: String!
+}
+
+input CourseCreateWithoutOwnerInput {
+  Media: MediaCreateNestedManyWithoutCourseMediaInput
+  courseMedia: MediaCreateNestedManyWithoutCourseDescripitonInput
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  description: ArticleCreateNestedOneWithoutCourseInput
+  name: String!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
+  poster: MediaCreateNestedOneWithoutCoursePosterInput
+  publishedPosts: PostCreateNestedManyWithoutCourseInput
+  shortDescription: String!
+}
+
+input CourseCreateWithoutPlatformConfigShowedInput {
+  Media: MediaCreateNestedManyWithoutCourseMediaInput
+  courseMedia: MediaCreateNestedManyWithoutCourseDescripitonInput
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  description: ArticleCreateNestedOneWithoutCourseInput
+  name: String!
+  owner: UserCreateNestedOneWithoutCoursesInput!
+  poster: MediaCreateNestedOneWithoutCoursePosterInput
+  publishedPosts: PostCreateNestedManyWithoutCourseInput
+  shortDescription: String!
+}
+
+input CourseCreateWithoutPosterInput {
+  Media: MediaCreateNestedManyWithoutCourseMediaInput
+  courseMedia: MediaCreateNestedManyWithoutCourseDescripitonInput
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  description: ArticleCreateNestedOneWithoutCourseInput
+  name: String!
+  owner: UserCreateNestedOneWithoutCoursesInput!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
+  publishedPosts: PostCreateNestedManyWithoutCourseInput
+  shortDescription: String!
+}
+
+input CourseCreateWithoutPublishedPostsInput {
+  Media: MediaCreateNestedManyWithoutCourseMediaInput
+  courseMedia: MediaCreateNestedManyWithoutCourseDescripitonInput
+  courseType: courseTypeEnum
+  createdAt: DateTime
+  description: ArticleCreateNestedOneWithoutCourseInput
+  name: String!
+  owner: UserCreateNestedOneWithoutCoursesInput!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput
+  poster: MediaCreateNestedOneWithoutCoursePosterInput
   shortDescription: String!
 }
 
@@ -84,6 +411,266 @@ input CourseOrderByWithRelationInput {
   posterId: SortOrder
   publishedPosts: PostOrderByRelationAggregateInput
   shortDescription: SortOrder
+}
+
+input CourseScalarWhereInput {
+  AND: [CourseScalarWhereInput!]
+  NOT: [CourseScalarWhereInput!]
+  OR: [CourseScalarWhereInput!]
+  courseType: EnumcourseTypeEnumNullableFilter
+  createdAt: DateTimeFilter
+  id: IntFilter
+  name: StringFilter
+  ownerId: IntFilter
+  posterId: IntNullableFilter
+  shortDescription: StringFilter
+}
+
+input CourseUpdateManyMutationInput {
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpdateManyWithWhereWithoutOwnerInput {
+  data: CourseUpdateManyMutationInput!
+  where: CourseScalarWhereInput!
+}
+
+input CourseUpdateManyWithWhereWithoutPlatformConfigShowedInput {
+  data: CourseUpdateManyMutationInput!
+  where: CourseScalarWhereInput!
+}
+
+input CourseUpdateManyWithWhereWithoutPosterInput {
+  data: CourseUpdateManyMutationInput!
+  where: CourseScalarWhereInput!
+}
+
+input CourseUpdateManyWithoutOwnerInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutOwnerInput!]
+  create: [CourseCreateWithoutOwnerInput!]
+  createMany: CourseCreateManyOwnerInputEnvelope
+  delete: [CourseWhereUniqueInput!]
+  deleteMany: [CourseScalarWhereInput!]
+  disconnect: [CourseWhereUniqueInput!]
+  set: [CourseWhereUniqueInput!]
+  update: [CourseUpdateWithWhereUniqueWithoutOwnerInput!]
+  updateMany: [CourseUpdateManyWithWhereWithoutOwnerInput!]
+  upsert: [CourseUpsertWithWhereUniqueWithoutOwnerInput!]
+}
+
+input CourseUpdateManyWithoutPlatformConfigShowedInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutPlatformConfigShowedInput!]
+  create: [CourseCreateWithoutPlatformConfigShowedInput!]
+  delete: [CourseWhereUniqueInput!]
+  deleteMany: [CourseScalarWhereInput!]
+  disconnect: [CourseWhereUniqueInput!]
+  set: [CourseWhereUniqueInput!]
+  update: [CourseUpdateWithWhereUniqueWithoutPlatformConfigShowedInput!]
+  updateMany: [CourseUpdateManyWithWhereWithoutPlatformConfigShowedInput!]
+  upsert: [CourseUpsertWithWhereUniqueWithoutPlatformConfigShowedInput!]
+}
+
+input CourseUpdateManyWithoutPosterInput {
+  connect: [CourseWhereUniqueInput!]
+  connectOrCreate: [CourseCreateOrConnectWithoutPosterInput!]
+  create: [CourseCreateWithoutPosterInput!]
+  createMany: CourseCreateManyPosterInputEnvelope
+  delete: [CourseWhereUniqueInput!]
+  deleteMany: [CourseScalarWhereInput!]
+  disconnect: [CourseWhereUniqueInput!]
+  set: [CourseWhereUniqueInput!]
+  update: [CourseUpdateWithWhereUniqueWithoutPosterInput!]
+  updateMany: [CourseUpdateManyWithWhereWithoutPosterInput!]
+  upsert: [CourseUpsertWithWhereUniqueWithoutPosterInput!]
+}
+
+input CourseUpdateOneWithoutCourseMediaInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutCourseMediaInput
+  create: CourseCreateWithoutCourseMediaInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CourseUpdateWithoutCourseMediaInput
+  upsert: CourseUpsertWithoutCourseMediaInput
+}
+
+input CourseUpdateOneWithoutDescriptionInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutDescriptionInput
+  create: CourseCreateWithoutDescriptionInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CourseUpdateWithoutDescriptionInput
+  upsert: CourseUpsertWithoutDescriptionInput
+}
+
+input CourseUpdateOneWithoutMediaInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutMediaInput
+  create: CourseCreateWithoutMediaInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CourseUpdateWithoutMediaInput
+  upsert: CourseUpsertWithoutMediaInput
+}
+
+input CourseUpdateOneWithoutPublishedPostsInput {
+  connect: CourseWhereUniqueInput
+  connectOrCreate: CourseCreateOrConnectWithoutPublishedPostsInput
+  create: CourseCreateWithoutPublishedPostsInput
+  delete: Boolean
+  disconnect: Boolean
+  update: CourseUpdateWithoutPublishedPostsInput
+  upsert: CourseUpsertWithoutPublishedPostsInput
+}
+
+input CourseUpdateWithWhereUniqueWithoutOwnerInput {
+  data: CourseUpdateWithoutOwnerInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpdateWithWhereUniqueWithoutPlatformConfigShowedInput {
+  data: CourseUpdateWithoutPlatformConfigShowedInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpdateWithWhereUniqueWithoutPosterInput {
+  data: CourseUpdateWithoutPosterInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpdateWithoutCourseMediaInput {
+  Media: MediaUpdateManyWithoutCourseMediaInput
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: ArticleUpdateOneWithoutCourseInput
+  name: StringFieldUpdateOperationsInput
+  owner: UserUpdateOneRequiredWithoutCoursesInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
+  poster: MediaUpdateOneWithoutCoursePosterInput
+  publishedPosts: PostUpdateManyWithoutCourseInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutDescriptionInput {
+  Media: MediaUpdateManyWithoutCourseMediaInput
+  courseMedia: MediaUpdateManyWithoutCourseDescripitonInput
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  owner: UserUpdateOneRequiredWithoutCoursesInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
+  poster: MediaUpdateOneWithoutCoursePosterInput
+  publishedPosts: PostUpdateManyWithoutCourseInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutMediaInput {
+  courseMedia: MediaUpdateManyWithoutCourseDescripitonInput
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: ArticleUpdateOneWithoutCourseInput
+  name: StringFieldUpdateOperationsInput
+  owner: UserUpdateOneRequiredWithoutCoursesInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
+  poster: MediaUpdateOneWithoutCoursePosterInput
+  publishedPosts: PostUpdateManyWithoutCourseInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutOwnerInput {
+  Media: MediaUpdateManyWithoutCourseMediaInput
+  courseMedia: MediaUpdateManyWithoutCourseDescripitonInput
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: ArticleUpdateOneWithoutCourseInput
+  name: StringFieldUpdateOperationsInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
+  poster: MediaUpdateOneWithoutCoursePosterInput
+  publishedPosts: PostUpdateManyWithoutCourseInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutPlatformConfigShowedInput {
+  Media: MediaUpdateManyWithoutCourseMediaInput
+  courseMedia: MediaUpdateManyWithoutCourseDescripitonInput
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: ArticleUpdateOneWithoutCourseInput
+  name: StringFieldUpdateOperationsInput
+  owner: UserUpdateOneRequiredWithoutCoursesInput
+  poster: MediaUpdateOneWithoutCoursePosterInput
+  publishedPosts: PostUpdateManyWithoutCourseInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutPosterInput {
+  Media: MediaUpdateManyWithoutCourseMediaInput
+  courseMedia: MediaUpdateManyWithoutCourseDescripitonInput
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: ArticleUpdateOneWithoutCourseInput
+  name: StringFieldUpdateOperationsInput
+  owner: UserUpdateOneRequiredWithoutCoursesInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
+  publishedPosts: PostUpdateManyWithoutCourseInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpdateWithoutPublishedPostsInput {
+  Media: MediaUpdateManyWithoutCourseMediaInput
+  courseMedia: MediaUpdateManyWithoutCourseDescripitonInput
+  courseType: NullableEnumcourseTypeEnumFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: ArticleUpdateOneWithoutCourseInput
+  name: StringFieldUpdateOperationsInput
+  owner: UserUpdateOneRequiredWithoutCoursesInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput
+  poster: MediaUpdateOneWithoutCoursePosterInput
+  shortDescription: StringFieldUpdateOperationsInput
+}
+
+input CourseUpsertWithWhereUniqueWithoutOwnerInput {
+  create: CourseCreateWithoutOwnerInput!
+  update: CourseUpdateWithoutOwnerInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpsertWithWhereUniqueWithoutPlatformConfigShowedInput {
+  create: CourseCreateWithoutPlatformConfigShowedInput!
+  update: CourseUpdateWithoutPlatformConfigShowedInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpsertWithWhereUniqueWithoutPosterInput {
+  create: CourseCreateWithoutPosterInput!
+  update: CourseUpdateWithoutPosterInput!
+  where: CourseWhereUniqueInput!
+}
+
+input CourseUpsertWithoutCourseMediaInput {
+  create: CourseCreateWithoutCourseMediaInput!
+  update: CourseUpdateWithoutCourseMediaInput!
+}
+
+input CourseUpsertWithoutDescriptionInput {
+  create: CourseCreateWithoutDescriptionInput!
+  update: CourseUpdateWithoutDescriptionInput!
+}
+
+input CourseUpsertWithoutMediaInput {
+  create: CourseCreateWithoutMediaInput!
+  update: CourseUpdateWithoutMediaInput!
+}
+
+input CourseUpsertWithoutPublishedPostsInput {
+  create: CourseCreateWithoutPublishedPostsInput!
+  update: CourseUpdateWithoutPublishedPostsInput!
 }
 
 input CourseWhereInput {
@@ -167,6 +754,10 @@ input CreateUserInput {
 
 scalar DateTime
 
+input DateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
 input DateTimeFilter {
   equals: DateTime
   gt: DateTime
@@ -208,11 +799,19 @@ input EnumcourseTypeEnumNullableFilter {
   notIn: [courseTypeEnum!]
 }
 
+input EnummediaTypeFieldUpdateOperationsInput {
+  set: mediaType
+}
+
 input EnummediaTypeFilter {
   equals: mediaType
   in: [mediaType!]
   not: NestedEnummediaTypeFilter
   notIn: [mediaType!]
+}
+
+input EnumsectionTypesFieldUpdateOperationsInput {
+  set: sectionTypes
 }
 
 input EnumsectionTypesFilter {
@@ -233,9 +832,121 @@ type Event {
   platformConfigShowed(after: PlatformConfigWhereUniqueInput, before: PlatformConfigWhereUniqueInput, first: Int, last: Int): [PlatformConfig!]!
   poster: Media
   shortDescription: String!
-  stream: Stream
   theme: String!
   user: User
+}
+
+input EventCreateManyPosterInput {
+  address: String!
+  date: DateTime!
+  description: String!
+  format: String
+  id: Int
+  name: String!
+  organizer: String!
+  shortDescription: String!
+  theme: String!
+  userId: Int
+}
+
+input EventCreateManyPosterInputEnvelope {
+  data: [EventCreateManyPosterInput!]
+  skipDuplicates: Boolean
+}
+
+input EventCreateManyUserInput {
+  address: String!
+  date: DateTime!
+  description: String!
+  format: String
+  id: Int
+  name: String!
+  organizer: String!
+  posterId: Int
+  shortDescription: String!
+  theme: String!
+}
+
+input EventCreateManyUserInputEnvelope {
+  data: [EventCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input EventCreateNestedManyWithoutPlatformConfigShowedInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutPlatformConfigShowedInput!]
+  create: [EventCreateWithoutPlatformConfigShowedInput!]
+}
+
+input EventCreateNestedManyWithoutPosterInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutPosterInput!]
+  create: [EventCreateWithoutPosterInput!]
+  createMany: EventCreateManyPosterInputEnvelope
+}
+
+input EventCreateNestedManyWithoutUserInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutUserInput!]
+  create: [EventCreateWithoutUserInput!]
+  createMany: EventCreateManyUserInputEnvelope
+}
+
+input EventCreateOrConnectWithoutPlatformConfigShowedInput {
+  create: EventCreateWithoutPlatformConfigShowedInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventCreateOrConnectWithoutPosterInput {
+  create: EventCreateWithoutPosterInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventCreateOrConnectWithoutUserInput {
+  create: EventCreateWithoutUserInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventCreateWithoutPlatformConfigShowedInput {
+  address: String!
+  date: DateTime!
+  description: String!
+  format: String
+  name: String!
+  organizer: String!
+  poster: MediaCreateNestedOneWithoutEventInput
+  registeredForEvent: RegisteredForEventCreateNestedManyWithoutEventInput
+  shortDescription: String!
+  theme: String!
+  user: UserCreateNestedOneWithoutPublishedEventInput
+}
+
+input EventCreateWithoutPosterInput {
+  address: String!
+  date: DateTime!
+  description: String!
+  format: String
+  name: String!
+  organizer: String!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutEventsShownOnLandingInput
+  registeredForEvent: RegisteredForEventCreateNestedManyWithoutEventInput
+  shortDescription: String!
+  theme: String!
+  user: UserCreateNestedOneWithoutPublishedEventInput
+}
+
+input EventCreateWithoutUserInput {
+  address: String!
+  date: DateTime!
+  description: String!
+  format: String
+  name: String!
+  organizer: String!
+  platformConfigShowed: PlatformConfigCreateNestedManyWithoutEventsShownOnLandingInput
+  poster: MediaCreateNestedOneWithoutEventInput
+  registeredForEvent: RegisteredForEventCreateNestedManyWithoutEventInput
+  shortDescription: String!
+  theme: String!
 }
 
 input EventCreatedInput {
@@ -273,10 +984,150 @@ input EventOrderByWithRelationInput {
   posterId: SortOrder
   registeredForEvent: RegisteredForEventOrderByRelationAggregateInput
   shortDescription: SortOrder
-  stream: StreamOrderByWithRelationInput
   theme: SortOrder
   user: UserOrderByWithRelationInput
   userId: SortOrder
+}
+
+input EventScalarWhereInput {
+  AND: [EventScalarWhereInput!]
+  NOT: [EventScalarWhereInput!]
+  OR: [EventScalarWhereInput!]
+  address: StringFilter
+  date: DateTimeFilter
+  description: StringFilter
+  format: StringNullableFilter
+  id: IntFilter
+  name: StringFilter
+  organizer: StringFilter
+  posterId: IntNullableFilter
+  shortDescription: StringFilter
+  theme: StringFilter
+  userId: IntNullableFilter
+}
+
+input EventUpdateManyMutationInput {
+  address: StringFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  format: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  organizer: StringFieldUpdateOperationsInput
+  shortDescription: StringFieldUpdateOperationsInput
+  theme: StringFieldUpdateOperationsInput
+}
+
+input EventUpdateManyWithWhereWithoutPlatformConfigShowedInput {
+  data: EventUpdateManyMutationInput!
+  where: EventScalarWhereInput!
+}
+
+input EventUpdateManyWithWhereWithoutPosterInput {
+  data: EventUpdateManyMutationInput!
+  where: EventScalarWhereInput!
+}
+
+input EventUpdateManyWithWhereWithoutUserInput {
+  data: EventUpdateManyMutationInput!
+  where: EventScalarWhereInput!
+}
+
+input EventUpdateManyWithoutPlatformConfigShowedInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutPlatformConfigShowedInput!]
+  create: [EventCreateWithoutPlatformConfigShowedInput!]
+  delete: [EventWhereUniqueInput!]
+  deleteMany: [EventScalarWhereInput!]
+  disconnect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutPlatformConfigShowedInput!]
+  updateMany: [EventUpdateManyWithWhereWithoutPlatformConfigShowedInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutPlatformConfigShowedInput!]
+}
+
+input EventUpdateManyWithoutPosterInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutPosterInput!]
+  create: [EventCreateWithoutPosterInput!]
+  createMany: EventCreateManyPosterInputEnvelope
+  delete: [EventWhereUniqueInput!]
+  deleteMany: [EventScalarWhereInput!]
+  disconnect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutPosterInput!]
+  updateMany: [EventUpdateManyWithWhereWithoutPosterInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutPosterInput!]
+}
+
+input EventUpdateManyWithoutUserInput {
+  connect: [EventWhereUniqueInput!]
+  connectOrCreate: [EventCreateOrConnectWithoutUserInput!]
+  create: [EventCreateWithoutUserInput!]
+  createMany: EventCreateManyUserInputEnvelope
+  delete: [EventWhereUniqueInput!]
+  deleteMany: [EventScalarWhereInput!]
+  disconnect: [EventWhereUniqueInput!]
+  set: [EventWhereUniqueInput!]
+  update: [EventUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [EventUpdateManyWithWhereWithoutUserInput!]
+  upsert: [EventUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input EventUpdateWithWhereUniqueWithoutPlatformConfigShowedInput {
+  data: EventUpdateWithoutPlatformConfigShowedInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpdateWithWhereUniqueWithoutPosterInput {
+  data: EventUpdateWithoutPosterInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpdateWithWhereUniqueWithoutUserInput {
+  data: EventUpdateWithoutUserInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpdateWithoutPlatformConfigShowedInput {
+  address: StringFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  format: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  organizer: StringFieldUpdateOperationsInput
+  poster: MediaUpdateOneWithoutEventInput
+  registeredForEvent: RegisteredForEventUpdateManyWithoutEventInput
+  shortDescription: StringFieldUpdateOperationsInput
+  theme: StringFieldUpdateOperationsInput
+  user: UserUpdateOneWithoutPublishedEventInput
+}
+
+input EventUpdateWithoutPosterInput {
+  address: StringFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  format: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  organizer: StringFieldUpdateOperationsInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutEventsShownOnLandingInput
+  registeredForEvent: RegisteredForEventUpdateManyWithoutEventInput
+  shortDescription: StringFieldUpdateOperationsInput
+  theme: StringFieldUpdateOperationsInput
+  user: UserUpdateOneWithoutPublishedEventInput
+}
+
+input EventUpdateWithoutUserInput {
+  address: StringFieldUpdateOperationsInput
+  date: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  format: NullableStringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  organizer: StringFieldUpdateOperationsInput
+  platformConfigShowed: PlatformConfigUpdateManyWithoutEventsShownOnLandingInput
+  poster: MediaUpdateOneWithoutEventInput
+  registeredForEvent: RegisteredForEventUpdateManyWithoutEventInput
+  shortDescription: StringFieldUpdateOperationsInput
+  theme: StringFieldUpdateOperationsInput
 }
 
 input EventUpdatedInput {
@@ -290,6 +1141,24 @@ input EventUpdatedInput {
   organizer: String
   shortDescription: String
   theme: String
+}
+
+input EventUpsertWithWhereUniqueWithoutPlatformConfigShowedInput {
+  create: EventCreateWithoutPlatformConfigShowedInput!
+  update: EventUpdateWithoutPlatformConfigShowedInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutPosterInput {
+  create: EventCreateWithoutPosterInput!
+  update: EventUpdateWithoutPosterInput!
+  where: EventWhereUniqueInput!
+}
+
+input EventUpsertWithWhereUniqueWithoutUserInput {
+  create: EventCreateWithoutUserInput!
+  update: EventUpdateWithoutUserInput!
+  where: EventWhereUniqueInput!
 }
 
 input EventWhereInput {
@@ -308,7 +1177,6 @@ input EventWhereInput {
   posterId: IntNullableFilter
   registeredForEvent: RegisteredForEventListRelationFilter
   shortDescription: StringFilter
-  stream: StreamWhereInput
   theme: StringFilter
   user: UserWhereInput
   userId: IntNullableFilter
@@ -316,6 +1184,33 @@ input EventWhereInput {
 
 input EventWhereUniqueInput {
   id: Int
+}
+
+input FloatFieldUpdateOperationsInput {
+  decrement: Float
+  divide: Float
+  increment: Float
+  multiply: Float
+  set: Float
+}
+
+input FloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
+}
+
+input IntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
 }
 
 input IntFilter {
@@ -351,6 +1246,288 @@ type Media {
   user(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int): [User!]!
 }
 
+input MediaCreateManyCourseDescripitonInput {
+  courseMediaId: Int
+  createdAt: DateTime
+  id: Int
+  isApproved: Boolean
+  postMediaId: Int
+  type: mediaType!
+  url: String!
+}
+
+input MediaCreateManyCourseDescripitonInputEnvelope {
+  data: [MediaCreateManyCourseDescripitonInput!]
+  skipDuplicates: Boolean
+}
+
+input MediaCreateManyCourseMediaInput {
+  courseDescriptionId: Int
+  createdAt: DateTime
+  id: Int
+  isApproved: Boolean
+  postMediaId: Int
+  type: mediaType!
+  url: String!
+}
+
+input MediaCreateManyCourseMediaInputEnvelope {
+  data: [MediaCreateManyCourseMediaInput!]
+  skipDuplicates: Boolean
+}
+
+input MediaCreateManyPostMediaInput {
+  courseDescriptionId: Int
+  courseMediaId: Int
+  createdAt: DateTime
+  id: Int
+  isApproved: Boolean
+  type: mediaType!
+  url: String!
+}
+
+input MediaCreateManyPostMediaInputEnvelope {
+  data: [MediaCreateManyPostMediaInput!]
+  skipDuplicates: Boolean
+}
+
+input MediaCreateNestedManyWithoutCourseDescripitonInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutCourseDescripitonInput!]
+  create: [MediaCreateWithoutCourseDescripitonInput!]
+  createMany: MediaCreateManyCourseDescripitonInputEnvelope
+}
+
+input MediaCreateNestedManyWithoutCourseMediaInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutCourseMediaInput!]
+  create: [MediaCreateWithoutCourseMediaInput!]
+  createMany: MediaCreateManyCourseMediaInputEnvelope
+}
+
+input MediaCreateNestedManyWithoutPostMediaInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutPostMediaInput!]
+  create: [MediaCreateWithoutPostMediaInput!]
+  createMany: MediaCreateManyPostMediaInputEnvelope
+}
+
+input MediaCreateNestedOneWithoutCoursePosterInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutCoursePosterInput
+  create: MediaCreateWithoutCoursePosterInput
+}
+
+input MediaCreateNestedOneWithoutEventInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutEventInput
+  create: MediaCreateWithoutEventInput
+}
+
+input MediaCreateNestedOneWithoutMessagerGroupInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutMessagerGroupInput
+  create: MediaCreateWithoutMessagerGroupInput
+}
+
+input MediaCreateNestedOneWithoutPostInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutPostInput
+  create: MediaCreateWithoutPostInput
+}
+
+input MediaCreateNestedOneWithoutSectionInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutSectionInput
+  create: MediaCreateWithoutSectionInput
+}
+
+input MediaCreateNestedOneWithoutUserInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutUserInput
+  create: MediaCreateWithoutUserInput
+}
+
+input MediaCreateOrConnectWithoutCourseDescripitonInput {
+  create: MediaCreateWithoutCourseDescripitonInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutCourseMediaInput {
+  create: MediaCreateWithoutCourseMediaInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutCoursePosterInput {
+  create: MediaCreateWithoutCoursePosterInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutEventInput {
+  create: MediaCreateWithoutEventInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutMessagerGroupInput {
+  create: MediaCreateWithoutMessagerGroupInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutPostInput {
+  create: MediaCreateWithoutPostInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutPostMediaInput {
+  create: MediaCreateWithoutPostMediaInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutSectionInput {
+  create: MediaCreateWithoutSectionInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateOrConnectWithoutUserInput {
+  create: MediaCreateWithoutUserInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaCreateWithoutCourseDescripitonInput {
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  post: PostCreateNestedManyWithoutPosterInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutCourseMediaInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  post: PostCreateNestedManyWithoutPosterInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutCoursePosterInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  post: PostCreateNestedManyWithoutPosterInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutEventInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  post: PostCreateNestedManyWithoutPosterInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutMessagerGroupInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  post: PostCreateNestedManyWithoutPosterInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutPostInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutPostMediaInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  post: PostCreateNestedManyWithoutPosterInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutSectionInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  post: PostCreateNestedManyWithoutPosterInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  type: mediaType!
+  url: String!
+  user: UserCreateNestedManyWithoutAvatarInput
+}
+
+input MediaCreateWithoutUserInput {
+  courseDescripiton: CourseCreateNestedOneWithoutCourseMediaInput
+  courseMedia: CourseCreateNestedOneWithoutMediaInput
+  coursePoster: CourseCreateNestedManyWithoutPosterInput
+  createdAt: DateTime
+  event: EventCreateNestedManyWithoutPosterInput
+  isApproved: Boolean
+  messagerGroup: MessagerGroupCreateNestedManyWithoutAvatarInput
+  post: PostCreateNestedManyWithoutPosterInput
+  postMedia: PostCreateNestedOneWithoutPostMediaInput
+  section: SectionCreateNestedManyWithoutMediaInput
+  type: mediaType!
+  url: String!
+}
+
 input MediaListRelationFilter {
   every: MediaWhereInput
   none: MediaWhereInput
@@ -379,6 +1556,342 @@ input MediaOrderByWithRelationInput {
   type: SortOrder
   url: SortOrder
   user: UserOrderByRelationAggregateInput
+}
+
+input MediaScalarWhereInput {
+  AND: [MediaScalarWhereInput!]
+  NOT: [MediaScalarWhereInput!]
+  OR: [MediaScalarWhereInput!]
+  courseDescriptionId: IntNullableFilter
+  courseMediaId: IntNullableFilter
+  createdAt: DateTimeNullableFilter
+  id: IntFilter
+  isApproved: BoolFilter
+  postMediaId: IntNullableFilter
+  type: EnummediaTypeFilter
+  url: StringFilter
+}
+
+input MediaUpdateManyMutationInput {
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  isApproved: BoolFieldUpdateOperationsInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+}
+
+input MediaUpdateManyWithWhereWithoutCourseDescripitonInput {
+  data: MediaUpdateManyMutationInput!
+  where: MediaScalarWhereInput!
+}
+
+input MediaUpdateManyWithWhereWithoutCourseMediaInput {
+  data: MediaUpdateManyMutationInput!
+  where: MediaScalarWhereInput!
+}
+
+input MediaUpdateManyWithWhereWithoutPostMediaInput {
+  data: MediaUpdateManyMutationInput!
+  where: MediaScalarWhereInput!
+}
+
+input MediaUpdateManyWithoutCourseDescripitonInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutCourseDescripitonInput!]
+  create: [MediaCreateWithoutCourseDescripitonInput!]
+  createMany: MediaCreateManyCourseDescripitonInputEnvelope
+  delete: [MediaWhereUniqueInput!]
+  deleteMany: [MediaScalarWhereInput!]
+  disconnect: [MediaWhereUniqueInput!]
+  set: [MediaWhereUniqueInput!]
+  update: [MediaUpdateWithWhereUniqueWithoutCourseDescripitonInput!]
+  updateMany: [MediaUpdateManyWithWhereWithoutCourseDescripitonInput!]
+  upsert: [MediaUpsertWithWhereUniqueWithoutCourseDescripitonInput!]
+}
+
+input MediaUpdateManyWithoutCourseMediaInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutCourseMediaInput!]
+  create: [MediaCreateWithoutCourseMediaInput!]
+  createMany: MediaCreateManyCourseMediaInputEnvelope
+  delete: [MediaWhereUniqueInput!]
+  deleteMany: [MediaScalarWhereInput!]
+  disconnect: [MediaWhereUniqueInput!]
+  set: [MediaWhereUniqueInput!]
+  update: [MediaUpdateWithWhereUniqueWithoutCourseMediaInput!]
+  updateMany: [MediaUpdateManyWithWhereWithoutCourseMediaInput!]
+  upsert: [MediaUpsertWithWhereUniqueWithoutCourseMediaInput!]
+}
+
+input MediaUpdateManyWithoutPostMediaInput {
+  connect: [MediaWhereUniqueInput!]
+  connectOrCreate: [MediaCreateOrConnectWithoutPostMediaInput!]
+  create: [MediaCreateWithoutPostMediaInput!]
+  createMany: MediaCreateManyPostMediaInputEnvelope
+  delete: [MediaWhereUniqueInput!]
+  deleteMany: [MediaScalarWhereInput!]
+  disconnect: [MediaWhereUniqueInput!]
+  set: [MediaWhereUniqueInput!]
+  update: [MediaUpdateWithWhereUniqueWithoutPostMediaInput!]
+  updateMany: [MediaUpdateManyWithWhereWithoutPostMediaInput!]
+  upsert: [MediaUpsertWithWhereUniqueWithoutPostMediaInput!]
+}
+
+input MediaUpdateOneWithoutCoursePosterInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutCoursePosterInput
+  create: MediaCreateWithoutCoursePosterInput
+  delete: Boolean
+  disconnect: Boolean
+  update: MediaUpdateWithoutCoursePosterInput
+  upsert: MediaUpsertWithoutCoursePosterInput
+}
+
+input MediaUpdateOneWithoutEventInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutEventInput
+  create: MediaCreateWithoutEventInput
+  delete: Boolean
+  disconnect: Boolean
+  update: MediaUpdateWithoutEventInput
+  upsert: MediaUpsertWithoutEventInput
+}
+
+input MediaUpdateOneWithoutMessagerGroupInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutMessagerGroupInput
+  create: MediaCreateWithoutMessagerGroupInput
+  delete: Boolean
+  disconnect: Boolean
+  update: MediaUpdateWithoutMessagerGroupInput
+  upsert: MediaUpsertWithoutMessagerGroupInput
+}
+
+input MediaUpdateOneWithoutPostInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutPostInput
+  create: MediaCreateWithoutPostInput
+  delete: Boolean
+  disconnect: Boolean
+  update: MediaUpdateWithoutPostInput
+  upsert: MediaUpsertWithoutPostInput
+}
+
+input MediaUpdateOneWithoutSectionInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutSectionInput
+  create: MediaCreateWithoutSectionInput
+  delete: Boolean
+  disconnect: Boolean
+  update: MediaUpdateWithoutSectionInput
+  upsert: MediaUpsertWithoutSectionInput
+}
+
+input MediaUpdateOneWithoutUserInput {
+  connect: MediaWhereUniqueInput
+  connectOrCreate: MediaCreateOrConnectWithoutUserInput
+  create: MediaCreateWithoutUserInput
+  delete: Boolean
+  disconnect: Boolean
+  update: MediaUpdateWithoutUserInput
+  upsert: MediaUpsertWithoutUserInput
+}
+
+input MediaUpdateWithWhereUniqueWithoutCourseDescripitonInput {
+  data: MediaUpdateWithoutCourseDescripitonInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpdateWithWhereUniqueWithoutCourseMediaInput {
+  data: MediaUpdateWithoutCourseMediaInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpdateWithWhereUniqueWithoutPostMediaInput {
+  data: MediaUpdateWithoutPostMediaInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpdateWithoutCourseDescripitonInput {
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  post: PostUpdateManyWithoutPosterInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutCourseMediaInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  post: PostUpdateManyWithoutPosterInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutCoursePosterInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  post: PostUpdateManyWithoutPosterInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutEventInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  post: PostUpdateManyWithoutPosterInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutMessagerGroupInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  post: PostUpdateManyWithoutPosterInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutPostInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutPostMediaInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  post: PostUpdateManyWithoutPosterInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutSectionInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  post: PostUpdateManyWithoutPosterInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+  user: UserUpdateManyWithoutAvatarInput
+}
+
+input MediaUpdateWithoutUserInput {
+  courseDescripiton: CourseUpdateOneWithoutCourseMediaInput
+  courseMedia: CourseUpdateOneWithoutMediaInput
+  coursePoster: CourseUpdateManyWithoutPosterInput
+  createdAt: NullableDateTimeFieldUpdateOperationsInput
+  event: EventUpdateManyWithoutPosterInput
+  isApproved: BoolFieldUpdateOperationsInput
+  messagerGroup: MessagerGroupUpdateManyWithoutAvatarInput
+  post: PostUpdateManyWithoutPosterInput
+  postMedia: PostUpdateOneWithoutPostMediaInput
+  section: SectionUpdateManyWithoutMediaInput
+  type: EnummediaTypeFieldUpdateOperationsInput
+  url: StringFieldUpdateOperationsInput
+}
+
+input MediaUpsertWithWhereUniqueWithoutCourseDescripitonInput {
+  create: MediaCreateWithoutCourseDescripitonInput!
+  update: MediaUpdateWithoutCourseDescripitonInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpsertWithWhereUniqueWithoutCourseMediaInput {
+  create: MediaCreateWithoutCourseMediaInput!
+  update: MediaUpdateWithoutCourseMediaInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpsertWithWhereUniqueWithoutPostMediaInput {
+  create: MediaCreateWithoutPostMediaInput!
+  update: MediaUpdateWithoutPostMediaInput!
+  where: MediaWhereUniqueInput!
+}
+
+input MediaUpsertWithoutCoursePosterInput {
+  create: MediaCreateWithoutCoursePosterInput!
+  update: MediaUpdateWithoutCoursePosterInput!
+}
+
+input MediaUpsertWithoutEventInput {
+  create: MediaCreateWithoutEventInput!
+  update: MediaUpdateWithoutEventInput!
+}
+
+input MediaUpsertWithoutMessagerGroupInput {
+  create: MediaCreateWithoutMessagerGroupInput!
+  update: MediaUpdateWithoutMessagerGroupInput!
+}
+
+input MediaUpsertWithoutPostInput {
+  create: MediaCreateWithoutPostInput!
+  update: MediaUpdateWithoutPostInput!
+}
+
+input MediaUpsertWithoutSectionInput {
+  create: MediaCreateWithoutSectionInput!
+  update: MediaUpdateWithoutSectionInput!
+}
+
+input MediaUpsertWithoutUserInput {
+  create: MediaCreateWithoutUserInput!
+  update: MediaUpdateWithoutUserInput!
 }
 
 input MediaWhereInput {
@@ -418,6 +1931,70 @@ type Message {
   updatedAt: DateTime!
 }
 
+input MessageCreateManyGroupInput {
+  createdAt: DateTime
+  id: Int
+  senderId: Int!
+  text: String!
+  updatedAt: DateTime
+}
+
+input MessageCreateManyGroupInputEnvelope {
+  data: [MessageCreateManyGroupInput!]
+  skipDuplicates: Boolean
+}
+
+input MessageCreateManySenderInput {
+  createdAt: DateTime
+  groupId: Int!
+  id: Int
+  text: String!
+  updatedAt: DateTime
+}
+
+input MessageCreateManySenderInputEnvelope {
+  data: [MessageCreateManySenderInput!]
+  skipDuplicates: Boolean
+}
+
+input MessageCreateNestedManyWithoutGroupInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutGroupInput!]
+  create: [MessageCreateWithoutGroupInput!]
+  createMany: MessageCreateManyGroupInputEnvelope
+}
+
+input MessageCreateNestedManyWithoutSenderInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutSenderInput!]
+  create: [MessageCreateWithoutSenderInput!]
+  createMany: MessageCreateManySenderInputEnvelope
+}
+
+input MessageCreateOrConnectWithoutGroupInput {
+  create: MessageCreateWithoutGroupInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageCreateOrConnectWithoutSenderInput {
+  create: MessageCreateWithoutSenderInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageCreateWithoutGroupInput {
+  createdAt: DateTime
+  sender: UserCreateNestedOneWithoutMessagesInput!
+  text: String!
+  updatedAt: DateTime
+}
+
+input MessageCreateWithoutSenderInput {
+  createdAt: DateTime
+  group: MessagerGroupCreateNestedOneWithoutMessagesInput!
+  text: String!
+  updatedAt: DateTime
+}
+
 input MessageListRelationFilter {
   every: MessageWhereInput
   none: MessageWhereInput
@@ -426,6 +2003,98 @@ input MessageListRelationFilter {
 
 input MessageOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+input MessageScalarWhereInput {
+  AND: [MessageScalarWhereInput!]
+  NOT: [MessageScalarWhereInput!]
+  OR: [MessageScalarWhereInput!]
+  createdAt: DateTimeFilter
+  groupId: IntFilter
+  id: IntFilter
+  senderId: IntFilter
+  text: StringFilter
+  updatedAt: DateTimeFilter
+}
+
+input MessageUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  text: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpdateManyWithWhereWithoutGroupInput {
+  data: MessageUpdateManyMutationInput!
+  where: MessageScalarWhereInput!
+}
+
+input MessageUpdateManyWithWhereWithoutSenderInput {
+  data: MessageUpdateManyMutationInput!
+  where: MessageScalarWhereInput!
+}
+
+input MessageUpdateManyWithoutGroupInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutGroupInput!]
+  create: [MessageCreateWithoutGroupInput!]
+  createMany: MessageCreateManyGroupInputEnvelope
+  delete: [MessageWhereUniqueInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutGroupInput!]
+  updateMany: [MessageUpdateManyWithWhereWithoutGroupInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutGroupInput!]
+}
+
+input MessageUpdateManyWithoutSenderInput {
+  connect: [MessageWhereUniqueInput!]
+  connectOrCreate: [MessageCreateOrConnectWithoutSenderInput!]
+  create: [MessageCreateWithoutSenderInput!]
+  createMany: MessageCreateManySenderInputEnvelope
+  delete: [MessageWhereUniqueInput!]
+  deleteMany: [MessageScalarWhereInput!]
+  disconnect: [MessageWhereUniqueInput!]
+  set: [MessageWhereUniqueInput!]
+  update: [MessageUpdateWithWhereUniqueWithoutSenderInput!]
+  updateMany: [MessageUpdateManyWithWhereWithoutSenderInput!]
+  upsert: [MessageUpsertWithWhereUniqueWithoutSenderInput!]
+}
+
+input MessageUpdateWithWhereUniqueWithoutGroupInput {
+  data: MessageUpdateWithoutGroupInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpdateWithWhereUniqueWithoutSenderInput {
+  data: MessageUpdateWithoutSenderInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpdateWithoutGroupInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  sender: UserUpdateOneRequiredWithoutMessagesInput
+  text: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpdateWithoutSenderInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  group: MessagerGroupUpdateOneRequiredWithoutMessagesInput
+  text: StringFieldUpdateOperationsInput
+  updatedAt: DateTimeFieldUpdateOperationsInput
+}
+
+input MessageUpsertWithWhereUniqueWithoutGroupInput {
+  create: MessageCreateWithoutGroupInput!
+  update: MessageUpdateWithoutGroupInput!
+  where: MessageWhereUniqueInput!
+}
+
+input MessageUpsertWithWhereUniqueWithoutSenderInput {
+  create: MessageCreateWithoutSenderInput!
+  update: MessageUpdateWithoutSenderInput!
+  where: MessageWhereUniqueInput!
 }
 
 input MessageWhereInput {
@@ -458,6 +2127,104 @@ type MessagerGroup {
   type: String!
 }
 
+input MessagerGroupCreateManyAvatarInput {
+  createdAt: DateTime
+  id: Int
+  inviteURL: String
+  title: String!
+  type: String!
+}
+
+input MessagerGroupCreateManyAvatarInputEnvelope {
+  data: [MessagerGroupCreateManyAvatarInput!]
+  skipDuplicates: Boolean
+}
+
+input MessagerGroupCreateNestedManyWithoutAdminsInput {
+  connect: [MessagerGroupWhereUniqueInput!]
+  connectOrCreate: [MessagerGroupCreateOrConnectWithoutAdminsInput!]
+  create: [MessagerGroupCreateWithoutAdminsInput!]
+}
+
+input MessagerGroupCreateNestedManyWithoutAvatarInput {
+  connect: [MessagerGroupWhereUniqueInput!]
+  connectOrCreate: [MessagerGroupCreateOrConnectWithoutAvatarInput!]
+  create: [MessagerGroupCreateWithoutAvatarInput!]
+  createMany: MessagerGroupCreateManyAvatarInputEnvelope
+}
+
+input MessagerGroupCreateNestedManyWithoutMembersInput {
+  connect: [MessagerGroupWhereUniqueInput!]
+  connectOrCreate: [MessagerGroupCreateOrConnectWithoutMembersInput!]
+  create: [MessagerGroupCreateWithoutMembersInput!]
+}
+
+input MessagerGroupCreateNestedOneWithoutMessagesInput {
+  connect: MessagerGroupWhereUniqueInput
+  connectOrCreate: MessagerGroupCreateOrConnectWithoutMessagesInput
+  create: MessagerGroupCreateWithoutMessagesInput
+}
+
+input MessagerGroupCreateOrConnectWithoutAdminsInput {
+  create: MessagerGroupCreateWithoutAdminsInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupCreateOrConnectWithoutAvatarInput {
+  create: MessagerGroupCreateWithoutAvatarInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupCreateOrConnectWithoutMembersInput {
+  create: MessagerGroupCreateWithoutMembersInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupCreateOrConnectWithoutMessagesInput {
+  create: MessagerGroupCreateWithoutMessagesInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupCreateWithoutAdminsInput {
+  avatar: MediaCreateNestedOneWithoutMessagerGroupInput
+  createdAt: DateTime
+  inviteURL: String
+  members: UserCreateNestedManyWithoutGroupsInput
+  messages: MessageCreateNestedManyWithoutGroupInput
+  title: String!
+  type: String!
+}
+
+input MessagerGroupCreateWithoutAvatarInput {
+  admins: UserCreateNestedManyWithoutGroupAdminsInput
+  createdAt: DateTime
+  inviteURL: String
+  members: UserCreateNestedManyWithoutGroupsInput
+  messages: MessageCreateNestedManyWithoutGroupInput
+  title: String!
+  type: String!
+}
+
+input MessagerGroupCreateWithoutMembersInput {
+  admins: UserCreateNestedManyWithoutGroupAdminsInput
+  avatar: MediaCreateNestedOneWithoutMessagerGroupInput
+  createdAt: DateTime
+  inviteURL: String
+  messages: MessageCreateNestedManyWithoutGroupInput
+  title: String!
+  type: String!
+}
+
+input MessagerGroupCreateWithoutMessagesInput {
+  admins: UserCreateNestedManyWithoutGroupAdminsInput
+  avatar: MediaCreateNestedOneWithoutMessagerGroupInput
+  createdAt: DateTime
+  inviteURL: String
+  members: UserCreateNestedManyWithoutGroupsInput
+  title: String!
+  type: String!
+}
+
 input MessagerGroupListRelationFilter {
   every: MessagerGroupWhereInput
   none: MessagerGroupWhereInput
@@ -479,6 +2246,166 @@ input MessagerGroupOrderByWithRelationInput {
   messages: MessageOrderByRelationAggregateInput
   title: SortOrder
   type: SortOrder
+}
+
+input MessagerGroupScalarWhereInput {
+  AND: [MessagerGroupScalarWhereInput!]
+  NOT: [MessagerGroupScalarWhereInput!]
+  OR: [MessagerGroupScalarWhereInput!]
+  avatarId: IntNullableFilter
+  createdAt: DateTimeFilter
+  id: IntFilter
+  inviteURL: StringNullableFilter
+  title: StringFilter
+  type: StringFilter
+}
+
+input MessagerGroupUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  inviteURL: NullableStringFieldUpdateOperationsInput
+  title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+}
+
+input MessagerGroupUpdateManyWithWhereWithoutAdminsInput {
+  data: MessagerGroupUpdateManyMutationInput!
+  where: MessagerGroupScalarWhereInput!
+}
+
+input MessagerGroupUpdateManyWithWhereWithoutAvatarInput {
+  data: MessagerGroupUpdateManyMutationInput!
+  where: MessagerGroupScalarWhereInput!
+}
+
+input MessagerGroupUpdateManyWithWhereWithoutMembersInput {
+  data: MessagerGroupUpdateManyMutationInput!
+  where: MessagerGroupScalarWhereInput!
+}
+
+input MessagerGroupUpdateManyWithoutAdminsInput {
+  connect: [MessagerGroupWhereUniqueInput!]
+  connectOrCreate: [MessagerGroupCreateOrConnectWithoutAdminsInput!]
+  create: [MessagerGroupCreateWithoutAdminsInput!]
+  delete: [MessagerGroupWhereUniqueInput!]
+  deleteMany: [MessagerGroupScalarWhereInput!]
+  disconnect: [MessagerGroupWhereUniqueInput!]
+  set: [MessagerGroupWhereUniqueInput!]
+  update: [MessagerGroupUpdateWithWhereUniqueWithoutAdminsInput!]
+  updateMany: [MessagerGroupUpdateManyWithWhereWithoutAdminsInput!]
+  upsert: [MessagerGroupUpsertWithWhereUniqueWithoutAdminsInput!]
+}
+
+input MessagerGroupUpdateManyWithoutAvatarInput {
+  connect: [MessagerGroupWhereUniqueInput!]
+  connectOrCreate: [MessagerGroupCreateOrConnectWithoutAvatarInput!]
+  create: [MessagerGroupCreateWithoutAvatarInput!]
+  createMany: MessagerGroupCreateManyAvatarInputEnvelope
+  delete: [MessagerGroupWhereUniqueInput!]
+  deleteMany: [MessagerGroupScalarWhereInput!]
+  disconnect: [MessagerGroupWhereUniqueInput!]
+  set: [MessagerGroupWhereUniqueInput!]
+  update: [MessagerGroupUpdateWithWhereUniqueWithoutAvatarInput!]
+  updateMany: [MessagerGroupUpdateManyWithWhereWithoutAvatarInput!]
+  upsert: [MessagerGroupUpsertWithWhereUniqueWithoutAvatarInput!]
+}
+
+input MessagerGroupUpdateManyWithoutMembersInput {
+  connect: [MessagerGroupWhereUniqueInput!]
+  connectOrCreate: [MessagerGroupCreateOrConnectWithoutMembersInput!]
+  create: [MessagerGroupCreateWithoutMembersInput!]
+  delete: [MessagerGroupWhereUniqueInput!]
+  deleteMany: [MessagerGroupScalarWhereInput!]
+  disconnect: [MessagerGroupWhereUniqueInput!]
+  set: [MessagerGroupWhereUniqueInput!]
+  update: [MessagerGroupUpdateWithWhereUniqueWithoutMembersInput!]
+  updateMany: [MessagerGroupUpdateManyWithWhereWithoutMembersInput!]
+  upsert: [MessagerGroupUpsertWithWhereUniqueWithoutMembersInput!]
+}
+
+input MessagerGroupUpdateOneRequiredWithoutMessagesInput {
+  connect: MessagerGroupWhereUniqueInput
+  connectOrCreate: MessagerGroupCreateOrConnectWithoutMessagesInput
+  create: MessagerGroupCreateWithoutMessagesInput
+  update: MessagerGroupUpdateWithoutMessagesInput
+  upsert: MessagerGroupUpsertWithoutMessagesInput
+}
+
+input MessagerGroupUpdateWithWhereUniqueWithoutAdminsInput {
+  data: MessagerGroupUpdateWithoutAdminsInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupUpdateWithWhereUniqueWithoutAvatarInput {
+  data: MessagerGroupUpdateWithoutAvatarInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupUpdateWithWhereUniqueWithoutMembersInput {
+  data: MessagerGroupUpdateWithoutMembersInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupUpdateWithoutAdminsInput {
+  avatar: MediaUpdateOneWithoutMessagerGroupInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  inviteURL: NullableStringFieldUpdateOperationsInput
+  members: UserUpdateManyWithoutGroupsInput
+  messages: MessageUpdateManyWithoutGroupInput
+  title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+}
+
+input MessagerGroupUpdateWithoutAvatarInput {
+  admins: UserUpdateManyWithoutGroupAdminsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  inviteURL: NullableStringFieldUpdateOperationsInput
+  members: UserUpdateManyWithoutGroupsInput
+  messages: MessageUpdateManyWithoutGroupInput
+  title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+}
+
+input MessagerGroupUpdateWithoutMembersInput {
+  admins: UserUpdateManyWithoutGroupAdminsInput
+  avatar: MediaUpdateOneWithoutMessagerGroupInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  inviteURL: NullableStringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutGroupInput
+  title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+}
+
+input MessagerGroupUpdateWithoutMessagesInput {
+  admins: UserUpdateManyWithoutGroupAdminsInput
+  avatar: MediaUpdateOneWithoutMessagerGroupInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  inviteURL: NullableStringFieldUpdateOperationsInput
+  members: UserUpdateManyWithoutGroupsInput
+  title: StringFieldUpdateOperationsInput
+  type: StringFieldUpdateOperationsInput
+}
+
+input MessagerGroupUpsertWithWhereUniqueWithoutAdminsInput {
+  create: MessagerGroupCreateWithoutAdminsInput!
+  update: MessagerGroupUpdateWithoutAdminsInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupUpsertWithWhereUniqueWithoutAvatarInput {
+  create: MessagerGroupCreateWithoutAvatarInput!
+  update: MessagerGroupUpdateWithoutAvatarInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupUpsertWithWhereUniqueWithoutMembersInput {
+  create: MessagerGroupCreateWithoutMembersInput!
+  update: MessagerGroupUpdateWithoutMembersInput!
+  where: MessagerGroupWhereUniqueInput!
+}
+
+input MessagerGroupUpsertWithoutMessagesInput {
+  create: MessagerGroupCreateWithoutMessagesInput!
+  update: MessagerGroupUpdateWithoutMessagesInput!
 }
 
 input MessagerGroupWhereInput {
@@ -511,8 +2438,8 @@ type Mutation {
   createMedia(data: createMediaInput!): SignUrlResponse
   createOneCourse(data: createCourseInput!): Course
   createOneEvent(data: EventCreatedInput!): Event
+  createOneStream(data: StreamCreateInput!): Stream!
   createOneTest(data: TestCreateInput!): Test!
-  createStream(data: createStreamArgs!): Stream
   deleteGroup(data: deleteGroupInput!): String
   deleteMediaElement(data: deleteMediaElementInput!): String
   deleteOneCourse(where: CourseWhereUniqueInput!): Course
@@ -544,9 +2471,8 @@ type Mutation {
   updateCourse(data: updateCourseInput!): String
   updateGroup(data: updateGroupInput!): MessagerGroup
   updateOneEvent(data: EventUpdatedInput!): String
+  updateOneStream(data: StreamUpdateInput!, where: StreamWhereUniqueInput!): Stream
   updateOneTest(data: TestUpdateInput!, where: TestWhereUniqueInput!): Test
-  updateStream(data: createStreamArgs!): Stream
-  updateStreamActivity(data: updateStreamActivityArgs!): Stream
   updateUserData(data: updateUserInput): User
 }
 
@@ -596,6 +2522,17 @@ input NestedEnumsectionTypesFilter {
   in: [sectionTypes!]
   not: NestedEnumsectionTypesFilter
   notIn: [sectionTypes!]
+}
+
+input NestedFloatFilter {
+  equals: Float
+  gt: Float
+  gte: Float
+  in: [Float!]
+  lt: Float
+  lte: Float
+  not: NestedFloatFilter
+  notIn: [Float!]
 }
 
 input NestedIntFilter {
@@ -648,6 +2585,26 @@ input NestedStringNullableFilter {
   startsWith: String
 }
 
+input NullableDateTimeFieldUpdateOperationsInput {
+  set: DateTime
+}
+
+input NullableEnumcourseTypeEnumFieldUpdateOperationsInput {
+  set: courseTypeEnum
+}
+
+input NullableIntFieldUpdateOperationsInput {
+  decrement: Int
+  divide: Int
+  increment: Int
+  multiply: Int
+  set: Int
+}
+
+input NullableStringFieldUpdateOperationsInput {
+  set: String
+}
+
 type PlatformConfig {
   createdAt: DateTime!
   eventsShownOnLanding(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int): [Event!]!
@@ -663,6 +2620,110 @@ type PlatformConfig {
   totalExtraBudgetInvestment: Int!
 }
 
+input PlatformConfigCreateNestedManyWithoutCoursesShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutCoursesShownOnLandingInput!]
+}
+
+input PlatformConfigCreateNestedManyWithoutEventsShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutEventsShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutEventsShownOnLandingInput!]
+}
+
+input PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutNewsShownOnLandingInput!]
+}
+
+input PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutOffersShownOnLandingInput!]
+}
+
+input PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput {
+  create: PlatformConfigCreateWithoutCoursesShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigCreateOrConnectWithoutEventsShownOnLandingInput {
+  create: PlatformConfigCreateWithoutEventsShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput {
+  create: PlatformConfigCreateWithoutNewsShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput {
+  create: PlatformConfigCreateWithoutOffersShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigCreateWithoutCoursesShownOnLandingInput {
+  createdAt: DateTime
+  eventsShownOnLanding: EventCreateNestedManyWithoutPlatformConfigShowedInput
+  newsShownOnLanding: PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
+  offersShownOnLanding: PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
+  platformDescription: String!
+  platformShortDescription: String!
+  platformTagline: String!
+  platformTitle: String!
+  totalBudgetInvestment: Int!
+  totalCompanyCount: Int!
+  totalExtraBudgetInvestment: Int!
+  totalcourseCount: Int!
+}
+
+input PlatformConfigCreateWithoutEventsShownOnLandingInput {
+  coursesShownOnLanding: CourseCreateNestedManyWithoutPlatformConfigShowedInput
+  createdAt: DateTime
+  newsShownOnLanding: PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
+  offersShownOnLanding: PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
+  platformDescription: String!
+  platformShortDescription: String!
+  platformTagline: String!
+  platformTitle: String!
+  totalBudgetInvestment: Int!
+  totalCompanyCount: Int!
+  totalExtraBudgetInvestment: Int!
+  totalcourseCount: Int!
+}
+
+input PlatformConfigCreateWithoutNewsShownOnLandingInput {
+  coursesShownOnLanding: CourseCreateNestedManyWithoutPlatformConfigShowedInput
+  createdAt: DateTime
+  eventsShownOnLanding: EventCreateNestedManyWithoutPlatformConfigShowedInput
+  offersShownOnLanding: PostCreateNestedManyWithoutPlatformConfigOffersShowedInput
+  platformDescription: String!
+  platformShortDescription: String!
+  platformTagline: String!
+  platformTitle: String!
+  totalBudgetInvestment: Int!
+  totalCompanyCount: Int!
+  totalExtraBudgetInvestment: Int!
+  totalcourseCount: Int!
+}
+
+input PlatformConfigCreateWithoutOffersShownOnLandingInput {
+  coursesShownOnLanding: CourseCreateNestedManyWithoutPlatformConfigShowedInput
+  createdAt: DateTime
+  eventsShownOnLanding: EventCreateNestedManyWithoutPlatformConfigShowedInput
+  newsShownOnLanding: PostCreateNestedManyWithoutPlatformConfigNewsShowedInput
+  platformDescription: String!
+  platformShortDescription: String!
+  platformTagline: String!
+  platformTitle: String!
+  totalBudgetInvestment: Int!
+  totalCompanyCount: Int!
+  totalExtraBudgetInvestment: Int!
+  totalcourseCount: Int!
+}
+
 input PlatformConfigListRelationFilter {
   every: PlatformConfigWhereInput
   none: PlatformConfigWhereInput
@@ -671,6 +2732,210 @@ input PlatformConfigListRelationFilter {
 
 input PlatformConfigOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+input PlatformConfigScalarWhereInput {
+  AND: [PlatformConfigScalarWhereInput!]
+  NOT: [PlatformConfigScalarWhereInput!]
+  OR: [PlatformConfigScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: IntFilter
+  platformDescription: StringFilter
+  platformShortDescription: StringFilter
+  platformTagline: StringFilter
+  platformTitle: StringFilter
+  totalBudgetInvestment: IntFilter
+  totalCompanyCount: IntFilter
+  totalExtraBudgetInvestment: IntFilter
+  totalcourseCount: IntFilter
+}
+
+input PlatformConfigUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  platformDescription: StringFieldUpdateOperationsInput
+  platformShortDescription: StringFieldUpdateOperationsInput
+  platformTagline: StringFieldUpdateOperationsInput
+  platformTitle: StringFieldUpdateOperationsInput
+  totalBudgetInvestment: IntFieldUpdateOperationsInput
+  totalCompanyCount: IntFieldUpdateOperationsInput
+  totalExtraBudgetInvestment: IntFieldUpdateOperationsInput
+  totalcourseCount: IntFieldUpdateOperationsInput
+}
+
+input PlatformConfigUpdateManyWithWhereWithoutCoursesShownOnLandingInput {
+  data: PlatformConfigUpdateManyMutationInput!
+  where: PlatformConfigScalarWhereInput!
+}
+
+input PlatformConfigUpdateManyWithWhereWithoutEventsShownOnLandingInput {
+  data: PlatformConfigUpdateManyMutationInput!
+  where: PlatformConfigScalarWhereInput!
+}
+
+input PlatformConfigUpdateManyWithWhereWithoutNewsShownOnLandingInput {
+  data: PlatformConfigUpdateManyMutationInput!
+  where: PlatformConfigScalarWhereInput!
+}
+
+input PlatformConfigUpdateManyWithWhereWithoutOffersShownOnLandingInput {
+  data: PlatformConfigUpdateManyMutationInput!
+  where: PlatformConfigScalarWhereInput!
+}
+
+input PlatformConfigUpdateManyWithoutCoursesShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutCoursesShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutCoursesShownOnLandingInput!]
+  delete: [PlatformConfigWhereUniqueInput!]
+  deleteMany: [PlatformConfigScalarWhereInput!]
+  disconnect: [PlatformConfigWhereUniqueInput!]
+  set: [PlatformConfigWhereUniqueInput!]
+  update: [PlatformConfigUpdateWithWhereUniqueWithoutCoursesShownOnLandingInput!]
+  updateMany: [PlatformConfigUpdateManyWithWhereWithoutCoursesShownOnLandingInput!]
+  upsert: [PlatformConfigUpsertWithWhereUniqueWithoutCoursesShownOnLandingInput!]
+}
+
+input PlatformConfigUpdateManyWithoutEventsShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutEventsShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutEventsShownOnLandingInput!]
+  delete: [PlatformConfigWhereUniqueInput!]
+  deleteMany: [PlatformConfigScalarWhereInput!]
+  disconnect: [PlatformConfigWhereUniqueInput!]
+  set: [PlatformConfigWhereUniqueInput!]
+  update: [PlatformConfigUpdateWithWhereUniqueWithoutEventsShownOnLandingInput!]
+  updateMany: [PlatformConfigUpdateManyWithWhereWithoutEventsShownOnLandingInput!]
+  upsert: [PlatformConfigUpsertWithWhereUniqueWithoutEventsShownOnLandingInput!]
+}
+
+input PlatformConfigUpdateManyWithoutNewsShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutNewsShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutNewsShownOnLandingInput!]
+  delete: [PlatformConfigWhereUniqueInput!]
+  deleteMany: [PlatformConfigScalarWhereInput!]
+  disconnect: [PlatformConfigWhereUniqueInput!]
+  set: [PlatformConfigWhereUniqueInput!]
+  update: [PlatformConfigUpdateWithWhereUniqueWithoutNewsShownOnLandingInput!]
+  updateMany: [PlatformConfigUpdateManyWithWhereWithoutNewsShownOnLandingInput!]
+  upsert: [PlatformConfigUpsertWithWhereUniqueWithoutNewsShownOnLandingInput!]
+}
+
+input PlatformConfigUpdateManyWithoutOffersShownOnLandingInput {
+  connect: [PlatformConfigWhereUniqueInput!]
+  connectOrCreate: [PlatformConfigCreateOrConnectWithoutOffersShownOnLandingInput!]
+  create: [PlatformConfigCreateWithoutOffersShownOnLandingInput!]
+  delete: [PlatformConfigWhereUniqueInput!]
+  deleteMany: [PlatformConfigScalarWhereInput!]
+  disconnect: [PlatformConfigWhereUniqueInput!]
+  set: [PlatformConfigWhereUniqueInput!]
+  update: [PlatformConfigUpdateWithWhereUniqueWithoutOffersShownOnLandingInput!]
+  updateMany: [PlatformConfigUpdateManyWithWhereWithoutOffersShownOnLandingInput!]
+  upsert: [PlatformConfigUpsertWithWhereUniqueWithoutOffersShownOnLandingInput!]
+}
+
+input PlatformConfigUpdateWithWhereUniqueWithoutCoursesShownOnLandingInput {
+  data: PlatformConfigUpdateWithoutCoursesShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigUpdateWithWhereUniqueWithoutEventsShownOnLandingInput {
+  data: PlatformConfigUpdateWithoutEventsShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigUpdateWithWhereUniqueWithoutNewsShownOnLandingInput {
+  data: PlatformConfigUpdateWithoutNewsShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigUpdateWithWhereUniqueWithoutOffersShownOnLandingInput {
+  data: PlatformConfigUpdateWithoutOffersShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigUpdateWithoutCoursesShownOnLandingInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  eventsShownOnLanding: EventUpdateManyWithoutPlatformConfigShowedInput
+  newsShownOnLanding: PostUpdateManyWithoutPlatformConfigNewsShowedInput
+  offersShownOnLanding: PostUpdateManyWithoutPlatformConfigOffersShowedInput
+  platformDescription: StringFieldUpdateOperationsInput
+  platformShortDescription: StringFieldUpdateOperationsInput
+  platformTagline: StringFieldUpdateOperationsInput
+  platformTitle: StringFieldUpdateOperationsInput
+  totalBudgetInvestment: IntFieldUpdateOperationsInput
+  totalCompanyCount: IntFieldUpdateOperationsInput
+  totalExtraBudgetInvestment: IntFieldUpdateOperationsInput
+  totalcourseCount: IntFieldUpdateOperationsInput
+}
+
+input PlatformConfigUpdateWithoutEventsShownOnLandingInput {
+  coursesShownOnLanding: CourseUpdateManyWithoutPlatformConfigShowedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  newsShownOnLanding: PostUpdateManyWithoutPlatformConfigNewsShowedInput
+  offersShownOnLanding: PostUpdateManyWithoutPlatformConfigOffersShowedInput
+  platformDescription: StringFieldUpdateOperationsInput
+  platformShortDescription: StringFieldUpdateOperationsInput
+  platformTagline: StringFieldUpdateOperationsInput
+  platformTitle: StringFieldUpdateOperationsInput
+  totalBudgetInvestment: IntFieldUpdateOperationsInput
+  totalCompanyCount: IntFieldUpdateOperationsInput
+  totalExtraBudgetInvestment: IntFieldUpdateOperationsInput
+  totalcourseCount: IntFieldUpdateOperationsInput
+}
+
+input PlatformConfigUpdateWithoutNewsShownOnLandingInput {
+  coursesShownOnLanding: CourseUpdateManyWithoutPlatformConfigShowedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  eventsShownOnLanding: EventUpdateManyWithoutPlatformConfigShowedInput
+  offersShownOnLanding: PostUpdateManyWithoutPlatformConfigOffersShowedInput
+  platformDescription: StringFieldUpdateOperationsInput
+  platformShortDescription: StringFieldUpdateOperationsInput
+  platformTagline: StringFieldUpdateOperationsInput
+  platformTitle: StringFieldUpdateOperationsInput
+  totalBudgetInvestment: IntFieldUpdateOperationsInput
+  totalCompanyCount: IntFieldUpdateOperationsInput
+  totalExtraBudgetInvestment: IntFieldUpdateOperationsInput
+  totalcourseCount: IntFieldUpdateOperationsInput
+}
+
+input PlatformConfigUpdateWithoutOffersShownOnLandingInput {
+  coursesShownOnLanding: CourseUpdateManyWithoutPlatformConfigShowedInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  eventsShownOnLanding: EventUpdateManyWithoutPlatformConfigShowedInput
+  newsShownOnLanding: PostUpdateManyWithoutPlatformConfigNewsShowedInput
+  platformDescription: StringFieldUpdateOperationsInput
+  platformShortDescription: StringFieldUpdateOperationsInput
+  platformTagline: StringFieldUpdateOperationsInput
+  platformTitle: StringFieldUpdateOperationsInput
+  totalBudgetInvestment: IntFieldUpdateOperationsInput
+  totalCompanyCount: IntFieldUpdateOperationsInput
+  totalExtraBudgetInvestment: IntFieldUpdateOperationsInput
+  totalcourseCount: IntFieldUpdateOperationsInput
+}
+
+input PlatformConfigUpsertWithWhereUniqueWithoutCoursesShownOnLandingInput {
+  create: PlatformConfigCreateWithoutCoursesShownOnLandingInput!
+  update: PlatformConfigUpdateWithoutCoursesShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigUpsertWithWhereUniqueWithoutEventsShownOnLandingInput {
+  create: PlatformConfigCreateWithoutEventsShownOnLandingInput!
+  update: PlatformConfigUpdateWithoutEventsShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigUpsertWithWhereUniqueWithoutNewsShownOnLandingInput {
+  create: PlatformConfigCreateWithoutNewsShownOnLandingInput!
+  update: PlatformConfigUpdateWithoutNewsShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
+}
+
+input PlatformConfigUpsertWithWhereUniqueWithoutOffersShownOnLandingInput {
+  create: PlatformConfigCreateWithoutOffersShownOnLandingInput!
+  update: PlatformConfigUpdateWithoutOffersShownOnLandingInput!
+  where: PlatformConfigWhereUniqueInput!
 }
 
 input PlatformConfigWhereInput {
@@ -724,6 +2989,206 @@ input PostCreateInput {
   title: String!
 }
 
+input PostCreateManyCourseInput {
+  articleBody: String
+  authorID: Int
+  createdAt: DateTime
+  description: String!
+  id: Int
+  isNews: Boolean
+  posterId: Int
+  tags: PostCreateManytagsInput
+  title: String!
+}
+
+input PostCreateManyCourseInputEnvelope {
+  data: [PostCreateManyCourseInput!]
+  skipDuplicates: Boolean
+}
+
+input PostCreateManyPosterInput {
+  articleBody: String
+  authorID: Int
+  courseID: Int
+  createdAt: DateTime
+  description: String!
+  id: Int
+  isNews: Boolean
+  tags: PostCreateManytagsInput
+  title: String!
+}
+
+input PostCreateManyPosterInputEnvelope {
+  data: [PostCreateManyPosterInput!]
+  skipDuplicates: Boolean
+}
+
+input PostCreateManytagsInput {
+  set: [String!]
+}
+
+input PostCreateNestedManyWithoutCourseInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutCourseInput!]
+  create: [PostCreateWithoutCourseInput!]
+  createMany: PostCreateManyCourseInputEnvelope
+}
+
+input PostCreateNestedManyWithoutPlatformConfigNewsShowedInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigNewsShowedInput!]
+  create: [PostCreateWithoutPlatformConfigNewsShowedInput!]
+}
+
+input PostCreateNestedManyWithoutPlatformConfigOffersShowedInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigOffersShowedInput!]
+  create: [PostCreateWithoutPlatformConfigOffersShowedInput!]
+}
+
+input PostCreateNestedManyWithoutPosterInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutPosterInput!]
+  create: [PostCreateWithoutPosterInput!]
+  createMany: PostCreateManyPosterInputEnvelope
+}
+
+input PostCreateNestedOneWithoutArticleInput {
+  connect: PostWhereUniqueInput
+  connectOrCreate: PostCreateOrConnectWithoutArticleInput
+  create: PostCreateWithoutArticleInput
+}
+
+input PostCreateNestedOneWithoutPostMediaInput {
+  connect: PostWhereUniqueInput
+  connectOrCreate: PostCreateOrConnectWithoutPostMediaInput
+  create: PostCreateWithoutPostMediaInput
+}
+
+input PostCreateOrConnectWithoutArticleInput {
+  create: PostCreateWithoutArticleInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateOrConnectWithoutCourseInput {
+  create: PostCreateWithoutCourseInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateOrConnectWithoutPlatformConfigNewsShowedInput {
+  create: PostCreateWithoutPlatformConfigNewsShowedInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateOrConnectWithoutPlatformConfigOffersShowedInput {
+  create: PostCreateWithoutPlatformConfigOffersShowedInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateOrConnectWithoutPostMediaInput {
+  create: PostCreateWithoutPostMediaInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateOrConnectWithoutPosterInput {
+  create: PostCreateWithoutPosterInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostCreateWithoutArticleInput {
+  articleBody: String
+  authorID: Int
+  course: CourseCreateNestedOneWithoutPublishedPostsInput
+  createdAt: DateTime
+  description: String!
+  isNews: Boolean
+  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
+  postMedia: MediaCreateNestedManyWithoutPostMediaInput
+  poster: MediaCreateNestedOneWithoutPostInput
+  tags: PostCreatetagsInput
+  title: String!
+}
+
+input PostCreateWithoutCourseInput {
+  article: ArticleCreateNestedOneWithoutPostInput
+  articleBody: String
+  authorID: Int
+  createdAt: DateTime
+  description: String!
+  isNews: Boolean
+  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
+  postMedia: MediaCreateNestedManyWithoutPostMediaInput
+  poster: MediaCreateNestedOneWithoutPostInput
+  tags: PostCreatetagsInput
+  title: String!
+}
+
+input PostCreateWithoutPlatformConfigNewsShowedInput {
+  article: ArticleCreateNestedOneWithoutPostInput
+  articleBody: String
+  authorID: Int
+  course: CourseCreateNestedOneWithoutPublishedPostsInput
+  createdAt: DateTime
+  description: String!
+  isNews: Boolean
+  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
+  postMedia: MediaCreateNestedManyWithoutPostMediaInput
+  poster: MediaCreateNestedOneWithoutPostInput
+  tags: PostCreatetagsInput
+  title: String!
+}
+
+input PostCreateWithoutPlatformConfigOffersShowedInput {
+  article: ArticleCreateNestedOneWithoutPostInput
+  articleBody: String
+  authorID: Int
+  course: CourseCreateNestedOneWithoutPublishedPostsInput
+  createdAt: DateTime
+  description: String!
+  isNews: Boolean
+  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
+  postMedia: MediaCreateNestedManyWithoutPostMediaInput
+  poster: MediaCreateNestedOneWithoutPostInput
+  tags: PostCreatetagsInput
+  title: String!
+}
+
+input PostCreateWithoutPostMediaInput {
+  article: ArticleCreateNestedOneWithoutPostInput
+  articleBody: String
+  authorID: Int
+  course: CourseCreateNestedOneWithoutPublishedPostsInput
+  createdAt: DateTime
+  description: String!
+  isNews: Boolean
+  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
+  poster: MediaCreateNestedOneWithoutPostInput
+  tags: PostCreatetagsInput
+  title: String!
+}
+
+input PostCreateWithoutPosterInput {
+  article: ArticleCreateNestedOneWithoutPostInput
+  articleBody: String
+  authorID: Int
+  course: CourseCreateNestedOneWithoutPublishedPostsInput
+  createdAt: DateTime
+  description: String!
+  isNews: Boolean
+  platformConfigNewsShowed: PlatformConfigCreateNestedManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigCreateNestedManyWithoutOffersShownOnLandingInput
+  postMedia: MediaCreateNestedManyWithoutPostMediaInput
+  tags: PostCreatetagsInput
+  title: String!
+}
+
+input PostCreatetagsInput {
+  set: [String!]
+}
+
 input PostListRelationFilter {
   every: PostWhereInput
   none: PostWhereInput
@@ -751,6 +3216,275 @@ input PostOrderByWithRelationInput {
   posterId: SortOrder
   tags: SortOrder
   title: SortOrder
+}
+
+input PostScalarWhereInput {
+  AND: [PostScalarWhereInput!]
+  NOT: [PostScalarWhereInput!]
+  OR: [PostScalarWhereInput!]
+  articleBody: StringNullableFilter
+  authorID: IntNullableFilter
+  courseID: IntNullableFilter
+  createdAt: DateTimeFilter
+  description: StringFilter
+  id: IntFilter
+  isNews: BoolFilter
+  posterId: IntNullableFilter
+  tags: StringNullableListFilter
+  title: StringFilter
+}
+
+input PostUpdateManyMutationInput {
+  articleBody: NullableStringFieldUpdateOperationsInput
+  authorID: NullableIntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  isNews: BoolFieldUpdateOperationsInput
+  tags: PostUpdatetagsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateManyWithWhereWithoutCourseInput {
+  data: PostUpdateManyMutationInput!
+  where: PostScalarWhereInput!
+}
+
+input PostUpdateManyWithWhereWithoutPlatformConfigNewsShowedInput {
+  data: PostUpdateManyMutationInput!
+  where: PostScalarWhereInput!
+}
+
+input PostUpdateManyWithWhereWithoutPlatformConfigOffersShowedInput {
+  data: PostUpdateManyMutationInput!
+  where: PostScalarWhereInput!
+}
+
+input PostUpdateManyWithWhereWithoutPosterInput {
+  data: PostUpdateManyMutationInput!
+  where: PostScalarWhereInput!
+}
+
+input PostUpdateManyWithoutCourseInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutCourseInput!]
+  create: [PostCreateWithoutCourseInput!]
+  createMany: PostCreateManyCourseInputEnvelope
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutCourseInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutCourseInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutCourseInput!]
+}
+
+input PostUpdateManyWithoutPlatformConfigNewsShowedInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigNewsShowedInput!]
+  create: [PostCreateWithoutPlatformConfigNewsShowedInput!]
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutPlatformConfigNewsShowedInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutPlatformConfigNewsShowedInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutPlatformConfigNewsShowedInput!]
+}
+
+input PostUpdateManyWithoutPlatformConfigOffersShowedInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutPlatformConfigOffersShowedInput!]
+  create: [PostCreateWithoutPlatformConfigOffersShowedInput!]
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutPlatformConfigOffersShowedInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutPlatformConfigOffersShowedInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutPlatformConfigOffersShowedInput!]
+}
+
+input PostUpdateManyWithoutPosterInput {
+  connect: [PostWhereUniqueInput!]
+  connectOrCreate: [PostCreateOrConnectWithoutPosterInput!]
+  create: [PostCreateWithoutPosterInput!]
+  createMany: PostCreateManyPosterInputEnvelope
+  delete: [PostWhereUniqueInput!]
+  deleteMany: [PostScalarWhereInput!]
+  disconnect: [PostWhereUniqueInput!]
+  set: [PostWhereUniqueInput!]
+  update: [PostUpdateWithWhereUniqueWithoutPosterInput!]
+  updateMany: [PostUpdateManyWithWhereWithoutPosterInput!]
+  upsert: [PostUpsertWithWhereUniqueWithoutPosterInput!]
+}
+
+input PostUpdateOneWithoutArticleInput {
+  connect: PostWhereUniqueInput
+  connectOrCreate: PostCreateOrConnectWithoutArticleInput
+  create: PostCreateWithoutArticleInput
+  delete: Boolean
+  disconnect: Boolean
+  update: PostUpdateWithoutArticleInput
+  upsert: PostUpsertWithoutArticleInput
+}
+
+input PostUpdateOneWithoutPostMediaInput {
+  connect: PostWhereUniqueInput
+  connectOrCreate: PostCreateOrConnectWithoutPostMediaInput
+  create: PostCreateWithoutPostMediaInput
+  delete: Boolean
+  disconnect: Boolean
+  update: PostUpdateWithoutPostMediaInput
+  upsert: PostUpsertWithoutPostMediaInput
+}
+
+input PostUpdateWithWhereUniqueWithoutCourseInput {
+  data: PostUpdateWithoutCourseInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpdateWithWhereUniqueWithoutPlatformConfigNewsShowedInput {
+  data: PostUpdateWithoutPlatformConfigNewsShowedInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpdateWithWhereUniqueWithoutPlatformConfigOffersShowedInput {
+  data: PostUpdateWithoutPlatformConfigOffersShowedInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpdateWithWhereUniqueWithoutPosterInput {
+  data: PostUpdateWithoutPosterInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpdateWithoutArticleInput {
+  articleBody: NullableStringFieldUpdateOperationsInput
+  authorID: NullableIntFieldUpdateOperationsInput
+  course: CourseUpdateOneWithoutPublishedPostsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  isNews: BoolFieldUpdateOperationsInput
+  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
+  postMedia: MediaUpdateManyWithoutPostMediaInput
+  poster: MediaUpdateOneWithoutPostInput
+  tags: PostUpdatetagsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateWithoutCourseInput {
+  article: ArticleUpdateOneWithoutPostInput
+  articleBody: NullableStringFieldUpdateOperationsInput
+  authorID: NullableIntFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  isNews: BoolFieldUpdateOperationsInput
+  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
+  postMedia: MediaUpdateManyWithoutPostMediaInput
+  poster: MediaUpdateOneWithoutPostInput
+  tags: PostUpdatetagsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateWithoutPlatformConfigNewsShowedInput {
+  article: ArticleUpdateOneWithoutPostInput
+  articleBody: NullableStringFieldUpdateOperationsInput
+  authorID: NullableIntFieldUpdateOperationsInput
+  course: CourseUpdateOneWithoutPublishedPostsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  isNews: BoolFieldUpdateOperationsInput
+  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
+  postMedia: MediaUpdateManyWithoutPostMediaInput
+  poster: MediaUpdateOneWithoutPostInput
+  tags: PostUpdatetagsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateWithoutPlatformConfigOffersShowedInput {
+  article: ArticleUpdateOneWithoutPostInput
+  articleBody: NullableStringFieldUpdateOperationsInput
+  authorID: NullableIntFieldUpdateOperationsInput
+  course: CourseUpdateOneWithoutPublishedPostsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  isNews: BoolFieldUpdateOperationsInput
+  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
+  postMedia: MediaUpdateManyWithoutPostMediaInput
+  poster: MediaUpdateOneWithoutPostInput
+  tags: PostUpdatetagsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateWithoutPostMediaInput {
+  article: ArticleUpdateOneWithoutPostInput
+  articleBody: NullableStringFieldUpdateOperationsInput
+  authorID: NullableIntFieldUpdateOperationsInput
+  course: CourseUpdateOneWithoutPublishedPostsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  isNews: BoolFieldUpdateOperationsInput
+  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
+  poster: MediaUpdateOneWithoutPostInput
+  tags: PostUpdatetagsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdateWithoutPosterInput {
+  article: ArticleUpdateOneWithoutPostInput
+  articleBody: NullableStringFieldUpdateOperationsInput
+  authorID: NullableIntFieldUpdateOperationsInput
+  course: CourseUpdateOneWithoutPublishedPostsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  description: StringFieldUpdateOperationsInput
+  isNews: BoolFieldUpdateOperationsInput
+  platformConfigNewsShowed: PlatformConfigUpdateManyWithoutNewsShownOnLandingInput
+  platformConfigOffersShowed: PlatformConfigUpdateManyWithoutOffersShownOnLandingInput
+  postMedia: MediaUpdateManyWithoutPostMediaInput
+  tags: PostUpdatetagsInput
+  title: StringFieldUpdateOperationsInput
+}
+
+input PostUpdatetagsInput {
+  push: String
+  set: [String!]
+}
+
+input PostUpsertWithWhereUniqueWithoutCourseInput {
+  create: PostCreateWithoutCourseInput!
+  update: PostUpdateWithoutCourseInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpsertWithWhereUniqueWithoutPlatformConfigNewsShowedInput {
+  create: PostCreateWithoutPlatformConfigNewsShowedInput!
+  update: PostUpdateWithoutPlatformConfigNewsShowedInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpsertWithWhereUniqueWithoutPlatformConfigOffersShowedInput {
+  create: PostCreateWithoutPlatformConfigOffersShowedInput!
+  update: PostUpdateWithoutPlatformConfigOffersShowedInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpsertWithWhereUniqueWithoutPosterInput {
+  create: PostCreateWithoutPosterInput!
+  update: PostUpdateWithoutPosterInput!
+  where: PostWhereUniqueInput!
+}
+
+input PostUpsertWithoutArticleInput {
+  create: PostCreateWithoutArticleInput!
+  update: PostUpdateWithoutArticleInput!
+}
+
+input PostUpsertWithoutPostMediaInput {
+  create: PostCreateWithoutPostMediaInput!
+  update: PostUpdateWithoutPostMediaInput!
 }
 
 input PostWhereInput {
@@ -825,6 +3559,36 @@ type RegisteredForEvent {
   surname: String!
 }
 
+input RegisteredForEventCreateManyEventInput {
+  email: String!
+  id: Int
+  name: String!
+  surname: String!
+}
+
+input RegisteredForEventCreateManyEventInputEnvelope {
+  data: [RegisteredForEventCreateManyEventInput!]
+  skipDuplicates: Boolean
+}
+
+input RegisteredForEventCreateNestedManyWithoutEventInput {
+  connect: [RegisteredForEventWhereUniqueInput!]
+  connectOrCreate: [RegisteredForEventCreateOrConnectWithoutEventInput!]
+  create: [RegisteredForEventCreateWithoutEventInput!]
+  createMany: RegisteredForEventCreateManyEventInputEnvelope
+}
+
+input RegisteredForEventCreateOrConnectWithoutEventInput {
+  create: RegisteredForEventCreateWithoutEventInput!
+  where: RegisteredForEventWhereUniqueInput!
+}
+
+input RegisteredForEventCreateWithoutEventInput {
+  email: String!
+  name: String!
+  surname: String!
+}
+
 input RegisteredForEventListRelationFilter {
   every: RegisteredForEventWhereInput
   none: RegisteredForEventWhereInput
@@ -833,6 +3597,59 @@ input RegisteredForEventListRelationFilter {
 
 input RegisteredForEventOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+input RegisteredForEventScalarWhereInput {
+  AND: [RegisteredForEventScalarWhereInput!]
+  NOT: [RegisteredForEventScalarWhereInput!]
+  OR: [RegisteredForEventScalarWhereInput!]
+  email: StringFilter
+  eventId: IntFilter
+  id: IntFilter
+  name: StringFilter
+  surname: StringFilter
+}
+
+input RegisteredForEventUpdateManyMutationInput {
+  email: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  surname: StringFieldUpdateOperationsInput
+}
+
+input RegisteredForEventUpdateManyWithWhereWithoutEventInput {
+  data: RegisteredForEventUpdateManyMutationInput!
+  where: RegisteredForEventScalarWhereInput!
+}
+
+input RegisteredForEventUpdateManyWithoutEventInput {
+  connect: [RegisteredForEventWhereUniqueInput!]
+  connectOrCreate: [RegisteredForEventCreateOrConnectWithoutEventInput!]
+  create: [RegisteredForEventCreateWithoutEventInput!]
+  createMany: RegisteredForEventCreateManyEventInputEnvelope
+  delete: [RegisteredForEventWhereUniqueInput!]
+  deleteMany: [RegisteredForEventScalarWhereInput!]
+  disconnect: [RegisteredForEventWhereUniqueInput!]
+  set: [RegisteredForEventWhereUniqueInput!]
+  update: [RegisteredForEventUpdateWithWhereUniqueWithoutEventInput!]
+  updateMany: [RegisteredForEventUpdateManyWithWhereWithoutEventInput!]
+  upsert: [RegisteredForEventUpsertWithWhereUniqueWithoutEventInput!]
+}
+
+input RegisteredForEventUpdateWithWhereUniqueWithoutEventInput {
+  data: RegisteredForEventUpdateWithoutEventInput!
+  where: RegisteredForEventWhereUniqueInput!
+}
+
+input RegisteredForEventUpdateWithoutEventInput {
+  email: StringFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  surname: StringFieldUpdateOperationsInput
+}
+
+input RegisteredForEventUpsertWithWhereUniqueWithoutEventInput {
+  create: RegisteredForEventCreateWithoutEventInput!
+  update: RegisteredForEventUpdateWithoutEventInput!
+  where: RegisteredForEventWhereUniqueInput!
 }
 
 input RegisteredForEventWhereInput {
@@ -860,6 +3677,70 @@ type Section {
   type: sectionTypes!
 }
 
+input SectionCreateManyArticleInput {
+  id: Int
+  mediaID: Int
+  number: Int!
+  text: String
+  type: sectionTypes!
+}
+
+input SectionCreateManyArticleInputEnvelope {
+  data: [SectionCreateManyArticleInput!]
+  skipDuplicates: Boolean
+}
+
+input SectionCreateManyMediaInput {
+  articleID: Int!
+  id: Int
+  number: Int!
+  text: String
+  type: sectionTypes!
+}
+
+input SectionCreateManyMediaInputEnvelope {
+  data: [SectionCreateManyMediaInput!]
+  skipDuplicates: Boolean
+}
+
+input SectionCreateNestedManyWithoutArticleInput {
+  connect: [SectionWhereUniqueInput!]
+  connectOrCreate: [SectionCreateOrConnectWithoutArticleInput!]
+  create: [SectionCreateWithoutArticleInput!]
+  createMany: SectionCreateManyArticleInputEnvelope
+}
+
+input SectionCreateNestedManyWithoutMediaInput {
+  connect: [SectionWhereUniqueInput!]
+  connectOrCreate: [SectionCreateOrConnectWithoutMediaInput!]
+  create: [SectionCreateWithoutMediaInput!]
+  createMany: SectionCreateManyMediaInputEnvelope
+}
+
+input SectionCreateOrConnectWithoutArticleInput {
+  create: SectionCreateWithoutArticleInput!
+  where: SectionWhereUniqueInput!
+}
+
+input SectionCreateOrConnectWithoutMediaInput {
+  create: SectionCreateWithoutMediaInput!
+  where: SectionWhereUniqueInput!
+}
+
+input SectionCreateWithoutArticleInput {
+  media: MediaCreateNestedOneWithoutSectionInput
+  number: Int!
+  text: String
+  type: sectionTypes!
+}
+
+input SectionCreateWithoutMediaInput {
+  article: ArticleCreateNestedOneWithoutSectionsInput!
+  number: Int!
+  text: String
+  type: sectionTypes!
+}
+
 input SectionListRelationFilter {
   every: SectionWhereInput
   none: SectionWhereInput
@@ -868,6 +3749,98 @@ input SectionListRelationFilter {
 
 input SectionOrderByRelationAggregateInput {
   _count: SortOrder
+}
+
+input SectionScalarWhereInput {
+  AND: [SectionScalarWhereInput!]
+  NOT: [SectionScalarWhereInput!]
+  OR: [SectionScalarWhereInput!]
+  articleID: IntFilter
+  id: IntFilter
+  mediaID: IntNullableFilter
+  number: IntFilter
+  text: StringNullableFilter
+  type: EnumsectionTypesFilter
+}
+
+input SectionUpdateManyMutationInput {
+  number: IntFieldUpdateOperationsInput
+  text: NullableStringFieldUpdateOperationsInput
+  type: EnumsectionTypesFieldUpdateOperationsInput
+}
+
+input SectionUpdateManyWithWhereWithoutArticleInput {
+  data: SectionUpdateManyMutationInput!
+  where: SectionScalarWhereInput!
+}
+
+input SectionUpdateManyWithWhereWithoutMediaInput {
+  data: SectionUpdateManyMutationInput!
+  where: SectionScalarWhereInput!
+}
+
+input SectionUpdateManyWithoutArticleInput {
+  connect: [SectionWhereUniqueInput!]
+  connectOrCreate: [SectionCreateOrConnectWithoutArticleInput!]
+  create: [SectionCreateWithoutArticleInput!]
+  createMany: SectionCreateManyArticleInputEnvelope
+  delete: [SectionWhereUniqueInput!]
+  deleteMany: [SectionScalarWhereInput!]
+  disconnect: [SectionWhereUniqueInput!]
+  set: [SectionWhereUniqueInput!]
+  update: [SectionUpdateWithWhereUniqueWithoutArticleInput!]
+  updateMany: [SectionUpdateManyWithWhereWithoutArticleInput!]
+  upsert: [SectionUpsertWithWhereUniqueWithoutArticleInput!]
+}
+
+input SectionUpdateManyWithoutMediaInput {
+  connect: [SectionWhereUniqueInput!]
+  connectOrCreate: [SectionCreateOrConnectWithoutMediaInput!]
+  create: [SectionCreateWithoutMediaInput!]
+  createMany: SectionCreateManyMediaInputEnvelope
+  delete: [SectionWhereUniqueInput!]
+  deleteMany: [SectionScalarWhereInput!]
+  disconnect: [SectionWhereUniqueInput!]
+  set: [SectionWhereUniqueInput!]
+  update: [SectionUpdateWithWhereUniqueWithoutMediaInput!]
+  updateMany: [SectionUpdateManyWithWhereWithoutMediaInput!]
+  upsert: [SectionUpsertWithWhereUniqueWithoutMediaInput!]
+}
+
+input SectionUpdateWithWhereUniqueWithoutArticleInput {
+  data: SectionUpdateWithoutArticleInput!
+  where: SectionWhereUniqueInput!
+}
+
+input SectionUpdateWithWhereUniqueWithoutMediaInput {
+  data: SectionUpdateWithoutMediaInput!
+  where: SectionWhereUniqueInput!
+}
+
+input SectionUpdateWithoutArticleInput {
+  media: MediaUpdateOneWithoutSectionInput
+  number: IntFieldUpdateOperationsInput
+  text: NullableStringFieldUpdateOperationsInput
+  type: EnumsectionTypesFieldUpdateOperationsInput
+}
+
+input SectionUpdateWithoutMediaInput {
+  article: ArticleUpdateOneRequiredWithoutSectionsInput
+  number: IntFieldUpdateOperationsInput
+  text: NullableStringFieldUpdateOperationsInput
+  type: EnumsectionTypesFieldUpdateOperationsInput
+}
+
+input SectionUpsertWithWhereUniqueWithoutArticleInput {
+  create: SectionCreateWithoutArticleInput!
+  update: SectionUpdateWithoutArticleInput!
+  where: SectionWhereUniqueInput!
+}
+
+input SectionUpsertWithWhereUniqueWithoutMediaInput {
+  create: SectionCreateWithoutMediaInput!
+  update: SectionUpdateWithoutMediaInput!
+  where: SectionWhereUniqueInput!
 }
 
 input SectionWhereInput {
@@ -932,15 +3905,50 @@ enum SortOrder {
 
 type Stream {
   active: Boolean!
-  event: Event
   id: Int!
   streamKey: String!
+}
+
+input StreamCreateInput {
+  active: Boolean
+  name: String
+  streamKey: String
 }
 
 type StreamMessage {
   createdAt: DateTime!
   id: Int!
   sender: User!
+  text: String!
+}
+
+input StreamMessageCreateManySenderInput {
+  createdAt: DateTime
+  id: Int
+  streamId: Int!
+  text: String!
+}
+
+input StreamMessageCreateManySenderInputEnvelope {
+  data: [StreamMessageCreateManySenderInput!]
+  skipDuplicates: Boolean
+}
+
+input StreamMessageCreateNestedManyWithoutSenderInput {
+  connect: [StreamMessageWhereUniqueInput!]
+  connectOrCreate: [StreamMessageCreateOrConnectWithoutSenderInput!]
+  create: [StreamMessageCreateWithoutSenderInput!]
+  createMany: StreamMessageCreateManySenderInputEnvelope
+}
+
+input StreamMessageCreateOrConnectWithoutSenderInput {
+  create: StreamMessageCreateWithoutSenderInput!
+  where: StreamMessageWhereUniqueInput!
+}
+
+input StreamMessageCreateWithoutSenderInput {
+  createdAt: DateTime
+  streamId: Int!
   text: String!
 }
 
@@ -954,6 +3962,59 @@ input StreamMessageOrderByRelationAggregateInput {
   _count: SortOrder
 }
 
+input StreamMessageScalarWhereInput {
+  AND: [StreamMessageScalarWhereInput!]
+  NOT: [StreamMessageScalarWhereInput!]
+  OR: [StreamMessageScalarWhereInput!]
+  createdAt: DateTimeFilter
+  id: IntFilter
+  senderId: IntFilter
+  streamId: IntFilter
+  text: StringFilter
+}
+
+input StreamMessageUpdateManyMutationInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  streamId: IntFieldUpdateOperationsInput
+  text: StringFieldUpdateOperationsInput
+}
+
+input StreamMessageUpdateManyWithWhereWithoutSenderInput {
+  data: StreamMessageUpdateManyMutationInput!
+  where: StreamMessageScalarWhereInput!
+}
+
+input StreamMessageUpdateManyWithoutSenderInput {
+  connect: [StreamMessageWhereUniqueInput!]
+  connectOrCreate: [StreamMessageCreateOrConnectWithoutSenderInput!]
+  create: [StreamMessageCreateWithoutSenderInput!]
+  createMany: StreamMessageCreateManySenderInputEnvelope
+  delete: [StreamMessageWhereUniqueInput!]
+  deleteMany: [StreamMessageScalarWhereInput!]
+  disconnect: [StreamMessageWhereUniqueInput!]
+  set: [StreamMessageWhereUniqueInput!]
+  update: [StreamMessageUpdateWithWhereUniqueWithoutSenderInput!]
+  updateMany: [StreamMessageUpdateManyWithWhereWithoutSenderInput!]
+  upsert: [StreamMessageUpsertWithWhereUniqueWithoutSenderInput!]
+}
+
+input StreamMessageUpdateWithWhereUniqueWithoutSenderInput {
+  data: StreamMessageUpdateWithoutSenderInput!
+  where: StreamMessageWhereUniqueInput!
+}
+
+input StreamMessageUpdateWithoutSenderInput {
+  createdAt: DateTimeFieldUpdateOperationsInput
+  streamId: IntFieldUpdateOperationsInput
+  text: StringFieldUpdateOperationsInput
+}
+
+input StreamMessageUpsertWithWhereUniqueWithoutSenderInput {
+  create: StreamMessageCreateWithoutSenderInput!
+  update: StreamMessageUpdateWithoutSenderInput!
+  where: StreamMessageWhereUniqueInput!
+}
+
 input StreamMessageWhereInput {
   AND: [StreamMessageWhereInput!]
   NOT: [StreamMessageWhereInput!]
@@ -962,34 +4023,21 @@ input StreamMessageWhereInput {
   id: IntFilter
   sender: UserWhereInput
   senderId: IntFilter
-  stream: StreamWhereInput
   streamId: IntFilter
   text: StringFilter
 }
 
-input StreamOrderByWithRelationInput {
-  active: SortOrder
-  event: EventOrderByWithRelationInput
-  eventId: SortOrder
-  id: SortOrder
-  streamKey: SortOrder
-  streamMessage: StreamMessageOrderByRelationAggregateInput
+input StreamMessageWhereUniqueInput {
+  id: Int
 }
 
-input StreamWhereInput {
-  AND: [StreamWhereInput!]
-  NOT: [StreamWhereInput!]
-  OR: [StreamWhereInput!]
-  active: BoolFilter
-  event: EventWhereInput
-  eventId: IntNullableFilter
-  id: IntFilter
-  streamKey: StringFilter
-  streamMessage: StreamMessageListRelationFilter
+input StreamUpdateInput {
+  active: BoolFieldUpdateOperationsInput
+  name: StringFieldUpdateOperationsInput
+  streamKey: StringFieldUpdateOperationsInput
 }
 
 input StreamWhereUniqueInput {
-  eventId: Int
   id: Int
   streamKey: String
 }
@@ -1043,8 +4091,10 @@ type Subscription {
 
 input TaskCreateManyTestInput {
   answers: TaskCreateManyanswersInput
+  cost: Float
   id: Int
   question: String!
+  rightAnswer: String!
 }
 
 input TaskCreateManyTestInputEnvelope {
@@ -1070,11 +4120,19 @@ input TaskCreateOrConnectWithoutTestInput {
 
 input TaskCreateWithoutTestInput {
   answers: TaskCreateanswersInput
+  cost: Float
   question: String!
+  rightAnswer: String!
 }
 
 input TaskCreateanswersInput {
   set: [String!]
+}
+
+input TaskListRelationFilter {
+  every: TaskWhereInput
+  none: TaskWhereInput
+  some: TaskWhereInput
 }
 
 input TaskScalarWhereInput {
@@ -1082,14 +4140,18 @@ input TaskScalarWhereInput {
   NOT: [TaskScalarWhereInput!]
   OR: [TaskScalarWhereInput!]
   answers: StringNullableListFilter
+  cost: FloatFilter
   id: IntFilter
   question: StringFilter
+  rightAnswer: StringFilter
   testId: IntFilter
 }
 
 input TaskUpdateManyMutationInput {
   answers: TaskUpdateanswersInput
+  cost: FloatFieldUpdateOperationsInput
   question: StringFieldUpdateOperationsInput
+  rightAnswer: StringFieldUpdateOperationsInput
 }
 
 input TaskUpdateManyWithWhereWithoutTestInput {
@@ -1118,7 +4180,9 @@ input TaskUpdateWithWhereUniqueWithoutTestInput {
 
 input TaskUpdateWithoutTestInput {
   answers: TaskUpdateanswersInput
+  cost: FloatFieldUpdateOperationsInput
   question: StringFieldUpdateOperationsInput
+  rightAnswer: StringFieldUpdateOperationsInput
 }
 
 input TaskUpdateanswersInput {
@@ -1130,6 +4194,19 @@ input TaskUpsertWithWhereUniqueWithoutTestInput {
   create: TaskCreateWithoutTestInput!
   update: TaskUpdateWithoutTestInput!
   where: TaskWhereUniqueInput!
+}
+
+input TaskWhereInput {
+  AND: [TaskWhereInput!]
+  NOT: [TaskWhereInput!]
+  OR: [TaskWhereInput!]
+  answers: StringNullableListFilter
+  cost: FloatFilter
+  id: IntFilter
+  question: StringFilter
+  rightAnswer: StringFilter
+  test: TestWhereInput
+  testId: IntFilter
 }
 
 input TaskWhereUniqueInput {
@@ -1144,11 +4221,223 @@ type Test {
 input TestCreateInput {
   name: String!
   tasks: TaskCreateNestedManyWithoutTestInput
+  testPasses: TestPassCreateNestedManyWithoutTestInput
+}
+
+input TestCreateNestedOneWithoutTestPassesInput {
+  connect: TestWhereUniqueInput
+  connectOrCreate: TestCreateOrConnectWithoutTestPassesInput
+  create: TestCreateWithoutTestPassesInput
+}
+
+input TestCreateOrConnectWithoutTestPassesInput {
+  create: TestCreateWithoutTestPassesInput!
+  where: TestWhereUniqueInput!
+}
+
+input TestCreateWithoutTestPassesInput {
+  name: String!
+  tasks: TaskCreateNestedManyWithoutTestInput
+}
+
+input TestPassCreateManyTestInput {
+  id: Int
+  score: Float!
+  userId: Int!
+}
+
+input TestPassCreateManyTestInputEnvelope {
+  data: [TestPassCreateManyTestInput!]
+  skipDuplicates: Boolean
+}
+
+input TestPassCreateManyUserInput {
+  id: Int
+  score: Float!
+  testId: Int!
+}
+
+input TestPassCreateManyUserInputEnvelope {
+  data: [TestPassCreateManyUserInput!]
+  skipDuplicates: Boolean
+}
+
+input TestPassCreateNestedManyWithoutTestInput {
+  connect: [TestPassWhereUniqueInput!]
+  connectOrCreate: [TestPassCreateOrConnectWithoutTestInput!]
+  create: [TestPassCreateWithoutTestInput!]
+  createMany: TestPassCreateManyTestInputEnvelope
+}
+
+input TestPassCreateNestedManyWithoutUserInput {
+  connect: [TestPassWhereUniqueInput!]
+  connectOrCreate: [TestPassCreateOrConnectWithoutUserInput!]
+  create: [TestPassCreateWithoutUserInput!]
+  createMany: TestPassCreateManyUserInputEnvelope
+}
+
+input TestPassCreateOrConnectWithoutTestInput {
+  create: TestPassCreateWithoutTestInput!
+  where: TestPassWhereUniqueInput!
+}
+
+input TestPassCreateOrConnectWithoutUserInput {
+  create: TestPassCreateWithoutUserInput!
+  where: TestPassWhereUniqueInput!
+}
+
+input TestPassCreateWithoutTestInput {
+  score: Float!
+  user: UserCreateNestedOneWithoutTestPassesInput!
+}
+
+input TestPassCreateWithoutUserInput {
+  score: Float!
+  test: TestCreateNestedOneWithoutTestPassesInput!
+}
+
+input TestPassListRelationFilter {
+  every: TestPassWhereInput
+  none: TestPassWhereInput
+  some: TestPassWhereInput
+}
+
+input TestPassOrderByRelationAggregateInput {
+  _count: SortOrder
+}
+
+input TestPassScalarWhereInput {
+  AND: [TestPassScalarWhereInput!]
+  NOT: [TestPassScalarWhereInput!]
+  OR: [TestPassScalarWhereInput!]
+  id: IntFilter
+  score: FloatFilter
+  testId: IntFilter
+  userId: IntFilter
+}
+
+input TestPassUpdateManyMutationInput {
+  score: FloatFieldUpdateOperationsInput
+}
+
+input TestPassUpdateManyWithWhereWithoutTestInput {
+  data: TestPassUpdateManyMutationInput!
+  where: TestPassScalarWhereInput!
+}
+
+input TestPassUpdateManyWithWhereWithoutUserInput {
+  data: TestPassUpdateManyMutationInput!
+  where: TestPassScalarWhereInput!
+}
+
+input TestPassUpdateManyWithoutTestInput {
+  connect: [TestPassWhereUniqueInput!]
+  connectOrCreate: [TestPassCreateOrConnectWithoutTestInput!]
+  create: [TestPassCreateWithoutTestInput!]
+  createMany: TestPassCreateManyTestInputEnvelope
+  delete: [TestPassWhereUniqueInput!]
+  deleteMany: [TestPassScalarWhereInput!]
+  disconnect: [TestPassWhereUniqueInput!]
+  set: [TestPassWhereUniqueInput!]
+  update: [TestPassUpdateWithWhereUniqueWithoutTestInput!]
+  updateMany: [TestPassUpdateManyWithWhereWithoutTestInput!]
+  upsert: [TestPassUpsertWithWhereUniqueWithoutTestInput!]
+}
+
+input TestPassUpdateManyWithoutUserInput {
+  connect: [TestPassWhereUniqueInput!]
+  connectOrCreate: [TestPassCreateOrConnectWithoutUserInput!]
+  create: [TestPassCreateWithoutUserInput!]
+  createMany: TestPassCreateManyUserInputEnvelope
+  delete: [TestPassWhereUniqueInput!]
+  deleteMany: [TestPassScalarWhereInput!]
+  disconnect: [TestPassWhereUniqueInput!]
+  set: [TestPassWhereUniqueInput!]
+  update: [TestPassUpdateWithWhereUniqueWithoutUserInput!]
+  updateMany: [TestPassUpdateManyWithWhereWithoutUserInput!]
+  upsert: [TestPassUpsertWithWhereUniqueWithoutUserInput!]
+}
+
+input TestPassUpdateWithWhereUniqueWithoutTestInput {
+  data: TestPassUpdateWithoutTestInput!
+  where: TestPassWhereUniqueInput!
+}
+
+input TestPassUpdateWithWhereUniqueWithoutUserInput {
+  data: TestPassUpdateWithoutUserInput!
+  where: TestPassWhereUniqueInput!
+}
+
+input TestPassUpdateWithoutTestInput {
+  score: FloatFieldUpdateOperationsInput
+  user: UserUpdateOneRequiredWithoutTestPassesInput
+}
+
+input TestPassUpdateWithoutUserInput {
+  score: FloatFieldUpdateOperationsInput
+  test: TestUpdateOneRequiredWithoutTestPassesInput
+}
+
+input TestPassUpsertWithWhereUniqueWithoutTestInput {
+  create: TestPassCreateWithoutTestInput!
+  update: TestPassUpdateWithoutTestInput!
+  where: TestPassWhereUniqueInput!
+}
+
+input TestPassUpsertWithWhereUniqueWithoutUserInput {
+  create: TestPassCreateWithoutUserInput!
+  update: TestPassUpdateWithoutUserInput!
+  where: TestPassWhereUniqueInput!
+}
+
+input TestPassWhereInput {
+  AND: [TestPassWhereInput!]
+  NOT: [TestPassWhereInput!]
+  OR: [TestPassWhereInput!]
+  id: IntFilter
+  score: FloatFilter
+  test: TestWhereInput
+  testId: IntFilter
+  user: UserWhereInput
+  userId: IntFilter
+}
+
+input TestPassWhereUniqueInput {
+  id: Int
 }
 
 input TestUpdateInput {
   name: StringFieldUpdateOperationsInput
   tasks: TaskUpdateManyWithoutTestInput
+  testPasses: TestPassUpdateManyWithoutTestInput
+}
+
+input TestUpdateOneRequiredWithoutTestPassesInput {
+  connect: TestWhereUniqueInput
+  connectOrCreate: TestCreateOrConnectWithoutTestPassesInput
+  create: TestCreateWithoutTestPassesInput
+  update: TestUpdateWithoutTestPassesInput
+  upsert: TestUpsertWithoutTestPassesInput
+}
+
+input TestUpdateWithoutTestPassesInput {
+  name: StringFieldUpdateOperationsInput
+  tasks: TaskUpdateManyWithoutTestInput
+}
+
+input TestUpsertWithoutTestPassesInput {
+  create: TestCreateWithoutTestPassesInput!
+  update: TestUpdateWithoutTestPassesInput!
+}
+
+input TestWhereInput {
+  AND: [TestWhereInput!]
+  NOT: [TestWhereInput!]
+  OR: [TestWhereInput!]
+  id: IntFilter
+  name: StringFilter
+  tasks: TaskListRelationFilter
+  testPasses: TestPassListRelationFilter
 }
 
 input TestWhereUniqueInput {
@@ -1197,6 +4486,251 @@ type User {
   tokenVersion: Int
 }
 
+input UserCreateManyAvatarInput {
+  bio: String
+  city: String
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  id: Int
+  lastname: String!
+  login: String!
+  password: String!
+  role: String
+  shortDescription: String
+  tokenVersion: Int
+}
+
+input UserCreateManyAvatarInputEnvelope {
+  data: [UserCreateManyAvatarInput!]
+  skipDuplicates: Boolean
+}
+
+input UserCreateNestedManyWithoutAvatarInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutAvatarInput!]
+  create: [UserCreateWithoutAvatarInput!]
+  createMany: UserCreateManyAvatarInputEnvelope
+}
+
+input UserCreateNestedManyWithoutGroupAdminsInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutGroupAdminsInput!]
+  create: [UserCreateWithoutGroupAdminsInput!]
+}
+
+input UserCreateNestedManyWithoutGroupsInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutGroupsInput!]
+  create: [UserCreateWithoutGroupsInput!]
+}
+
+input UserCreateNestedOneWithoutCoursesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCoursesInput
+  create: UserCreateWithoutCoursesInput
+}
+
+input UserCreateNestedOneWithoutMessagesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutMessagesInput
+  create: UserCreateWithoutMessagesInput
+}
+
+input UserCreateNestedOneWithoutPublishedEventInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutPublishedEventInput
+  create: UserCreateWithoutPublishedEventInput
+}
+
+input UserCreateNestedOneWithoutTestPassesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTestPassesInput
+  create: UserCreateWithoutTestPassesInput
+}
+
+input UserCreateOrConnectWithoutAvatarInput {
+  create: UserCreateWithoutAvatarInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutCoursesInput {
+  create: UserCreateWithoutCoursesInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutGroupAdminsInput {
+  create: UserCreateWithoutGroupAdminsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutGroupsInput {
+  create: UserCreateWithoutGroupsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutMessagesInput {
+  create: UserCreateWithoutMessagesInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutPublishedEventInput {
+  create: UserCreateWithoutPublishedEventInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateOrConnectWithoutTestPassesInput {
+  create: UserCreateWithoutTestPassesInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserCreateWithoutAvatarInput {
+  StreamMessage: StreamMessageCreateNestedManyWithoutSenderInput
+  bio: String
+  city: String
+  courses: CourseCreateNestedManyWithoutOwnerInput
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  groupAdmins: MessagerGroupCreateNestedManyWithoutAdminsInput
+  groups: MessagerGroupCreateNestedManyWithoutMembersInput
+  lastname: String!
+  login: String!
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  publishedEvent: EventCreateNestedManyWithoutUserInput
+  role: String
+  shortDescription: String
+  testPasses: TestPassCreateNestedManyWithoutUserInput
+  tokenVersion: Int
+}
+
+input UserCreateWithoutCoursesInput {
+  StreamMessage: StreamMessageCreateNestedManyWithoutSenderInput
+  avatar: MediaCreateNestedOneWithoutUserInput
+  bio: String
+  city: String
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  groupAdmins: MessagerGroupCreateNestedManyWithoutAdminsInput
+  groups: MessagerGroupCreateNestedManyWithoutMembersInput
+  lastname: String!
+  login: String!
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  publishedEvent: EventCreateNestedManyWithoutUserInput
+  role: String
+  shortDescription: String
+  testPasses: TestPassCreateNestedManyWithoutUserInput
+  tokenVersion: Int
+}
+
+input UserCreateWithoutGroupAdminsInput {
+  StreamMessage: StreamMessageCreateNestedManyWithoutSenderInput
+  avatar: MediaCreateNestedOneWithoutUserInput
+  bio: String
+  city: String
+  courses: CourseCreateNestedManyWithoutOwnerInput
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  groups: MessagerGroupCreateNestedManyWithoutMembersInput
+  lastname: String!
+  login: String!
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  publishedEvent: EventCreateNestedManyWithoutUserInput
+  role: String
+  shortDescription: String
+  testPasses: TestPassCreateNestedManyWithoutUserInput
+  tokenVersion: Int
+}
+
+input UserCreateWithoutGroupsInput {
+  StreamMessage: StreamMessageCreateNestedManyWithoutSenderInput
+  avatar: MediaCreateNestedOneWithoutUserInput
+  bio: String
+  city: String
+  courses: CourseCreateNestedManyWithoutOwnerInput
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  groupAdmins: MessagerGroupCreateNestedManyWithoutAdminsInput
+  lastname: String!
+  login: String!
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  publishedEvent: EventCreateNestedManyWithoutUserInput
+  role: String
+  shortDescription: String
+  testPasses: TestPassCreateNestedManyWithoutUserInput
+  tokenVersion: Int
+}
+
+input UserCreateWithoutMessagesInput {
+  StreamMessage: StreamMessageCreateNestedManyWithoutSenderInput
+  avatar: MediaCreateNestedOneWithoutUserInput
+  bio: String
+  city: String
+  courses: CourseCreateNestedManyWithoutOwnerInput
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  groupAdmins: MessagerGroupCreateNestedManyWithoutAdminsInput
+  groups: MessagerGroupCreateNestedManyWithoutMembersInput
+  lastname: String!
+  login: String!
+  password: String!
+  publishedEvent: EventCreateNestedManyWithoutUserInput
+  role: String
+  shortDescription: String
+  testPasses: TestPassCreateNestedManyWithoutUserInput
+  tokenVersion: Int
+}
+
+input UserCreateWithoutPublishedEventInput {
+  StreamMessage: StreamMessageCreateNestedManyWithoutSenderInput
+  avatar: MediaCreateNestedOneWithoutUserInput
+  bio: String
+  city: String
+  courses: CourseCreateNestedManyWithoutOwnerInput
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  groupAdmins: MessagerGroupCreateNestedManyWithoutAdminsInput
+  groups: MessagerGroupCreateNestedManyWithoutMembersInput
+  lastname: String!
+  login: String!
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  role: String
+  shortDescription: String
+  testPasses: TestPassCreateNestedManyWithoutUserInput
+  tokenVersion: Int
+}
+
+input UserCreateWithoutTestPassesInput {
+  StreamMessage: StreamMessageCreateNestedManyWithoutSenderInput
+  avatar: MediaCreateNestedOneWithoutUserInput
+  bio: String
+  city: String
+  courses: CourseCreateNestedManyWithoutOwnerInput
+  createdAt: DateTime
+  email: String!
+  firstname: String!
+  groupAdmins: MessagerGroupCreateNestedManyWithoutAdminsInput
+  groups: MessagerGroupCreateNestedManyWithoutMembersInput
+  lastname: String!
+  login: String!
+  messages: MessageCreateNestedManyWithoutSenderInput
+  password: String!
+  publishedEvent: EventCreateNestedManyWithoutUserInput
+  role: String
+  shortDescription: String
+  tokenVersion: Int
+}
+
 input UserListRelationFilter {
   every: UserWhereInput
   none: UserWhereInput
@@ -1227,7 +4761,330 @@ input UserOrderByWithRelationInput {
   publishedEvent: EventOrderByRelationAggregateInput
   role: SortOrder
   shortDescription: SortOrder
+  testPasses: TestPassOrderByRelationAggregateInput
   tokenVersion: SortOrder
+}
+
+input UserScalarWhereInput {
+  AND: [UserScalarWhereInput!]
+  NOT: [UserScalarWhereInput!]
+  OR: [UserScalarWhereInput!]
+  avatarId: IntNullableFilter
+  bio: StringNullableFilter
+  city: StringNullableFilter
+  createdAt: DateTimeFilter
+  email: StringFilter
+  firstname: StringFilter
+  id: IntFilter
+  lastname: StringFilter
+  login: StringFilter
+  password: StringFilter
+  role: StringFilter
+  shortDescription: StringNullableFilter
+  tokenVersion: IntNullableFilter
+}
+
+input UserUpdateManyMutationInput {
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateManyWithWhereWithoutAvatarInput {
+  data: UserUpdateManyMutationInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateManyWithWhereWithoutGroupAdminsInput {
+  data: UserUpdateManyMutationInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateManyWithWhereWithoutGroupsInput {
+  data: UserUpdateManyMutationInput!
+  where: UserScalarWhereInput!
+}
+
+input UserUpdateManyWithoutAvatarInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutAvatarInput!]
+  create: [UserCreateWithoutAvatarInput!]
+  createMany: UserCreateManyAvatarInputEnvelope
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutAvatarInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutAvatarInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutAvatarInput!]
+}
+
+input UserUpdateManyWithoutGroupAdminsInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutGroupAdminsInput!]
+  create: [UserCreateWithoutGroupAdminsInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutGroupAdminsInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutGroupAdminsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutGroupAdminsInput!]
+}
+
+input UserUpdateManyWithoutGroupsInput {
+  connect: [UserWhereUniqueInput!]
+  connectOrCreate: [UserCreateOrConnectWithoutGroupsInput!]
+  create: [UserCreateWithoutGroupsInput!]
+  delete: [UserWhereUniqueInput!]
+  deleteMany: [UserScalarWhereInput!]
+  disconnect: [UserWhereUniqueInput!]
+  set: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueWithoutGroupsInput!]
+  updateMany: [UserUpdateManyWithWhereWithoutGroupsInput!]
+  upsert: [UserUpsertWithWhereUniqueWithoutGroupsInput!]
+}
+
+input UserUpdateOneRequiredWithoutCoursesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutCoursesInput
+  create: UserCreateWithoutCoursesInput
+  update: UserUpdateWithoutCoursesInput
+  upsert: UserUpsertWithoutCoursesInput
+}
+
+input UserUpdateOneRequiredWithoutMessagesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutMessagesInput
+  create: UserCreateWithoutMessagesInput
+  update: UserUpdateWithoutMessagesInput
+  upsert: UserUpsertWithoutMessagesInput
+}
+
+input UserUpdateOneRequiredWithoutTestPassesInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutTestPassesInput
+  create: UserCreateWithoutTestPassesInput
+  update: UserUpdateWithoutTestPassesInput
+  upsert: UserUpsertWithoutTestPassesInput
+}
+
+input UserUpdateOneWithoutPublishedEventInput {
+  connect: UserWhereUniqueInput
+  connectOrCreate: UserCreateOrConnectWithoutPublishedEventInput
+  create: UserCreateWithoutPublishedEventInput
+  delete: Boolean
+  disconnect: Boolean
+  update: UserUpdateWithoutPublishedEventInput
+  upsert: UserUpsertWithoutPublishedEventInput
+}
+
+input UserUpdateWithWhereUniqueWithoutAvatarInput {
+  data: UserUpdateWithoutAvatarInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutGroupAdminsInput {
+  data: UserUpdateWithoutGroupAdminsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithWhereUniqueWithoutGroupsInput {
+  data: UserUpdateWithoutGroupsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpdateWithoutAvatarInput {
+  StreamMessage: StreamMessageUpdateManyWithoutSenderInput
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  courses: CourseUpdateManyWithoutOwnerInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  groupAdmins: MessagerGroupUpdateManyWithoutAdminsInput
+  groups: MessagerGroupUpdateManyWithoutMembersInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderInput
+  password: StringFieldUpdateOperationsInput
+  publishedEvent: EventUpdateManyWithoutUserInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  testPasses: TestPassUpdateManyWithoutUserInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutCoursesInput {
+  StreamMessage: StreamMessageUpdateManyWithoutSenderInput
+  avatar: MediaUpdateOneWithoutUserInput
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  groupAdmins: MessagerGroupUpdateManyWithoutAdminsInput
+  groups: MessagerGroupUpdateManyWithoutMembersInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderInput
+  password: StringFieldUpdateOperationsInput
+  publishedEvent: EventUpdateManyWithoutUserInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  testPasses: TestPassUpdateManyWithoutUserInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutGroupAdminsInput {
+  StreamMessage: StreamMessageUpdateManyWithoutSenderInput
+  avatar: MediaUpdateOneWithoutUserInput
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  courses: CourseUpdateManyWithoutOwnerInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  groups: MessagerGroupUpdateManyWithoutMembersInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderInput
+  password: StringFieldUpdateOperationsInput
+  publishedEvent: EventUpdateManyWithoutUserInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  testPasses: TestPassUpdateManyWithoutUserInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutGroupsInput {
+  StreamMessage: StreamMessageUpdateManyWithoutSenderInput
+  avatar: MediaUpdateOneWithoutUserInput
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  courses: CourseUpdateManyWithoutOwnerInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  groupAdmins: MessagerGroupUpdateManyWithoutAdminsInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderInput
+  password: StringFieldUpdateOperationsInput
+  publishedEvent: EventUpdateManyWithoutUserInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  testPasses: TestPassUpdateManyWithoutUserInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutMessagesInput {
+  StreamMessage: StreamMessageUpdateManyWithoutSenderInput
+  avatar: MediaUpdateOneWithoutUserInput
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  courses: CourseUpdateManyWithoutOwnerInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  groupAdmins: MessagerGroupUpdateManyWithoutAdminsInput
+  groups: MessagerGroupUpdateManyWithoutMembersInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  password: StringFieldUpdateOperationsInput
+  publishedEvent: EventUpdateManyWithoutUserInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  testPasses: TestPassUpdateManyWithoutUserInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutPublishedEventInput {
+  StreamMessage: StreamMessageUpdateManyWithoutSenderInput
+  avatar: MediaUpdateOneWithoutUserInput
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  courses: CourseUpdateManyWithoutOwnerInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  groupAdmins: MessagerGroupUpdateManyWithoutAdminsInput
+  groups: MessagerGroupUpdateManyWithoutMembersInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderInput
+  password: StringFieldUpdateOperationsInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  testPasses: TestPassUpdateManyWithoutUserInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpdateWithoutTestPassesInput {
+  StreamMessage: StreamMessageUpdateManyWithoutSenderInput
+  avatar: MediaUpdateOneWithoutUserInput
+  bio: NullableStringFieldUpdateOperationsInput
+  city: NullableStringFieldUpdateOperationsInput
+  courses: CourseUpdateManyWithoutOwnerInput
+  createdAt: DateTimeFieldUpdateOperationsInput
+  email: StringFieldUpdateOperationsInput
+  firstname: StringFieldUpdateOperationsInput
+  groupAdmins: MessagerGroupUpdateManyWithoutAdminsInput
+  groups: MessagerGroupUpdateManyWithoutMembersInput
+  lastname: StringFieldUpdateOperationsInput
+  login: StringFieldUpdateOperationsInput
+  messages: MessageUpdateManyWithoutSenderInput
+  password: StringFieldUpdateOperationsInput
+  publishedEvent: EventUpdateManyWithoutUserInput
+  role: StringFieldUpdateOperationsInput
+  shortDescription: NullableStringFieldUpdateOperationsInput
+  tokenVersion: NullableIntFieldUpdateOperationsInput
+}
+
+input UserUpsertWithWhereUniqueWithoutAvatarInput {
+  create: UserCreateWithoutAvatarInput!
+  update: UserUpdateWithoutAvatarInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutGroupAdminsInput {
+  create: UserCreateWithoutGroupAdminsInput!
+  update: UserUpdateWithoutGroupAdminsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithWhereUniqueWithoutGroupsInput {
+  create: UserCreateWithoutGroupsInput!
+  update: UserUpdateWithoutGroupsInput!
+  where: UserWhereUniqueInput!
+}
+
+input UserUpsertWithoutCoursesInput {
+  create: UserCreateWithoutCoursesInput!
+  update: UserUpdateWithoutCoursesInput!
+}
+
+input UserUpsertWithoutMessagesInput {
+  create: UserCreateWithoutMessagesInput!
+  update: UserUpdateWithoutMessagesInput!
+}
+
+input UserUpsertWithoutPublishedEventInput {
+  create: UserCreateWithoutPublishedEventInput!
+  update: UserUpdateWithoutPublishedEventInput!
+}
+
+input UserUpsertWithoutTestPassesInput {
+  create: UserCreateWithoutTestPassesInput!
+  update: UserUpdateWithoutTestPassesInput!
 }
 
 input UserWhereInput {
@@ -1253,6 +5110,7 @@ input UserWhereInput {
   publishedEvent: EventListRelationFilter
   role: StringFilter
   shortDescription: StringNullableFilter
+  testPasses: TestPassListRelationFilter
   tokenVersion: IntNullableFilter
 }
 
@@ -1486,7 +5344,10 @@ enum salesType {
 }
 
 enum sectionTypes {
+  audio
+  doc
   image
+  pdf
   text
   video
 }

@@ -9,5 +9,6 @@ export const Stream = objectType({
     t.model.id();
     t.model.streamKey();
     t.model.active();
+    t.model.name();
   },
 });
