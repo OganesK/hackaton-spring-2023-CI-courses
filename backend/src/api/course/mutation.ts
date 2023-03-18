@@ -2,21 +2,20 @@ import { arg, extendType, inputObjectType, nonNull } from 'nexus';
 import { Context } from '../../graphql/context';
 import { DEFAULT_IMAGE } from '../../config';
 
-export const ProjectMutation = extendType({
+export const CourseMutation = extendType({
   type: 'Mutation',
   definition: (t) => {
-    t.field('createOneProject', {
-      type: 'Project',
-      args: { data: nonNull(arg({ type: createProjectInput })) },
+    t.field('createOneCourse', {
+      type: 'Course',
+      args: { data: nonNull(arg({ type: createCourseInput })) },
       resolve: async (_, { data }, ctx: Context) => {
         return ctx.prisma.course.create({
           data: {
             name: data.name,
-            category: data.category,
             shortDescription: data.shortDescription,
             owner: {
               connect: {
-                id: data.ownerCompany,
+                id: data.ownerID,
               },
             },
             poster: {
@@ -29,34 +28,23 @@ export const ProjectMutation = extendType({
       },
     });
 
-    t.field('updateProject', {
+    t.field('updateCourse', {
       type: 'String',
-      args: { data: nonNull(arg({ type: updateProjectInput })) },
+      args: { data: nonNull(arg({ type: updateCourseInput })) },
       resolve: async (_, { data }, ctx: Context) => {
-        const projectData = await ctx.prisma.project.findUnique({
+        const courseData = await ctx.prisma.course.findUnique({
           where: {
-            id: data.projectId,
+            id: data.courseId,
           },
         });
 
-        await ctx.prisma.project.update({
+        await ctx.prisma.course.update({
           where: {
-            id: data.projectId,
+            id: data.courseId,
           },
           data: {
-            moderationChecked: false,
-            name: data.name !== null ? data.name : projectData.name,
-            shortDescription: data.shortDescription !== null ? data.shortDescription : projectData.shortDescription,
-            category: data.category !== null ? data.category : projectData.category,
-            projectSite: data.projectSite !== null ? data.projectSite : projectData.projectSite,
-            projectType: data.projectType !== null ? data.projectType : projectData.projectType,
-            projectStage: data.projectStage !== null ? data.projectStage : projectData.projectStage,
-            projectMarket: data.projectMarket !== null ? data.projectMarket : projectData.projectMarket,
-            technologyType: data.technologyType !== null ? data.technologyType : projectData.technologyType,
-            investmentStage: data.investmentStage !== null ? data.investmentStage : projectData.investmentStage,
-            salesType: data.salesType !== null ? data.salesType : projectData.salesType,
-            businessModel: data.businessModel !== null ? data.businessModel : projectData.businessModel,
-            mainGoal: data.mainGoal !== null ? data.mainGoal : projectData.mainGoal,
+            name: data.name !== null ? data.name : courseData.name,
+            shortDescription: data.shortDescription !== null ? data.shortDescription : courseData.shortDescription,
           },
         });
 
@@ -64,80 +52,36 @@ export const ProjectMutation = extendType({
       },
     });
 
-    t.crud.deleteOneProject();
+    t.crud.deleteOneCourse();
   },
 });
 
-export const updateProjectInput = inputObjectType({
-  name: 'updateProjectInput',
+export const updateCourseInput = inputObjectType({
+  name: 'updateCourseInput',
   definition (t) {
-    t.nonNull.int('projectId');
+    t.nonNull.int('courseId');
     t.string('name');
-    t.string('projectSite');
     t.field('category', {
       type: 'filteringCategoies',
     });
-    t.field('projectType', {
-      type: 'projectType',
-    });
-    t.field('projectStage', {
-      type: 'projectStage',
-    });
-    t.field('projectMarket', {
-      type: 'projectMarket',
-    });
-    t.field('technologyType', {
-      type: 'technologyType',
-    });
-    t.field('investmentStage', {
-      type: 'investmentStage',
-    });
-    t.field('salesType', {
-      type: 'salesType',
-    });
-    t.field('businessModel', {
-      type: 'businessModel',
-    });
-    t.field('mainGoal', {
-      type: 'mainGoal',
+    t.field('courseType', {
+      type: 'courseType',
     });
     t.string('shortDescription');
   },
 });
 
-export const createProjectInput = inputObjectType({
-  name: 'createProjectInput',
+export const createCourseInput = inputObjectType({
+  name: 'createCourseInput',
   definition (t) {
     t.nonNull.string('name');
     t.nonNull.field('category', {
       type: 'filteringCategoies',
     });
     t.nonNull.string('shortDescription');
-    t.nonNull.int('ownerCompany');
-    t.string('projectSite');
-    t.field('projectType', {
-      type: 'projectType',
-    });
-    t.field('projectStage', {
-      type: 'projectStage',
-    });
-    t.field('projectMarket', {
-      type: 'projectMarket',
-    });
-    t.field('technologyType', {
-      type: 'technologyType',
-    });
-    t.field('investmentStage', {
-      type: 'investmentStage',
-    });
-    t.field('salesType', {
-      type: 'salesType',
-    });
-    t.field('businessModel', {
-      type: 'businessModel',
-    });
-    t.field('mainGoal', {
-      type: 'mainGoal',
+    t.nonNull.int('ownerID');
+    t.field('courseType', {
+      type: 'courseType',
     });
   },
 });

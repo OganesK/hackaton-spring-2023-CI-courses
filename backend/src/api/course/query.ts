@@ -3,14 +3,9 @@ import { extendType } from 'nexus';
 export const ProjectQuery = extendType({
   type: 'Query',
   definition: (t) => {
-    t.crud.project();
+    t.crud.course();
 
-    t.crud.projects({
-      filtering: true,
-      ordering: true,
-    });
-
-    t.crud.projectMetrics({
+    t.crud.courses({
       filtering: true,
       ordering: true,
     });

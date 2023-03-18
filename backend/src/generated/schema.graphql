@@ -106,6 +106,10 @@ input CourseWhereInput {
   shortDescription: StringFilter
 }
 
+input CourseWhereUniqueInput {
+  id: Int
+}
+
 input CreateArticleInput {
   postId: Int!
   sections: [CreateSectionInput]
@@ -505,10 +509,13 @@ type Mutation {
   articleUpdateMutation(data: UpdateArticleInput!): String
   createGroup(data: createGroupInput!): MessagerGroup
   createMedia(data: createMediaInput!): SignUrlResponse
+  createOneCourse(data: createCourseInput!): Course
   createOneEvent(data: EventCreatedInput!): Event
+  createOneTest(data: TestCreateInput!): Test!
   createStream(data: createStreamArgs!): Stream
   deleteGroup(data: deleteGroupInput!): String
   deleteMediaElement(data: deleteMediaElementInput!): String
+  deleteOneCourse(where: CourseWhereUniqueInput!): Course
   deleteOneEvent(where: EventWhereUniqueInput!): Event
   deletePostMedia(data: deletePostMedia!): String
   deleteProjectPresentationMedia(data: deleteProjectPresentationMedia!): String
@@ -534,8 +541,10 @@ type Mutation {
   storyDeleteMutation(data: DeleteStoryInput!): String
   storyUpdateMutation(data: UpdateStoryInput!): String
   switchToMessager(data: switchToMessagerInput!): MessagerGroup
+  updateCourse(data: updateCourseInput!): String
   updateGroup(data: updateGroupInput!): MessagerGroup
   updateOneEvent(data: EventUpdatedInput!): String
+  updateOneTest(data: TestUpdateInput!, where: TestWhereUniqueInput!): Test
   updateStream(data: createStreamArgs!): Stream
   updateStreamActivity(data: updateStreamActivityArgs!): Stream
   updateUserData(data: updateUserInput): User
@@ -771,6 +780,8 @@ input PostWhereUniqueInput {
 }
 
 type Query {
+  course(where: CourseWhereUniqueInput!): Course
+  courses(after: CourseWhereUniqueInput, before: CourseWhereUniqueInput, first: Int, last: Int, orderBy: [CourseOrderByWithRelationInput!], where: CourseWhereInput): [Course!]!
   event(where: EventWhereUniqueInput!): Event
   events(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByWithRelationInput!], where: EventWhereInput): [Event!]!
   getMessageInGroup(data: getMessageInGroupInput!): MessagerGroup
@@ -787,6 +798,8 @@ type Query {
   registeredForEvents(after: RegisteredForEventWhereUniqueInput, before: RegisteredForEventWhereUniqueInput, first: Int, last: Int): [RegisteredForEvent!]!
   stream(where: StreamWhereUniqueInput!): Stream
   streams(after: StreamWhereUniqueInput, before: StreamWhereUniqueInput, first: Int, last: Int): [Stream!]!
+  test(where: TestWhereUniqueInput!): Test
+  tests(after: TestWhereUniqueInput, before: TestWhereUniqueInput, first: Int, last: Int): [Test!]!
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByWithRelationInput!], where: UserWhereInput): [User!]!
 }
@@ -981,6 +994,10 @@ input StreamWhereUniqueInput {
   streamKey: String
 }
 
+input StringFieldUpdateOperationsInput {
+  set: String
+}
+
 input StringFilter {
   contains: String
   endsWith: String
@@ -1022,6 +1039,117 @@ input StringNullableListFilter {
 type Subscription {
   newMessage(data: subscriptionMessageInGroup!): Message
   streamChat(data: subscriptionMessageInStream!): StreamMessage
+}
+
+input TaskCreateManyTestInput {
+  answers: TaskCreateManyanswersInput
+  id: Int
+  question: String!
+}
+
+input TaskCreateManyTestInputEnvelope {
+  data: [TaskCreateManyTestInput!]
+  skipDuplicates: Boolean
+}
+
+input TaskCreateManyanswersInput {
+  set: [String!]
+}
+
+input TaskCreateNestedManyWithoutTestInput {
+  connect: [TaskWhereUniqueInput!]
+  connectOrCreate: [TaskCreateOrConnectWithoutTestInput!]
+  create: [TaskCreateWithoutTestInput!]
+  createMany: TaskCreateManyTestInputEnvelope
+}
+
+input TaskCreateOrConnectWithoutTestInput {
+  create: TaskCreateWithoutTestInput!
+  where: TaskWhereUniqueInput!
+}
+
+input TaskCreateWithoutTestInput {
+  answers: TaskCreateanswersInput
+  question: String!
+}
+
+input TaskCreateanswersInput {
+  set: [String!]
+}
+
+input TaskScalarWhereInput {
+  AND: [TaskScalarWhereInput!]
+  NOT: [TaskScalarWhereInput!]
+  OR: [TaskScalarWhereInput!]
+  answers: StringNullableListFilter
+  id: IntFilter
+  question: StringFilter
+  testId: IntFilter
+}
+
+input TaskUpdateManyMutationInput {
+  answers: TaskUpdateanswersInput
+  question: StringFieldUpdateOperationsInput
+}
+
+input TaskUpdateManyWithWhereWithoutTestInput {
+  data: TaskUpdateManyMutationInput!
+  where: TaskScalarWhereInput!
+}
+
+input TaskUpdateManyWithoutTestInput {
+  connect: [TaskWhereUniqueInput!]
+  connectOrCreate: [TaskCreateOrConnectWithoutTestInput!]
+  create: [TaskCreateWithoutTestInput!]
+  createMany: TaskCreateManyTestInputEnvelope
+  delete: [TaskWhereUniqueInput!]
+  deleteMany: [TaskScalarWhereInput!]
+  disconnect: [TaskWhereUniqueInput!]
+  set: [TaskWhereUniqueInput!]
+  update: [TaskUpdateWithWhereUniqueWithoutTestInput!]
+  updateMany: [TaskUpdateManyWithWhereWithoutTestInput!]
+  upsert: [TaskUpsertWithWhereUniqueWithoutTestInput!]
+}
+
+input TaskUpdateWithWhereUniqueWithoutTestInput {
+  data: TaskUpdateWithoutTestInput!
+  where: TaskWhereUniqueInput!
+}
+
+input TaskUpdateWithoutTestInput {
+  answers: TaskUpdateanswersInput
+  question: StringFieldUpdateOperationsInput
+}
+
+input TaskUpdateanswersInput {
+  push: String
+  set: [String!]
+}
+
+input TaskUpsertWithWhereUniqueWithoutTestInput {
+  create: TaskCreateWithoutTestInput!
+  update: TaskUpdateWithoutTestInput!
+  where: TaskWhereUniqueInput!
+}
+
+input TaskWhereUniqueInput {
+  id: Int
+}
+
+type Test
+
+input TestCreateInput {
+  name: String!
+  tasks: TaskCreateNestedManyWithoutTestInput
+}
+
+input TestUpdateInput {
+  name: StringFieldUpdateOperationsInput
+  tasks: TaskUpdateManyWithoutTestInput
+}
+
+input TestWhereUniqueInput {
+  id: Int
 }
 
 input UpdateArticleInput {
@@ -1149,6 +1277,43 @@ input connectMediaInput {
   mediaURL: String!
 }
 
+enum courseMarket {
+  AeroNet
+  AeroNext
+  AutoNet
+  EcoNet
+  EduNet
+  EnergyNet
+  FoodNet
+  GameNet
+  HealthNet
+  HomeNet
+  Marinet
+  NeuroNet
+  SafeNet
+  SpaceNet
+  SportNet
+  TechNet
+  WearNet
+}
+
+enum courseStage {
+  ideaOrConcept
+  prototypeOrMVP
+  scaling
+  workingProduct
+}
+
+enum courseType {
+  hardwareAndSoftwareComplex
+  hardwareSolution
+  initiativeOfTheRegion
+  notDefined
+  service
+  softwareSolution
+  technology
+}
+
 enum courseTypeEnum {
   hardwareAndSoftwareComplex
   hardwareSolution
@@ -1157,6 +1322,14 @@ enum courseTypeEnum {
   service
   softwareSolution
   technology
+}
+
+input createCourseInput {
+  category: filteringCategoies!
+  courseType: courseType
+  name: String!
+  ownerID: Int!
+  shortDescription: String!
 }
 
 input createGroupInput {
@@ -1199,17 +1372,8 @@ input deleteUserInput {
 }
 
 enum entityTypes {
-  companyAvatar
-  crowdFundingPoster
-  crowdfundingStory
-  eventPoster
-  groupAvatar
-  postMedia
-  postPoster
-  projectDescription
-  projectMedia
-  projectPoster
-  userAvatar
+  courseMaterial
+  coursePoster
 }
 
 enum enumPostCategory {
@@ -1287,43 +1451,6 @@ enum mediaType {
 
 input postQueryInput {
   postId: Int
-}
-
-enum projectMarket {
-  AeroNet
-  AeroNext
-  AutoNet
-  EcoNet
-  EduNet
-  EnergyNet
-  FoodNet
-  GameNet
-  HealthNet
-  HomeNet
-  Marinet
-  NeuroNet
-  SafeNet
-  SpaceNet
-  SportNet
-  TechNet
-  WearNet
-}
-
-enum projectStage {
-  ideaOrConcept
-  prototypeOrMVP
-  scaling
-  workingProduct
-}
-
-enum projectType {
-  hardwareAndSoftwareComplex
-  hardwareSolution
-  initiativeOfTheRegion
-  notDefined
-  service
-  softwareSolution
-  technology
 }
 
 enum registeredVerdict {
@@ -1420,6 +1547,14 @@ enum technologyType {
   technologiesOfModeling
   technologiesOfRoboticsAndMechatronics
   wirelessCommunicationTechnologies
+}
+
+input updateCourseInput {
+  category: filteringCategoies
+  courseId: Int!
+  courseType: courseType
+  name: String
+  shortDescription: String
 }
 
 input updateGroupInput {

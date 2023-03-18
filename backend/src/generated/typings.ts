@@ -92,6 +92,9 @@ export interface NexusGenInputs {
     publishedPosts?: NexusGenInputs['PostListRelationFilter'] | null; // PostListRelationFilter
     shortDescription?: NexusGenInputs['StringFilter'] | null; // StringFilter
   }
+  CourseWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
   CreateArticleInput: { // input type
     postId: number; // Int!
     sections?: Array<NexusGenInputs['CreateSectionInput'] | null> | null; // [CreateSectionInput]
@@ -675,6 +678,9 @@ export interface NexusGenInputs {
     id?: number | null; // Int
     streamKey?: string | null; // String
   }
+  StringFieldUpdateOperationsInput: { // input type
+    set?: string | null; // String
+  }
   StringFilter: { // input type
     contains?: string | null; // String
     endsWith?: string | null; // String
@@ -709,6 +715,96 @@ export interface NexusGenInputs {
     hasEvery?: string[] | null; // [String!]
     hasSome?: string[] | null; // [String!]
     isEmpty?: boolean | null; // Boolean
+  }
+  TaskCreateManyTestInput: { // input type
+    answers?: NexusGenInputs['TaskCreateManyanswersInput'] | null; // TaskCreateManyanswersInput
+    id?: number | null; // Int
+    question: string; // String!
+  }
+  TaskCreateManyTestInputEnvelope: { // input type
+    data?: NexusGenInputs['TaskCreateManyTestInput'][] | null; // [TaskCreateManyTestInput!]
+    skipDuplicates?: boolean | null; // Boolean
+  }
+  TaskCreateManyanswersInput: { // input type
+    set?: string[] | null; // [String!]
+  }
+  TaskCreateNestedManyWithoutTestInput: { // input type
+    connect?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['TaskCreateOrConnectWithoutTestInput'][] | null; // [TaskCreateOrConnectWithoutTestInput!]
+    create?: NexusGenInputs['TaskCreateWithoutTestInput'][] | null; // [TaskCreateWithoutTestInput!]
+    createMany?: NexusGenInputs['TaskCreateManyTestInputEnvelope'] | null; // TaskCreateManyTestInputEnvelope
+  }
+  TaskCreateOrConnectWithoutTestInput: { // input type
+    create: NexusGenInputs['TaskCreateWithoutTestInput']; // TaskCreateWithoutTestInput!
+    where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+  }
+  TaskCreateWithoutTestInput: { // input type
+    answers?: NexusGenInputs['TaskCreateanswersInput'] | null; // TaskCreateanswersInput
+    question: string; // String!
+  }
+  TaskCreateanswersInput: { // input type
+    set?: string[] | null; // [String!]
+  }
+  TaskScalarWhereInput: { // input type
+    AND?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
+    NOT?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
+    OR?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
+    answers?: NexusGenInputs['StringNullableListFilter'] | null; // StringNullableListFilter
+    id?: NexusGenInputs['IntFilter'] | null; // IntFilter
+    question?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    testId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  TaskUpdateManyMutationInput: { // input type
+    answers?: NexusGenInputs['TaskUpdateanswersInput'] | null; // TaskUpdateanswersInput
+    question?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  TaskUpdateManyWithWhereWithoutTestInput: { // input type
+    data: NexusGenInputs['TaskUpdateManyMutationInput']; // TaskUpdateManyMutationInput!
+    where: NexusGenInputs['TaskScalarWhereInput']; // TaskScalarWhereInput!
+  }
+  TaskUpdateManyWithoutTestInput: { // input type
+    connect?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    connectOrCreate?: NexusGenInputs['TaskCreateOrConnectWithoutTestInput'][] | null; // [TaskCreateOrConnectWithoutTestInput!]
+    create?: NexusGenInputs['TaskCreateWithoutTestInput'][] | null; // [TaskCreateWithoutTestInput!]
+    createMany?: NexusGenInputs['TaskCreateManyTestInputEnvelope'] | null; // TaskCreateManyTestInputEnvelope
+    delete?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    deleteMany?: NexusGenInputs['TaskScalarWhereInput'][] | null; // [TaskScalarWhereInput!]
+    disconnect?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    set?: NexusGenInputs['TaskWhereUniqueInput'][] | null; // [TaskWhereUniqueInput!]
+    update?: NexusGenInputs['TaskUpdateWithWhereUniqueWithoutTestInput'][] | null; // [TaskUpdateWithWhereUniqueWithoutTestInput!]
+    updateMany?: NexusGenInputs['TaskUpdateManyWithWhereWithoutTestInput'][] | null; // [TaskUpdateManyWithWhereWithoutTestInput!]
+    upsert?: NexusGenInputs['TaskUpsertWithWhereUniqueWithoutTestInput'][] | null; // [TaskUpsertWithWhereUniqueWithoutTestInput!]
+  }
+  TaskUpdateWithWhereUniqueWithoutTestInput: { // input type
+    data: NexusGenInputs['TaskUpdateWithoutTestInput']; // TaskUpdateWithoutTestInput!
+    where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+  }
+  TaskUpdateWithoutTestInput: { // input type
+    answers?: NexusGenInputs['TaskUpdateanswersInput'] | null; // TaskUpdateanswersInput
+    question?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+  }
+  TaskUpdateanswersInput: { // input type
+    push?: string | null; // String
+    set?: string[] | null; // [String!]
+  }
+  TaskUpsertWithWhereUniqueWithoutTestInput: { // input type
+    create: NexusGenInputs['TaskCreateWithoutTestInput']; // TaskCreateWithoutTestInput!
+    update: NexusGenInputs['TaskUpdateWithoutTestInput']; // TaskUpdateWithoutTestInput!
+    where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+  }
+  TaskWhereUniqueInput: { // input type
+    id?: number | null; // Int
+  }
+  TestCreateInput: { // input type
+    name: string; // String!
+    tasks?: NexusGenInputs['TaskCreateNestedManyWithoutTestInput'] | null; // TaskCreateNestedManyWithoutTestInput
+  }
+  TestUpdateInput: { // input type
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    tasks?: NexusGenInputs['TaskUpdateManyWithoutTestInput'] | null; // TaskUpdateManyWithoutTestInput
+  }
+  TestWhereUniqueInput: { // input type
+    id?: number | null; // Int
   }
   UpdateArticleInput: { // input type
     articleId: number; // Int!
@@ -795,6 +891,13 @@ export interface NexusGenInputs {
     entityId: number; // Int!
     entityType: NexusGenEnums['entityTypes']; // entityTypes!
     mediaURL: string; // String!
+  }
+  createCourseInput: { // input type
+    category: NexusGenEnums['filteringCategoies']; // filteringCategoies!
+    courseType?: NexusGenEnums['courseType'] | null; // courseType
+    name: string; // String!
+    ownerID: number; // Int!
+    shortDescription: string; // String!
   }
   createGroupInput: { // input type
     membersIds?: Array<number | null> | null; // [Int]
@@ -885,6 +988,13 @@ export interface NexusGenInputs {
     recipientId: number; // Int!
     senderId: number; // Int!
   }
+  updateCourseInput: { // input type
+    category?: NexusGenEnums['filteringCategoies'] | null; // filteringCategoies
+    courseId: number; // Int!
+    courseType?: NexusGenEnums['courseType'] | null; // courseType
+    name?: string | null; // String
+    shortDescription?: string | null; // String
+  }
   updateGroupInput: { // input type
     groupId: number; // Int!
     title?: string | null; // String
@@ -916,17 +1026,17 @@ export interface NexusGenEnums {
   QueryMode: "default" | "insensitive"
   SortOrder: "asc" | "desc"
   businessModel: "B2B" | "B2B2C" | "B2C" | "B2G" | "C2C" | "G2B" | "G2C"
+  courseMarket: "AeroNet" | "AeroNext" | "AutoNet" | "EcoNet" | "EduNet" | "EnergyNet" | "FoodNet" | "GameNet" | "HealthNet" | "HomeNet" | "Marinet" | "NeuroNet" | "SafeNet" | "SpaceNet" | "SportNet" | "TechNet" | "WearNet"
+  courseStage: "ideaOrConcept" | "prototypeOrMVP" | "scaling" | "workingProduct"
+  courseType: "hardwareAndSoftwareComplex" | "hardwareSolution" | "initiativeOfTheRegion" | "notDefined" | "service" | "softwareSolution" | "technology"
   courseTypeEnum: "hardwareAndSoftwareComplex" | "hardwareSolution" | "initiativeOfTheRegion" | "notDefined" | "service" | "softwareSolution" | "technology"
-  entityTypes: "companyAvatar" | "crowdFundingPoster" | "crowdfundingStory" | "eventPoster" | "groupAvatar" | "postMedia" | "postPoster" | "projectDescription" | "projectMedia" | "projectPoster" | "userAvatar"
+  entityTypes: "courseMaterial" | "coursePoster"
   enumPostCategory: "news" | "offer" | "resource"
   enumSectionType: "image" | "text" | "video"
   filteringCategoies: "IT" | "analytic" | "business" | "content" | "design" | "development" | "education" | "management"
   investmentStage: "angels" | "ownInvestments" | "preSeed" | "seed" | "stageA" | "stageB" | "stageC"
   mainGoal: "biometricsTasks" | "computerVisionTasks" | "dataMiningTasks" | "humanSpeechProcessingTasks" | "naturalLanguageProcessingTasks" | "tasksOfRecommendationSystems"
   mediaType: "image" | "video"
-  projectMarket: "AeroNet" | "AeroNext" | "AutoNet" | "EcoNet" | "EduNet" | "EnergyNet" | "FoodNet" | "GameNet" | "HealthNet" | "HomeNet" | "Marinet" | "NeuroNet" | "SafeNet" | "SpaceNet" | "SportNet" | "TechNet" | "WearNet"
-  projectStage: "ideaOrConcept" | "prototypeOrMVP" | "scaling" | "workingProduct"
-  projectType: "hardwareAndSoftwareComplex" | "hardwareSolution" | "initiativeOfTheRegion" | "notDefined" | "service" | "softwareSolution" | "technology"
   registeredVerdict: "maybe" | "yes"
   salesType: "firstSales" | "noSales" | "systemSales"
   sectionTypes: "image" | "text" | "video"
@@ -1154,10 +1264,13 @@ export interface NexusGenFieldTypes {
     articleUpdateMutation: string | null; // String
     createGroup: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
     createMedia: NexusGenRootTypes['SignUrlResponse'] | null; // SignUrlResponse
+    createOneCourse: NexusGenRootTypes['Course'] | null; // Course
     createOneEvent: NexusGenRootTypes['Event'] | null; // Event
+    createOneTest: NexusGenRootTypes['Test']; // Test!
     createStream: NexusGenRootTypes['Stream'] | null; // Stream
     deleteGroup: string | null; // String
     deleteMediaElement: string | null; // String
+    deleteOneCourse: NexusGenRootTypes['Course'] | null; // Course
     deleteOneEvent: NexusGenRootTypes['Event'] | null; // Event
     deletePostMedia: string | null; // String
     deleteProjectPresentationMedia: string | null; // String
@@ -1183,8 +1296,10 @@ export interface NexusGenFieldTypes {
     storyDeleteMutation: string | null; // String
     storyUpdateMutation: string | null; // String
     switchToMessager: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
+    updateCourse: string | null; // String
     updateGroup: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
     updateOneEvent: string | null; // String
+    updateOneTest: NexusGenRootTypes['Test'] | null; // Test
     updateStream: NexusGenRootTypes['Stream'] | null; // Stream
     updateStreamActivity: NexusGenRootTypes['Stream'] | null; // Stream
     updateUserData: NexusGenRootTypes['User'] | null; // User
@@ -1218,6 +1333,8 @@ export interface NexusGenFieldTypes {
     title: string; // String!
   }
   Query: { // field return type
+    course: NexusGenRootTypes['Course'] | null; // Course
+    courses: NexusGenRootTypes['Course'][]; // [Course!]!
     event: NexusGenRootTypes['Event'] | null; // Event
     events: NexusGenRootTypes['Event'][]; // [Event!]!
     getMessageInGroup: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
@@ -1234,6 +1351,8 @@ export interface NexusGenFieldTypes {
     registeredForEvents: NexusGenRootTypes['RegisteredForEvent'][]; // [RegisteredForEvent!]!
     stream: NexusGenRootTypes['Stream'] | null; // Stream
     streams: NexusGenRootTypes['Stream'][]; // [Stream!]!
+    test: NexusGenRootTypes['Test'] | null; // Test
+    tests: NexusGenRootTypes['Test'][]; // [Test!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
@@ -1385,10 +1504,13 @@ export interface NexusGenFieldTypeNames {
     articleUpdateMutation: 'String'
     createGroup: 'MessagerGroup'
     createMedia: 'SignUrlResponse'
+    createOneCourse: 'Course'
     createOneEvent: 'Event'
+    createOneTest: 'Test'
     createStream: 'Stream'
     deleteGroup: 'String'
     deleteMediaElement: 'String'
+    deleteOneCourse: 'Course'
     deleteOneEvent: 'Event'
     deletePostMedia: 'String'
     deleteProjectPresentationMedia: 'String'
@@ -1414,8 +1536,10 @@ export interface NexusGenFieldTypeNames {
     storyDeleteMutation: 'String'
     storyUpdateMutation: 'String'
     switchToMessager: 'MessagerGroup'
+    updateCourse: 'String'
     updateGroup: 'MessagerGroup'
     updateOneEvent: 'String'
+    updateOneTest: 'Test'
     updateStream: 'Stream'
     updateStreamActivity: 'Stream'
     updateUserData: 'User'
@@ -1449,6 +1573,8 @@ export interface NexusGenFieldTypeNames {
     title: 'String'
   }
   Query: { // field return type name
+    course: 'Course'
+    courses: 'Course'
     event: 'Event'
     events: 'Event'
     getMessageInGroup: 'MessagerGroup'
@@ -1465,6 +1591,8 @@ export interface NexusGenFieldTypeNames {
     registeredForEvents: 'RegisteredForEvent'
     stream: 'Stream'
     streams: 'Stream'
+    test: 'Test'
+    tests: 'Test'
     user: 'User'
     users: 'User'
   }
@@ -1630,8 +1758,14 @@ export interface NexusGenArgTypes {
     createMedia: { // args
       data: NexusGenInputs['createMediaInput']; // createMediaInput!
     }
+    createOneCourse: { // args
+      data: NexusGenInputs['createCourseInput']; // createCourseInput!
+    }
     createOneEvent: { // args
       data: NexusGenInputs['EventCreatedInput']; // EventCreatedInput!
+    }
+    createOneTest: { // args
+      data: NexusGenInputs['TestCreateInput']; // TestCreateInput!
     }
     createStream: { // args
       data: NexusGenInputs['createStreamArgs']; // createStreamArgs!
@@ -1641,6 +1775,9 @@ export interface NexusGenArgTypes {
     }
     deleteMediaElement: { // args
       data: NexusGenInputs['deleteMediaElementInput']; // deleteMediaElementInput!
+    }
+    deleteOneCourse: { // args
+      where: NexusGenInputs['CourseWhereUniqueInput']; // CourseWhereUniqueInput!
     }
     deleteOneEvent: { // args
       where: NexusGenInputs['EventWhereUniqueInput']; // EventWhereUniqueInput!
@@ -1717,11 +1854,18 @@ export interface NexusGenArgTypes {
     switchToMessager: { // args
       data: NexusGenInputs['switchToMessagerInput']; // switchToMessagerInput!
     }
+    updateCourse: { // args
+      data: NexusGenInputs['updateCourseInput']; // updateCourseInput!
+    }
     updateGroup: { // args
       data: NexusGenInputs['updateGroupInput']; // updateGroupInput!
     }
     updateOneEvent: { // args
       data: NexusGenInputs['EventUpdatedInput']; // EventUpdatedInput!
+    }
+    updateOneTest: { // args
+      data: NexusGenInputs['TestUpdateInput']; // TestUpdateInput!
+      where: NexusGenInputs['TestWhereUniqueInput']; // TestWhereUniqueInput!
     }
     updateStream: { // args
       data: NexusGenInputs['createStreamArgs']; // createStreamArgs!
@@ -1774,6 +1918,17 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    course: { // args
+      where: NexusGenInputs['CourseWhereUniqueInput']; // CourseWhereUniqueInput!
+    }
+    courses: { // args
+      after?: NexusGenInputs['CourseWhereUniqueInput'] | null; // CourseWhereUniqueInput
+      before?: NexusGenInputs['CourseWhereUniqueInput'] | null; // CourseWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+      orderBy?: NexusGenInputs['CourseOrderByWithRelationInput'][] | null; // [CourseOrderByWithRelationInput!]
+      where?: NexusGenInputs['CourseWhereInput'] | null; // CourseWhereInput
+    }
     event: { // args
       where: NexusGenInputs['EventWhereUniqueInput']; // EventWhereUniqueInput!
     }
@@ -1830,6 +1985,15 @@ export interface NexusGenArgTypes {
     streams: { // args
       after?: NexusGenInputs['StreamWhereUniqueInput'] | null; // StreamWhereUniqueInput
       before?: NexusGenInputs['StreamWhereUniqueInput'] | null; // StreamWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    test: { // args
+      where: NexusGenInputs['TestWhereUniqueInput']; // TestWhereUniqueInput!
+    }
+    tests: { // args
+      after?: NexusGenInputs['TestWhereUniqueInput'] | null; // TestWhereUniqueInput
+      before?: NexusGenInputs['TestWhereUniqueInput'] | null; // TestWhereUniqueInput
       first?: number | null; // Int
       last?: number | null; // Int
     }

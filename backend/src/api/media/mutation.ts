@@ -27,88 +27,28 @@ export const MediaMutation = extendType({
 
         if (data.entityType !== undefined) {
           switch (data.entityType) {
-            case 'userAvatar': {
-              await ctx.prisma.user.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  avatar: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'eventPoster': {
-              await ctx.prisma.event.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  poster: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'postPoster': {
-              await ctx.prisma.post.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  poster: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'postMedia': {
-              await ctx.prisma.post.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  postMedia: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'groupAvatar': {
-              await ctx.prisma.messagerGroup.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  avatar: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'projectDescription': {
+            case 'coursePoster': {
               await ctx.prisma.course.update({
                 where: {
                   id: data.entityId,
                 },
                 data: {
-                  courseMedia: {
+                  poster: {
+                    connect: {
+                      url: media.url,
+                    },
+                  },
+                },
+              });
+              break;
+            }
+            case 'courseMaterial': {
+              await ctx.prisma.course.update({
+                where: {
+                  id: data.entityId,
+                },
+                data: {
+                  Media: {
                     connect: {
                       url: media.url,
                     },

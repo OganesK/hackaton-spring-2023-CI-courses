@@ -2,8 +2,8 @@ import { objectType } from 'nexus';
 import { DEFAULT_IMAGE } from '../../config';
 import { Context } from '../../graphql/context';
 
-// export * from './query';
-// export * from './mutation';
+export * from './query';
+export * from './mutation';
 
 export const Course = objectType({
   name: 'Course',

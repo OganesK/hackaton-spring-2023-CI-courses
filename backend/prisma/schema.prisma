@@ -69,6 +69,24 @@ model Course {
   @@map("course")
 }
 
+model Test {
+  id  Int @id @default(autoincrement())
+
+  name  String
+
+  tasks Task[]
+}
+
+model Task {
+  id  Int @id @default(autoincrement())
+
+  question  String
+  answers String[]
+  
+  testId  Int
+  test  Test @relation(fields: [testId], references: [id])
+}
+
 model Post {
   id                         Int              @id @default(autoincrement())
   createdAt                  DateTime         @default(now())

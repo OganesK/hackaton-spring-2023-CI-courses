@@ -61,5 +61,5 @@ export const SignUrlResponse = objectType({
 
 export const entityTypes = enumType({
   name: 'entityTypes',
-  members: ['crowdfundingStory', 'projectDescription', 'crowdFundingPoster', 'groupAvatar', 'userAvatar', 'companyAvatar', 'projectPoster', 'projectMedia', 'eventPoster', 'postPoster', 'postMedia'],
+  members: ['coursePoster', 'courseMaterial'],
 });

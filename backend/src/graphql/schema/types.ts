@@ -8,3 +8,4 @@ export * from '../../api/course/types';
 export * from '../../api/stream/types';
 export * from '../../api/typings/types';
 export * from '../../api/users/types';
+export * from '../../api/test/types';
