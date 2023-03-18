@@ -648,13 +648,8 @@ input CreateDescriptionSectionInput {
 }
 
 input CreatePostInput {
-  category: filteringCategoies!
+  articleBody: String!
   description: String!
-  isNews: Boolean!
-  isOffer: Boolean!
-  isResource: Boolean!
-  projectId: Int!
-  tags: [String]!
   title: String!
 }
 
@@ -2373,7 +2368,9 @@ type Mutation {
   createOneEvent(data: EventCreatedInput!): Event
   createOnePost(data: PostCreateInput!): Post
   createOneStream(data: StreamCreateInput!): Stream!
+  createOneTask(data: TaskCreateInput!): Task!
   createOneTest(data: TestCreateInput!): Test!
+  createOneTestPass(data: TestPassCreateInput!): TestPass!
   deleteGroup(data: deleteGroupInput!): String
   deleteMediaElement(data: deleteMediaElementInput!): String
   deleteOneCourse(where: CourseWhereUniqueInput!): Course
@@ -2406,7 +2403,9 @@ type Mutation {
   updateGroup(data: updateGroupInput!): MessagerGroup
   updateOneEvent(data: EventUpdatedInput!): String
   updateOneStream(data: StreamUpdateInput!, where: StreamWhereUniqueInput!): Stream
+  updateOneTask(data: TaskUpdateInput!, where: TaskWhereUniqueInput!): Task
   updateOneTest(data: TestUpdateInput!, where: TestWhereUniqueInput!): Test
+  updateOneTestPass(data: TestPassUpdateInput!, where: TestPassWhereUniqueInput!): TestPass
   updateUserData(data: updateUserInput): User
 }
 
@@ -2757,13 +2756,7 @@ type Post {
 
 input PostCreateInput {
   articleBody: String!
-  category: filteringCategoies!
   description: String!
-  isNews: Boolean!
-  isOffer: Boolean!
-  isResource: Boolean!
-  projectId: Int!
-  tags: [String]!
   title: String!
 }
 
@@ -3007,7 +3000,11 @@ type Query {
   registeredForEvents(after: RegisteredForEventWhereUniqueInput, before: RegisteredForEventWhereUniqueInput, first: Int, last: Int): [RegisteredForEvent!]!
   stream(where: StreamWhereUniqueInput!): Stream
   streams(after: StreamWhereUniqueInput, before: StreamWhereUniqueInput, first: Int, last: Int): [Stream!]!
+  task(where: TaskWhereUniqueInput!): Task
+  tasks(after: TaskWhereUniqueInput, before: TaskWhereUniqueInput, first: Int, last: Int): [Task!]!
   test(where: TestWhereUniqueInput!): Test
+  testPass(where: TestPassWhereUniqueInput!): TestPass
+  testPasses(after: TestPassWhereUniqueInput, before: TestPassWhereUniqueInput, first: Int, last: Int): [TestPass!]!
   tests(after: TestWhereUniqueInput, before: TestWhereUniqueInput, first: Int, last: Int): [Test!]!
   user(where: UserWhereUniqueInput!): User
   users(after: UserWhereUniqueInput, before: UserWhereUniqueInput, first: Int, last: Int, orderBy: [UserOrderByWithRelationInput!], where: UserWhereInput): [User!]!
@@ -3565,6 +3562,23 @@ type Subscription {
   streamChat(data: subscriptionMessageInStream!): StreamMessage
 }
 
+type Task {
+  answers: [String!]!
+  cost: Float!
+  id: Int!
+  question: String!
+  rightAnswer: String!
+  test: Test!
+}
+
+input TaskCreateInput {
+  answers: TaskCreateanswersInput
+  cost: Float
+  question: String!
+  rightAnswer: String!
+  test: TestCreateNestedOneWithoutTasksInput!
+}
+
 input TaskCreateManyTestInput {
   answers: TaskCreateManyanswersInput
   cost: Float
@@ -3621,6 +3635,14 @@ input TaskScalarWhereInput {
   question: StringFilter
   rightAnswer: StringFilter
   testId: IntFilter
+}
+
+input TaskUpdateInput {
+  answers: TaskUpdateanswersInput
+  cost: FloatFieldUpdateOperationsInput
+  question: StringFieldUpdateOperationsInput
+  rightAnswer: StringFieldUpdateOperationsInput
+  test: TestUpdateOneRequiredWithoutTasksInput
 }
 
 input TaskUpdateManyMutationInput {
@@ -3692,6 +3714,8 @@ input TaskWhereUniqueInput {
 type Test {
   id: Int!
   name: String!
+  tasks(after: TaskWhereUniqueInput, before: TaskWhereUniqueInput, first: Int, last: Int): [Task!]!
+  testPasses(after: TestPassWhereUniqueInput, before: TestPassWhereUniqueInput, first: Int, last: Int): [TestPass!]!
 }
 
 input TestCreateInput {
@@ -3700,10 +3724,21 @@ input TestCreateInput {
   testPasses: TestPassCreateNestedManyWithoutTestInput
 }
 
+input TestCreateNestedOneWithoutTasksInput {
+  connect: TestWhereUniqueInput
+  connectOrCreate: TestCreateOrConnectWithoutTasksInput
+  create: TestCreateWithoutTasksInput
+}
+
 input TestCreateNestedOneWithoutTestPassesInput {
   connect: TestWhereUniqueInput
   connectOrCreate: TestCreateOrConnectWithoutTestPassesInput
   create: TestCreateWithoutTestPassesInput
+}
+
+input TestCreateOrConnectWithoutTasksInput {
+  create: TestCreateWithoutTasksInput!
+  where: TestWhereUniqueInput!
 }
 
 input TestCreateOrConnectWithoutTestPassesInput {
@@ -3711,9 +3746,27 @@ input TestCreateOrConnectWithoutTestPassesInput {
   where: TestWhereUniqueInput!
 }
 
+input TestCreateWithoutTasksInput {
+  name: String!
+  testPasses: TestPassCreateNestedManyWithoutTestInput
+}
+
 input TestCreateWithoutTestPassesInput {
   name: String!
   tasks: TaskCreateNestedManyWithoutTestInput
+}
+
+type TestPass {
+  id: Int!
+  score: Float!
+  test: Test!
+  user: User!
+}
+
+input TestPassCreateInput {
+  score: Float!
+  test: TestCreateNestedOneWithoutTestPassesInput!
+  user: UserCreateNestedOneWithoutTestPassesInput!
 }
 
 input TestPassCreateManyTestInput {
@@ -3790,6 +3843,12 @@ input TestPassScalarWhereInput {
   score: FloatFilter
   testId: IntFilter
   userId: IntFilter
+}
+
+input TestPassUpdateInput {
+  score: FloatFieldUpdateOperationsInput
+  test: TestUpdateOneRequiredWithoutTestPassesInput
+  user: UserUpdateOneRequiredWithoutTestPassesInput
 }
 
 input TestPassUpdateManyMutationInput {
@@ -3888,6 +3947,14 @@ input TestUpdateInput {
   testPasses: TestPassUpdateManyWithoutTestInput
 }
 
+input TestUpdateOneRequiredWithoutTasksInput {
+  connect: TestWhereUniqueInput
+  connectOrCreate: TestCreateOrConnectWithoutTasksInput
+  create: TestCreateWithoutTasksInput
+  update: TestUpdateWithoutTasksInput
+  upsert: TestUpsertWithoutTasksInput
+}
+
 input TestUpdateOneRequiredWithoutTestPassesInput {
   connect: TestWhereUniqueInput
   connectOrCreate: TestCreateOrConnectWithoutTestPassesInput
@@ -3896,9 +3963,19 @@ input TestUpdateOneRequiredWithoutTestPassesInput {
   upsert: TestUpsertWithoutTestPassesInput
 }
 
+input TestUpdateWithoutTasksInput {
+  name: StringFieldUpdateOperationsInput
+  testPasses: TestPassUpdateManyWithoutTestInput
+}
+
 input TestUpdateWithoutTestPassesInput {
   name: StringFieldUpdateOperationsInput
   tasks: TaskUpdateManyWithoutTestInput
+}
+
+input TestUpsertWithoutTasksInput {
+  create: TestCreateWithoutTasksInput!
+  update: TestUpdateWithoutTasksInput!
 }
 
 input TestUpsertWithoutTestPassesInput {
@@ -3931,11 +4008,9 @@ input UpdateDescriptionInput {
 }
 
 input UpdatePostInput {
-  category: filteringCategoies
-  description: String
-  postId: Int!
-  tags: [String]
-  title: String
+  articleBody: String!
+  description: String!
+  title: String!
 }
 
 input UpdateStoryInput {

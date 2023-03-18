@@ -4,12 +4,12 @@ import { Context } from '../../graphql/context';
 export * from './query';
 export * from './mutation';
 
-export const Test = objectType({
-  name: 'Test',
+export const TestPass = objectType({
+  name: 'TestPass',
   definition(t) {
     t.model.id();
-    t.model.name();
-    t.model.tasks();
-    t.model.testPasses();
+    t.model.user();
+    t.model.test();
+    t.model.score()
   },
 });

@@ -563,13 +563,8 @@ export interface NexusGenInputs {
     type: NexusGenEnums['enumSectionType']; // enumSectionType!
   }
   CreatePostInput: { // input type
-    category: NexusGenEnums['filteringCategoies']; // filteringCategoies!
+    articleBody: string; // String!
     description: string; // String!
-    isNews: boolean; // Boolean!
-    isOffer: boolean; // Boolean!
-    isResource: boolean; // Boolean!
-    projectId: number; // Int!
-    tags: Array<string | null>; // [String]!
     title: string; // String!
   }
   CreateSectionInput: { // input type
@@ -2318,13 +2313,7 @@ export interface NexusGenInputs {
   }
   PostCreateInput: { // input type
     articleBody: string; // String!
-    category: NexusGenEnums['filteringCategoies']; // filteringCategoies!
     description: string; // String!
-    isNews: boolean; // Boolean!
-    isOffer: boolean; // Boolean!
-    isResource: boolean; // Boolean!
-    projectId: number; // Int!
-    tags: Array<string | null>; // [String]!
     title: string; // String!
   }
   PostCreateManyPosterInput: { // input type
@@ -2926,6 +2915,13 @@ export interface NexusGenInputs {
     hasSome?: string[] | null; // [String!]
     isEmpty?: boolean | null; // Boolean
   }
+  TaskCreateInput: { // input type
+    answers?: NexusGenInputs['TaskCreateanswersInput'] | null; // TaskCreateanswersInput
+    cost?: number | null; // Float
+    question: string; // String!
+    rightAnswer: string; // String!
+    test: NexusGenInputs['TestCreateNestedOneWithoutTasksInput']; // TestCreateNestedOneWithoutTasksInput!
+  }
   TaskCreateManyTestInput: { // input type
     answers?: NexusGenInputs['TaskCreateManyanswersInput'] | null; // TaskCreateManyanswersInput
     cost?: number | null; // Float
@@ -2974,6 +2970,13 @@ export interface NexusGenInputs {
     question?: NexusGenInputs['StringFilter'] | null; // StringFilter
     rightAnswer?: NexusGenInputs['StringFilter'] | null; // StringFilter
     testId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  TaskUpdateInput: { // input type
+    answers?: NexusGenInputs['TaskUpdateanswersInput'] | null; // TaskUpdateanswersInput
+    cost?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    question?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    rightAnswer?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    test?: NexusGenInputs['TestUpdateOneRequiredWithoutTasksInput'] | null; // TestUpdateOneRequiredWithoutTasksInput
   }
   TaskUpdateManyMutationInput: { // input type
     answers?: NexusGenInputs['TaskUpdateanswersInput'] | null; // TaskUpdateanswersInput
@@ -3037,18 +3040,36 @@ export interface NexusGenInputs {
     tasks?: NexusGenInputs['TaskCreateNestedManyWithoutTestInput'] | null; // TaskCreateNestedManyWithoutTestInput
     testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutTestInput'] | null; // TestPassCreateNestedManyWithoutTestInput
   }
+  TestCreateNestedOneWithoutTasksInput: { // input type
+    connect?: NexusGenInputs['TestWhereUniqueInput'] | null; // TestWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TestCreateOrConnectWithoutTasksInput'] | null; // TestCreateOrConnectWithoutTasksInput
+    create?: NexusGenInputs['TestCreateWithoutTasksInput'] | null; // TestCreateWithoutTasksInput
+  }
   TestCreateNestedOneWithoutTestPassesInput: { // input type
     connect?: NexusGenInputs['TestWhereUniqueInput'] | null; // TestWhereUniqueInput
     connectOrCreate?: NexusGenInputs['TestCreateOrConnectWithoutTestPassesInput'] | null; // TestCreateOrConnectWithoutTestPassesInput
     create?: NexusGenInputs['TestCreateWithoutTestPassesInput'] | null; // TestCreateWithoutTestPassesInput
   }
+  TestCreateOrConnectWithoutTasksInput: { // input type
+    create: NexusGenInputs['TestCreateWithoutTasksInput']; // TestCreateWithoutTasksInput!
+    where: NexusGenInputs['TestWhereUniqueInput']; // TestWhereUniqueInput!
+  }
   TestCreateOrConnectWithoutTestPassesInput: { // input type
     create: NexusGenInputs['TestCreateWithoutTestPassesInput']; // TestCreateWithoutTestPassesInput!
     where: NexusGenInputs['TestWhereUniqueInput']; // TestWhereUniqueInput!
   }
+  TestCreateWithoutTasksInput: { // input type
+    name: string; // String!
+    testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutTestInput'] | null; // TestPassCreateNestedManyWithoutTestInput
+  }
   TestCreateWithoutTestPassesInput: { // input type
     name: string; // String!
     tasks?: NexusGenInputs['TaskCreateNestedManyWithoutTestInput'] | null; // TaskCreateNestedManyWithoutTestInput
+  }
+  TestPassCreateInput: { // input type
+    score: number; // Float!
+    test: NexusGenInputs['TestCreateNestedOneWithoutTestPassesInput']; // TestCreateNestedOneWithoutTestPassesInput!
+    user: NexusGenInputs['UserCreateNestedOneWithoutTestPassesInput']; // UserCreateNestedOneWithoutTestPassesInput!
   }
   TestPassCreateManyTestInput: { // input type
     id?: number | null; // Int
@@ -3112,6 +3133,11 @@ export interface NexusGenInputs {
     score?: NexusGenInputs['FloatFilter'] | null; // FloatFilter
     testId?: NexusGenInputs['IntFilter'] | null; // IntFilter
     userId?: NexusGenInputs['IntFilter'] | null; // IntFilter
+  }
+  TestPassUpdateInput: { // input type
+    score?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
+    test?: NexusGenInputs['TestUpdateOneRequiredWithoutTestPassesInput'] | null; // TestUpdateOneRequiredWithoutTestPassesInput
+    user?: NexusGenInputs['UserUpdateOneRequiredWithoutTestPassesInput'] | null; // UserUpdateOneRequiredWithoutTestPassesInput
   }
   TestPassUpdateManyMutationInput: { // input type
     score?: NexusGenInputs['FloatFieldUpdateOperationsInput'] | null; // FloatFieldUpdateOperationsInput
@@ -3195,6 +3221,13 @@ export interface NexusGenInputs {
     tasks?: NexusGenInputs['TaskUpdateManyWithoutTestInput'] | null; // TaskUpdateManyWithoutTestInput
     testPasses?: NexusGenInputs['TestPassUpdateManyWithoutTestInput'] | null; // TestPassUpdateManyWithoutTestInput
   }
+  TestUpdateOneRequiredWithoutTasksInput: { // input type
+    connect?: NexusGenInputs['TestWhereUniqueInput'] | null; // TestWhereUniqueInput
+    connectOrCreate?: NexusGenInputs['TestCreateOrConnectWithoutTasksInput'] | null; // TestCreateOrConnectWithoutTasksInput
+    create?: NexusGenInputs['TestCreateWithoutTasksInput'] | null; // TestCreateWithoutTasksInput
+    update?: NexusGenInputs['TestUpdateWithoutTasksInput'] | null; // TestUpdateWithoutTasksInput
+    upsert?: NexusGenInputs['TestUpsertWithoutTasksInput'] | null; // TestUpsertWithoutTasksInput
+  }
   TestUpdateOneRequiredWithoutTestPassesInput: { // input type
     connect?: NexusGenInputs['TestWhereUniqueInput'] | null; // TestWhereUniqueInput
     connectOrCreate?: NexusGenInputs['TestCreateOrConnectWithoutTestPassesInput'] | null; // TestCreateOrConnectWithoutTestPassesInput
@@ -3202,9 +3235,17 @@ export interface NexusGenInputs {
     update?: NexusGenInputs['TestUpdateWithoutTestPassesInput'] | null; // TestUpdateWithoutTestPassesInput
     upsert?: NexusGenInputs['TestUpsertWithoutTestPassesInput'] | null; // TestUpsertWithoutTestPassesInput
   }
+  TestUpdateWithoutTasksInput: { // input type
+    name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    testPasses?: NexusGenInputs['TestPassUpdateManyWithoutTestInput'] | null; // TestPassUpdateManyWithoutTestInput
+  }
   TestUpdateWithoutTestPassesInput: { // input type
     name?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     tasks?: NexusGenInputs['TaskUpdateManyWithoutTestInput'] | null; // TaskUpdateManyWithoutTestInput
+  }
+  TestUpsertWithoutTasksInput: { // input type
+    create: NexusGenInputs['TestCreateWithoutTasksInput']; // TestCreateWithoutTasksInput!
+    update: NexusGenInputs['TestUpdateWithoutTasksInput']; // TestUpdateWithoutTasksInput!
   }
   TestUpsertWithoutTestPassesInput: { // input type
     create: NexusGenInputs['TestCreateWithoutTestPassesInput']; // TestCreateWithoutTestPassesInput!
@@ -3231,11 +3272,9 @@ export interface NexusGenInputs {
     sections?: Array<NexusGenInputs['CreateDescriptionSectionInput'] | null> | null; // [CreateDescriptionSectionInput]
   }
   UpdatePostInput: { // input type
-    category?: NexusGenEnums['filteringCategoies'] | null; // filteringCategoies
-    description?: string | null; // String
-    postId: number; // Int!
-    tags?: Array<string | null> | null; // [String]
-    title?: string | null; // String
+    articleBody: string; // String!
+    description: string; // String!
+    title: string; // String!
   }
   UpdateStoryInput: { // input type
     sections?: Array<NexusGenInputs['CreateStorySectionInput'] | null> | null; // [CreateStorySectionInput]
@@ -4101,9 +4140,20 @@ export interface NexusGenObjects {
     text: string; // String!
   }
   Subscription: {};
+  Task: { // root type
+    answers: string[]; // [String!]!
+    cost: number; // Float!
+    id: number; // Int!
+    question: string; // String!
+    rightAnswer: string; // String!
+  }
   Test: { // root type
     id: number; // Int!
     name: string; // String!
+  }
+  TestPass: { // root type
+    id: number; // Int!
+    score: number; // Float!
   }
   User: { // root type
     bio?: string | null; // String
@@ -4205,7 +4255,9 @@ export interface NexusGenFieldTypes {
     createOneEvent: NexusGenRootTypes['Event'] | null; // Event
     createOnePost: NexusGenRootTypes['Post'] | null; // Post
     createOneStream: NexusGenRootTypes['Stream']; // Stream!
+    createOneTask: NexusGenRootTypes['Task']; // Task!
     createOneTest: NexusGenRootTypes['Test']; // Test!
+    createOneTestPass: NexusGenRootTypes['TestPass']; // TestPass!
     deleteGroup: string | null; // String
     deleteMediaElement: string | null; // String
     deleteOneCourse: NexusGenRootTypes['Course'] | null; // Course
@@ -4238,7 +4290,9 @@ export interface NexusGenFieldTypes {
     updateGroup: NexusGenRootTypes['MessagerGroup'] | null; // MessagerGroup
     updateOneEvent: string | null; // String
     updateOneStream: NexusGenRootTypes['Stream'] | null; // Stream
+    updateOneTask: NexusGenRootTypes['Task'] | null; // Task
     updateOneTest: NexusGenRootTypes['Test'] | null; // Test
+    updateOneTestPass: NexusGenRootTypes['TestPass'] | null; // TestPass
     updateUserData: NexusGenRootTypes['User'] | null; // User
   }
   PlatformConfig: { // field return type
@@ -4282,7 +4336,11 @@ export interface NexusGenFieldTypes {
     registeredForEvents: NexusGenRootTypes['RegisteredForEvent'][]; // [RegisteredForEvent!]!
     stream: NexusGenRootTypes['Stream'] | null; // Stream
     streams: NexusGenRootTypes['Stream'][]; // [Stream!]!
+    task: NexusGenRootTypes['Task'] | null; // Task
+    tasks: NexusGenRootTypes['Task'][]; // [Task!]!
     test: NexusGenRootTypes['Test'] | null; // Test
+    testPass: NexusGenRootTypes['TestPass'] | null; // TestPass
+    testPasses: NexusGenRootTypes['TestPass'][]; // [TestPass!]!
     tests: NexusGenRootTypes['Test'][]; // [Test!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
@@ -4344,9 +4402,25 @@ export interface NexusGenFieldTypes {
     newMessage: NexusGenRootTypes['Message'] | null; // Message
     streamChat: NexusGenRootTypes['StreamMessage'] | null; // StreamMessage
   }
+  Task: { // field return type
+    answers: string[]; // [String!]!
+    cost: number; // Float!
+    id: number; // Int!
+    question: string; // String!
+    rightAnswer: string; // String!
+    test: NexusGenRootTypes['Test']; // Test!
+  }
   Test: { // field return type
     id: number; // Int!
     name: string; // String!
+    tasks: NexusGenRootTypes['Task'][]; // [Task!]!
+    testPasses: NexusGenRootTypes['TestPass'][]; // [TestPass!]!
+  }
+  TestPass: { // field return type
+    id: number; // Int!
+    score: number; // Float!
+    test: NexusGenRootTypes['Test']; // Test!
+    user: NexusGenRootTypes['User']; // User!
   }
   User: { // field return type
     avatar: NexusGenRootTypes['Media'] | null; // Media
@@ -4442,7 +4516,9 @@ export interface NexusGenFieldTypeNames {
     createOneEvent: 'Event'
     createOnePost: 'Post'
     createOneStream: 'Stream'
+    createOneTask: 'Task'
     createOneTest: 'Test'
+    createOneTestPass: 'TestPass'
     deleteGroup: 'String'
     deleteMediaElement: 'String'
     deleteOneCourse: 'Course'
@@ -4475,7 +4551,9 @@ export interface NexusGenFieldTypeNames {
     updateGroup: 'MessagerGroup'
     updateOneEvent: 'String'
     updateOneStream: 'Stream'
+    updateOneTask: 'Task'
     updateOneTest: 'Test'
+    updateOneTestPass: 'TestPass'
     updateUserData: 'User'
   }
   PlatformConfig: { // field return type name
@@ -4519,7 +4597,11 @@ export interface NexusGenFieldTypeNames {
     registeredForEvents: 'RegisteredForEvent'
     stream: 'Stream'
     streams: 'Stream'
+    task: 'Task'
+    tasks: 'Task'
     test: 'Test'
+    testPass: 'TestPass'
+    testPasses: 'TestPass'
     tests: 'Test'
     user: 'User'
     users: 'User'
@@ -4581,9 +4663,25 @@ export interface NexusGenFieldTypeNames {
     newMessage: 'Message'
     streamChat: 'StreamMessage'
   }
+  Task: { // field return type name
+    answers: 'String'
+    cost: 'Float'
+    id: 'Int'
+    question: 'String'
+    rightAnswer: 'String'
+    test: 'Test'
+  }
   Test: { // field return type name
     id: 'Int'
     name: 'String'
+    tasks: 'Task'
+    testPasses: 'TestPass'
+  }
+  TestPass: { // field return type name
+    id: 'Int'
+    score: 'Float'
+    test: 'Test'
+    user: 'User'
   }
   User: { // field return type name
     avatar: 'Media'
@@ -4694,8 +4792,14 @@ export interface NexusGenArgTypes {
     createOneStream: { // args
       data: NexusGenInputs['StreamCreateInput']; // StreamCreateInput!
     }
+    createOneTask: { // args
+      data: NexusGenInputs['TaskCreateInput']; // TaskCreateInput!
+    }
     createOneTest: { // args
       data: NexusGenInputs['TestCreateInput']; // TestCreateInput!
+    }
+    createOneTestPass: { // args
+      data: NexusGenInputs['TestPassCreateInput']; // TestPassCreateInput!
     }
     deleteGroup: { // args
       data: NexusGenInputs['deleteGroupInput']; // deleteGroupInput!
@@ -4794,9 +4898,17 @@ export interface NexusGenArgTypes {
       data: NexusGenInputs['StreamUpdateInput']; // StreamUpdateInput!
       where: NexusGenInputs['StreamWhereUniqueInput']; // StreamWhereUniqueInput!
     }
+    updateOneTask: { // args
+      data: NexusGenInputs['TaskUpdateInput']; // TaskUpdateInput!
+      where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+    }
     updateOneTest: { // args
       data: NexusGenInputs['TestUpdateInput']; // TestUpdateInput!
       where: NexusGenInputs['TestWhereUniqueInput']; // TestWhereUniqueInput!
+    }
+    updateOneTestPass: { // args
+      data: NexusGenInputs['TestPassUpdateInput']; // TestPassUpdateInput!
+      where: NexusGenInputs['TestPassWhereUniqueInput']; // TestPassWhereUniqueInput!
     }
     updateUserData: { // args
       data?: NexusGenInputs['updateUserInput'] | null; // updateUserInput
@@ -4889,8 +5001,26 @@ export interface NexusGenArgTypes {
       first?: number | null; // Int
       last?: number | null; // Int
     }
+    task: { // args
+      where: NexusGenInputs['TaskWhereUniqueInput']; // TaskWhereUniqueInput!
+    }
+    tasks: { // args
+      after?: NexusGenInputs['TaskWhereUniqueInput'] | null; // TaskWhereUniqueInput
+      before?: NexusGenInputs['TaskWhereUniqueInput'] | null; // TaskWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
     test: { // args
       where: NexusGenInputs['TestWhereUniqueInput']; // TestWhereUniqueInput!
+    }
+    testPass: { // args
+      where: NexusGenInputs['TestPassWhereUniqueInput']; // TestPassWhereUniqueInput!
+    }
+    testPasses: { // args
+      after?: NexusGenInputs['TestPassWhereUniqueInput'] | null; // TestPassWhereUniqueInput
+      before?: NexusGenInputs['TestPassWhereUniqueInput'] | null; // TestPassWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
     tests: { // args
       after?: NexusGenInputs['TestWhereUniqueInput'] | null; // TestWhereUniqueInput
@@ -4916,6 +5046,20 @@ export interface NexusGenArgTypes {
     }
     streamChat: { // args
       data: NexusGenInputs['subscriptionMessageInStream']; // subscriptionMessageInStream!
+    }
+  }
+  Test: {
+    tasks: { // args
+      after?: NexusGenInputs['TaskWhereUniqueInput'] | null; // TaskWhereUniqueInput
+      before?: NexusGenInputs['TaskWhereUniqueInput'] | null; // TaskWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
+    }
+    testPasses: { // args
+      after?: NexusGenInputs['TestPassWhereUniqueInput'] | null; // TestPassWhereUniqueInput
+      before?: NexusGenInputs['TestPassWhereUniqueInput'] | null; // TestPassWhereUniqueInput
+      first?: number | null; // Int
+      last?: number | null; // Int
     }
   }
   User: {
