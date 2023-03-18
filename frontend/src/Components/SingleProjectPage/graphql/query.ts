@@ -6,11 +6,7 @@ export const GET_USERS_QUERY = gql`
       id
       firstname
       lastname
-      inWorks {
-        project {
-          id
-        }
-      }
+      
       avatar {
         link
       }

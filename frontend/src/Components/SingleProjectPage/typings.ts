@@ -46,11 +46,7 @@ export interface UserTypes {
   firstname: string;
   lastname: string;
   avatar: string;
-  inWorks: {
-    project: {
-      id: number;
-    };
-  }[];
+  
 }
 
 export interface AutoCompleteTypes {

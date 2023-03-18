@@ -166,7 +166,6 @@ export const userContext = createContext<ContextUserTypes>({
     email: 'string',
     ownerCompanies: [],
     publishedEvent: [],
-    inWorks: [],
     avatar: {
       link: '',
     },

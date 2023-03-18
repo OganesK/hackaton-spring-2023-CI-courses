@@ -37,10 +37,7 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
       bio: 'string',
       ownerCompanies: [],
       publishedEvent: [],
-      inWorks: [],
-      avatar: {
-        link: '',
-      },
+      
       role: 'string',
       email: 'string',
     };
