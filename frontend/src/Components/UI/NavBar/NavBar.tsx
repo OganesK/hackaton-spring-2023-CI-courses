@@ -413,7 +413,20 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                         Трансляции
                       </Link>
                     </MenuItem>
-                    
+                    <MenuItem>
+                      <Link
+                        className={
+                          props.text === 'header'
+                            ? classes.linkFooter
+                            : props.text === 'footer'
+                            ? classes.linkFooter
+                            : classes.projectLink
+                        }
+                        to="/test"
+                      >
+                        Тесты
+                      </Link>
+                    </MenuItem>
                     <MenuItem>
                       <Link
                         className={

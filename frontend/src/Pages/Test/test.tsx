@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from "react";
 import PollModal from "./singleTest";
-
-
+import { useQuery } from '@apollo/client';
 import {GetTasksQuery} from '../Poll/graphql/query'
 type Option = {
   id: number;
@@ -25,11 +24,10 @@ const Test: React.FC<TestProps> = ({open, setOpen}) => {
 
   const [tasks,setTasks] = useState([])
 
-  useEffect(async () => {
-    GetTasksQuery().then(response=>{
-      setTasks(JSON.parse(response));
-    })
-  }, [])
+  const { loading, error, data } = useQuery(GetTasksQuery);
+
+  console.log(data)
+    
   
   const handlePollSubmit = (optionId: number) => {
     console.log(`User selected option ${optionId}`);
