@@ -1,5 +1,5 @@
 // import React, { useState } from "react";
-// import PollModal from "./singleTest";
+// import PollModal from "../../Pages/SingleTest/singleTest";
 
 // type Option = {
 //   id: number;
@@ -12,25 +12,23 @@
 //   { id: 3, text: "Option 3" },
 // ];
 
-// interface TestProps {
-//   open: boolean
-//   setOpen: () => void
-// }
+// const Test: React.FC = () => {
+//   const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
-// const Test: React.FC<TestProps> = ({open, setOpen}) => {
 //   const handlePollSubmit = (optionId: number) => {
 //     console.log(`User selected option ${optionId}`);
-//     setOpen(false);
+//     setIsPollModalOpen(false);
 //   };
 
 //   return (
-//     <div>
+//     <div onLoad= {() => setIsPollModalOpen(true)}>
+//       {/* <button onClick={() =>setIsPollModalOpen (true)}>Начать тестирование</button> */}
 //       <PollModal
-//         isOpen={open}
+//         isOpen={isPollModalOpen}
 //         question="What is your favorite color?"
 //         options={options}
 //         onSubmit={handlePollSubmit}
-//         onClose={() => setOpen(!open)}
+//         onClose={() => setIsPollModalOpen(!isPollModalOpen)}
 //         />
 //     </div>
 //   )

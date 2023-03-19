@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Grid from '@mui/material/Grid';
 import { useHistory } from 'react-router-dom';
 import { useWindowSize } from '../../rules/index';
@@ -9,12 +9,15 @@ import useStyles, { ArrowIconWrapper, DescriptionText } from './Styles';
 import { useTranslate } from '../../helpers/hooks/useTranslateCategories';
 
 import { ProjectCardProps } from './typing';
+import Test from './test';
+
 
 export default function TestXard(props: ProjectCardProps): JSX.Element {
   const [width] = useWindowSize();
   const firstDefaultBlockHeight = width / 6;
   const secondDefaultBlockHeight = width / 4;
   const thirdDefaultBlockHeight = width / 2;
+  const [isPollModalOpen, setIsPollModalOpen] = useState(false);
 
 
   const history = useHistory();
@@ -22,10 +25,10 @@ export default function TestXard(props: ProjectCardProps): JSX.Element {
   const classes = useStyles();
   return (
     <div
-      onClick={(): void => history.push(`/tests/${props.courseId}`)}
       style={{
         cursor: 'pointer',
       }}
+      onClick={() => setIsPollModalOpen(true)}
     >
       <Grid
         className="hover-text-one"
@@ -81,6 +84,7 @@ export default function TestXard(props: ProjectCardProps): JSX.Element {
           </figcaption>
         </figure>
       </Grid>
-    </div>
+      <Test open={isPollModalOpen} setOpen={setIsPollModalOpen}/>
+    </div> 
   );
 }

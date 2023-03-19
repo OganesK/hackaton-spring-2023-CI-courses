@@ -12,23 +12,28 @@ const options: Option[] = [
   { id: 3, text: "Option 3" },
 ];
 
-const Test: React.FC = () => {
-  const [isPollModalOpen, setIsPollModalOpen] = useState(false);
+
+interface TestProps {
+  open: boolean
+  setOpen: () => void
+}
+
+
+const Test: React.FC<TestProps> = ({open, setOpen}) => {
 
   const handlePollSubmit = (optionId: number) => {
     console.log(`User selected option ${optionId}`);
-    setIsPollModalOpen(false);
+    setOpen(false);
   };
 
   return (
     <div>
-      <button onClick={() => setIsPollModalOpen(true)}>Open poll</button>
       <PollModal
-        isOpen={isPollModalOpen}
+        isOpen={open}
         question="What is your favorite color?"
         options={options}
         onSubmit={handlePollSubmit}
-        onClose={() => setIsPollModalOpen(!isPollModalOpen)}
+        onClose={() => setOpen(false)}
         />
     </div>
   )

@@ -29,7 +29,7 @@ function FormRow(props: { data: PollTypes[] | undefined; loading: boolean }): JS
   return (
     <Grid container direction="row" justifyContent="flex-start" columnSpacing={6}>
       {props.data &&
-        props.data.map((poll: ) => (
+        props.data.map((poll: PollTypes) => (
           <Grid
             key={poll.id}
             item
