@@ -253,7 +253,11 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                         Прямая трансляцию
                       </Link>
                     </MenuItem>
-                   
+                    <MenuItem>
+                      <Link className={props.text === 'header' ? classes.linkFooter : classes.projectLink} to="/tests">
+                        Тесты
+                      </Link>
+                    </MenuItem>
                     
                     <MenuItem>
                       <Link className={props.text === 'header' ? classes.linkFooter : classes.projectLink} to="/news">
