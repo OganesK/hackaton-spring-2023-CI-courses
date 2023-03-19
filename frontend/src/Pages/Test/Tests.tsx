@@ -13,7 +13,8 @@ import useStyles from '../../Components/UI/Styles/TS/TextStyles/style';
 
 import Footer from '../../Components/Home/Footer/Footer';
 
-import ProjectCard from '../../Components/ProjectsPage/ProjectCard';
+// import ProjectCard from '../../Components/ProjectsPage/ProjectCard';
+import TestXard from './testBar';
 
 import { GET_TESTS_QUERY } from '../../Queries';
 import { TestTypes } from './typings';
@@ -42,7 +43,7 @@ function FormRow(props: { data: TestTypes[] | undefined; loading: boolean }): JS
               marginBottom: width < 600 ? 40 : 60,
             }}
           >
-            <ProjectCard
+            <TestXard
               img={''}
               title={test.name}
               shortContent={'Description'}
