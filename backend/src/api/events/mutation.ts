@@ -14,7 +14,6 @@ export const EventMutation = extendType({
             name: data.name,
             description: data.description,
             shortDescription: data.shortDescription,
-            category: data.category,
             date: data.date,
             organizer: data.organizer,
             theme: data.theme,
@@ -50,14 +49,12 @@ export const EventMutation = extendType({
             id: data.eventId,
           },
           data: {
-            moderationChecked: false,
             name: data.name !== null ? data.name : eventData.name,
             description: data.description !== null ? data.description : eventData.description,
             shortDescription: data.shortDescription !== null ? data.shortDescription : eventData.shortDescription,
             organizer: data.organizer !== null ? data.organizer : eventData.organizer,
             theme: data.theme !== null ? data.theme : eventData.theme,
             address: data.address !== null ? data.address : eventData.address,
-            category: data.category !== null ? data.category : eventData.category,
             date: data.date !== null ? data.date : eventData.date,
             format: data.format !== null ? data.format : eventData.format,
           },
@@ -86,13 +83,11 @@ export const EventMutation = extendType({
               id: registerExist.id,
             },
             data: {
-              verdict: data.verdict,
             },
           });
         } else {
           await ctx.prisma.registeredForEvent.create({
             data: {
-              verdict: data.verdict,
               name: data.name,
               surname: data.surname,
               email: data.email,

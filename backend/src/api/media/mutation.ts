@@ -6,6 +6,7 @@ import url from 'url-parse';
 import cuid from 'cuid';
 import * as awsS3API from '../../integrations/aws/s3';
 import { Context } from '../../graphql/context';
+import { mediaType } from '@prisma/client';
 
 export const MediaMutation = extendType({
   type: 'Mutation',
@@ -21,29 +22,14 @@ export const MediaMutation = extendType({
         const media = await ctx.prisma.media.create({
           data: {
             url: result.objectURL,
-            type: data.fileType === 'video/mp4' ? 'video' : 'image',
+            type: data.fileType as mediaType,
           },
         });
 
         if (data.entityType !== undefined) {
           switch (data.entityType) {
-            case 'userAvatar': {
-              await ctx.prisma.user.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  avatar: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'crowdFundingPoster': {
-              await ctx.prisma.crowdFunding.update({
+            case 'coursePoster': {
+              await ctx.prisma.course.update({
                 where: {
                   id: data.entityId,
                 },
@@ -57,133 +43,13 @@ export const MediaMutation = extendType({
               });
               break;
             }
-            case 'companyAvatar': {
-              await ctx.prisma.company.update({
+            case 'courseMaterial': {
+              await ctx.prisma.course.update({
                 where: {
                   id: data.entityId,
                 },
                 data: {
-                  avatar: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'projectPoster': {
-              await ctx.prisma.project.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  poster: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'projectMedia': {
-              await ctx.prisma.project.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  presentationMedia: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'eventPoster': {
-              await ctx.prisma.event.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  poster: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'postPoster': {
-              await ctx.prisma.post.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  poster: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'postMedia': {
-              await ctx.prisma.post.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  postMedia: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'groupAvatar': {
-              await ctx.prisma.messagerGroup.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  avatar: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'projectDescription': {
-              await ctx.prisma.project.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  projectMedia: {
-                    connect: {
-                      url: media.url,
-                    },
-                  },
-                },
-              });
-              break;
-            }
-            case 'crowdfundingStory': {
-              await ctx.prisma.crowdFunding.update({
-                where: {
-                  id: data.entityId,
-                },
-                data: {
-                  crowdFundingMedia: {
+                  Media: {
                     connect: {
                       url: media.url,
                     },
@@ -225,31 +91,6 @@ export const MediaMutation = extendType({
       },
     });
 
-    t.field('putCompanyAvatar', {
-      type: 'SignUrlResponse',
-      args: { data: nonNull(arg({ type: getMediaDataInput })) },
-      resolve: async (_, { data }, ctx: Context) => {
-        if (await awsS3API.objectType({ type: data.fileType }) === false) {
-          throw new GraphQLError('Not supported mimetype!');
-        }
-
-        const result = await awsS3API.getSignedUrl({ fileName: data.fileName, type: data.fileType });
-
-        await ctx.prisma.media.create({
-          data: {
-            company: {
-              connect: {
-                id: data.entityId,
-              },
-            },
-            url: result.objectURL,
-            type: 'image',
-          },
-        });
-
-        return result;
-      },
-    });
     t.field('putUserAvatar', {
       type: 'SignUrlResponse',
       args: { data: nonNull(arg({ type: getMediaDataInput })) },
@@ -379,7 +220,7 @@ export const MediaMutation = extendType({
 
         await ctx.prisma.media.create({
           data: {
-            projectPoster: {
+            courseMedia: {
               connect: {
                 id: data.entityId,
               },
@@ -404,7 +245,7 @@ export const MediaMutation = extendType({
 
         await ctx.prisma.media.create({
           data: {
-            projectMedia: {
+            courseMedia: {
               connect: {
                 id: data.entityId,
               },
@@ -439,7 +280,7 @@ export const MediaMutation = extendType({
 
 export const getMediaDataInput = inputObjectType({
   name: 'getMediaDataInput',
-  definition (t) {
+  definition(t) {
     t.int('entityId');
     t.string('fileName');
     t.string('fileType');
@@ -448,28 +289,28 @@ export const getMediaDataInput = inputObjectType({
 
 export const deleteProjectPresentationMedia = inputObjectType({
   name: 'deleteProjectPresentationMedia',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('mediaUrl');
   },
 });
 
 export const deleteMediaElementInput = inputObjectType({
   name: 'deleteMediaElementInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('mediaURL');
   },
 });
 
 export const deletePostMedia = inputObjectType({
   name: 'deletePostMedia',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('mediaUrl');
   },
 });
 
 export const createMediaInput = inputObjectType({
   name: 'createMediaInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.string('fileType');
     t.int('entityId');
     t.field('entityType', {
@@ -480,7 +321,7 @@ export const createMediaInput = inputObjectType({
 
 export const connectMediaInput = inputObjectType({
   name: 'connectMediaInput',
-  definition (t) {
+  definition(t) {
     t.nonNull.int('entityId');
     t.nonNull.string('mediaURL');
     t.nonNull.field('entityType', {

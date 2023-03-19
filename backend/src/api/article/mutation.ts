@@ -134,11 +134,6 @@ export const CrowdfundingArticleMutations = extendType({
       resolve: async (_, { data }, ctx: Context) => {
         const story = await ctx.prisma.article.create({
           data: {
-            crowdfunding: {
-              connect: {
-                id: data.crowdFundingId,
-              },
-            },
           },
         });
 
@@ -186,11 +181,6 @@ export const CrowdfundingArticleMutations = extendType({
 
         const storyNew = await ctx.prisma.article.create({
           data: {
-            crowdfunding: {
-              connect: {
-                id: articleOld.cfId,
-              },
-            },
           },
         });
 
@@ -251,7 +241,7 @@ export const ProjectArticleMutation = extendType({
       resolve: async (_, { data }, ctx: Context) => {
         const description = await ctx.prisma.article.create({
           data: {
-            project: {
+            course: {
               connect: {
                 id: data.projectId,
               },
@@ -303,9 +293,9 @@ export const ProjectArticleMutation = extendType({
 
         const descriptionNew = await ctx.prisma.article.create({
           data: {
-            project: {
+            course: {
               connect: {
-                id: descriptionOld.projectId,
+                id: descriptionOld.courseId,
               },
             },
           },

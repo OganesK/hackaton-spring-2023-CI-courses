@@ -7,7 +7,6 @@ export const PlatformConfig = objectType({
   definition (t) {
     t.model.id();
     t.model.createdAt();
-    t.model.totalProjectCount();
     t.model.totalCompanyCount();
     t.model.totalBudgetInvestment();
     t.model.totalExtraBudgetInvestment();
@@ -15,10 +14,6 @@ export const PlatformConfig = objectType({
     t.model.platformTitle();
     t.model.platformDescription();
     t.model.platformShortDescription();
-    t.model.newsShownOnLanding();
-    t.model.offersShownOnLanding();
-    t.model.crowdFundingsShownOnLanding();
-    t.model.projectsShownOnLanding();
     t.model.eventsShownOnLanding();
   },
 });

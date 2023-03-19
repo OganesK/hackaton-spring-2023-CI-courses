@@ -4,12 +4,11 @@ export * from './mutation';
 
 export const Article = objectType({
   name: 'Article',
-  definition (t) {
+  definition(t) {
     t.model.id();
     t.model.createdAt();
     t.model.post();
-    t.model.crowdfunding();
-    t.model.project();
+    t.model.course();
     t.model.sections({
       ordering: {
         number: true,
@@ -20,7 +19,7 @@ export const Article = objectType({
 
 export const Section = objectType({
   name: 'Section',
-  definition (t) {
+  definition(t) {
     t.model.id();
     t.model.article();
     t.model.number();

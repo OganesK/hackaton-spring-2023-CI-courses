@@ -8,7 +8,7 @@ export const Stream = objectType({
   definition (t) {
     t.model.id();
     t.model.streamKey();
-    t.model.event();
     t.model.active();
+    t.model.name();
   },
 });

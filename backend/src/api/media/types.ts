@@ -7,19 +7,14 @@ export * from './mutation';
 
 export const Media = objectType({
   name: 'Media',
-  definition (t) {
+  definition(t) {
     t.model.id();
     t.model.createdAt();
     t.model.type();
     t.model.user();
-    t.model.company();
-    t.model.projectPoster();
-    t.model.projectMedia();
     t.model.event();
     t.model.post();
     t.model.postMedia();
-    t.model.projectDescripiton();
-    t.model.crowdfundingStory();
     t.field('link', {
       type: 'String',
       resolve: async (parent: any, { }, ctx: Context) => {
@@ -56,7 +51,7 @@ export const Media = objectType({
 
 export const SignUrlResponse = objectType({
   name: 'SignUrlResponse',
-  definition (t) {
+  definition(t) {
     t.string('signedURL');
     t.string('fileName');
     t.int('mediaId');
@@ -66,5 +61,5 @@ export const SignUrlResponse = objectType({
 
 export const entityTypes = enumType({
   name: 'entityTypes',
-  members: ['crowdfundingStory', 'projectDescription', 'crowdFundingPoster', 'groupAvatar', 'userAvatar', 'companyAvatar', 'projectPoster', 'projectMedia', 'eventPoster', 'postPoster', 'postMedia'],
+  members: ['coursePoster', 'courseMaterial'],
 });

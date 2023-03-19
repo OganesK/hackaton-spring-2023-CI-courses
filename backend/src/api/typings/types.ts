@@ -11,37 +11,11 @@ export const filteringCategoies = enumType({
     'education',
     'content',
     'IT',
-    'securityAndDefenseIndustry',
-    'geologyGeodesyAndMeteorology',
-    'stateAdministration',
-    'other',
-    'healthcareMedicinePharmaceuticals',
-    'healthyLifestyleAndSports',
-    'publicUtilities',
-    'creativeTechnologiesAndTheEntertainmentIndustry',
-    'cultureAndArt',
-    'forestry',
-    'mediaAndSocialNetworks',
-    'metallurgyAndMiningIndustry',
-    'theScience',
-    'realty',
-    'oilAndGasIndustry',
-    'catering',
-    'productionOfProducts',
-    'connection',
-    'agriculturalIndustry',
-    'constructionAndInfrastructure',
-    'tradeAndRetail',
-    'transport',
-    'tourismAndHotelBusiness',
-    'finance',
-    'chemicalIndustry',
-    'energy',
   ],
 });
 
-export const projectType = enumType({
-  name: 'projectType',
+export const courseType = enumType({
+  name: 'courseType',
   members: [
     'softwareSolution',
     'hardwareAndSoftwareComplex',
@@ -53,8 +27,8 @@ export const projectType = enumType({
   ],
 });
 
-export const projectStage = enumType({
-  name: 'projectStage',
+export const courseStage = enumType({
+  name: 'courseStage',
   members: [
     'ideaOrConcept',
     'prototypeOrMVP',
@@ -63,8 +37,8 @@ export const projectStage = enumType({
   ],
 });
 
-export const projectMarket = enumType({
-  name: 'projectMarket',
+export const courseMarket = enumType({
+  name: 'courseMarket',
   members: [
     'AeroNet',
     'AeroNext',
