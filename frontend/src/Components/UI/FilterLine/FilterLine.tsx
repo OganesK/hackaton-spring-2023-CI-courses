@@ -16,7 +16,7 @@ const StyledAppBar = styled(AppBar)(() => ({
 }));
 
 export default function FilterLine(props: FilterLineProps): JSX.Element {
-  const filters = ['Курсы', 'Уроки', 'Трансляции', 'Тесты']
+  const filters = ['Курсы', 'Уроки', 'Тесты']
     
 
   const onClickLeft: () => void = () => {

@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-
+import axios from 'axios';
 import { Grid, OutlinedInput, MenuItem, Select, SelectChangeEvent } from '@mui/material';
 
 import { Modal } from 'react-responsive-modal';
@@ -47,6 +47,7 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
   const [themeValue, setThemeValue] = useState('');
   const [eventFormatValue, setEventFormatValue] = useState('');
   const [imgModal, setImgModal] = useState(imgModalDefault);
+  const [questionsCount, setQuestionsCount] = useState(10)
 
   const [openNoneClick, setOpenNoneClick] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
@@ -60,63 +61,59 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
   const onClickHandler: () => Promise<void> = async () => {
     if (
       nameValue &&
-      catValue &&
-      bodyValue &&
-      descriptionValue &&
-      dateValue &&
-      organizerValue &&
-      addressValue &&
-      themeValue
+      bodyValue
     ) {
       setOpenNoneClick(true);
-      const newEventData = {
-        name: nameValue,
-        category: catValue,
-        description: bodyValue,
-        shortDescription: descriptionValue,
-        date: dateValue,
-        organizer: organizerValue,
-        address: addressValue,
-        theme: themeValue,
-        ...(eventFormatValue && { format: eventFormatValue }),
-      };
 
-      const eventId = await createEventHandler(newEventData);
-      if (posterValue.size !== 0) {
-        const PosterData = {
-          entityType: 'eventPoster',
-          entityId: eventId?.data?.createOneEvent?.id,
-          fileType: posterValue.type,
-        };
-        const uploadUrl = (await getUrlToUploadEventPosterHandler(PosterData)).data;
-        await fetch(uploadUrl!.createMedia?.signedURL, {
-          method: 'PUT', // *GET, POST, PUT, DELETE, etc.
-          credentials: 'include', // include, *same-origin, omit
-          headers: {
-            'Content-Type': posterValue.type,
-          },
-          //@ts-ignore
-          body: posterValue, // body data type must match "Content-Type" header
-        });
+      const testParams = {
+        n: questionsCount,
+        text: bodyValue
       }
-      props.handleOpenClose();
-      await props.refetch();
 
-      setNameValue('');
-      setDescriptionValue('');
-      setPosterValue({
-        name: '',
-        type: '',
-        size: 0,
+      const data = await axios.post(`https://nikko-develop.space/neuro/questions?n=${questionsCount}&text=${bodyValue}`, {})
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
       });
-      setBodyValue('');
-      setDateValue(new Date());
-      setOrganizerValue('');
-      setAddressValue('');
-      setThemeValue('');
-      setEventFormatValue('');
-      setImgModal(imgModalDefault);
-      setCatValue('business');
+
+      // const eventId = await createEventHandler(newEventData);
+      // if (posterValue.size !== 0) {
+      //   const PosterData = {
+      //     entityType: 'eventPoster',
+      //     entityId: eventId?.data?.createOneEvent?.id,
+      //     fileType: posterValue.type,
+      //   };~[]
+      //   const uploadUrl = (await getUrlToUploadEventPosterHandler(PosterData)).data;
+      //   await fetch(uploadUrl!.createMedia?.signedURL, {
+      //     method: 'PUT', // *GET, POST, PUT, DELETE, etc.
+      //     credentials: 'include', // include, *same-origin, omit
+      //     headers: {
+      //       'Content-Type': posterValue.type,
+      //     },
+      //     //@ts-ignore
+      //     body: posterValue, // body data type must match "Content-Type" header
+      //   });
+      // }
+      // props.handleOpenClose();
+      // await props.refetch();
+
+      // setNameValue('');
+      // setDescriptionValue('');
+      // setPosterValue({
+      //   name: '',
+      //   type: '',
+      //   size: 0,
+      // });
+      // setBodyValue('');
+      // setDateValue(new Date());
+      // setOrganizerValue('');
+      // setAddressValue('');
+      // setThemeValue('');
+      // setEventFormatValue('');
+      // setImgModal(imgModalDefault);
+      // setCatValue('business');
 
       setOpenNoneClick(false);
     } else {
@@ -151,7 +148,7 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
         <Grid container direction="column" className={styles.modalContainer}>
           {openNoneClick ? <NoneClick /> : null}
           <Grid item className={styles.modalHeader}>
-            Создание Трансляции
+            Создание 
           </Grid>
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
@@ -162,7 +159,7 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
                 fullWidth={true}
                 defaultValue={nameValue}
                 value={nameValue}
-                placeholder={isTabletOrMobile ? '*' : 'Заголовок Трансляции *'}
+                placeholder={isTabletOrMobile ? '*' : 'Заголовок теста *'}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setNameValue(e.target.value)}
                 inputProps={{
                   maxLength: 96,
@@ -172,85 +169,6 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
             </Grid>
           </Grid>
 
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Краткое описание
-            </Grid>
-            <Grid container xs>
-              <OutlinedInput
-                fullWidth={true}
-                defaultValue={descriptionValue}
-                value={descriptionValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setDescriptionValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Краткое описание Трансляции *'}
-                inputProps={{
-                  maxLength: 128,
-                }}
-                required
-                size="small"
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Дата
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <DateTimePicker onChange={setDateValue} value={dateValue} className={styles.dateTime} />
-            </Grid>
-          </Grid>
-
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Категория*
-            </Grid>
-            <Grid container md={5} xs={12}>
-              <Select value={catValue} onChange={handleChangeCategory} fullWidth size="small">
-                {categoriesArray
-                  .filter(cat => {
-                    if (cat.split(',').pop() === 'Все') {
-                      return false;
-                    }
-                    return true;
-                  })
-                  .map(cat => (
-                    <MenuItem key={cat} value={cat}>
-                      {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
-                      {useTranslate(cat)}
-                    </MenuItem>
-                  ))}
-              </Select>
-            </Grid>
-          </Grid>
-
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} className={styles.modalHeaderText}>
-              Обложка
-            </Grid>
-            <Grid container xs direction="column" style={{ gap: 15 }}>
-              {isTabletOrMobile ? null : <Grid>Выберете изображение для обложки Трансляции</Grid>}
-              <Grid container direction="row" style={{ gap: 20 }}>
-                <input type="file" ref={hiddenFileInput} onChange={handleChange} style={{ display: 'none' }} />
-                <ModalImageContainer
-                  container
-                  justifyContent="center"
-                  alignItems="center"
-                  onClick={handleClick}
-                  md={5}
-                  xs={5}
-                  isDefault={imgModal === imgModalDefault}
-                >
-                  <ModalImage src={imgModal} isDefault={imgModal === imgModalDefault} />
-                </ModalImageContainer>
-                <Grid container xs alignItems="center" className={styles.imgConditionText}>
-                  JPEG или PNG
-                  <br />
-                  930x385px
-                </Grid>
-              </Grid>
-            </Grid>
-          </Grid>
 
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid
@@ -268,7 +186,7 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
                 defaultValue={bodyValue}
                 value={bodyValue}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setBodyValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Описание Трансляции *'}
+                placeholder={isTabletOrMobile ? '*' : 'Основной тематический текст теста *'}
                 multiline
                 maxRows={7}
                 color="primary"
@@ -280,75 +198,30 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
               />
             </Grid>
           </Grid>
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Организатор
-            </Grid>
-            <Grid container xs>
-              <OutlinedInput
-                fullWidth={true}
-                defaultValue={organizerValue}
-                value={organizerValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setOrganizerValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Организатор Трансляции *'}
-                inputProps={{
-                  maxLength: 56,
-                }}
-                size="small"
-              />
-            </Grid>
-          </Grid>
 
           <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Тематика
+            <Grid
+              container
+              md={3}
+              xs={12}
+              style={{ paddingTop: isTabletOrMobile ? 0 : 10 }}
+              className={styles.modalHeaderText}
+            >
+              Количество вопросов
             </Grid>
-            <Grid container xs>
+            <Grid item xs>
               <OutlinedInput
-                fullWidth={true}
-                defaultValue={themeValue}
-                value={themeValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setThemeValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Тематика Трансляции *'}
+                fullWidth
+                defaultValue={questionsCount}
+                value={questionsCount}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setQuestionsCount(Number(e.target.value))}
+                placeholder={isTabletOrMobile ? '*' : 'Количество вопросов *'}
+                multiline
+                maxRows={7}
+                color="primary"
                 inputProps={{
-                  maxLength: 62,
-                }}
-                size="small"
-              />
-            </Grid>
-          </Grid>
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Адрес проведения
-            </Grid>
-            <Grid container xs>
-              <OutlinedInput
-                fullWidth={true}
-                defaultValue={addressValue}
-                value={addressValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setAddressValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '*' : 'Адрес Трансляции *'}
-                inputProps={{
-                  maxLength: 96,
-                }}
-                size="small"
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container direction="row" className={styles.inputContainerGap}>
-            <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>
-              Формат
-            </Grid>
-            <Grid container xs>
-              <OutlinedInput
-                fullWidth={true}
-                defaultValue={eventFormatValue}
-                value={eventFormatValue}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>): void => setEventFormatValue(e.target.value)}
-                placeholder={isTabletOrMobile ? '' : 'Формат Трансляции'}
-                inputProps={{
-                  maxLength: 36,
+                  maxLength: 8128,
+                  overflow: 'auto',
                 }}
                 size="small"
               />
