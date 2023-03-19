@@ -76,7 +76,6 @@ model Course {
   courseType           courseTypeEnum?
   Media                Media[]          @relation("Media")
 
-  @@map("course")
 }
 
 model Test {
