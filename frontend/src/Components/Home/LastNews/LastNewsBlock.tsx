@@ -31,7 +31,7 @@ const LastNews: (props: LastNewsProps) => JSX.Element = (props: LastNewsProps) =
     >
       <Grid container xl lg md={12} sm={12} xs={12} direction="row">
         <Grid container lg={12} md={8} sm={8} xs={7}>
-          <ComponentTextHeader text="уроки сообщества" />
+          <ComponentTextHeader text="Уроки сообщества" />
         </Grid>
         <Grid
           container

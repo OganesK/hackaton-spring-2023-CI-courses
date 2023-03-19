@@ -62,7 +62,7 @@ export default function TestXard(props: ProjectCardProps): JSX.Element {
             margin: 0,
           }}
         >
-          <img style={{ height: 'auto', width: '100%', objectFit: 'cover' }} src={props.img} alt="" />
+          <img style={{ height: 'auto', width: '100%', objectFit: 'cover' }} src={'https://www.mosereducational.com/wp-content/uploads/2019/08/act-test-information-scantron-post.jpg'} alt="" />
           <figcaption>
             <p className={classes.titleText}>{props.title}</p>
             <DescriptionText>

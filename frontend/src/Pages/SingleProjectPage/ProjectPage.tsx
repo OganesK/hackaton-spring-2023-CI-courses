@@ -32,7 +32,6 @@ import SideBarNavigation from '../../Components/SingleProjectPage/sideBarNavigat
 import AutoCompleteSearchField from '../../Components/SingleProjectPage/AutoCompleteSearchField';
 import ImageSlider from '../../Components/SingleProjectPage/ImageSlider';
 
-// import CreatePostModal from '../../Components/ProfilePage/Modals/CreatePostModal';
 import ProjectEditModal from '../../Components/SingleProjectPage/Modals/ProjectEditModal';
 
 
@@ -497,15 +496,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                             alignItems="center"
                             className={classes.projectHeaders}
                           >
-                            {/* <CreatePostModal
-                              projectId={Number(projectId)}
-                              open={openModalResource}
-                              handleOpenClose={handleResourceOpenClose}
-                              isOfferFilter={false}
-                              isResourceFilter={true}
-                              isNewsFilter={false}
-                              isProjectPage
-                            /> */}
+                           
                             <MyButton
                               value="Submit"
                               isWhite={true}
@@ -557,15 +548,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                             alignItems="center"
                             className={classes.projectHeaders}
                           >
-                            {/* <CreatePostModal
-                              projectId={Number(projectId)}
-                              open={openModalOffer}
-                              handleOpenClose={handleOfferOpenClose}
-                              isOfferFilter={true}
-                              isResourceFilter={false}
-                              isNewsFilter={false}
-                              isProjectPage
-                            /> */}
+                            
                             <MyButton
                               value="Submit"
                               isWhite={true}
@@ -617,15 +600,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                             alignItems="center"
                             className={classes.projectHeaders}
                           >
-                            {/* <CreatePostModal
-                              projectId={Number(projectId)}
-                              open={openModalNews}
-                              handleOpenClose={handleNewsOpenClose}
-                              isOfferFilter={false}
-                              isResourceFilter={false}
-                              isNewsFilter={true}
-                              isProjectPage
-                            /> */}
+                          
                             <MyButton
                               value="Submit"
                               isWhite={true}
@@ -644,7 +619,7 @@ const ProjectPage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
                     isOwner={true}
                     contentValues={filteredShownPosts}
                     isNoPostAtUser={true}
-                    value={'уроки'}
+                    value={'Уроки'}
                     ownerId={userContextInfo?.user?.id !== undefined ? userContextInfo.user.id : 0}
                   />
                 </Grid>
