@@ -174,11 +174,22 @@ export const CreateEventMutation = () => {
 
 export const GetUrlToUploadEventPoster = () => {
   const [uploadUrl] = useMutation<{ createMedia: { signedURL: string } }>(gql`
-    mutation ($data: createMediaInput!) {
-      createMedia(data: $data) {
-        signedURL
-      }
+  mutation($data: TaskCreateInput!){
+    createOneTask(data:$data){
+      id
     }
+  }
+  `);
+  return (data: any) => uploadUrl({ variables: { data } });
+};
+
+export const createTest = () => {
+  const [uploadUrl] = useMutation<{ createMedia: { signedURL: string } }>(gql`
+  mutation($data:TestCreateInput!){
+    createOneTest(data: $data) {
+      id
+    }
+  }
   `);
   return (data: any) => uploadUrl({ variables: { data } });
 };

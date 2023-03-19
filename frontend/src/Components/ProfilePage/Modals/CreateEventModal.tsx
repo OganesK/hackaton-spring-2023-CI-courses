@@ -10,7 +10,7 @@ import 'react-responsive-modal/styles.css';
 
 //@ts-ignore
 import DateTimePicker from 'react-datetime-picker';
-import { CreateEventMutation, GetUrlToUploadEventPoster } from '../graphql/mutations';
+import { CreateEventMutation, GetUrlToUploadEventPoster, createTest } from '../graphql/mutations';
 import Button from '../../UI/Buttons/OutlinedButton/Button';
 import NoneClick from '../../UI/NoneClickableField/NoneClick';
 import SnackbarOnChange from '../../UI/Snackbar/Snackbar';
@@ -49,6 +49,8 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
   const [imgModal, setImgModal] = useState(imgModalDefault);
   const [questionsCount, setQuestionsCount] = useState(10)
 
+  const createTestHandler = createTest();
+
   const [openNoneClick, setOpenNoneClick] = useState(false);
   const [openSnack, setOpenSnack] = useState(false);
 
@@ -65,18 +67,53 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
     ) {
       setOpenNoneClick(true);
 
+      const dataJ = await createTestHandler({
+        name: nameValue
+      })
+
+      console.log(dataJ)
+
       const testParams = {
         n: questionsCount,
         text: bodyValue
       }
 
       const data = await axios.post(`https://nikko-develop.space/neuro/questions?n=${questionsCount}&text=${bodyValue}`, {})
-      .then(function (response) {
-        console.log(response);
+      data.data.questions.map(async (que)=> {
+        const data = {
+          question: que.question,
+          rightAnswer: String(que.answer),
+          answers: {
+            set: que.options
+          },
+          test:{
+            connect: {
+              id: dataJ.data.createOneTest.id
+            }
+          }
+        }
+        
+
+        await getUrlToUploadEventPosterHandler(data)
       })
-      .catch(function (error) {
-        console.log(error);
-      });
+
+      // data: {
+      //   question: "Лучший язык программирования?",
+      //   rightAnswer: "TypeScript",
+      //   answers: {
+      //     set: [
+      //       "Фреймворк для создания серверов",
+      //       "Фреймворк для создания клиентских приложений",
+      //       "Фреймворк для создания баз данных",
+      //       "Фреймворк для разработки игр"
+      //     ]
+      //   },
+      //   test: {
+      //     connect: {
+      //       id: 1
+      //     }
+      //   }
+      // }
 
       // const eventId = await createEventHandler(newEventData);
       // if (posterValue.size !== 0) {
@@ -102,7 +139,7 @@ const CreateEventModal: (props: EventCreateModalProps) => JSX.Element = (props: 
       // setNameValue('');
       // setDescriptionValue('');
       // setPosterValue({
-      //   name: '',
+      //   name: '',~[]
       //   type: '',
       //   size: 0,
       // });
