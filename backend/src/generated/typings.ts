@@ -622,6 +622,15 @@ export interface NexusGenInputs {
   DeleteStoryInput: { // input type
     storyId: number; // Int!
   }
+  EnumUserRoleFieldUpdateOperationsInput: { // input type
+    set?: NexusGenEnums['UserRole'] | null; // UserRole
+  }
+  EnumUserRoleFilter: { // input type
+    equals?: NexusGenEnums['UserRole'] | null; // UserRole
+    in?: NexusGenEnums['UserRole'][] | null; // [UserRole!]
+    not?: NexusGenInputs['NestedEnumUserRoleFilter'] | null; // NestedEnumUserRoleFilter
+    notIn?: NexusGenEnums['UserRole'][] | null; // [UserRole!]
+  }
   EnumcourseTypeEnumNullableFilter: { // input type
     equals?: NexusGenEnums['courseTypeEnum'] | null; // courseTypeEnum
     in?: NexusGenEnums['courseTypeEnum'][] | null; // [courseTypeEnum!]
@@ -2051,6 +2060,12 @@ export interface NexusGenInputs {
     not?: NexusGenInputs['NestedDateTimeNullableFilter'] | null; // NestedDateTimeNullableFilter
     notIn?: NexusGenScalars['DateTime'][] | null; // [DateTime!]
   }
+  NestedEnumUserRoleFilter: { // input type
+    equals?: NexusGenEnums['UserRole'] | null; // UserRole
+    in?: NexusGenEnums['UserRole'][] | null; // [UserRole!]
+    not?: NexusGenInputs['NestedEnumUserRoleFilter'] | null; // NestedEnumUserRoleFilter
+    notIn?: NexusGenEnums['UserRole'][] | null; // [UserRole!]
+  }
   NestedEnumcourseTypeEnumNullableFilter: { // input type
     equals?: NexusGenEnums['courseTypeEnum'] | null; // courseTypeEnum
     in?: NexusGenEnums['courseTypeEnum'][] | null; // [courseTypeEnum!]
@@ -3290,7 +3305,7 @@ export interface NexusGenInputs {
     lastname: string; // String!
     login: string; // String!
     password: string; // String!
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     tokenVersion?: number | null; // Int
   }
@@ -3377,7 +3392,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageCreateNestedManyWithoutSenderInput'] | null; // MessageCreateNestedManyWithoutSenderInput
     password: string; // String!
     publishedEvent?: NexusGenInputs['EventCreateNestedManyWithoutUserInput'] | null; // EventCreateNestedManyWithoutUserInput
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutUserInput'] | null; // TestPassCreateNestedManyWithoutUserInput
     tokenVersion?: number | null; // Int
@@ -3397,7 +3412,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageCreateNestedManyWithoutSenderInput'] | null; // MessageCreateNestedManyWithoutSenderInput
     password: string; // String!
     publishedEvent?: NexusGenInputs['EventCreateNestedManyWithoutUserInput'] | null; // EventCreateNestedManyWithoutUserInput
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutUserInput'] | null; // TestPassCreateNestedManyWithoutUserInput
     tokenVersion?: number | null; // Int
@@ -3417,7 +3432,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageCreateNestedManyWithoutSenderInput'] | null; // MessageCreateNestedManyWithoutSenderInput
     password: string; // String!
     publishedEvent?: NexusGenInputs['EventCreateNestedManyWithoutUserInput'] | null; // EventCreateNestedManyWithoutUserInput
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutUserInput'] | null; // TestPassCreateNestedManyWithoutUserInput
     tokenVersion?: number | null; // Int
@@ -3437,7 +3452,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageCreateNestedManyWithoutSenderInput'] | null; // MessageCreateNestedManyWithoutSenderInput
     password: string; // String!
     publishedEvent?: NexusGenInputs['EventCreateNestedManyWithoutUserInput'] | null; // EventCreateNestedManyWithoutUserInput
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutUserInput'] | null; // TestPassCreateNestedManyWithoutUserInput
     tokenVersion?: number | null; // Int
@@ -3457,7 +3472,7 @@ export interface NexusGenInputs {
     login: string; // String!
     password: string; // String!
     publishedEvent?: NexusGenInputs['EventCreateNestedManyWithoutUserInput'] | null; // EventCreateNestedManyWithoutUserInput
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutUserInput'] | null; // TestPassCreateNestedManyWithoutUserInput
     tokenVersion?: number | null; // Int
@@ -3477,7 +3492,7 @@ export interface NexusGenInputs {
     login: string; // String!
     messages?: NexusGenInputs['MessageCreateNestedManyWithoutSenderInput'] | null; // MessageCreateNestedManyWithoutSenderInput
     password: string; // String!
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     testPasses?: NexusGenInputs['TestPassCreateNestedManyWithoutUserInput'] | null; // TestPassCreateNestedManyWithoutUserInput
     tokenVersion?: number | null; // Int
@@ -3498,7 +3513,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageCreateNestedManyWithoutSenderInput'] | null; // MessageCreateNestedManyWithoutSenderInput
     password: string; // String!
     publishedEvent?: NexusGenInputs['EventCreateNestedManyWithoutUserInput'] | null; // EventCreateNestedManyWithoutUserInput
-    role?: string | null; // String
+    role?: NexusGenEnums['UserRole'] | null; // UserRole
     shortDescription?: string | null; // String
     tokenVersion?: number | null; // Int
   }
@@ -3547,7 +3562,7 @@ export interface NexusGenInputs {
     lastname?: NexusGenInputs['StringFilter'] | null; // StringFilter
     login?: NexusGenInputs['StringFilter'] | null; // StringFilter
     password?: NexusGenInputs['StringFilter'] | null; // StringFilter
-    role?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    role?: NexusGenInputs['EnumUserRoleFilter'] | null; // EnumUserRoleFilter
     shortDescription?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     tokenVersion?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
   }
@@ -3560,7 +3575,7 @@ export interface NexusGenInputs {
     lastname?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     login?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
   }
@@ -3670,7 +3685,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     publishedEvent?: NexusGenInputs['EventUpdateManyWithoutUserInput'] | null; // EventUpdateManyWithoutUserInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     testPasses?: NexusGenInputs['TestPassUpdateManyWithoutUserInput'] | null; // TestPassUpdateManyWithoutUserInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
@@ -3690,7 +3705,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     publishedEvent?: NexusGenInputs['EventUpdateManyWithoutUserInput'] | null; // EventUpdateManyWithoutUserInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     testPasses?: NexusGenInputs['TestPassUpdateManyWithoutUserInput'] | null; // TestPassUpdateManyWithoutUserInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
@@ -3710,7 +3725,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     publishedEvent?: NexusGenInputs['EventUpdateManyWithoutUserInput'] | null; // EventUpdateManyWithoutUserInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     testPasses?: NexusGenInputs['TestPassUpdateManyWithoutUserInput'] | null; // TestPassUpdateManyWithoutUserInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
@@ -3730,7 +3745,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     publishedEvent?: NexusGenInputs['EventUpdateManyWithoutUserInput'] | null; // EventUpdateManyWithoutUserInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     testPasses?: NexusGenInputs['TestPassUpdateManyWithoutUserInput'] | null; // TestPassUpdateManyWithoutUserInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
@@ -3750,7 +3765,7 @@ export interface NexusGenInputs {
     login?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     publishedEvent?: NexusGenInputs['EventUpdateManyWithoutUserInput'] | null; // EventUpdateManyWithoutUserInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     testPasses?: NexusGenInputs['TestPassUpdateManyWithoutUserInput'] | null; // TestPassUpdateManyWithoutUserInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
@@ -3770,7 +3785,7 @@ export interface NexusGenInputs {
     login?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     messages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     testPasses?: NexusGenInputs['TestPassUpdateManyWithoutUserInput'] | null; // TestPassUpdateManyWithoutUserInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
@@ -3791,7 +3806,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageUpdateManyWithoutSenderInput'] | null; // MessageUpdateManyWithoutSenderInput
     password?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
     publishedEvent?: NexusGenInputs['EventUpdateManyWithoutUserInput'] | null; // EventUpdateManyWithoutUserInput
-    role?: NexusGenInputs['StringFieldUpdateOperationsInput'] | null; // StringFieldUpdateOperationsInput
+    role?: NexusGenInputs['EnumUserRoleFieldUpdateOperationsInput'] | null; // EnumUserRoleFieldUpdateOperationsInput
     shortDescription?: NexusGenInputs['NullableStringFieldUpdateOperationsInput'] | null; // NullableStringFieldUpdateOperationsInput
     tokenVersion?: NexusGenInputs['NullableIntFieldUpdateOperationsInput'] | null; // NullableIntFieldUpdateOperationsInput
   }
@@ -3847,7 +3862,7 @@ export interface NexusGenInputs {
     messages?: NexusGenInputs['MessageListRelationFilter'] | null; // MessageListRelationFilter
     password?: NexusGenInputs['StringFilter'] | null; // StringFilter
     publishedEvent?: NexusGenInputs['EventListRelationFilter'] | null; // EventListRelationFilter
-    role?: NexusGenInputs['StringFilter'] | null; // StringFilter
+    role?: NexusGenInputs['EnumUserRoleFilter'] | null; // EnumUserRoleFilter
     shortDescription?: NexusGenInputs['StringNullableFilter'] | null; // StringNullableFilter
     testPasses?: NexusGenInputs['TestPassListRelationFilter'] | null; // TestPassListRelationFilter
     tokenVersion?: NexusGenInputs['IntNullableFilter'] | null; // IntNullableFilter
@@ -3999,6 +4014,7 @@ export interface NexusGenInputs {
 export interface NexusGenEnums {
   QueryMode: "default" | "insensitive"
   SortOrder: "asc" | "desc"
+  UserRole: "administrator" | "creator" | "user"
   businessModel: "B2B" | "B2B2C" | "B2C" | "B2G" | "C2C" | "G2B" | "G2C"
   courseMarket: "AeroNet" | "AeroNext" | "AutoNet" | "EcoNet" | "EduNet" | "EnergyNet" | "FoodNet" | "GameNet" | "HealthNet" | "HomeNet" | "Marinet" | "NeuroNet" | "SafeNet" | "SpaceNet" | "SportNet" | "TechNet" | "WearNet"
   courseStage: "ideaOrConcept" | "prototypeOrMVP" | "scaling" | "workingProduct"
@@ -4165,7 +4181,7 @@ export interface NexusGenObjects {
     lastname: string; // String!
     login: string; // String!
     password: string; // String!
-    role: string; // String!
+    role: NexusGenEnums['UserRole']; // UserRole!
     shortDescription?: string | null; // String
     tokenVersion?: number | null; // Int
   }
@@ -4436,7 +4452,7 @@ export interface NexusGenFieldTypes {
     messages: NexusGenRootTypes['Message'][]; // [Message!]!
     password: string; // String!
     publishedEvent: NexusGenRootTypes['Event'][]; // [Event!]!
-    role: string; // String!
+    role: NexusGenEnums['UserRole']; // UserRole!
     shortDescription: string | null; // String
     tokenVersion: number | null; // Int
   }
@@ -4697,7 +4713,7 @@ export interface NexusGenFieldTypeNames {
     messages: 'Message'
     password: 'String'
     publishedEvent: 'Event'
-    role: 'String'
+    role: 'UserRole'
     shortDescription: 'String'
     tokenVersion: 'Int'
   }

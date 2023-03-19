@@ -720,6 +720,17 @@ input DeleteStoryInput {
   storyId: Int!
 }
 
+input EnumUserRoleFieldUpdateOperationsInput {
+  set: UserRole
+}
+
+input EnumUserRoleFilter {
+  equals: UserRole
+  in: [UserRole!]
+  not: NestedEnumUserRoleFilter
+  notIn: [UserRole!]
+}
+
 input EnumcourseTypeEnumNullableFilter {
   equals: courseTypeEnum
   in: [courseTypeEnum!]
@@ -2436,6 +2447,13 @@ input NestedDateTimeNullableFilter {
   notIn: [DateTime!]
 }
 
+input NestedEnumUserRoleFilter {
+  equals: UserRole
+  in: [UserRole!]
+  not: NestedEnumUserRoleFilter
+  notIn: [UserRole!]
+}
+
 input NestedEnumcourseTypeEnumNullableFilter {
   equals: courseTypeEnum
   in: [courseTypeEnum!]
@@ -4032,7 +4050,7 @@ type User {
   messages(after: MessageWhereUniqueInput, before: MessageWhereUniqueInput, first: Int, last: Int): [Message!]!
   password: String!
   publishedEvent(after: EventWhereUniqueInput, before: EventWhereUniqueInput, first: Int, last: Int, orderBy: [EventOrderByWithRelationInput!]): [Event!]!
-  role: String!
+  role: UserRole!
   shortDescription: String
   tokenVersion: Int
 }
@@ -4047,7 +4065,7 @@ input UserCreateManyAvatarInput {
   lastname: String!
   login: String!
   password: String!
-  role: String
+  role: UserRole
   shortDescription: String
   tokenVersion: Int
 }
@@ -4150,7 +4168,7 @@ input UserCreateWithoutAvatarInput {
   messages: MessageCreateNestedManyWithoutSenderInput
   password: String!
   publishedEvent: EventCreateNestedManyWithoutUserInput
-  role: String
+  role: UserRole
   shortDescription: String
   testPasses: TestPassCreateNestedManyWithoutUserInput
   tokenVersion: Int
@@ -4171,7 +4189,7 @@ input UserCreateWithoutCoursesInput {
   messages: MessageCreateNestedManyWithoutSenderInput
   password: String!
   publishedEvent: EventCreateNestedManyWithoutUserInput
-  role: String
+  role: UserRole
   shortDescription: String
   testPasses: TestPassCreateNestedManyWithoutUserInput
   tokenVersion: Int
@@ -4192,7 +4210,7 @@ input UserCreateWithoutGroupAdminsInput {
   messages: MessageCreateNestedManyWithoutSenderInput
   password: String!
   publishedEvent: EventCreateNestedManyWithoutUserInput
-  role: String
+  role: UserRole
   shortDescription: String
   testPasses: TestPassCreateNestedManyWithoutUserInput
   tokenVersion: Int
@@ -4213,7 +4231,7 @@ input UserCreateWithoutGroupsInput {
   messages: MessageCreateNestedManyWithoutSenderInput
   password: String!
   publishedEvent: EventCreateNestedManyWithoutUserInput
-  role: String
+  role: UserRole
   shortDescription: String
   testPasses: TestPassCreateNestedManyWithoutUserInput
   tokenVersion: Int
@@ -4234,7 +4252,7 @@ input UserCreateWithoutMessagesInput {
   login: String!
   password: String!
   publishedEvent: EventCreateNestedManyWithoutUserInput
-  role: String
+  role: UserRole
   shortDescription: String
   testPasses: TestPassCreateNestedManyWithoutUserInput
   tokenVersion: Int
@@ -4255,7 +4273,7 @@ input UserCreateWithoutPublishedEventInput {
   login: String!
   messages: MessageCreateNestedManyWithoutSenderInput
   password: String!
-  role: String
+  role: UserRole
   shortDescription: String
   testPasses: TestPassCreateNestedManyWithoutUserInput
   tokenVersion: Int
@@ -4277,7 +4295,7 @@ input UserCreateWithoutTestPassesInput {
   messages: MessageCreateNestedManyWithoutSenderInput
   password: String!
   publishedEvent: EventCreateNestedManyWithoutUserInput
-  role: String
+  role: UserRole
   shortDescription: String
   tokenVersion: Int
 }
@@ -4316,6 +4334,12 @@ input UserOrderByWithRelationInput {
   tokenVersion: SortOrder
 }
 
+enum UserRole {
+  administrator
+  creator
+  user
+}
+
 input UserScalarWhereInput {
   AND: [UserScalarWhereInput!]
   NOT: [UserScalarWhereInput!]
@@ -4330,7 +4354,7 @@ input UserScalarWhereInput {
   lastname: StringFilter
   login: StringFilter
   password: StringFilter
-  role: StringFilter
+  role: EnumUserRoleFilter
   shortDescription: StringNullableFilter
   tokenVersion: IntNullableFilter
 }
@@ -4344,7 +4368,7 @@ input UserUpdateManyMutationInput {
   lastname: StringFieldUpdateOperationsInput
   login: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
 }
@@ -4468,7 +4492,7 @@ input UserUpdateWithoutAvatarInput {
   messages: MessageUpdateManyWithoutSenderInput
   password: StringFieldUpdateOperationsInput
   publishedEvent: EventUpdateManyWithoutUserInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   testPasses: TestPassUpdateManyWithoutUserInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
@@ -4489,7 +4513,7 @@ input UserUpdateWithoutCoursesInput {
   messages: MessageUpdateManyWithoutSenderInput
   password: StringFieldUpdateOperationsInput
   publishedEvent: EventUpdateManyWithoutUserInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   testPasses: TestPassUpdateManyWithoutUserInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
@@ -4510,7 +4534,7 @@ input UserUpdateWithoutGroupAdminsInput {
   messages: MessageUpdateManyWithoutSenderInput
   password: StringFieldUpdateOperationsInput
   publishedEvent: EventUpdateManyWithoutUserInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   testPasses: TestPassUpdateManyWithoutUserInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
@@ -4531,7 +4555,7 @@ input UserUpdateWithoutGroupsInput {
   messages: MessageUpdateManyWithoutSenderInput
   password: StringFieldUpdateOperationsInput
   publishedEvent: EventUpdateManyWithoutUserInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   testPasses: TestPassUpdateManyWithoutUserInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
@@ -4552,7 +4576,7 @@ input UserUpdateWithoutMessagesInput {
   login: StringFieldUpdateOperationsInput
   password: StringFieldUpdateOperationsInput
   publishedEvent: EventUpdateManyWithoutUserInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   testPasses: TestPassUpdateManyWithoutUserInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
@@ -4573,7 +4597,7 @@ input UserUpdateWithoutPublishedEventInput {
   login: StringFieldUpdateOperationsInput
   messages: MessageUpdateManyWithoutSenderInput
   password: StringFieldUpdateOperationsInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   testPasses: TestPassUpdateManyWithoutUserInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
@@ -4595,7 +4619,7 @@ input UserUpdateWithoutTestPassesInput {
   messages: MessageUpdateManyWithoutSenderInput
   password: StringFieldUpdateOperationsInput
   publishedEvent: EventUpdateManyWithoutUserInput
-  role: StringFieldUpdateOperationsInput
+  role: EnumUserRoleFieldUpdateOperationsInput
   shortDescription: NullableStringFieldUpdateOperationsInput
   tokenVersion: NullableIntFieldUpdateOperationsInput
 }
@@ -4659,7 +4683,7 @@ input UserWhereInput {
   messages: MessageListRelationFilter
   password: StringFilter
   publishedEvent: EventListRelationFilter
-  role: StringFilter
+  role: EnumUserRoleFilter
   shortDescription: StringNullableFilter
   testPasses: TestPassListRelationFilter
   tokenVersion: IntNullableFilter
