@@ -25,23 +25,40 @@ const Test: React.FC<TestProps> = ({ open, closeModal }) => {
 
   const { loading, error, data } = useQuery(GetTasksQuery);
 
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   console.log(data);
+  console.log(data.tests);
+  const tests = data.tests
 
   const handlePollSubmit = (optionId: number) => {
     console.log(`User selected option ${optionId}`);
-    closeModal;
+    window.location.reload();
   };
-
+  
   return (
-    <div>
-      <PollModal
-        isOpen={open}
-        question="What is your favorite?"
-        options={options}
-        onSubmit={handlePollSubmit}
-        closeModal={closeModal}
-      />
-    </div>
+    <>
+
+    {data.tests?.map((test) => (
+      test.tasks?.map((task) =>(
+
+        <div>
+          {console.log(task)}          
+        <PollModal
+          isOpen={open}
+          question={task.question}
+          options={task.answers}
+          onSubmit={handlePollSubmit}
+          closeModal={closeModal}
+        />
+      </div>
+      )
+  ) ))
+  }
+</>
+    
   );
 };
 

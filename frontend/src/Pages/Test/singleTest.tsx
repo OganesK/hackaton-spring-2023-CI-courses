@@ -25,9 +25,9 @@ const PollModal: React.FC<Props> = ({
   const [selectedOptionId, setSelectedOptionId] = useState<number | null>(null);
 
   const handleSubmit = () => {
-    if (selectedOptionId !== null) {
-      closeModal(selectedOptionId);
-    }
+
+    window.location.reload();
+
   };
 
   return (
@@ -43,27 +43,27 @@ const PollModal: React.FC<Props> = ({
         <span className="questionContainer">
           <h2>{question}</h2>
           <ul>
-            {options.map((option) => (
-              <li key={option.id}>
+            {options.map((option, index) => (
+              <li key={index}>
                 <input
                   type="radio"
-                  id={`option-${option.id}`}
+                  id={`option-${index}`}
                   name="options"
-                  value={option.id}
-                  checked={option.id === selectedOptionId}
-                  onChange={() => setSelectedOptionId(option.id)}
+                  value={index}
+                  checked={index === selectedOptionId}
+                  onChange={() => setSelectedOptionId(index)}
                 />
-                <label htmlFor={`option-${option.id}`}>{option.text}</label>
+                <label htmlFor={`option-${index}`}>{option}</label>
               </li>
             ))}
           </ul>
         </span>
         <span className="buttonsContainer">
           <button className="button-46" onClick={handleSubmit}>
-            Submit
+            Отправить
           </button>
           <button className="button-46" onClick={closeModal}>
-            Cancel
+            Отменить
           </button>
         </span>
       </span>

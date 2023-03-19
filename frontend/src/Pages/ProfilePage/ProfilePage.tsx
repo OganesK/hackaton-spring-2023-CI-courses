@@ -29,7 +29,7 @@ import ProfileNewsBlock from '../../Components/ProfilePage/ProfileNewsBlock/Prof
 import ProfileProjectsBlock from '../../Components/ProfilePage/ProfileProjectBlock/ProfileProjectsBlock';
 import ProfileEvent from '../../Components/ProfilePage/ProfileEvent/ProfileEvent';
 
-import CreatePostModal from '../../Components/ProfilePage/Modals/CreatePostModal';
+
 import CreateEventModal from '../../Components/ProfilePage/Modals/CreateEventModal';
 
 import ProfileEditModal from '../../Components/ProfilePage/EntityEditModals/ProfileEditModal';
@@ -367,15 +367,7 @@ const ProfilePage: (props: MatchProps) => JSX.Element = (props: MatchProps) => {
               >
                 {contextUserData.user && contextUserData.user.id === Number(userId) ? (
                   <>
-                    <CreatePostModal
-                      projectId={1}
-                      open={openModalOffer}
-                      handleOpenClose={handleOpenClosePostModal}
-                      isOfferFilter={false}
-                      isResourceFilter={false}
-                      isNewsFilter={true}
-                      refetchOnProfilePage={refetch}
-                    />
+                   
                     <Button
                       onClick={handleOpenClosePostModal}
                       variant="text"

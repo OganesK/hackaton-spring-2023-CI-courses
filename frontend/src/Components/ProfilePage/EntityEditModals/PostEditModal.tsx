@@ -147,7 +147,7 @@ const PostEditModal: (props: PostEditModalProps) => JSX.Element = (props: PostEd
           {openNoneClick ? <NoneClick /> : null}
 
           <Grid item className={styles.modalHeader}>
-            Редактирование {props.isNewsFilter ? 'уроки' : props.isResourceFilter ? 'ресурса' : 'объявления'}
+            Редактирование {props.isNewsFilter ? 'Уроки' : props.isResourceFilter ? 'ресурса' : 'объявления'}
           </Grid>
           <Grid container direction="row" className={styles.inputContainerGap}>
             <Grid container md={3} xs={12} alignItems="center" className={styles.modalHeaderText}>

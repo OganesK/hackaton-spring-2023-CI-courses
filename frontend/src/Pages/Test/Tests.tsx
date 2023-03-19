@@ -45,8 +45,8 @@ function FormRow(props: { data: TestTypes[] | undefined; loading: boolean }): JS
           >
             <TestXard
               img={''}
-              title={test.name}
-              shortContent={'Description'}
+              title={'Название теста'}
+              shortContent={'Здесь краткое описание теста.'}
               courseId={test.id}
             />
           </Grid>
