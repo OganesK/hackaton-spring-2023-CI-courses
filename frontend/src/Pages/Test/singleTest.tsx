@@ -2,23 +2,22 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import "./modalStyles.css";
 
-type Option = {
-  id: number;
-  text: string;
+type Task = {
+  question: string,
+  answers: string[],
+  rightAnswer: string
 };
 
 type Props = {
   isOpen: boolean;
-  question: string;
-  options: Option[];
+  tasks:Task[]
   closeModal: any;
   onSubmit: any;
 };
 
 const PollModal: React.FC<Props> = ({
   isOpen,
-  question,
-  options,
+  tasks,
   closeModal,
   onSubmit,
 }) => {
@@ -31,6 +30,7 @@ const PollModal: React.FC<Props> = ({
   };
 
   return (
+    
     <Modal
       isOpen={isOpen}
       className="Modal"
@@ -39,34 +39,39 @@ const PollModal: React.FC<Props> = ({
       shouldCloseOnOverlayClick={false}
       shouldCloseOnEsc={true}
     >
-      <span className="modalContainer">
-        <span className="questionContainer">
-          <h2>{question}</h2>
-          <ul>
-            {options.map((option, index) => (
-              <li key={index}>
-                <input
-                  type="radio"
-                  id={`option-${index}`}
-                  name="options"
-                  value={index}
-                  checked={index === selectedOptionId}
-                  onChange={() => setSelectedOptionId(index)}
-                />
-                <label htmlFor={`option-${index}`}>{option}</label>
-              </li>
-            ))}
-          </ul>
-        </span>
-        <span className="buttonsContainer">
-          <button className="button-46" onClick={handleSubmit}>
-            Отправить
-          </button>
-          <button className="button-46" onClick={closeModal}>
-            Отменить
-          </button>
-        </span>
-      </span>
+      { tasks?.map((task)=>(
+
+<span className="modalContainer">
+<span className="questionContainer">
+  <h2>{task.question}</h2>
+    {task.answers.map((option, index) => (
+  <ul>
+      <li key={index}>
+        <input
+          type="radio"
+          id={`option-${index}`}
+          name="options"
+          value={index}
+          checked={index === selectedOptionId}
+          onChange={() => setSelectedOptionId(index)}
+        />
+        <label htmlFor={`option-${index}`}>{option}</label>
+      </li>
+  </ul>
+    ))}
+</span>
+
+</span>
+      ))}
+<span className="buttonsContainer">
+  <button className="button-46" onClick={handleSubmit}>
+    Отправить
+  </button>
+  <button className="button-46" onClick={closeModal}>
+    Отменить
+  </button>
+</span>
+    
     </Modal>
   );
 };

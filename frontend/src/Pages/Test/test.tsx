@@ -19,11 +19,11 @@ interface TestProps {
 }
 
 const Test: React.FC<TestProps> = ({ open, closeModal }) => {
-  const [tasks, setTasks] = useState([]);
-
   console.log(open, closeModal);
 
   const { loading, error, data } = useQuery(GetTasksQuery);
+
+  const [taskData, setTaskData] = useState([])
 
   if (loading) {
     return <p>Loading...</p>;
@@ -42,20 +42,19 @@ const Test: React.FC<TestProps> = ({ open, closeModal }) => {
     <>
 
     {data.tests?.map((test) => (
-      test.tasks?.map((task) =>(
+      
 
         <div>
-          {console.log(task)}          
+                  
         <PollModal
           isOpen={open}
-          question={task.question}
-          options={task.answers}
+          tasks = {test.tasks}
           onSubmit={handlePollSubmit}
           closeModal={closeModal}
         />
       </div>
-      )
-  ) ))
+    
+   ))
   }
 </>
     
