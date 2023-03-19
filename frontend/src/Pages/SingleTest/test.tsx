@@ -30,7 +30,7 @@
 //         question="What is your favorite color?"
 //         options={options}
 //         onSubmit={handlePollSubmit}
-//         onClose={() => setOpen(!open)}
+//         onClose={() => setOpen(false)}
 //         />
 //     </div>
 //   )
