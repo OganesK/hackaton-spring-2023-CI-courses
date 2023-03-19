@@ -1,10 +1,6 @@
 export interface TestTypes {
   id: number;
   name: string;
-  description: string;
-  poster: {
-    link: string
-  }
 }
 
 interface Section {

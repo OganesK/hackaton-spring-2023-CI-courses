@@ -15,7 +15,7 @@ import Footer from '../../Components/Home/Footer/Footer';
 
 import ProjectCard from '../../Components/ProjectsPage/ProjectCard';
 
-import { GET_PROJECTS_QUERY } from '../../Queries';
+import { GET_TESTS_QUERY } from '../../Queries';
 import { TestTypes } from './typings';
 
 function FormRow(props: { data: TestTypes[] | undefined; loading: boolean }): JSX.Element {
@@ -43,7 +43,7 @@ function FormRow(props: { data: TestTypes[] | undefined; loading: boolean }): JS
             }}
           >
             <ProjectCard
-              img={test.poster?.link}
+              img={''}
               title={test.name}
               shortContent={'Description'}
               courseId={test.id}
@@ -57,11 +57,11 @@ function FormRow(props: { data: TestTypes[] | undefined; loading: boolean }): JS
 const Tests: () => JSX.Element = () => {
   const classes = useStyles();
   const [filteredData, setFilteredData] = useState<TestTypes[]>();
-  const { data, loading } = useQuery<{ courses: TestTypes[] }>(GET_PROJECTS_QUERY);
+  const { data, loading } = useQuery<{ tests: TestTypes[] }>(GET_TESTS_QUERY);
 
   useEffect(() => {
     if (data && !loading) {
-      setFilteredData(data.courses)
+      setFilteredData(data.tests)
       console.log(filteredData)
     }
   }, [loading, data]);

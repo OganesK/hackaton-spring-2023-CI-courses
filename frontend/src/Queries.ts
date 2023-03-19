@@ -25,6 +25,15 @@ query{
   }
 }
 `;
+
+export const GET_TESTS_QUERY = gql`
+query{
+  tests{
+    id
+    name
+  }
+}
+`;
 export const GET_PROJECTS_QUERY = gql`
 query{
   courses{
