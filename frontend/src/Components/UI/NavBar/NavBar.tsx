@@ -139,6 +139,20 @@ const Navbar: (props: NavBarProps) => JSX.Element = (props: NavBarProps) => {
                       ? classes.linkFooter
                       : classes.projectLink
                   }
+                  to="/tests"
+                >
+                  Тесты
+                </Link>
+              </Button>
+              <Button>
+                <Link
+                  className={
+                    props.text === 'header'
+                      ? classes.link
+                      : props.text === 'footer'
+                      ? classes.linkFooter
+                      : classes.projectLink
+                  }
                   to="/events"
                 >
                   Трансляции

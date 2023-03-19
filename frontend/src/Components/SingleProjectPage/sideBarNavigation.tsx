@@ -78,7 +78,6 @@ const SideBarNavigation: (props: NavigationProps) => JSX.Element = (props: Navig
           </Grid>
           {/* ) : null} */}
 
-          {/* {props.isCrowd || props.isOwner ? (
             <Grid className={classes.GridLink}>
               <Button>
                 <Link
@@ -91,28 +90,26 @@ const SideBarNavigation: (props: NavigationProps) => JSX.Element = (props: Navig
                   smooth={true}
                   offset={-150}
                 >
-                  Краудфандинг
+                  Тесты
                 </Link>
               </Button>
             </Grid>
-          ) : null} */}
-          {props.isOwner ? null : (
             <Grid className={classes.GridLink}>
               <Button>
                 <Link
                   activeClass={classes.activeLink}
                   className={classes.link}
-                  to="forInvestors"
+                  style={{ color: props.isNews ? '' : '#AAADB2' }}
+                  to="news"
                   spy={true}
                   hashSpy={true}
                   smooth={true}
                   offset={-150}
                 >
-                  Инвесторам
+                  уроки
                 </Link>
               </Button>
             </Grid>
-          )}
           {props.isResources || props.isOwner ? (
             <Grid className={classes.GridLink}>
               <Button>
@@ -150,6 +147,7 @@ const SideBarNavigation: (props: NavigationProps) => JSX.Element = (props: Navig
               </Button>
             </Grid>
           ) : null}
+          
         </Grid>
       )}
     </>

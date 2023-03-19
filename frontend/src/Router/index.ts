@@ -12,6 +12,8 @@ import Projects from '../Pages/Projects/Projects';
 import NewsPage from '../Pages/NewsPage/NewsPage';
 
 import ProjectPage from '../Pages/SingleProjectPage/ProjectPage';
+import test from '../Pages/SingleTest/test';
+import Tests from '../Pages/Test/Tests';
 
 export const publicRoutes = [
   { path: '/home', component: Home, exact: true },
@@ -24,6 +26,8 @@ export const publicRoutes = [
   { path: '/profile/:profileId', component: ProfilePage, exact: true },
   { path: '/messages', component: MessagesPage, exact: true },
   { path: '/messages/:groupId', component: MessagesPage, exact: true },
+  { path: '/tests', component: Tests, exact: true },
+  { path: '/tests/:testId', component: test, exact: true },
 ];
 
 export const privateRoutes = [

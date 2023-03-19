@@ -25,7 +25,7 @@ export default function AutoCompleteSearchField(props: AutoCompleteSearchFieldPr
 
           id="controllable-states-demo"
           // options={filteredData && filteredData.length > 0 && filteredData.map((data: string) => data.split('.')[1])}
-          options={top100Films} //ЕБАНУТЬ БЛЯТЬ ТУТ КУРСЫ ПО ЗАПРОСУ
+          options={top100Films} 
           //           onChange={(event, newValue: string | null): void => {
           //   props.setValue(filteredData);
           // }}

@@ -70,7 +70,7 @@ const Tests: () => JSX.Element = () => {
     <Grid container xs={12}>
       <NavBar text="qwe" />
       <Grid container xs={10} style={{ margin: 'auto' }}>
-      <Grid className={classes.sloganText}>Представленные курсы</Grid>
+      <Grid className={classes.sloganText}>Представленные тесты</Grid>
               <FormRow  data={filteredData} loading={loading}/>
       </Grid>
       <Footer footerMobileTopIdent={100} footerTopIdent={200} />
