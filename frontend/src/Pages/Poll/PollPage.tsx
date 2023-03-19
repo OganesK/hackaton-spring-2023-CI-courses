@@ -18,7 +18,7 @@ import ProjectCard from '../../Components/ProjectsPage/ProjectCard';
 import { GetTasksQuery } from './graphql/query';
 import { PollTypes } from './typings';
 
-function FormRow(props: { data: './typings.ts'[] | undefined; loading: boolean }): JSX.Element {
+function FormRow(props: { data: PollTypes[] | undefined; loading: boolean }): JSX.Element {
   const [width] = useWindowSize();
   const isMobile = useMediaQuery({ query: '(max-width: 600px)' });
 
@@ -71,8 +71,8 @@ const Projects: () => JSX.Element = () => {
     <Grid container xs={12}>
       <NavBar text="qwe" />
       <Grid container xs={10} style={{ margin: 'auto' }}>
-      <Grid className={classes.sloganText}>Представленные курсы</Grid>
-              <FormRow  data={filteredData} loading={loading}/>
+      <Grid className={classes.sloganText}>Представленные тесты</Grid>
+              <FormRow data={filteredData} loading={loading}/>
       </Grid>
       <Footer footerMobileTopIdent={100} footerTopIdent={200} />
     </Grid>
